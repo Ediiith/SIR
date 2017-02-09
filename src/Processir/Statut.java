@@ -24,5 +24,5 @@ SECRETAIRE("Secretaire");
     public String toString() {
         return libelle;
     }
-
+   
 }
