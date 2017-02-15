@@ -1,4 +1,4 @@
-package Processir;
+package Processir.nf;
 
 //Enumération des différents types de sexe
 public enum Genre {

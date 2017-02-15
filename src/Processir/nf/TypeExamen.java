@@ -1,4 +1,4 @@
-package Processir;
+package Processir.nf;
 
 //Enumeration des différents types d'examens
 public enum TypeExamen {

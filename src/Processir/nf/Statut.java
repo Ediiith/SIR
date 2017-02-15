@@ -1,4 +1,4 @@
-package Processir;
+package Processir.nf;
 
 //Enumération des différents statuts professionnels
 public enum Statut {
