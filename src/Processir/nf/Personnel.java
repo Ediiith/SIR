@@ -22,6 +22,22 @@ public class Personnel {
         this.statut = statut;
         this.chefService = false;
     }
+    
+    //affiche les informations du professionnel
+    public String toString(){
+        return ""+statut.toString()+" : "+this.nom+" "+this.prenom;
+    }
+    
+    //vérifie si deux instances de Personnel sont égales
+    public boolean equals(Object o){
+        if (o instanceof Personnel){
+        Personnel p = (Personnel) o;
+        return this.nom.equals(p.nom)&& this.prenom.equals(p.prenom)&& this.statut.equals(p.statut);
+        }
+        else{
+            return false;
+        }
+    }
 
     //retourne le nom
     public String getNom() {
