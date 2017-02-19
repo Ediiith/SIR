@@ -30,28 +30,41 @@ public class DMR {
         this.numUnique = numUnique;
         this.genre = genre;
     }
-    
-    public DMR(String nom, String prenom, Date dateNaissance){
+
+    public DMR(String nom, String prenom, Date dateNaissance) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
     }
-    
-    //compare si deux instances de DMR sont égales en tout points (sauf examens)
-    public boolean equals(Object o){
-        if (o instanceof DMR){
-            DMR d = (DMR) o;
-            return this.getNom().equals(d.getNom()) && this.getPrenom().equals(d.getPrenom()) 
-                    && this.getDateNaissance().equals(d.getDateNaissance()) && this.getGenre().equals(d.getGenre())
-                     && this.getAdresse().equals(d.getAdresse())
-                    && this.getNumSS()==d.getNumSS()&& this.getNumUnique()==d.getNumUnique();
+
+    //compare si deux instances de DMR sont proches
+    public boolean procheDe(Object o) {
+        boolean proche = false;
+        Levenshtein l = new Levenshtein();
+        if (o instanceof DMR) {
+            DMR d = (DMR) o; 
+            int nomsProches = l.levenshtein(this.getNom(), d.getNom());
+            int prenomsProches = l.levenshtein(this.getPrenom(), d.getPrenom());
+            int datesProches = l.levenshtein(this.getDateNaissance().toString(), d.getDateNaissance().toString());
+            if (nomsProches <=4 && prenomsProches<=3 && datesProches<=5){
+                proche = true;
+            }
         }
-        else{
+        return proche;
+    }
+
+    //compare si deux instances de DMR sont égales en tout points (sauf examens)
+    public boolean equals(Object o) {
+        if (o instanceof DMR) {
+            DMR d = (DMR) o;
+            return this.getNom().equals(d.getNom()) && this.getPrenom().equals(d.getPrenom())
+                    && this.getDateNaissance().equals(d.getDateNaissance()) && this.getGenre().equals(d.getGenre())
+                    && this.getAdresse().equals(d.getAdresse())
+                    && this.getNumSS() == d.getNumSS() && this.getNumUnique() == d.getNumUnique();
+        } else {
             return false;
         }
     }
-    
-    
 
     //retourne le nom
     public String getNom() {
