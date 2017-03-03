@@ -5,7 +5,9 @@ public enum TypeExamen {
 
     SCANNER("Scanner"),
     IRM("IRM"),
-    RADIOGRAPHIE("Radiographie");
+    RADIOGRAPHIE("Radiographie"),
+    AUTRE("Autre");
+    
 
     //attributs de l'énumération
     private String libelle;

@@ -4,18 +4,14 @@ import java.util.Date;
 
 public class Examen {
 
-    private Patient patient;
-
+    private DMR dmr;
     private Date date;
-
     private CompteRendu compteRendu;
-
     private TypeExamen typeExamen;
-
     private String PACS;
 
-    public Examen(Patient patient, Date date, CompteRendu compteRendu, TypeExamen typeExamen, String PACS) {
-        this.patient = patient;
+    public Examen(DMR dmr, Date date, CompteRendu compteRendu, TypeExamen typeExamen, String PACS) {
+        this.dmr = dmr;
         this.date = date;
         this.compteRendu = compteRendu;
         this.typeExamen = typeExamen;
@@ -23,17 +19,17 @@ public class Examen {
     }
     
     public String toString(){
-        return "Date : "+date+"\n Type d'examen : "+typeExamen+"\n Compte-rendu : "+compteRendu+"\n N° PACS : "+PACS;
+        return "Patient "+this.dmr.getNom()+" "+this.dmr.getPrenom()+" Né le "+this.dmr.getDateNaissance()+"\nDate : "+date+"\n Type d'examen : "+typeExamen+"\n Compte-rendu : "+compteRendu+"\n N° PACS : "+PACS;
     }
 
-    //retourne le patient
-    public Patient getPatient() {
-        return patient;
+    //retourne le DMR
+    public DMR getPatient() {
+        return dmr;
     }
 
     //change le patient
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatient(DMR dmr) {
+        this.dmr = dmr;
     }
 
     //retourne la date de l'examen
