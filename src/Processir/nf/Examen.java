@@ -21,6 +21,10 @@ public class Examen {
         this.typeExamen = typeExamen;
         this.PACS = PACS;
     }
+    
+    public String toString(){
+        return "Date : "+date+"\n Type d'examen : "+typeExamen+"\n Compte-rendu : "+compteRendu+"\n N° PACS : "+PACS;
+    }
 
     //retourne le patient
     public Patient getPatient() {

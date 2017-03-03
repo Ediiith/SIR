@@ -65,6 +65,22 @@ public class DMR {
             return false;
         }
     }
+    
+    //retourne les informations du patient 
+    public String InfoPatient() {
+        return "Prénom : " +prenom+ "\n Nom " + nom + "\n Genre : "+genre+ " \n N° sécurité sociale : " + numSS 
+                + " \n né le " + dateNaissance + " \n Adresse : " + adresse + " \n n° unique : " + numUnique;
+    }
+    
+    public String ExamensPatient(){
+        String s;
+        s=("Examens du patient " +prenom+" "+nom);
+        for (int i = 0; i < examens.size(); i++) {
+            Examen e = (Examen) examens.get(i);
+            s=s+("    > " + e.toString());
+        }
+        return s;
+    }
 
     //retourne le nom
     public String getNom() {

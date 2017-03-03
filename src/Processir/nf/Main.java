@@ -8,14 +8,20 @@ public class Main {
 
     public static void main(String[] args) throws ParseException {
         
-        //Test de comparaison de deux DMR proches
-        Date d1 = new Date(System.currentTimeMillis()); 
-        Genre g1 = Genre.FEMME;
-        DMR dmr1 = new DMR("MATHIVET","Marie",d1,334,"1 place dubedout",001,g1);
-        
-        DMR dmr2 = new DMR("Ferard","Marie",d1,334,"1 place dubedout",001,g1);
-        
-        System.out.println("Les deux DMR sont semblables : " +dmr1.procheDe(dmr2));
+//        //Test d'affichage d'un DMR
+//        Date d1 = new SimpleDateFormat("yyyy-MM-dd hh'h'mm").parse("1976-09-07 23h45");
+//        Genre g1 = Genre.FEMME;
+//        DMR dmr1 = new DMR("MATHIVET","Marie",d1,334,"1 place dubedout",001,g1);
+//        
+//        
+//        //Test de comparaison de deux DMR proches
+//        Date d1 = new Date(System.currentTimeMillis()); 
+//        Genre g1 = Genre.FEMME;
+//        DMR dmr1 = new DMR("MATHIVET","Marie",d1,334,"1 place dubedout",001,g1);
+//        
+//        DMR dmr2 = new DMR("MATIVE","Mary",d1,334,"1 place dubedout",001,g1);
+//        
+//        System.out.println("Les deux DMR sont semblables : " +dmr1.procheDe(dmr2));
 
 //        //Test de la fonction levenshtein
 //        Date n1 = new SimpleDateFormat("yyyy-MM-dd hh'h'mm").parse("1976-09-07 23h45");
