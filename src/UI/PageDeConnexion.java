@@ -41,7 +41,6 @@ public class PageDeConnexion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
 
-        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
         image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(image, java.awt.BorderLayout.EAST);
 
