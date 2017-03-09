@@ -22,10 +22,10 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
   public PageAccueil(String statut, String identifiant) {
         initComponents();
         this.setTitle("Page d'Accueil");
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
         this.statut = statut ;
         this.identifiant = identifiant;
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(identifiant);
@@ -400,7 +400,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
 
         jSplitPane.setRightComponent(jPanel4);
 
-        getContentPane().add(jSplitPane, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jSplitPane, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
