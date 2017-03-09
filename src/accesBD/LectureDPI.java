@@ -17,7 +17,44 @@ import java.sql.SQLException;
  */
 public class LectureDPI {
 
-    // creer existenceDPI
+    public static boolean existenceDPI(String nomPatient, String prenomPatient, String dateNaissance, String genre) {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        boolean existence = false;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql1 = "select * from dpi ;";
+            resultat = (ResultSet) st.executeQuery(sql1);
+            while (resultat.next() && existence == false) {
+                if (nomPatient.equalsIgnoreCase(resultat.getString("nomPatient")) && prenomPatient.equalsIgnoreCase(resultat.getString("prenomPatient")) && dateNaissance.equalsIgnoreCase(resultat.getString("dateNaissance")) && genre.equalsIgnoreCase(resultat.getString("genre"))) {
+                    existence = true;
+                } else {
+                    existence = false;
+                }
+            }
+        }
+        
+        catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        return existence;
+
+    }
 
     public static int lireIdDPI(String nomPatient, String prenomPatient, String dateNaissance, String genre) {
 
