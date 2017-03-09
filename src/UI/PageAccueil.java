@@ -130,7 +130,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jButtonDeco = new javax.swing.JButton();
         jSplitPane = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -208,7 +208,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
 
         getContentPane().add(barreDuHaut, java.awt.BorderLayout.NORTH);
 
-        jTree1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
+        jTree.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Processir");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patient");
         treeNode1.add(treeNode2);
@@ -238,11 +238,11 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte personnel");
         treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTree1.setMinimumSize(new java.awt.Dimension(40, 0));
-        jTree1.setPreferredSize(new java.awt.Dimension(150, 132));
-        jScrollPane1.setViewportView(jTree1);
+        jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTree.setMinimumSize(new java.awt.Dimension(40, 0));
+        jTree.setPreferredSize(new java.awt.Dimension(150, 132));
+        jScrollPane1.setViewportView(jTree);
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Princeton-Plainsboro");
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patients");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("DMR");
@@ -441,7 +441,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTree;
     // End of variables declaration//GEN-END:variables
 
 }

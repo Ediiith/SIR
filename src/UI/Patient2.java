@@ -130,7 +130,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jButtonDeco = new javax.swing.JButton();
         jSplitPane = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -211,7 +211,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
 
         getContentPane().add(barreDuHaut, java.awt.BorderLayout.NORTH);
 
-        jTree1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
+        jTree.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Processir");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patient");
         treeNode1.add(treeNode2);
@@ -241,8 +241,8 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte personnel");
         treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jTree);
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Princeton-Plainsboro");
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patients");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("DMR");
@@ -469,26 +469,26 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         int i = 0;
         int compteur = 0;
         boolean rep = false;
-        while ((i < listeFiche.size()) && (rep == false)) {
-            compteur = 0;
-            if (listeFiche.get(i).getDate().toString().equals(jTable1.getValueAt(row, 0))
-                && listeFiche.get(i).getMedecin().toString().equals(jTable1.getValueAt(row, 1))
-                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable1.getValueAt(row, 3))) {
-                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable1.getValueAt(row + j, 5))) {
-                        compteur++;
-                    }
-
-                }
-                if (compteur == listeFiche.get(i).getActes().size()) {
-                    rep = true;
-                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-                    f.setVisible(true);
-                }
-
-            }
-            i++;
-        }
+//        while ((i < listeFiche.size()) && (rep == false)) {
+//            compteur = 0;
+//            if (listeFiche.get(i).getDate().toString().equals(jTable1.getValueAt(row, 0))
+//                && listeFiche.get(i).getMedecin().toString().equals(jTable1.getValueAt(row, 1))
+//                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable1.getValueAt(row, 3))) {
+//                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
+//                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable1.getValueAt(row + j, 5))) {
+//                        compteur++;
+//                    }
+//
+//                }
+//                if (compteur == listeFiche.get(i).getActes().size()) {
+//                    rep = true;
+//                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
+//                    f.setVisible(true);
+//                }
+//
+//            }
+//            i++;
+//        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
@@ -524,7 +524,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTree;
     // End of variables declaration//GEN-END:variables
 
 }

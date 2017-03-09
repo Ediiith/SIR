@@ -132,7 +132,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         jButtonDeco = new javax.swing.JButton();
         jSplitPane = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -209,7 +209,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
 
         getContentPane().add(barreDuHaut, java.awt.BorderLayout.NORTH);
 
-        jTree1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
+        jTree.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Processir");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patient");
         treeNode1.add(treeNode2);
@@ -239,8 +239,8 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte personnel");
         treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jTree);
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Princeton-Plainsboro");
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patients");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("DMR");
@@ -467,7 +467,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTree;
     // End of variables declaration//GEN-END:variables
 
 }
