@@ -1,6 +1,8 @@
 
 package UI;
 
+import NF.Personnel;
+import NF.Statut;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
@@ -13,6 +15,9 @@ public class PageDeConnexion extends javax.swing.JFrame {
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
     }
+    
+    Statut t1 = Statut.MANIPULATEUR;
+    Personnel p1= new Personnel("JACOB","Edith","JE","edith",t1,true);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +46,6 @@ public class PageDeConnexion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
 
-        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
         image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(image, java.awt.BorderLayout.EAST);
 
@@ -147,7 +151,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                 .addComponent(PasswordFieldMDP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel1))
             .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layoutbuttonLayout.createSequentialGroup()
@@ -166,7 +170,10 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        //------------identification a partir de la base de donnees
+        PageAccueil accueil = new PageAccueil(t1.toString(),p1.toString());
+        accueil.setVisible(true);
+        this.dispose();
+//------------identification a partir de la base de donnees
 
            /** PageAccueil accueil = new PageAccueil(li.getListeType().get(i), li.getListeIdentifiant().get(i), dm,
                     listePatient, listeFiche);

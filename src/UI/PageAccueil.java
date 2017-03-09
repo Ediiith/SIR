@@ -1,6 +1,8 @@
 
 package UI;
 
+import NF.Personnel;
+import NF.Statut;
 import java.util.ArrayList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -13,24 +15,22 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
      */
     private String statut;
     private String identifiant;
+   
 
   
 
-  /**  public PageAccueil(String statut, String identifiant, DossierMedical dm, ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
+  public PageAccueil(String statut, String identifiant) {
         initComponents();
         this.setTitle("Page d'Accueil");
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.statut = statut;
+        this.statut = statut ;
         this.identifiant = identifiant;
-        //this.dm = dm;
-        //this.listePatient = listePatient;
-        //this.listeFiche = listeFiche;
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(identifiant);
         jTextFieldStatut.setText(statut);
-    }**/
+    }
 
     @Override
     public void valueChanged(TreeSelectionEvent e) {
