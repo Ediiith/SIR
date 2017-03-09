@@ -1,17 +1,19 @@
-package Processir.nf;
+package NF;
 
-//Enumération des différents types de sexe
-public enum Genre {
+//Enumeration des différents types d'examens
+public enum TypeExamen {
 
-    FEMME("Femme"),
-    HOMME("Homme"),
+    SCANNER("Scanner"),
+    IRM("IRM"),
+    RADIOGRAPHIE("Radiographie"),
     AUTRE("Autre");
+    
 
     //attributs de l'énumération
     private String libelle;
 
-    //constructeur
-    private Genre(String libelle) {
+//constructeur
+    private TypeExamen(String libelle) {
         this.libelle = libelle;
     }
 //méthode
