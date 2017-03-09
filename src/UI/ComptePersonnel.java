@@ -32,7 +32,7 @@ public class ComptePersonnel extends javax.swing.JFrame implements TreeSelection
 
     @Override
     public void valueChanged(TreeSelectionEvent e) {
-        Object obj = jTree.getLastSelectedPathComponent();
+        Object obj = jTree1.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
             case "Admission patient":
