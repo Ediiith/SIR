@@ -5,36 +5,32 @@
  */
 package UI;
 
+import NF.DMR;
 import java.awt.print.PrinterException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import princetonPlainsboro.nf.*;
+
 
 /**
  *
- * @author Boris
+ * @author Edith
  */
 public class AfficherDMR extends javax.swing.JFrame {
 
     /**
      * Creates new form affichageFiche
      */
-    private FicheDeSoins fiche;
+    private DMR dmr;
     private String statut;
 
-    public AfficherDMR(FicheDeSoins fiche, String statut) {
+    public AfficherDMR(DMR dmr, String statut) {
         initComponents();
-        this.setTitle("affichage fiche de Soin");
-        this.fiche = fiche;
+        this.setTitle("affichage du DMR");
+        this.dmr = dmr;
         this.statut = statut;
         zoneAffichage.setEditable(false);
 
-        if (this.statut.equals("SecAdm")) {
-            zoneAffichage.setText(this.fiche.afficherPourImpressionFacture());
-        }
-        else {
-             zoneAffichage.setText(this.fiche.afficherPourImpression());
-        }
+   
 
     }
 
@@ -49,7 +45,6 @@ public class AfficherDMR extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jButtonImprimer = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         zoneAffichage = new javax.swing.JTextArea();
@@ -66,13 +61,6 @@ public class AfficherDMR extends javax.swing.JFrame {
             }
         });
 
-        jButtonImprimer.setText("Imprimer");
-        jButtonImprimer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImprimerActionPerformed(evt);
-            }
-        });
-
         jLabel16.setFont(new java.awt.Font("Bernard MT Condensed", 2, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(153, 0, 0));
         jLabel16.setText("Processir");
@@ -83,19 +71,15 @@ public class AfficherDMR extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addComponent(jButtonImprimer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButtonImprimer))
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -138,18 +122,8 @@ public class AfficherDMR extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButtonImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimerActionPerformed
-
-        try {
-            zoneAffichage.print();
-        } catch (PrinterException ex) {
-            Logger.getLogger(AfficherDMR.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jButtonImprimerActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonImprimer;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
