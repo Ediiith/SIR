@@ -1,6 +1,10 @@
 package NF;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Examen {
 
@@ -9,13 +13,50 @@ public class Examen {
     private CompteRendu compteRendu;
     private TypeExamen typeExamen;
     private String PACS;
+    private final Personnel praticien; 
+    private int identifiant;
 
-    public Examen(DMR dmr, Date date, CompteRendu compteRendu, TypeExamen typeExamen, String PACS) {
+    // constructeur 
+    
+    public Examen(DMR dmr, Date date, CompteRendu compteRendu, TypeExamen typeExamen, String PACS, Personnel radiologue) {
         this.dmr = dmr;
         this.date = date;
         this.compteRendu = compteRendu;
         this.typeExamen = typeExamen;
         this.PACS = PACS;
+        this.praticien=radiologue;
+    }
+    
+    /**
+     * Récupere toutes les infos de l'examen depuis la base de données.
+     */
+    public void getInfos() {
+        String sql;
+        sql = "SELECT * FROM BDexamens WHERE idResponsable=" + identifiant;
+        try {
+            ResultSet rs = ConnexionBD.getConnexionBD().exec(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    if (rs.getString("id_p") == null) {
+                        idP = 0;
+                    } else {
+                        idP = rs.getInt("id_p");
+                    }
+                    if (rs.getString("compterendu") == null) {
+                        compte_rendu = "N/A";
+                    } else {
+                        compte_rendu = rs.getString("compterendu");
+                    }
+                    if (rs.getString("commentaire") == null) {
+                        commentaire = "N/A";
+                    } else {
+                        commentaire = rs.getString("commentaire");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public String toString(){
@@ -71,5 +112,11 @@ public class Examen {
     public void setPACS(String PACS) {
         this.PACS = PACS;
     }
-
+    
+    //retour le radiologue qui a rédigé le compte rendu
+    public Personnel getPh(){
+        return praticien;
+    }
 }
+
+
