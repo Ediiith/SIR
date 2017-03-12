@@ -1,10 +1,16 @@
 package NF;
 
+import UI.PageDeConnexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+/**
+ * 
+ * @author Edith
+ */
 
 public class Examen {
 
@@ -15,6 +21,7 @@ public class Examen {
     private String PACS;
     private final Personnel praticien; 
     private int identifiant;
+    private int idPersonnel;
 
     // constructeur 
     
@@ -32,35 +39,32 @@ public class Examen {
      */
     public void getInfos() {
         String sql;
-        sql = "SELECT * FROM BDexamens WHERE idResponsable=" + identifiant;
+        sql = "SELECT * FROM BDexamens WHERE idExamen=" + identifiant;
         try {
-            ResultSet rs = ConnexionBD.getConnexionBD().exec(sql);
+            ResultSet rs = PageDeConnexion.getConnexionBD().exec(sql);
             if (rs != null) {
                 while (rs.next()) {
-                    if (rs.getString("id_p") == null) {
-                        idP = 0;
+                    if (rs.getString("idPersonnel") == null) {
+                        idPersonnel = 0;
                     } else {
-                        idP = rs.getInt("id_p");
+                        idPersonnel = rs.getInt("idPersonnel");
                     }
-                    if (rs.getString("compterendu") == null) {
-                        compte_rendu = "N/A";
+                    // à vérifier avec Marie car pas sûre...
+                    if (rs.getString("compteRendu") == null) {
+                        compteRendu.equals(0);
                     } else {
-                        compte_rendu = rs.getString("compterendu");
-                    }
-                    if (rs.getString("commentaire") == null) {
-                        commentaire = "N/A";
-                    } else {
-                        commentaire = rs.getString("commentaire");
+                        compteRendu.equals(compteRendu);
                     }
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    @Override
     public String toString(){
-        return "Patient "+this.dmr.getNom()+" "+this.dmr.getPrenom()+" Né le "+this.dmr.getDateNaissance()+"\nDate : "+date+"\n Type d'examen : "+typeExamen+"\n Compte-rendu : "+compteRendu+"\n N° PACS : "+PACS;
+        return "Patient "+this.dmr.getNom()+" "+this.dmr.getPrenom()+" Né(e) le "+this.dmr.getDateNaissance()+"\nDate : "+date+"\n Type d'examen : "+typeExamen+"\n Compte-rendu : "+compteRendu+"\n N° PACS : "+PACS;
     }
 
     //retourne le DMR
@@ -113,10 +117,11 @@ public class Examen {
         this.PACS = PACS;
     }
     
-    //retour le radiologue qui a rédigé le compte rendu
-    public Personnel getPh(){
+    //retour le praticien qui a rédigé le compte rendu
+    public Personnel getPraticien(){
         return praticien;
     }
+    
 }
 
 
