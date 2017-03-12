@@ -45,6 +45,19 @@ public class ListeDMR {
         return s;
     }
     
+    //renvoie la liste des DMR proches de la recherche
+    public String afficherDMRproches(DMR dmr1){
+        String s;
+        s=("Liste des DMR proches de la recherche :\n-----------------------------------------------------------------------------------------\n");
+            for (int i = 0; i < getDMR().size(); i++) {
+            if(getDMR().get(i).procheDe(dmr1)){
+                DMR dmr = getDMR().get(i);
+                s = s + dmr.AfficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
+            }     
+        }
+        return s;
+    }
+    
     //renvoie toutes les DMR admis
     public String afficherDMRAdmis() {
         String s;
