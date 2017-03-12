@@ -9,15 +9,15 @@ import java.util.ArrayList;
 
 public class PageDeConnexion extends javax.swing.JFrame {
 
+    
     private static ConnexionBD connexionBD;
-
+    
     public PageDeConnexion() {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
 
         connexionBD = getConnexionBD();
-
     }
 
     Statut t1 = Statut.MANIPULATEUR;
@@ -203,9 +203,12 @@ public class PageDeConnexion extends javax.swing.JFrame {
         PasswordFieldMDP.setText("");
     }//GEN-LAST:event_PasswordFieldMDPFocusGained
 
+    
     public static ConnexionBD getConnexionBD(){
         return connexionBD;    
     }
+    
+
     /**
      * @param args the command line arguments
      */
@@ -246,6 +249,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                 new PageDeConnexion().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
