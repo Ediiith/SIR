@@ -1,6 +1,7 @@
 
 package UI;
 
+import NF.ConnexionBD;
 import NF.Personnel;
 import NF.Statut;
 import java.awt.event.FocusAdapter;
@@ -9,12 +10,17 @@ import java.util.ArrayList;
 
 
 public class PageDeConnexion extends javax.swing.JFrame {
-
+    
+    private static ConnexionBD connexionBD;
+    
     public PageDeConnexion() {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
+        
+        connexionBD = getConnexionBD();
     }
+    
     
     Statut t1 = Statut.MANIPULATEUR;
     Personnel p1= new Personnel("JACOB","Edith","JE","edith",t1,true);
@@ -197,7 +203,11 @@ public class PageDeConnexion extends javax.swing.JFrame {
     private void PasswordFieldMDPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFieldMDPFocusGained
         PasswordFieldMDP.setText("");
     }//GEN-LAST:event_PasswordFieldMDPFocusGained
-
+    
+    public static ConnexionBD getConnexionBD(){
+        return connexionBD;    
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -238,6 +248,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                 new PageDeConnexion().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
