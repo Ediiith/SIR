@@ -421,7 +421,10 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
-        // TODO add your handling code here:
+        Examen e = new Examen();
+        e.setVisible(true);
+        this.dispose();
+       
     }//GEN-LAST:event_jButtonDeco2ActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
