@@ -10,7 +10,7 @@ public class Patient4 extends javax.swing.JFrame {
 
     public Patient4() {
         initComponents();
-        this.setTitle("Connexion");
+        this.setTitle("Patient4");
         this.setLocationRelativeTo(null);
     }
 
@@ -61,7 +61,7 @@ public class Patient4 extends javax.swing.JFrame {
         jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Le dossier a bien été créé pour le patient");
+        jLabel5.setText("Voulez vous créer le dossier du patient ?");
 
         Valider1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Valider1.setText("Admission");

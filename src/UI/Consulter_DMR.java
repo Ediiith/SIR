@@ -6,7 +6,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 
-public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionListener {
+public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
      * Creates new form PageAccueil
@@ -14,7 +14,7 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
     private String statut;
     private String identifiant;
 
-    Consuler_DMR(String statut, String identifiant) {
+    Consulter_DMR(String statut, String identifiant) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -53,7 +53,7 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
             
             case "Consultation d'un DMR":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    Consuler_DMR cDMR= new Consuler_DMR(this.statut, this.identifiant);
+                    Consulter_DMR cDMR= new Consulter_DMR(this.statut, this.identifiant);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -550,7 +550,9 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
+        AfficherDMR aDMR=new AfficherDMR();
+        aDMR.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed

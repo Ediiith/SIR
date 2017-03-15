@@ -13,27 +13,18 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     private String identifiant;
 
     Patient(String statut, String identifiant) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
-
-  /**  public PageAccueil(String statut, String identifiant, DossierMedical dm, ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
         initComponents();
-        this.setTitle("Page d'Accueil");
-        this.setExtendedState(this.MAXIMIZED_BOTH);
         this.statut = statut;
         this.identifiant = identifiant;
-        //this.dm = dm;
-        //this.listePatient = listePatient;
-        //this.listeFiche = listeFiche;
+        this.setTitle("Patient");
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(identifiant);
         jTextFieldStatut.setText(statut);
-    }**/
+    }
 
+ 
     @Override
      public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
@@ -51,7 +42,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
             
             case "Consultation d'un DMR":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    Consuler_DMR cDMR= new Consuler_DMR(this.statut, this.identifiant);
+                    Consulter_DMR cDMR= new Consulter_DMR(this.statut, this.identifiant);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -483,7 +474,9 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
+        Patient3 p3=new Patient3();
+        p3.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
     /**

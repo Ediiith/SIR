@@ -10,7 +10,7 @@ public class Patient3 extends javax.swing.JFrame {
 
     public Patient3() {
         initComponents();
-        this.setTitle("Connexion");
+        this.setTitle("Patient3");
         this.setLocationRelativeTo(null);
     }
 

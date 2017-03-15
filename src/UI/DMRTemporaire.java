@@ -51,7 +51,7 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
             
             case "Consultation d'un DMR":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    Consuler_DMR cDMR= new Consuler_DMR(this.statut, this.identifiant);
+                    Consulter_DMR cDMR= new Consulter_DMR(this.statut, this.identifiant);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {

@@ -16,21 +16,18 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
 
   
 
-  /**  public PageAccueil(String statut, String identifiant, DossierMedical dm, ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
+  public Patient2(String statut, String identifiant) {
         initComponents();
         this.setTitle("Page d'Accueil");
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.statut = statut;
         this.identifiant = identifiant;
-        //this.dm = dm;
-        //this.listePatient = listePatient;
-        //this.listeFiche = listeFiche;
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(identifiant);
         jTextFieldStatut.setText(statut);
-    }**/
+    }
 
     @Override
      public void valueChanged(TreeSelectionEvent e) {
@@ -49,7 +46,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
             
             case "Consultation d'un DMR":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    Consuler_DMR cDMR= new Consuler_DMR(this.statut, this.identifiant);
+                    Consulter_DMR cDMR= new Consulter_DMR(this.statut, this.identifiant);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -458,11 +455,15 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
+        Patient4 p4=new Patient4();
+        p4.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
     private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
-        // TODO add your handling code here:
+        Patient3 p3=new Patient3();
+        p3.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonDeco2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

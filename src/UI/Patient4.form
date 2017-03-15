@@ -158,7 +158,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Le dossier a bien &#xe9;t&#xe9; cr&#xe9;&#xe9; pour le patient"/>
+            <Property name="text" type="java.lang.String" value="Voulez vous cr&#xe9;er le dossier du patient ?"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="Valider1">
