@@ -8,19 +8,35 @@ public class Main {
 
     public static void main(String[] args) throws ParseException {
         
-        //Test de la liste de DMR
+        //Test de liste DMR proches
         Date d1 = new SimpleDateFormat("yyyy-MM-dd hh'h'mm").parse("1976-09-07 23h45");
         Genre g1 = Genre.FEMME;
         DMR dmr1 = new DMR("MATHIVET", "Marie", d1, 334, "1 place dubedout", 001, g1,true);
         DMR dmr2 = new DMR("MATIVE","Mary",d1,334,"1 place dubedout",001,g1,false);
+        DMR dmr3 = new DMR("Ferard","Julie",d1,334,"1 place dubedout",001,g1,false);
         
         ListeDMR LD=new ListeDMR();
         
         LD.ajouterDMR(dmr2);
         LD.ajouterDMR(dmr1);
+        LD.ajouterDMR(dmr3);
         
-        System.out.println(LD.nombreDMR());
-        System.out.println(LD.afficherDMRAdmis());
+        System.out.println(LD.afficher());
+        System.out.println(LD.afficherDMRproches(dmr1));
+        
+//        //Test de la liste de DMR
+//        Date d1 = new SimpleDateFormat("yyyy-MM-dd hh'h'mm").parse("1976-09-07 23h45");
+//        Genre g1 = Genre.FEMME;
+//        DMR dmr1 = new DMR("MATHIVET", "Marie", d1, 334, "1 place dubedout", 001, g1,true);
+//        DMR dmr2 = new DMR("MATIVE","Mary",d1,334,"1 place dubedout",001,g1,false);
+//        
+//        ListeDMR LD=new ListeDMR();
+//        
+//        LD.ajouterDMR(dmr2);
+//        LD.ajouterDMR(dmr1);
+//        
+//        System.out.println(LD.nombreDMR());
+//        System.out.println(LD.afficherDMRAdmis());
         
         
 //        //Test d'affichage d'un DMR

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accesBD;
+package BD;
 
 import NF.Genre;
-import static accesBD.LectureDPI.lireAdresse;
-import static accesBD.LectureDPI.lireDateNaissance;
-import static accesBD.LectureDPI.lireGenre;
-import static accesBD.LectureDPI.lireNomPatient;
-import static accesBD.LectureDPI.lirePrenomPatient;
+import static BD.LectureDPI.lireAdresse;
+import static BD.LectureDPI.lireDateNaissance;
+import static BD.LectureDPI.lireGenre;
+import static BD.LectureDPI.lireNomPatient;
+import static BD.LectureDPI.lirePrenomPatient;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;

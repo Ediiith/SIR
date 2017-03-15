@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accesBD;
+package BD;
 
-import static accesBD.EcritureDMR.creerDMR;
-import static accesBD.EcritureDMR.genererDMR;
-import static accesBD.EcritureDPI.creerDPI;
-import static accesBD.EcritureExamen.ajouterCompteRendu;
-import static accesBD.EcritureExamen.ajouterLienPACS;
-import static accesBD.EcritureExamen.creerExamen;
-import static accesBD.LectureDMR.existenceDMR;
-import static accesBD.LectureDPI.existenceDPI;
-import static accesBD.LectureDPI.lireAdresse;
-import static accesBD.LectureDPI.lireDateNaissance;
-import static accesBD.LectureDPI.lireGenre;
-import static accesBD.LectureDPI.lireIdDPI;
-import static accesBD.LectureDPI.lireNomPatient;
-import static accesBD.LectureDPI.lirePrenomPatient;
+import static BD.EcritureDMR.creerDMR;
+import static BD.EcritureDMR.genererDMR;
+import static BD.EcritureDPI.creerDPI;
+import static BD.EcritureExamen.ajouterCompteRendu;
+import static BD.EcritureExamen.ajouterLienPACS;
+import static BD.EcritureExamen.creerExamen;
+import static BD.LectureDMR.existenceDMR;
+import static BD.LectureDPI.existenceDPI;
+import static BD.LectureDPI.lireAdresse;
+import static BD.LectureDPI.lireDateNaissance;
+import static BD.LectureDPI.lireGenre;
+import static BD.LectureDPI.lireIdDPI;
+import static BD.LectureDPI.lireNomPatient;
+import static BD.LectureDPI.lirePrenomPatient;
 
 
 /**

@@ -1,23 +1,27 @@
-
 package UI;
 
+import NF.ConnexionBD;
 import NF.Personnel;
 import NF.Statut;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 
-
 public class PageDeConnexion extends javax.swing.JFrame {
 
+    
+    private static ConnexionBD connexionBD;
+    
     public PageDeConnexion() {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
+
+        connexionBD = getConnexionBD();
     }
-    
+
     Statut t1 = Statut.MANIPULATEUR;
-    Personnel p1= new Personnel("JACOB","Edith","JE","edith",t1,true);
+    Personnel p1 = new Personnel("JACOB", "Edith", "JE", "edith", t1, true);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,19 +174,20 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        PageAccueil accueil = new PageAccueil(t1.toString(),p1.toString());
+        PageAccueil accueil = new PageAccueil(t1.toString(), p1.toString());
         accueil.setVisible(true);
         this.dispose();
 //------------identification a partir de la base de donnees
 
-           /** PageAccueil accueil = new PageAccueil(li.getListeType().get(i), li.getListeIdentifiant().get(i), dm,
-                    listePatient, listeFiche);
-            accueil.setVisible(true);
-            this.dispose();
-        } else {
-            System.out.println("error");
-            javax.swing.JOptionPane.showMessageDialog(null, "mot de passe ou identifiant incorrect");
-        }**/
+        /**
+         * PageAccueil accueil = new PageAccueil(li.getListeType().get(i),
+         * li.getListeIdentifiant().get(i), dm, listePatient, listeFiche);
+         * accueil.setVisible(true); this.dispose(); } else {
+         * System.out.println("error");
+         * javax.swing.JOptionPane.showMessageDialog(null, "mot de passe ou
+         * identifiant incorrect");
+        }*
+         */
         //----------------------------------------------------
     }//GEN-LAST:event_ValiderActionPerformed
 
@@ -197,6 +202,12 @@ public class PageDeConnexion extends javax.swing.JFrame {
     private void PasswordFieldMDPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFieldMDPFocusGained
         PasswordFieldMDP.setText("");
     }//GEN-LAST:event_PasswordFieldMDPFocusGained
+
+    
+    public static ConnexionBD getConnexionBD(){
+        return connexionBD;    
+    }
+    
 
     /**
      * @param args the command line arguments
@@ -238,6 +249,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                 new PageDeConnexion().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

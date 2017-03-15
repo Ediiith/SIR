@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accesBD;
+package BD;
 
 import NF.Genre;
 import NF.Statut;
-import static accesBD.EcritureDMR.creerDMR;
-import static accesBD.EcritureDPI.creerDPI;
-import static accesBD.EcriturePersonnel.creerProfessionnel;
+import static BD.EcritureDMR.creerDMR;
+import static BD.EcritureDPI.creerDPI;
+import static BD.EcriturePersonnel.creerProfessionnel;
 
 /**
  *

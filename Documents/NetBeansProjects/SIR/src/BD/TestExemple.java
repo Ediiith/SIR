@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accesBD;
+package BD;
 
-import static accesBD.EcritureDMR.genererDMR;
-import static accesBD.LectureDMR.existenceDMR;
-import static accesBD.LectureDPI.existenceDPI;
-import static accesBD.LectureDPI.lireIdDPI;
+import static BD.EcritureDMR.genererDMR;
+import static BD.LectureDMR.existenceDMR;
+import static BD.LectureDPI.existenceDPI;
+import static BD.LectureDPI.lireIdDPI;
 
 /**
  *

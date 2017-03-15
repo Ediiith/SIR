@@ -39,9 +39,9 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         switch (obj.toString()) {
             case "Admission patient":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //PatientHopital ph = new PatientHopital(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //ph.setVisible(true);
-                    //this.dispose();
+                    Patient p = new Patient(this.statut, this.identifiant);
+                    p.setVisible(true);
+                    this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
@@ -49,8 +49,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
             
             case "Consultation d'un DMR":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //ConsultationFicheDesoins cfs = new ConsultationFicheDesoins(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //cfs.setVisible(true);
+                    Consuler_DMR cDMR= new Consuler_DMR(this.statut, this.identifiant);
+                    cDMR.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
@@ -58,8 +58,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 break;
             case "Procéder à un examen":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //AjouterFicheDeSoin afs = new AjouterFicheDeSoin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //afs.setVisible(true);
+                    Examen e1 = new Examen(this.statut, this.identifiant);
+                    e1.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
@@ -67,15 +67,15 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 break;
             case "Création d'un CMR"://pas de restriction d'accès
                 
-                    //CalculCoutActe cca = new CalculCoutActe(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //cca.setVisible(true);
+                    DMRTemporaire dmrt = new DMRTemporaire(this.statut, this.identifiant);
+                    dmrt.setVisible(true);
                     this.dispose();
                 
                 break;
             case "Compte Rendu":
                 if (statut.equals("PH")) {
-                    //FacturationPatient fp = new FacturationPatient(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //fp.setVisible(true);
+                    CompteRendu cr = new CompteRendu(this.statut, this.identifiant);
+                    cr.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
@@ -83,27 +83,27 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 break;
             case "Image":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //fsm.setVisible(true);
+                    Image i1 = new Image(this.statut, this.identifiant);
+                    i1.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Appareil":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //fsm.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
-            case "Compte personnel":
-                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                //lm.setVisible(true);
-                this.dispose();
-                break;
+//            case "Appareil":
+//                if (statut.equals("PH") || statut.equals("Manip")) {
+//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                    //fsm.setVisible(true);
+//                    this.dispose();
+//                } else {
+//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+//                }
+//                break;
+//            case "Compte personnel":
+//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                //lm.setVisible(true);
+//                this.dispose();
+//                break;
 
             default:
                 break;
@@ -243,41 +243,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jTree.setMinimumSize(new java.awt.Dimension(40, 0));
         jTree.setPreferredSize(new java.awt.Dimension(150, 132));
         jScrollPane1.setViewportView(jTree);
-        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Princeton-Plainsboro");
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patients");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("DMR");
-        treeNode3.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Creation DMR");
-        treeNode3.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Consulter DMR");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Compte rendu");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Image");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte personnel");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Associer à un DMR");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Saisir");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Imprimer");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Traiter");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Numériser");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-
-        jTree.setPreferredSize(new java.awt.Dimension(230, 80));
-
-        jSplitPane.setLeftComponent(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setText("l'hopital Princeton Plainsboro");

@@ -14,6 +14,10 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
     private String statut;
     private String identifiant;
 
+    Consuler_DMR(String statut, String identifiant) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
   
 
   /**  public PageAccueil(String statut, String identifiant, DossierMedical dm, ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
@@ -39,9 +43,9 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
         switch (obj.toString()) {
             case "Admission patient":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //PatientHopital ph = new PatientHopital(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //ph.setVisible(true);
-                    //this.dispose();
+                    Patient p = new Patient(this.statut, this.identifiant);
+                    p.setVisible(true);
+                    this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
@@ -49,8 +53,8 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
             
             case "Consultation d'un DMR":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //ConsultationFicheDesoins cfs = new ConsultationFicheDesoins(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //cfs.setVisible(true);
+                    Consuler_DMR cDMR= new Consuler_DMR(this.statut, this.identifiant);
+                    cDMR.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
@@ -58,8 +62,8 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
                 break;
             case "Procéder à un examen":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //AjouterFicheDeSoin afs = new AjouterFicheDeSoin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //afs.setVisible(true);
+                    Examen e1 = new Examen(this.statut, this.identifiant);
+                    e1.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
@@ -67,15 +71,15 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
                 break;
             case "Création d'un CMR"://pas de restriction d'accès
                 
-                    //CalculCoutActe cca = new CalculCoutActe(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //cca.setVisible(true);
+                    DMRTemporaire dmrt = new DMRTemporaire(this.statut, this.identifiant);
+                    dmrt.setVisible(true);
                     this.dispose();
                 
                 break;
             case "Compte Rendu":
                 if (statut.equals("PH")) {
-                    //FacturationPatient fp = new FacturationPatient(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //fp.setVisible(true);
+                    CompteRendu cr = new CompteRendu(this.statut, this.identifiant);
+                    cr.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
@@ -83,32 +87,31 @@ public class Consuler_DMR extends javax.swing.JFrame implements TreeSelectionLis
                 break;
             case "Image":
                 if (statut.equals("PH") || statut.equals("Manip")) {
-                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //fsm.setVisible(true);
+                    Image i1 = new Image(this.statut, this.identifiant);
+                    i1.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Appareil":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                    //fsm.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
-            case "Compte personnel":
-                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-                //lm.setVisible(true);
-                this.dispose();
-                break;
+//            case "Appareil":
+//                if (statut.equals("PH") || statut.equals("Manip")) {
+//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                    //fsm.setVisible(true);
+//                    this.dispose();
+//                } else {
+//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+//                }
+//                break;
+//            case "Compte personnel":
+//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                //lm.setVisible(true);
+//                this.dispose();
+//                break;
 
             default:
                 break;
         }
-
     }
 
     /**
