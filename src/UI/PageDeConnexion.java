@@ -5,7 +5,12 @@ import NF.Personnel;
 import NF.Statut;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class PageDeConnexion extends javax.swing.JFrame {
 
@@ -171,21 +176,38 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE,TextFieldID.getText());
-        //PageAccueil accueil = new PageAccueil(t, p.toString());
-        accueil.setVisible(true);
-        this.dispose();
-//------------identification a partir de la base de donnees
+        String nom = "";
+        String prenom = "";
 
-        /**
-         * PageAccueil accueil = new PageAccueil(li.getListeType().get(i),
-         * li.getListeIdentifiant().get(i), dm, listePatient, listeFiche);
-         * accueil.setVisible(true); this.dispose(); } else {
-         * System.out.println("error");
-         * javax.swing.JOptionPane.showMessageDialog(null, "mot de passe ou
-         * identifiant incorrect"); }*
-         */
-        //----------------------------------------------------
+        boolean b = false;
+        try {
+            ResultSet rs = connexionBD.exec("SELECT * FROM utilisateurs WHERE login='" + TextFieldID.getText() + "'");
+            if (rs != null) {
+                if (!rs.isBeforeFirst()) {
+                    JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+                while (rs.next()) {
+                    if (rs.getString("login").equals(TextFieldID.getText()) && rs.getString("mdp").equals(PasswordFieldMDP.getText())) {
+                        nom = rs.getString("nom_u");
+                        prenom = rs.getString("prenom_u");
+                        //this.t = rs.getObject(metier, null);
+                        b = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        b = false;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (b) {
+            PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE, nom);
+            accueil.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_ValiderActionPerformed
 
     private void TextFieldIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextFieldIDMouseClicked
