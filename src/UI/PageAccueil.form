@@ -172,7 +172,7 @@
                   </Border>
                 </Property>
                 <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-                  <TreeModel code="Processir&#xa; Admission patient&#xa; DMR&#xa;  Consulter DMR&#xa;  Cr&#xe9;er DMR&#xa; Examen&#xa;  Proc&#xe9;der &#xe0; un examen&#xa;  Associer &#xe0; un DMR&#xa; Compte-rendu&#xa;  Saisir&#xa;  Associer &#xe0; un DMR&#xa;  Imprimer&#xa; Image&#xa; Appareil&#xa; Compte personnel"/>
+                  <TreeModel code="Processir&#xa; Admission patient&#xa; DMR&#xa;  Consultation d&apos;un DMR&#xa;  Cr&#xe9;ation d&apos;un CMR&#xa; Examen&#xa;  Proc&#xe9;der &#xe0; un examen&#xa;  Associer &#xe0; un DMR&#xa; Compte-rendu&#xa; Image"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Curseur par d&#xe9;faut"/>

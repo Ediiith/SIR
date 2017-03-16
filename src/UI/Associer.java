@@ -1,11 +1,12 @@
 
 package UI;
 
+import NF.Personnel;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 
-
+//interface à refaire
 public class Associer extends javax.swing.JFrame {
 
     public Associer() {
@@ -14,6 +15,10 @@ public class Associer extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
 
+    }
+
+    Associer(Personnel personnel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

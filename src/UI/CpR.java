@@ -47,7 +47,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 //                break;
 
             case "Consultation d'un DMR":
-                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                if (personnel.equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
                     cDMR.setVisible(true);
                     this.dispose();
@@ -202,9 +202,9 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patient");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("DMR");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consulter DMR");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultation d'un DMR");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Créer DMR");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Création d'un CMR");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Examen");
@@ -214,32 +214,8 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Afficher");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Saisir");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Associer à un DMR");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Imprimer");
-        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Image");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Traiter");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Numériser");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Imprimer");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Appareil");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Trier");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Ajouter");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Supprimer");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte personnel");
         treeNode1.add(treeNode2);
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree.setToolTipText("");

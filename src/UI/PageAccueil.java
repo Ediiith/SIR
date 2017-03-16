@@ -5,8 +5,6 @@ import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
-import NF.Statut;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -62,6 +60,13 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
+            case "Création d'un CMR"://pas de restriction d'accès
+
+                DMRTemporaire dmrt = new DMRTemporaire(this.personnel, this.listeDMR);
+                dmrt.setVisible(true);
+                this.dispose();
+
+                break;
             case "Procéder à un examen":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
                     Exam e1 = new Exam(this.personnel, this.e);
@@ -71,12 +76,14 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Création d'un CMR"://pas de restriction d'accès
-
-                DMRTemporaire dmrt = new DMRTemporaire(this.personnel, this.listeDMR);
-                dmrt.setVisible(true);
-                this.dispose();
-
+            case "Associer à un DMR":
+                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                    Associer a = new Associer(this.personnel);
+                    a.setVisible(true);
+                    this.dispose();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+                }
                 break;
             case "Compte Rendu":
                 if (personnel.getStatut().equals("Radiologue")) {
@@ -219,9 +226,9 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patient");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("DMR");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consulter DMR");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Consultation d'un DMR");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Créer DMR");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Création d'un CMR");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Examen");
@@ -231,18 +238,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Saisir");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Associer à un DMR");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Imprimer");
-        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Image");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Appareil");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte personnel");
         treeNode1.add(treeNode2);
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
