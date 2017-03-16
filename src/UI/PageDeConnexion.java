@@ -29,6 +29,8 @@ public class PageDeConnexion extends javax.swing.JFrame {
     List<DMR> listeDMR;
     CompteRendu cr;
     Examen e;
+    Personnel p;
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,7 +183,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        PageAccueil accueil = new PageAccueil(p1, listeDMR, cr, e);
+        PageAccueil accueil = new PageAccueil(p, listeDMR, cr, e);
         accueil.setVisible(true);
         this.dispose();
 //------------identification a partir de la base de donnees
