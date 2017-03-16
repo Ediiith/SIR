@@ -10,10 +10,10 @@ import java.util.Vector;
 
 public class ListeDMR {
 
-    private List<DMR> ListeDMR; 	// contient des objets de classe 'DMR'
+    private List<DMR> listeDMR; 	// contient des objets de classe 'DMR'
 
     public ListeDMR() {
-        ListeDMR = new Vector<DMR>(); //liste vide
+        listeDMR = new Vector<DMR>(); //liste vide
     }
 
     //ajoute un DMR à la liste
@@ -23,7 +23,7 @@ public class ListeDMR {
 
     //retourne sous forme de liste l'ensemble des dmr
     public List<DMR> getDMR() {
-        return ListeDMR;
+        return listeDMR;
     }
 
     //retourne le nombre de DMR enregistrés dans le système
@@ -31,7 +31,7 @@ public class ListeDMR {
         int nb = 0;
         String s;
         s = "> Nombre de DMR : ";
-        return s + ListeDMR.size() + "\n";
+        return s + listeDMR.size() + "\n";
     }
     
     //renvoie toutes les DMR

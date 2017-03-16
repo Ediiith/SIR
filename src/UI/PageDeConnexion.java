@@ -1,11 +1,15 @@
 package UI;
 
+import NF.CompteRendu;
 import NF.ConnexionBD;
+import NF.DMR;
+import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PageDeConnexion extends javax.swing.JFrame {
 
@@ -22,6 +26,9 @@ public class PageDeConnexion extends javax.swing.JFrame {
 
     Statut t1 = Statut.MANIPULATEUR;
     Personnel p1 = new Personnel("JACOB", "Edith", "JE", "edith", t1, true);
+    List<DMR> listeDMR;
+    CompteRendu cr;
+    Examen e;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,7 +181,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        PageAccueil accueil = new PageAccueil(t1, p1.toString());
+        PageAccueil accueil = new PageAccueil(p1, listeDMR, cr, e);
         accueil.setVisible(true);
         this.dispose();
 //------------identification a partir de la base de donnees

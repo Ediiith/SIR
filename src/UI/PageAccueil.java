@@ -1,9 +1,13 @@
 
 package UI;
 
+import NF.CompteRendu;
+import NF.DMR;
+import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -13,43 +17,45 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
     /**
      * Creates new form PageAccueil
      */
-    private Statut statut;
-    private String identifiant;
-    
-
+    private Personnel personnel;
+    private CompteRendu cr;
+    private List<DMR> listeDMR;
+    private Examen e;
 
   
 
-  public PageAccueil(Statut statut, String identifiant) {
+  public PageAccueil(Personnel personnel, List<DMR> listeDMR, CompteRendu cr, Examen e) {
         initComponents();
         this.setTitle("Page d'Accueil");
         this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
-        this.statut = statut ;
-        this.identifiant = identifiant;
+        this.personnel = personnel;
+        this.listeDMR = listeDMR;
+        this.cr = cr;
+        this.e = e;
         this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(identifiant);
-        jTextFieldStatut.setText(statut.toString());
+        jTextFieldID.setText(personnel.getIdentifiant());
+        jTextFieldStatut.setText(personnel.getStatut().toString());
     }
-
-    @Override
+@Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
             case "Admission patient": //pas de restriction
-                //if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
-                    Patient p = new Patient();
-                    p.setVisible(true);
-                    this.dispose();
+                //if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                Patient p = new Patient(this.personnel);
+                p.setVisible(true);
+                this.dispose();
 //                } else {
 //                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
 //                }
 //                break;
+
             case "Consultation d'un DMR":
-                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
-                    Consulter_DMR cDMR= new Consulter_DMR();
+                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -57,8 +63,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Procéder à un examen":
-                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
-                    Examen e1 = new Examen();
+                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                    Exam e1 = new Exam(this.personnel, this.e);
                     e1.setVisible(true);
                     this.dispose();
                 } else {
@@ -66,24 +72,24 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Création d'un CMR"://pas de restriction d'accès
-                
-                    DMRTemporaire dmrt = new DMRTemporaire();
-                    dmrt.setVisible(true);
-                    this.dispose();
-                
+
+                DMRTemporaire dmrt = new DMRTemporaire(this.personnel, this.listeDMR);
+                dmrt.setVisible(true);
+                this.dispose();
+
                 break;
             case "Compte Rendu":
-                if (statut.equals("Radiologue")) {
-                    CompteRendu cr = new CompteRendu();
-                    cr.setVisible(true);
+                if (personnel.getStatut().equals("Radiologue")) {
+                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    cr1.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
             case "Image":
-                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
-                    Image i1 = new Image();
+                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                    Image i1 = new Image(this.personnel);
                     i1.setVisible(true);
                     this.dispose();
                 } else {
@@ -91,7 +97,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
 //            case "Appareil":
-//                if (statut.equals("Radiologue") || statut.equals("Manipulateurulateur")) {
+//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
 //                    //fsm.setVisible(true);
 //                    this.dispose();
@@ -241,8 +247,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTree.setMaximumSize(new java.awt.Dimension(200, 132));
-        jTree.setMinimumSize(new java.awt.Dimension(100, 0));
-        jTree.setPreferredSize(new java.awt.Dimension(150, 150));
+        jTree.setMinimumSize(new java.awt.Dimension(100, 100));
+        jTree.setPreferredSize(new java.awt.Dimension(200, 200));
         jScrollPane1.setViewportView(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
