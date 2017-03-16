@@ -1,6 +1,7 @@
 
 package UI;
 
+import NF.Statut;
 import java.util.ArrayList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -11,10 +12,10 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     /**
      * Creates new form PageAccueil
      */
-    private String statut;
+    private Statut statut;
     private String identifiant;
 
-    Image(String statut, String identifiant) {
+    Image() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -35,25 +36,24 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         jTextFieldID.setText(identifiant);
         jTextFieldStatut.setText(statut);
     }**/
-
     @Override
-     public void valueChanged(TreeSelectionEvent e) {
+    public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
-            case "Admission patient":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Patient p = new Patient(this.statut, this.identifiant);
+            case "Admission patient": //pas de restriction
+                //if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                    Patient p = new Patient();
                     p.setVisible(true);
                     this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
+//                } else {
+//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+//                }
+//                break;
             
             case "Consultation d'un DMR":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Consulter_DMR cDMR= new Consulter_DMR(this.statut, this.identifiant);
+                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                    Consulter_DMR cDMR= new Consulter_DMR();
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -61,8 +61,8 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
             case "Procéder à un examen":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Examen e1 = new Examen(this.statut, this.identifiant);
+                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                    Examen e1 = new Examen();
                     e1.setVisible(true);
                     this.dispose();
                 } else {
@@ -71,14 +71,14 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
             case "Création d'un CMR"://pas de restriction d'accès
                 
-                    DMRTemporaire dmrt = new DMRTemporaire(this.statut, this.identifiant);
+                    DMRTemporaire dmrt = new DMRTemporaire();
                     dmrt.setVisible(true);
                     this.dispose();
                 
                 break;
             case "Compte Rendu":
-                if (statut.equals("PH")) {
-                    CompteRendu cr = new CompteRendu(this.statut, this.identifiant);
+                if (statut.equals("Radiologue")) {
+                    CompteRendu cr = new CompteRendu();
                     cr.setVisible(true);
                     this.dispose();
                 } else {
@@ -86,8 +86,8 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
             case "Image":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Image i1 = new Image(this.statut, this.identifiant);
+                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                    Image i1 = new Image();
                     i1.setVisible(true);
                     this.dispose();
                 } else {
@@ -95,7 +95,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
 //            case "Appareil":
-//                if (statut.equals("PH") || statut.equals("Manip")) {
+//                if (statut.equals("Radiologue") || statut.equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
 //                    //fsm.setVisible(true);
 //                    this.dispose();
@@ -113,9 +113,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
         }
 
-
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -382,8 +380,8 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecoActionPerformed
-        PageDeConnexion connection = new PageDeConnexion();
-        connection.setVisible(true);
+        PageDeConnexion connexion = new PageDeConnexion();
+        connexion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 

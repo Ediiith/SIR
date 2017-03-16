@@ -174,7 +174,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        PageAccueil accueil = new PageAccueil(t1.toString(), p1.toString());
+        PageAccueil accueil = new PageAccueil(t1, p1.toString());
         accueil.setVisible(true);
         this.dispose();
 //------------identification a partir de la base de donnees

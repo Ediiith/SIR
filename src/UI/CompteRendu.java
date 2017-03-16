@@ -1,59 +1,49 @@
-
 package UI;
 
+import NF.Statut;
 import java.util.ArrayList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-
 
 public class CompteRendu extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
      * Creates new form PageAccueil
      */
-    private String statut;
+    private Statut statut;
     private String identifiant;
 
-    CompteRendu(String statut, String identifiant) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
-
-  /**  public PageAccueil(String statut, String identifiant, DossierMedical dm, ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
+    public CompteRendu() {
         initComponents();
-        this.setTitle("Page d'Accueil");
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setTitle("CompteRendu");
+        this.setExtendedState(CompteRendu.MAXIMIZED_BOTH);
         this.statut = statut;
         this.identifiant = identifiant;
-        //this.dm = dm;
-        //this.listePatient = listePatient;
-        //this.listeFiche = listeFiche;
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(CompteRendu.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(identifiant);
-        jTextFieldStatut.setText(statut);
-    }**/
+        jTextFieldStatut.setText(statut.toString());
+    }
 
     @Override
-     public void valueChanged(TreeSelectionEvent e) {
+    public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
-            case "Admission patient":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Patient p = new Patient(this.statut, this.identifiant);
-                    p.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
-            
+            case "Admission patient": //pas de restriction
+                //if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                Patient p = new Patient();
+                p.setVisible(true);
+                this.dispose();
+//                } else {
+//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+//                }
+//                break;
+
             case "Consultation d'un DMR":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Consulter_DMR cDMR= new Consulter_DMR(this.statut, this.identifiant);
+                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                    Consulter_DMR cDMR = new Consulter_DMR();
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -61,8 +51,8 @@ public class CompteRendu extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Procéder à un examen":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Examen e1 = new Examen(this.statut, this.identifiant);
+                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                    Examen e1 = new Examen();
                     e1.setVisible(true);
                     this.dispose();
                 } else {
@@ -70,15 +60,15 @@ public class CompteRendu extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Création d'un CMR"://pas de restriction d'accès
-                
-                    DMRTemporaire dmrt = new DMRTemporaire(this.statut, this.identifiant);
-                    dmrt.setVisible(true);
-                    this.dispose();
-                
+
+                DMRTemporaire dmrt = new DMRTemporaire();
+                dmrt.setVisible(true);
+                this.dispose();
+
                 break;
             case "Compte Rendu":
-                if (statut.equals("PH")) {
-                    CompteRendu cr = new CompteRendu(this.statut, this.identifiant);
+                if (statut.equals("Radiologue")) {
+                    CompteRendu cr = new CompteRendu();
                     cr.setVisible(true);
                     this.dispose();
                 } else {
@@ -86,8 +76,8 @@ public class CompteRendu extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Image":
-                if (statut.equals("PH") || statut.equals("Manip")) {
-                    Image i1 = new Image(this.statut, this.identifiant);
+                if (statut.equals("Radiologue") || statut.equals("Manipulateur")) {
+                    Image i1 = new Image();
                     i1.setVisible(true);
                     this.dispose();
                 } else {
@@ -95,7 +85,7 @@ public class CompteRendu extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
 //            case "Appareil":
-//                if (statut.equals("PH") || statut.equals("Manip")) {
+//                if (statut.equals("Radiologue") || statut.equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
 //                    //fsm.setVisible(true);
 //                    this.dispose();
@@ -112,7 +102,6 @@ public class CompteRendu extends javax.swing.JFrame implements TreeSelectionList
             default:
                 break;
         }
-
 
     }
 
@@ -397,8 +386,8 @@ public class CompteRendu extends javax.swing.JFrame implements TreeSelectionList
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecoActionPerformed
-        PageDeConnexion connection = new PageDeConnexion();
-        connection.setVisible(true);
+        PageDeConnexion connexion = new PageDeConnexion();
+        connexion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
