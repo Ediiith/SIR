@@ -9,19 +9,16 @@ import java.util.ArrayList;
 
 public class PageDeConnexion extends javax.swing.JFrame {
 
-    
     private static ConnexionBD connexionBD;
-    
+    private Personnel p;
+    private Statut t;
+
     public PageDeConnexion() {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
-
         connexionBD = getConnexionBD();
     }
-
-    Statut t1 = Statut.MANIPULATEUR;
-    Personnel p1 = new Personnel("JACOB", "Edith", "JE", "edith", t1, true);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,7 +56,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
         ID.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ID.setText("ID:");
 
-        TextFieldID.setText("taper votre identifiant");
+        TextFieldID.setText("8");
         TextFieldID.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TextFieldIDMouseClicked(evt);
@@ -83,7 +80,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
             }
         });
 
-        PasswordFieldMDP.setText("jPasswordField1");
+        PasswordFieldMDP.setText("azerty");
         PasswordFieldMDP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 PasswordFieldMDPFocusGained(evt);
@@ -132,7 +129,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
-                        .addContainerGap(12, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Connection, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +171,8 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        PageAccueil accueil = new PageAccueil(t1, p1.toString());
+        PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE,TextFieldID.getText());
+        //PageAccueil accueil = new PageAccueil(t, p.toString());
         accueil.setVisible(true);
         this.dispose();
 //------------identification a partir de la base de donnees
@@ -185,8 +183,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
          * accueil.setVisible(true); this.dispose(); } else {
          * System.out.println("error");
          * javax.swing.JOptionPane.showMessageDialog(null, "mot de passe ou
-         * identifiant incorrect");
-        }*
+         * identifiant incorrect"); }*
          */
         //----------------------------------------------------
     }//GEN-LAST:event_ValiderActionPerformed
@@ -203,11 +200,9 @@ public class PageDeConnexion extends javax.swing.JFrame {
         PasswordFieldMDP.setText("");
     }//GEN-LAST:event_PasswordFieldMDPFocusGained
 
-    
-    public static ConnexionBD getConnexionBD(){
-        return connexionBD;    
+    public static ConnexionBD getConnexionBD() {
+        return connexionBD;
     }
-    
 
     /**
      * @param args the command line arguments
@@ -249,7 +244,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                 new PageDeConnexion().setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
