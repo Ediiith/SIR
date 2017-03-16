@@ -8,29 +8,25 @@ import NF.Personnel;
 import NF.Statut;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class PageDeConnexion extends javax.swing.JFrame {
 
-    
     private static ConnexionBD connexionBD;
-    
+    private Personnel p;
+    private Statut t;
+
     public PageDeConnexion() {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
-
         connexionBD = getConnexionBD();
     }
-
-    Statut t1 = Statut.MANIPULATEUR;
-    Personnel p1 = new Personnel("JACOB", "Edith", "JE", "edith", t1, true);
-    List<DMR> listeDMR;
-    CompteRendu cr;
-    Examen e;
-    Personnel p;
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +64,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
         ID.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ID.setText("ID:");
 
-        TextFieldID.setText("taper votre identifiant");
+        TextFieldID.setText("8");
         TextFieldID.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TextFieldIDMouseClicked(evt);
@@ -92,7 +88,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
             }
         });
 
-        PasswordFieldMDP.setText("jPasswordField1");
+        PasswordFieldMDP.setText("azerty");
         PasswordFieldMDP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 PasswordFieldMDPFocusGained(evt);
@@ -141,7 +137,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
-                        .addContainerGap(12, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Connection, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,21 +179,38 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        PageAccueil accueil = new PageAccueil(p, listeDMR, cr, e);
-        accueil.setVisible(true);
-        this.dispose();
-//------------identification a partir de la base de donnees
+        String nom = "";
+        String prenom = "";
 
-        /**
-         * PageAccueil accueil = new PageAccueil(li.getListeType().get(i),
-         * li.getListeIdentifiant().get(i), dm, listePatient, listeFiche);
-         * accueil.setVisible(true); this.dispose(); } else {
-         * System.out.println("error");
-         * javax.swing.JOptionPane.showMessageDialog(null, "mot de passe ou
-         * identifiant incorrect");
-        }*
-         */
-        //----------------------------------------------------
+        boolean b = false;
+        try {
+            ResultSet rs = connexionBD.exec("SELECT * FROM utilisateurs WHERE login='" + TextFieldID.getText() + "'");
+            if (rs != null) {
+                if (!rs.isBeforeFirst()) {
+                    JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+                while (rs.next()) {
+                    if (rs.getString("login").equals(TextFieldID.getText()) && rs.getString("mdp").equals(PasswordFieldMDP.getText())) {
+                        nom = rs.getString("nom_u");
+                        prenom = rs.getString("prenom_u");
+                        //this.t = rs.getObject(metier, null);
+                        b = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        b = false;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (b) {
+            PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE, nom);
+            accueil.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_ValiderActionPerformed
 
     private void TextFieldIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextFieldIDMouseClicked
@@ -212,11 +225,9 @@ public class PageDeConnexion extends javax.swing.JFrame {
         PasswordFieldMDP.setText("");
     }//GEN-LAST:event_PasswordFieldMDPFocusGained
 
-    
-    public static ConnexionBD getConnexionBD(){
-        return connexionBD;    
+    public static ConnexionBD getConnexionBD() {
+        return connexionBD;
     }
-    
 
     /**
      * @param args the command line arguments
@@ -258,7 +269,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
                 new PageDeConnexion().setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
