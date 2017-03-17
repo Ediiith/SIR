@@ -39,7 +39,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
             nbrligne = nbrligne + listeDMR.get(i).getNumUnique(); //pas la bonne varaible de fin à changer
         }
         int k = 0;
-        data = new Object[nbrligne][4];
+        data = new Object[nbrligne][5];
         for (int i = 0; i < listeDMR.size(); i++) {
             data[k][0] = dmr.getDate().toString();
             data[k][1] = personnel.toString();

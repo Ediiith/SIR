@@ -30,7 +30,7 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
         jTextFieldID.setText(personnel.getIdentifiant());
         jTextFieldStatut.setText(personnel.getStatut().toString());
         
-        jLabelInfoPatient.setText(this.dmr.AfficherInfoPatient());
+        jLabelInfoPatient.setText(this.dmr.AfficherInfoPatientTemp());
         
     }
 
@@ -143,20 +143,10 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jTextFieldNsecu = new javax.swing.JTextField();
-        jTextFieldAdresse = new javax.swing.JTextField();
         jButtonDeco1 = new javax.swing.JButton();
         jLabelInfoPatient = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButtonDecoCreation = new javax.swing.JButton();
-        aa = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        mm = new javax.swing.JTextField();
-        jj = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -350,19 +340,6 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Numéro de Sécurité Sociale :");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setText("Adresse :");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("Date de naissance :");
-
-        jTextFieldNsecu.setText("jTextField1");
-
-        jTextFieldAdresse.setText("jTextField2");
-
         jButtonDeco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonDeco1.setText("Retour");
         jButtonDeco1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
@@ -391,82 +368,6 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
             }
         });
 
-        aa.setText("AAAA");
-        aa.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                aaFocusGained(evt);
-            }
-        });
-        aa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                aaMouseClicked(evt);
-            }
-        });
-        aa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aaActionPerformed(evt);
-            }
-        });
-        aa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                aaKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                aaKeyTyped(evt);
-            }
-        });
-
-        jLabel15.setText("/");
-
-        mm.setText("MM");
-        mm.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                mmFocusGained(evt);
-            }
-        });
-        mm.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mmMouseClicked(evt);
-            }
-        });
-        mm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mmActionPerformed(evt);
-            }
-        });
-        mm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                mmKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                mmKeyTyped(evt);
-            }
-        });
-
-        jj.setText("JJ");
-        jj.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jjFocusGained(evt);
-            }
-        });
-        jj.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jjMouseClicked(evt);
-            }
-        });
-        jj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jjActionPerformed(evt);
-            }
-        });
-        jj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jjKeyTyped(evt);
-            }
-        });
-
-        jLabel17.setText("/");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -478,33 +379,10 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
                 .addGap(122, 122, 122))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextFieldAdresse))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextFieldNsecu, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(aa, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addComponent(jLabel5)
+                .addGap(17, 17, 17)
+                .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -521,30 +399,8 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNsecu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel15)
-                            .addComponent(mm, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jj, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(aa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                    .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonDecoCreation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -564,75 +420,13 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco1ActionPerformed
-
     private void jButtonDecoCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecoCreationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDecoCreationActionPerformed
 
-    private void aaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_aaFocusGained
-        aa.setText("");
-    }//GEN-LAST:event_aaFocusGained
-
-    private void aaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aaMouseClicked
-        aa.setText("");
-    }//GEN-LAST:event_aaMouseClicked
-
-    private void aaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaActionPerformed
-
-    }//GEN-LAST:event_aaActionPerformed
-
-    private void aaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aaKeyPressed
-
-    }//GEN-LAST:event_aaKeyPressed
-
-    private void aaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aaKeyTyped
-        if (aa.getText().length() == 3) {
-            jButtonDecoCreation.requestFocus();
-        }
-    }//GEN-LAST:event_aaKeyTyped
-
-    private void mmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mmFocusGained
-        mm.setText("");
-    }//GEN-LAST:event_mmFocusGained
-
-    private void mmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mmMouseClicked
-        mm.setText("");
-    }//GEN-LAST:event_mmMouseClicked
-
-    private void mmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmActionPerformed
-
-    }//GEN-LAST:event_mmActionPerformed
-
-    private void mmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mmKeyPressed
-
-    }//GEN-LAST:event_mmKeyPressed
-
-    private void mmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mmKeyTyped
-        if (mm.getText().length() == 1) {
-            aa.requestFocus();
-        }
-    }//GEN-LAST:event_mmKeyTyped
-
-    private void jjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jjFocusGained
-        jj.setText("");
-    }//GEN-LAST:event_jjFocusGained
-
-    private void jjMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jjMouseClicked
-        jj.setText("");
-    }//GEN-LAST:event_jjMouseClicked
-
-    private void jjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jjActionPerformed
-
-    }//GEN-LAST:event_jjActionPerformed
-
-    private void jjKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jjKeyTyped
-        if (jj.getText().length() == 1) {
-            mm.requestFocus();
-        }
-    }//GEN-LAST:event_jjKeyTyped
+    private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
     /**
      *
@@ -640,24 +434,18 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField aa;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JButton jButtonDeco1;
     private javax.swing.JButton jButtonDecoCreation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelInfoPatient;
@@ -668,13 +456,9 @@ public class DMRTemporaire extends javax.swing.JFrame implements TreeSelectionLi
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTextField jTextFieldAdresse;
     private javax.swing.JLabel jTextFieldID;
-    private javax.swing.JTextField jTextFieldNsecu;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;
-    private javax.swing.JTextField jj;
-    private javax.swing.JTextField mm;
     // End of variables declaration//GEN-END:variables
 
 }

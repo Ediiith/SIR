@@ -13,10 +13,11 @@ public class DMR {
     private String adresse;
     private int numUnique;
     private Genre genre;
-    private List<Examen> ListeExamen;
+    private List<Examen> listeExamen;
     private Boolean estAdmis;
     private Date date;
     private Boolean temporaire;
+    private Personnel personnel;
 
     public DMR(String nom, String prenom, Date dateNaissance, int numSS, String adresse, int numUnique, Genre genre, Boolean estAdmis) {
         this.nom = nom;
@@ -26,7 +27,7 @@ public class DMR {
         this.adresse = adresse;
         this.numUnique = numUnique;
         this.genre = genre;
-        ListeExamen = new Vector<Examen>();
+        this.listeExamen = new Vector<Examen>();
         this.estAdmis = estAdmis;
     }
 
@@ -118,6 +119,17 @@ public class DMR {
         s = s + "\n---------------------------------\n";
         return s;
     }
+    public String afficherDMR() {
+        String s = "DMR du " + date.toString() + "\n";
+        s += "- Medecin : " + "Prénom : "+personnel.getPrenom()+ " Nom " +personnel.getNom()+ " Identifiant : "+ personnel.getIdentifiant()+ "\n";
+        s += "- Patient : " + "Prénom : " + prenom + " Nom " + nom + " Genre : " + genre + "  né le " + dateNaissance + "\n";
+        s += "- Examens :";
+        for (int i = 0; i < listeExamen.size(); i++) {
+            Examen e = listeExamen.get(i);
+            s += "    > " + e.toString() + "\n";
+        }
+        return s;
+    }
 
     //retourne le nom
     public String getNom() {
@@ -207,14 +219,14 @@ public class DMR {
      * @return the ListeExamen
      */
     public List<Examen> getListeExamen() {
-        return ListeExamen;
+        return listeExamen;
     }
 
     /**
      * @param ListeExamen the ListeExamen to set
      */
     public void setListeExamen(List<Examen> ListeExamen) {
-        this.ListeExamen = ListeExamen;
+        this.listeExamen = ListeExamen;
     }
 
     public Date getDate() {
