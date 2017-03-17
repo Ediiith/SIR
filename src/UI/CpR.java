@@ -27,7 +27,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         this.setExtendedState(CpR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.getIdentifiant());
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel())); 
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
 
