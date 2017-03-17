@@ -1,38 +1,43 @@
 package NF;
 
+import static BD.LecturePersonnel.lireIdPersonnel;
+import static BD.LecturePersonnel.lireStatut;
+import static BD.LecturePersonnel.lireNomPersonnel;
+import static BD.LecturePersonnel.lirePrenomPersonnel;
+
 public class Personnel {
 
-    private String nom;
-
-    private String prenom;
-
-    private String identifiant;
-
+    private int idPersonnel;
     private String mdp;
-
+    private String nomPersonnel;
+    private String prenomPersonnel;
     private Statut statut;
 
     private boolean chefService;
 
-    public Personnel(String nom, String prenom, String identifiant, String mdp, Statut statut, boolean chefService) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.identifiant = identifiant;
-        this.mdp = mdp;
+    public Personnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
+        this.idPersonnel = lireIdPersonnel(nomPersonnel, prenomPersonnel, statut);
+        this.nomPersonnel = nomPersonnel;
+        this.prenomPersonnel = prenomPersonnel;
         this.statut = statut;
-        this.chefService = false;
     }
     
+    public Personnel(int idPersonnel) {
+        this.idPersonnel = idPersonnel;
+        this.nomPersonnel = lireNomPersonnel(idPersonnel);
+        this.prenomPersonnel = lirePrenomPersonnel(idPersonnel);
+        this.statut=lireStatut(idPersonnel);
+    }
     //affiche les informations du professionnel
-    public String toString(){
-        return ""+statut.toString()+" : "+this.nom+" "+this.prenom;
-    }
     
+     public String toString() {
+        return this.statut.toString() + " : " + this.nomPersonnel + " " + this.prenomPersonnel;
+    }
     //vérifie si deux instances de Personnel sont égales
     public boolean equals(Object o){
         if (o instanceof Personnel){
         Personnel p = (Personnel) o;
-        return this.nom.equals(p.nom)&& this.prenom.equals(p.prenom)&& this.statut.equals(p.statut);
+        return this.nomPersonnel.equals(p.nomPersonnel)&& this.prenomPersonnel.equals(p.prenomPersonnel)&& this.statut.equals(p.statut);
         }
         else{
             return false;
@@ -40,33 +45,33 @@ public class Personnel {
     }
 
     //retourne le nom
-    public String getNom() {
-        return nom;
+    public String getNomPersonnel() {
+        return nomPersonnel;
     }
 
     //change le nom
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNomPersonnel(String nomPersonnel) {
+        this.nomPersonnel = nomPersonnel;
     }
 
     //retourne le prénom
-    public String getPrenom() {
-        return prenom;
+    public String getPrenomPersonnel() {
+        return prenomPersonnel;
     }
 
-    //changer le prénom
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    //change le prénom
+    public void setPrenomPersonnel(String prenomPersonnel) {
+        this.prenomPersonnel = prenomPersonnel;
     }
 
     //retourne l'identifiant
-    public String getIdentifiant() {
-        return identifiant;
+    public int getIdPersonnel() {
+        return idPersonnel;
     }
 
     //change l'identifiant
-    public void setIdentifiant(String identifiant) {
-        this.identifiant = identifiant;
+    public void setIdPersonnel(int idPersonnel) {
+        this.idPersonnel = idPersonnel;
     }
 
     //retourne le mot de passe

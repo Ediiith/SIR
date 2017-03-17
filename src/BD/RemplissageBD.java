@@ -9,7 +9,11 @@ import NF.Genre;
 import NF.Statut;
 import static BD.EcritureDMR.creerDMR;
 import static BD.EcritureDPI.creerDPI;
+import static BD.EcritureExamen.ajouterCompteRendu;
+import static BD.EcritureExamen.ajouterLienPACS;
+import static BD.EcritureExamen.creerExamen;
 import static BD.EcriturePersonnel.creerProfessionnel;
+import NF.TypeExamen;
 
 /**
  *
@@ -82,6 +86,34 @@ public class RemplissageBD {
         creerProfessionnel(8, "azerty", "Henry", "Sylvie", Statut.SECRETAIRE);
         creerProfessionnel(9, "azerty", "Roussel", "Patrick", Statut.SECRETAIRE);
         creerProfessionnel(10, "azerty", "Nicolas", "Catherine", Statut.SECRETAIRE);
+        
+        //creation de 10 examens
+        creerExamen(1,2,"11/03/2017",5,TypeExamen.SCANNER);
+        creerExamen(2,1,"12/03/2017",5,TypeExamen.IRM);
+        creerExamen(3,8,"13/03/2017",1,TypeExamen.AUTRE);
+        creerExamen(4,10,"14/03/2017",2,TypeExamen.RADIOGRAPHIE);
+        creerExamen(5,15,"15/03/2017",5,TypeExamen.RADIOGRAPHIE);
+        creerExamen(6,5,"16/03/2017",3,TypeExamen.IRM);
+        creerExamen(7,2,"17/03/2017",4,TypeExamen.SCANNER);
+        creerExamen(8,7,"18/03/2017",2,TypeExamen.RADIOGRAPHIE);
+        creerExamen(9,11,"19/03/2017",2,TypeExamen.SCANNER);
+        creerExamen(10,1,"10/03/2017",5,TypeExamen.AUTRE);        
+        
+        //ajout de comptes rendus
+        ajouterCompteRendu(1, "Compte rendu");
+        ajouterCompteRendu(2, "Compte rendu");
+        ajouterCompteRendu(3, "Compte rendu");
+        ajouterCompteRendu(4, "Compte rendu");
+        ajouterCompteRendu(5, "Compte rendu");
+        ajouterCompteRendu(6, "Compte rendu");
+        
+        //ajout de liens PACS
+        ajouterLienPACS(1, "Lien PACS");
+        ajouterLienPACS(2, "Lien PACS");
+        ajouterLienPACS(3, "Lien PACS");
+        ajouterLienPACS(4, "Lien PACS");
+        ajouterLienPACS(5, "Lien PACS");
+        ajouterLienPACS(6, "Lien PACS");
         
     }
     

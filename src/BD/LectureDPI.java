@@ -5,11 +5,13 @@
  */
 package BD;
 
+import NF.Genre;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  *
@@ -17,8 +19,8 @@ import java.sql.SQLException;
  */
 public class LectureDPI {
 
-    //pour savoir si un patient possede un DPI
-    public static boolean existenceDPI(String nomPatient, String prenomPatient, String dateNaissance, String genre) {
+    //pour savoir si un patient possede un DPI a partir du nom, prenom, date de naissance, genre du patient
+    public static boolean existenceDPI(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 
         Connection cn = null;
         Statement st = null;
@@ -32,7 +34,7 @@ public class LectureDPI {
             String sql1 = "select * from dpi ;";
             resultat = (ResultSet) st.executeQuery(sql1);
             while (resultat.next() && existence == false) {
-                if (nomPatient.equalsIgnoreCase(resultat.getString("nomPatient")) && prenomPatient.equalsIgnoreCase(resultat.getString("prenomPatient")) && dateNaissance.equalsIgnoreCase(resultat.getString("dateNaissance")) && genre.equalsIgnoreCase(resultat.getString("genre"))) {
+                if (nomPatient.equalsIgnoreCase(resultat.getString("nomPatient")) && prenomPatient.equalsIgnoreCase(resultat.getString("prenomPatient")) && dateNaissance.equalsIgnoreCase(resultat.getString("dateNaissance")) && genre.toString().equalsIgnoreCase(resultat.getString("genre"))) {
                     existence = true;
                 } else {
                     existence = false;
@@ -56,9 +58,9 @@ public class LectureDPI {
         return existence;
 
     }
-
+    
     //recuperer l'identifiant d'un DPI a partir du nom, prenom, date de naissance, genre du patient
-    public static int lireIdDPI(String nomPatient, String prenomPatient, String dateNaissance, String genre) {
+    public static int lireIdDPI(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 
         Connection cn = null;
         Statement st = null;
@@ -95,7 +97,7 @@ public class LectureDPI {
     }
 
     //recuperer le nom du patient a partir de l'indentifiant du DPI
-    public static String lireNomPatient(int idDPI) {
+    public static String lireNomPatient_fromDPI(int idDPI) {
 
         Connection cn = null;
         Statement st = null;
@@ -129,7 +131,7 @@ public class LectureDPI {
     }
 
     //recuperer le prenom du patient a partir de l'indentifiant du DPI
-    public static String lirePrenomPatient(int idDPI) {
+    public static String lirePrenomPatient_fromDPI(int idDPI) {
 
         Connection cn = null;
         Statement st = null;
@@ -163,7 +165,7 @@ public class LectureDPI {
     }
 
     //recuperer la date de naissance du patient a partir de l'indentifiant du DPI
-    public static String lireDateNaissance(int idDPI) {
+    public static String lireDateNaissance_fromDPI(int idDPI) {
 
         Connection cn = null;
         Statement st = null;
@@ -197,12 +199,13 @@ public class LectureDPI {
     }
 
     //recuperer le genre du patient a partir de l'indentifiant du DPI
-    public static String lireGenre(int idDPI) {
+    public static Genre lireGenre_fromDPI(int idDPI) {
 
         Connection cn = null;
         Statement st = null;
         ResultSet resultat = null;
-        String genre = null;
+        String genreString = null;
+        Genre genre = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -211,7 +214,7 @@ public class LectureDPI {
             String sql = "select * from dpi where idDPI = " + idDPI + ";";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
-                genre = resultat.getString("genre");
+                genreString = resultat.getString("genre");
             }
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -226,12 +229,19 @@ public class LectureDPI {
             }
         }
 
+        if (genreString.compareTo("Homme") == 0) {
+            genre = Genre.HOMME;
+        }
+        if (genreString.compareTo("Femme") == 0) {
+            genre = Genre.FEMME;
+        }
+        
         return genre;
 
     }
 
     //recuperer l'adresse du patient a partir de l'indentifiant du DPI
-    public static String lireAdresse(int idDPI) {
+    public static String lireAdresse_fromDPI(int idDPI) {
 
         Connection cn = null;
         Statement st = null;

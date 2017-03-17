@@ -1,5 +1,8 @@
 package NF;
 
+import static BD.LectureExamen.lireCompteRendu;
+import static BD.LectureExamen.lireIdResponsable;
+
 public class CompteRendu {
 
     private Personnel praticien;
@@ -7,9 +10,9 @@ public class CompteRendu {
     private String bilan;
 
     // constructeur 
-    public CompteRendu(Personnel praticien, String bilan) {
-        this.praticien = praticien;
-        this.bilan = bilan;
+    public CompteRendu(Examen examen) {
+        this.praticien = new Personnel(lireIdResponsable(examen.getIdExamen()));
+        this.bilan = lireCompteRendu(examen.getIdExamen());
     }
 
     //retourne le praticien
