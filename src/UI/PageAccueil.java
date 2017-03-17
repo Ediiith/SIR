@@ -5,6 +5,7 @@ import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
+import NF.Statut;
 import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -19,17 +20,15 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private Statut statut;
 
   
 
-  public PageAccueil(Personnel personnel, List<DMR> listeDMR, CompteRendu cr, Examen e) {
+  public PageAccueil(Personnel personnel) {
         initComponents();
         this.setTitle("Page d'Accueil");
         this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
         this.personnel = personnel;
-        this.listeDMR = listeDMR;
-        this.cr = cr;
-        this.e = e;
         this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
@@ -69,7 +68,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Exam e1 = new Exam(this.personnel, this.e);
+                    Examen2 e1 = new Examen2(this.personnel);
                     e1.setVisible(true);
                     this.dispose();
                 } else {

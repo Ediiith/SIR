@@ -206,7 +206,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
         }
 
         if (b) {
-            PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE, nom);
+            PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE);
             accueil.setVisible(true);
             this.dispose();
         }

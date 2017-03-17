@@ -24,13 +24,14 @@ public class AfficherDMR extends javax.swing.JFrame {
      */
     private List<DMR> listeDMR;
     private Personnel personnel;
+    private DMR dmr;
 
     public AfficherDMR(Personnel personnel, List<DMR> listeDMR) {
         initComponents();
         this.setTitle("affichage du DMR");
         this.listeDMR = listeDMR;
         this.personnel = personnel;
-        zoneAffichage.setEditable(false);
+        zoneAffichage.setText(this.dmr.afficherDMR());
     }
 
 
