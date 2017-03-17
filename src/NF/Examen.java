@@ -7,7 +7,7 @@ import static BD.LectureExamen.lireIdExamen;
 import static BD.LectureExamen.lireIdResponsable;
 import static BD.LectureExamen.lireLienPACS;
 import static BD.LectureExamen.lireTypeExamen;
-import UI.PageDeConnexion;
+//import UI.PageDeConnexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
