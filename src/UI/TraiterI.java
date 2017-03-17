@@ -67,7 +67,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Exam e1 = new Exam(this.personnel, this.e);
+                    Examen2 e1 = new Examen2(this.personnel);
                     e1.setVisible(true);
                     this.dispose();
                 } else {

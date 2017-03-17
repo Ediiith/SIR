@@ -24,28 +24,27 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     private String[] columnNames;
     private Object[][] data;
 
-    public Examen2() {
+    public Examen2(Personnel personnel) {
        jTree.addTreeSelectionListener(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.personnel = personnel;
         this.columnNames = new String[8];
         this.columnNames[0] = "Date";
-        this.columnNames[1] = "medecin";
-        this.columnNames[2] = "Patient (nom,prenom)";
-        this.columnNames[3] = "numéro unique";
-        this.columnNames[4] = "Date de naissance";
+        this.columnNames[1] = "Patient (nom,prenom)";
+        this.columnNames[2] = "numéro unique";
+        this.columnNames[3] = "Date de naissance";
 
         int nbrligne = 0;
         for (int i = 0; i < listeDMR.size(); i++) {
             nbrligne = nbrligne + listeDMR.get(i).getNumUnique(); //pas la bonne varaible de fin à changer
         }
         int k = 0;
-        data = new Object[nbrligne][5];
+        data = new Object[nbrligne][4];
         for (int i = 0; i < listeDMR.size(); i++) {
-            data[k][0] = dmr.getDate().toString();
-            data[k][1] = personnel.toString();
-            data[k][2] = dmr.getNom().toUpperCase() + " " + dmr.getPrenom();
-            data[k][3] = dmr.getNumUnique();
-            data[k][4] = dmr.getDateNaissance();
+            data[k][0] = dmr.getDate().toString();           
+            data[k][1] = dmr.getNom().toUpperCase() + " " + dmr.getPrenom();
+            data[k][2] = dmr.getNumUnique();
+            data[k][3] = dmr.getDateNaissance();
             
         }
         jTablePatient.setModel(new DefaultTableModel(data, columnNames));
@@ -77,7 +76,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Exam e1 = new Exam(this.personnel, this.e);
+                    Examen2 e1 = new Examen2(this.personnel);
                     e1.setVisible(true);
                     this.dispose();
                 } else {
@@ -161,7 +160,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        jButtonDeco2 = new javax.swing.JButton();
+        jButtonValider = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
 
@@ -356,14 +355,14 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Liste des patients admis :");
 
-        jButtonDeco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco2.setText("Valider");
-        jButtonDeco2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco2.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco2.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonValider.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonValider.setText("Valider");
+        jButtonValider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonValider.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonValider.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco2ActionPerformed(evt);
+                jButtonValiderActionPerformed(evt);
             }
         });
 
@@ -384,13 +383,14 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                         .addContainerGap()
                         .addComponent(jLabel5))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(286, 286, 286)
-                        .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(144, Short.MAX_VALUE))
+                        .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(184, Short.MAX_VALUE))
             .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(165, 165, 165))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
@@ -406,7 +406,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
-                .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -428,12 +428,12 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
         Exam e1 = new Exam(this.personnel, this.e);
         e1.setVisible(true);
         this.dispose();
 
-    }//GEN-LAST:event_jButtonDeco2ActionPerformed
+    }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
         int row = jTablePatient.getSelectedRow();
@@ -470,7 +470,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonDeco2;
+    private javax.swing.JButton jButtonValider;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;

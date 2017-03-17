@@ -64,7 +64,7 @@ public class Patient3 extends javax.swing.JFrame {
         jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Le patient a bien été admis");
+        jLabel5.setText("Le patient suivant a bien été admis");
 
         javax.swing.GroupLayout layoutbuttonLayout = new javax.swing.GroupLayout(layoutbutton);
         layoutbutton.setLayout(layoutbuttonLayout);
@@ -79,12 +79,13 @@ public class Patient3 extends javax.swing.JFrame {
                         .addGap(238, 238, 238)
                         .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layoutbuttonLayout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(jLabel5))
-                    .addGroup(layoutbuttonLayout.createSequentialGroup()
                         .addGap(111, 111, 111)
-                        .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layoutbuttonLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel5)))))
+                .addGap(0, 111, Short.MAX_VALUE))
         );
         layoutbuttonLayout.setVerticalGroup(
             layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
