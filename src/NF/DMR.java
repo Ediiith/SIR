@@ -16,7 +16,7 @@ public class DMR {
     private List<Examen> ListeExamen;
     private Boolean estAdmis;
     private Date date;
-    private Patient patient;
+    private Boolean temporaire;
 
     public DMR(String nom, String prenom, Date dateNaissance, int numSS, String adresse, int numUnique, Genre genre, Boolean estAdmis) {
         this.nom = nom;
@@ -36,37 +36,34 @@ public class DMR {
         this.dateNaissance = dateNaissance;
         this.genre = genre;
     }
-    
+
     //retourne sous forme de liste l'ensemble des dmr
     public List<Examen> getExamen() {
         return getListeExamen();
     }
-    
+
     //ajoute un examen à la liste
     public void ajouterExamen(Examen examen) {
         getExamen().add(examen);
     }
 
-    public Patient getPatient(){
-        return patient;
-    }
-    
+
     //compare si deux instances de DMR sont proches (Nom, prénom, date de naissance)
     public boolean procheDe(Object o) {
         boolean proche = false;
         Levenshtein l = new Levenshtein();
         if (o instanceof DMR) {
-            DMR d = (DMR) o; 
+            DMR d = (DMR) o;
             int nomsProches = l.levenshtein(this.getNom(), d.getNom());
             int prenomsProches = l.levenshtein(this.getPrenom(), d.getPrenom());
             int datesProches = l.levenshtein(this.getDateNaissance().toString(), d.getDateNaissance().toString());
-            if (nomsProches <=4 && prenomsProches<=3 && datesProches<=5){
+            if (nomsProches <= 4 && prenomsProches <= 3 && datesProches <= 5) {
                 proche = true;
             }
         }
         return proche;
     }
-    
+
     //compare si deux instances de DMR sont égales pour Nom, prénom, date de naissance et genre
     public boolean equalsPartiel(Object o) {
         if (o instanceof DMR) {
@@ -90,37 +87,38 @@ public class DMR {
             return false;
         }
     }
-    
+
     //retourne les informations du patient 
     public String AfficherInfoPatient() {
-        return "Prénom : " +prenom+ "\n Nom : " + nom + "\n Genre : "+genre+ " \n N° sécurité sociale : " + numSS 
-                + " \n né le " + dateNaissance + " \n Adresse : " + adresse + " \n n° unique : " + numUnique+"\n";
+        return "Prénom : " + prenom + "\n Nom : " + nom + "\n Genre : " + genre + " \n N° sécurité sociale : " + numSS
+                + " \n né le " + dateNaissance + " \n Adresse : " + adresse + " \n n° unique : " + numUnique + "\n";
     }
-    
-    public String AfficherInfoPatientAdmis(){
-        if (this.estAdmis){
-            return "Prénom : " +prenom+ "\n Nom " + nom + "\n Genre : "+genre+ " \n N° sécurité sociale : " + numSS 
-                + " \n né le " + dateNaissance + " \n Adresse : " + adresse + " \n n° unique : " + numUnique;
-        }
-        else {
+
+    public String AfficherInfoPatientAdmis() {
+        if (this.estAdmis) {
+            return "Prénom : " + prenom + "\n Nom " + nom + "\n Genre : " + genre + " \n N° sécurité sociale : " + numSS
+                    + " \n né le " + dateNaissance + " \n Adresse : " + adresse + " \n n° unique : " + numUnique;
+        } else {
             return "";
         }
     }
-    
+
+    public String AfficherInfoPatientTemp() {
+        return "Prénom : " + prenom + "\n Nom : " + nom + "\n Genre : " + genre + " \n né le " + dateNaissance;
+    }
+
     //retourne tous les examens radiologiques du patient
-    public String ExamensPatient(){
+    public String ExamensPatient() {
         String s;
-        s=("Examens du patient " +prenom+" "+nom);
+        s = ("Examens du patient " + prenom + " " + nom);
         for (int i = 0; i < getListeExamen().size(); i++) {
             Examen e = (Examen) getListeExamen().get(i);
-            s=s+("    > " + e.toString());
+            s = s + ("    > " + e.toString());
         }
-        s=s+"\n---------------------------------\n";
+        s = s + "\n---------------------------------\n";
         return s;
     }
- 
-          
-          
+
     //retourne le nom
     public String getNom() {
         return nom;
@@ -191,8 +189,6 @@ public class DMR {
         this.genre = genre;
     }
 
-
-
     /**
      * @return the estAdmis
      */
@@ -220,8 +216,8 @@ public class DMR {
     public void setListeExamen(List<Examen> ListeExamen) {
         this.ListeExamen = ListeExamen;
     }
-    
-    public Date getDate(){
+
+    public Date getDate() {
         return date;
     }
 

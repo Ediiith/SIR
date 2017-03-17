@@ -36,16 +36,16 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 
         int nbrligne = 0;
         for (int i = 0; i < listeDMR.size(); i++) {
-            nbrligne = nbrligne + listeDMR.get(i).;
+            nbrligne = nbrligne + listeDMR.get(i).getNumUnique(); //pas la bonne varaible de fin à changer
         }
         int k = 0;
         data = new Object[nbrligne][4];
         for (int i = 0; i < listeDMR.size(); i++) {
             data[k][0] = dmr.getDate().toString();
             data[k][1] = personnel.toString();
-            data[k][2] = dmr.getPatient().getNom().toUpperCase() + " " + dmr.getPatient().getPrenom();
+            data[k][2] = dmr.getNom().toUpperCase() + " " + dmr.getPrenom();
             data[k][3] = dmr.getNumUnique();
-            data[k][4] = dmr.getPatient().getDateDeNaissance();
+            data[k][4] = dmr.getDateNaissance();
             
         }
         jTablePatient.setModel(new DefaultTableModel(data, columnNames));
