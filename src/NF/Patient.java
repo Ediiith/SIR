@@ -36,7 +36,7 @@ public class Patient {
     }
 
     /**
-     * @return the adresse
+     * @return the genre
      */
     public String getGenre() {
         return genre;
@@ -48,10 +48,8 @@ public class Patient {
     public Date getDateDeNaissance() {
         return dateDeNaissance;
     }
-
-    /**
-     * @return the numSecu
-     */
+    
+    
     
 
 }

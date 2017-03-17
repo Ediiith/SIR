@@ -6,6 +6,7 @@ import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
+import NF.TraitementImage;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
@@ -21,6 +22,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private TraitementImage ti;
 
   
 

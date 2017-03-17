@@ -15,6 +15,8 @@ public class DMR {
     private Genre genre;
     private List<Examen> ListeExamen;
     private Boolean estAdmis;
+    private Date date;
+    private Patient patient;
 
     public DMR(String nom, String prenom, Date dateNaissance, int numSS, String adresse, int numUnique, Genre genre, Boolean estAdmis) {
         this.nom = nom;
@@ -45,6 +47,9 @@ public class DMR {
         getExamen().add(examen);
     }
 
+    public Patient getPatient(){
+        return patient;
+    }
     
     //compare si deux instances de DMR sont proches (Nom, prénom, date de naissance)
     public boolean procheDe(Object o) {
@@ -214,6 +219,10 @@ public class DMR {
      */
     public void setListeExamen(List<Examen> ListeExamen) {
         this.ListeExamen = ListeExamen;
+    }
+    
+    public Date getDate(){
+        return date;
     }
 
 }

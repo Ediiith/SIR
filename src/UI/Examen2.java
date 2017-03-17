@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener {
 
@@ -19,10 +20,35 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private DMR dmr;
+    private String[] columnNames;
+    private Object[][] data;
 
     public Examen2() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       jTree.addTreeSelectionListener(this);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.columnNames = new String[8];
+        this.columnNames[0] = "Date";
+        this.columnNames[1] = "medecin";
+        this.columnNames[2] = "Patient (nom,prenom)";
+        this.columnNames[3] = "numéro unique";
+        this.columnNames[4] = "Date de naissance";
 
+        int nbrligne = 0;
+        for (int i = 0; i < listeDMR.size(); i++) {
+            nbrligne = nbrligne + listeDMR.get(i).;
+        }
+        int k = 0;
+        data = new Object[nbrligne][4];
+        for (int i = 0; i < listeDMR.size(); i++) {
+            data[k][0] = dmr.getDate().toString();
+            data[k][1] = personnel.toString();
+            data[k][2] = dmr.getPatient().getNom().toUpperCase() + " " + dmr.getPatient().getPrenom();
+            data[k][3] = dmr.getNumUnique();
+            data[k][4] = dmr.getPatient().getDateDeNaissance();
+            
+        }
+        jTablePatient.setModel(new DefaultTableModel(data, columnNames));
     }
 
    @Override
@@ -137,7 +163,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jLabel5 = new javax.swing.JLabel();
         jButtonDeco2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
+        jTablePatient = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -341,12 +367,12 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
             }
         });
 
-        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTablePatient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableMouseClicked(evt);
+                jTablePatientMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(jTable);
+        jScrollPane3.setViewportView(jTablePatient);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -409,8 +435,8 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 
     }//GEN-LAST:event_jButtonDeco2ActionPerformed
 
-    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        int row = jTable.getSelectedRow();
+    private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
+        int row = jTablePatient.getSelectedRow();
         int i = 0;
         int compteur = 0;
         boolean rep = false;
@@ -434,7 +460,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 //            }
 //            i++;
 //        }
-    }//GEN-LAST:event_jTableMouseClicked
+    }//GEN-LAST:event_jTablePatientMouseClicked
 
     /**
      *
@@ -463,7 +489,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTable jTable;
+    private javax.swing.JTable jTablePatient;
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;

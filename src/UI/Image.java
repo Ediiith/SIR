@@ -136,7 +136,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         jPanel5 = new javax.swing.JPanel();
         jButtonDeco1 = new javax.swing.JButton();
         jButtonDeco2 = new javax.swing.JButton();
-        jButtonDeco3 = new javax.swing.JButton();
+        jButtonTraiter = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
@@ -301,14 +301,14 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
             }
         });
 
-        jButtonDeco3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco3.setText("Traiter");
-        jButtonDeco3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco3.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco3.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTraiter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonTraiter.setText("Traiter");
+        jButtonTraiter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonTraiter.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonTraiter.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonTraiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco3ActionPerformed(evt);
+                jButtonTraiterActionPerformed(evt);
             }
         });
 
@@ -336,7 +336,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonDeco3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -353,7 +353,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeco3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 151, Short.MAX_VALUE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -380,11 +380,11 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDeco2ActionPerformed
 
-    private void jButtonDeco3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco3ActionPerformed
+    private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
         TraiterI tI= new TraiterI();
         tI.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButtonDeco3ActionPerformed
+    }//GEN-LAST:event_jButtonTraiterActionPerformed
 
     /**
      *
@@ -396,7 +396,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JButton jButtonDeco1;
     private javax.swing.JButton jButtonDeco2;
-    private javax.swing.JButton jButtonDeco3;
+    private javax.swing.JButton jButtonTraiter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
