@@ -20,6 +20,7 @@ import java.awt.image.ShortLookupTable;
 import javax.swing.JPanel;
 
 
+
 public class TraitementImage extends JPanel {
 
     private Image displayImage;

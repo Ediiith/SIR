@@ -6,11 +6,11 @@
 package BD;
 
 import NF.Genre;
-import static BD.LectureDPI.lireAdresse;
-import static BD.LectureDPI.lireDateNaissance;
-import static BD.LectureDPI.lireGenre;
-import static BD.LectureDPI.lireNomPatient;
-import static BD.LectureDPI.lirePrenomPatient;
+import static BD.LectureDPI.lireAdresse_fromDPI;
+import static BD.LectureDPI.lireDateNaissance_fromDPI;
+import static BD.LectureDPI.lireGenre_fromDPI;
+import static BD.LectureDPI.lireNomPatient_fromDPI;
+import static BD.LectureDPI.lirePrenomPatient_fromDPI;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
@@ -24,16 +24,16 @@ public class EcritureDMR {
 
     //pour generer un DMR s'il n'exite pas a partir de l'identifiant d'un DPI
     public static void genererDMR(int idDPI) {
-
+        
         Connection c = null;
         Statement s = null;
 
         int idDMR=idDPI;
-        String nomPatient=lireNomPatient(idDPI);
-        String prenomPatient=lirePrenomPatient(idDPI);
-        String dateNaissance=lireDateNaissance(idDPI);
-        String genre=lireGenre(idDPI);
-        String adresse=lireAdresse(idDPI);
+        String nomPatient=lireNomPatient_fromDPI(idDPI);
+        String prenomPatient=lirePrenomPatient_fromDPI(idDPI);
+        String dateNaissance=lireDateNaissance_fromDPI(idDPI);
+        Genre genre=lireGenre_fromDPI(idDPI);
+        String adresse=lireAdresse_fromDPI(idDPI);
         
         try {
             Class.forName("com.mysql.jdbc.Driver");

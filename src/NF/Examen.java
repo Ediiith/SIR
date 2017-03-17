@@ -1,11 +1,19 @@
 package NF;
 
+import static BD.LectureExamen.lireCompteRendu;
+import static BD.LectureExamen.lireDateExamen;
+import static BD.LectureExamen.lireIdDMR_fromExamen;
+import static BD.LectureExamen.lireIdExamen;
+import static BD.LectureExamen.lireIdResponsable;
+import static BD.LectureExamen.lireLienPACS;
+import static BD.LectureExamen.lireTypeExamen;
 import UI.PageDeConnexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * 
@@ -14,58 +22,42 @@ import java.util.logging.Logger;
 
 public class Examen {
 
+    private int idExamen;
     private DMR dmr;
-    private Date date;
-    private CompteRendu compteRendu;
+    private String date;
+    private final Personnel praticien;
     private TypeExamen typeExamen;
+    private String compteRendu;
     private String PACS;
-    private final Personnel praticien; 
-    private int identifiant;
-    private int idPersonnel;
 
     // constructeur 
     
-    public Examen(DMR dmr, Date date, CompteRendu compteRendu, TypeExamen typeExamen, String PACS, Personnel radiologue) {
+    public Examen(int idExamen) {
+        this.idExamen = idExamen;
+        this.date = lireDateExamen(idExamen);
+        this.praticien = new Personnel(lireIdResponsable(idExamen));
+        this.typeExamen = lireTypeExamen(idExamen);
+        this.compteRendu = lireCompteRendu(idExamen);
+        this.PACS = lireLienPACS(idExamen);
+        this.dmr = new DMR(lireIdDMR_fromExamen(idExamen));
+    }
+    
+    public Examen(DMR dmr, String dateExamen, Personnel personnel, TypeExamen typeExamen) {
+        this.idExamen = lireIdExamen(dmr.getIdDMR(), dateExamen, personnel.getIdPersonnel(), typeExamen);
         this.dmr = dmr;
-        this.date = date;
-        this.compteRendu = compteRendu;
+        this.date = dateExamen;
+        this.praticien = personnel;
         this.typeExamen = typeExamen;
-        this.PACS = PACS;
-        this.praticien=radiologue;
+        this.compteRendu = lireCompteRendu(this.idExamen);
+        this.PACS = lireLienPACS(this.idExamen);
     }
-    
-    /**
-     * Récupere toutes les infos de l'examen depuis la base de données.
-     */
-    public void getInfos() {
-        String sql;
-        sql = "SELECT * FROM BDexamens WHERE idExamen=" + identifiant;
-        try {
-            ResultSet rs = PageDeConnexion.getConnexionBD().exec(sql);
-            if (rs != null) {
-                while (rs.next()) {
-                    if (rs.getString("idPersonnel") == null) {
-                        idPersonnel = 0;
-                    } else {
-                        idPersonnel = rs.getInt("idPersonnel");
-                    }
-                    // à vérifier avec Marie car pas sûre...
-                    if (rs.getString("compteRendu") == null) {
-                        compteRendu.equals(0);
-                    } else {
-                        compteRendu.equals(compteRendu);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     @Override
     public String toString(){
-        return "Patient "+this.dmr.getNom()+" "+this.dmr.getPrenom()+" Né(e) le "+this.dmr.getDateNaissance()+"\nDate : "+date+"\n Type d'examen : "+typeExamen+"\n Compte-rendu : "+compteRendu+"\n N° PACS : "+PACS;
+        return "Patient "+this.dmr.getNomPatient()+" "+this.dmr.getPrenomPatient()+" Né(e) le "+this.dmr.getDateNaissance()+"\nDate : "+date+"\n Type d'examen : "+typeExamen+"\n Compte-rendu : "+compteRendu+"\n N° PACS : "+PACS;
     }
+   
+   
+   
 
     //retourne le DMR
     public DMR getPatient() {
@@ -78,22 +70,22 @@ public class Examen {
     }
 
     //retourne la date de l'examen
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     //change la date de l'examen
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     //retourne le compte rendu
-    public CompteRendu getCompteRendu() {
+    public String getCompteRendu() {
         return compteRendu;
     }
 
     //change le compte rendu
-    public void setCompteRendu(CompteRendu compteRendu) {
+    public void setCompteRendu(String compteRendu) {
         this.compteRendu = compteRendu;
     }
 
@@ -121,6 +113,11 @@ public class Examen {
     public Personnel getPraticien(){
         return praticien;
     }
+
+    public int getIdExamen(){
+        return idExamen;
+    }
+     
     
 }
 

@@ -9,6 +9,7 @@ import static BD.EcritureDMR.genererDMR;
 import static BD.LectureDMR.existenceDMR;
 import static BD.LectureDPI.existenceDPI;
 import static BD.LectureDPI.lireIdDPI;
+import NF.Genre;
 
 /**
  *
@@ -22,12 +23,12 @@ public class TestExemple {
     public static void main(String[] args) {
         //test existence DMR
         //false
-        existenceDMR("David", "Ethan", "07/11/1998", "HOMME");
+        existenceDMR("David", "Ethan", "07/11/1998", Genre.HOMME);
         //test existence DPI
         //true
-        existenceDPI("David", "Ethan", "07/11/1998", "HOMME");
+        existenceDPI("David", "Ethan", "07/11/1998", Genre.HOMME);
         //generation d'un DMR a partir d'un DPI
-        int idDPI=lireIdDPI("David", "Ethan", "07/11/1998", "HOMME");
+        int idDPI=lireIdDPI("David", "Ethan", "07/11/1998", Genre.HOMME);
         genererDMR(idDPI);
     }
     
