@@ -6,7 +6,9 @@
 package UI;
 
 import NF.DMR;
+import NF.Personnel;
 import java.awt.print.PrinterException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,23 +22,17 @@ public class AfficherDMR extends javax.swing.JFrame {
     /**
      * Creates new form affichageFiche
      */
-    private DMR dmr;
-    private String statut;
+    private List<DMR> listeDMR;
+    private Personnel personnel;
 
-    public AfficherDMR(DMR dmr, String statut) {
+    public AfficherDMR(Personnel personnel, List<DMR> listeDMR) {
         initComponents();
         this.setTitle("affichage du DMR");
-        this.dmr = dmr;
-        this.statut = statut;
+        this.listeDMR = listeDMR;
+        this.personnel = personnel;
         zoneAffichage.setEditable(false);
-
-   
-
     }
 
-    AfficherDMR() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

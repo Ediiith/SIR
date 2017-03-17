@@ -524,7 +524,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        AfficherDMR aDMR = new AfficherDMR();
+        AfficherDMR aDMR = new AfficherDMR(this.personnel, this.listeDMR);
         aDMR.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed

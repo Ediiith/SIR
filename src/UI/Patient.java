@@ -1,4 +1,3 @@
-
 package UI;
 
 import NF.CompteRendu;
@@ -10,10 +9,8 @@ import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
-
 public class Patient extends javax.swing.JFrame implements TreeSelectionListener {
 
-    
     private Personnel personnel;
     private CompteRendu cr;
     private List<DMR> listeDMR;
@@ -30,7 +27,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
 
-@Override
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -145,10 +142,14 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jButtonDeco1 = new javax.swing.JButton();
+        jTextFieldNom = new javax.swing.JTextField();
+        jTextFieldPrenom = new javax.swing.JTextField();
+        jButtonValider = new javax.swing.JButton();
+        jj = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        mm = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        aa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -364,20 +365,104 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextFieldNom.setText("jTextField1");
+        jTextFieldNom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldNomMouseClicked(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
+        jTextFieldPrenom.setText("jTextField2");
+        jTextFieldPrenom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldPrenomMouseClicked(evt);
+            }
+        });
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-
-        jButtonDeco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco1.setText("Valider");
-        jButtonDeco1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco1.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco1.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonValider.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonValider.setText("Valider");
+        jButtonValider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonValider.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonValider.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco1ActionPerformed(evt);
+                jButtonValiderActionPerformed(evt);
+            }
+        });
+
+        jj.setText("JJ");
+        jj.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jjFocusGained(evt);
+            }
+        });
+        jj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jjMouseClicked(evt);
+            }
+        });
+        jj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jjActionPerformed(evt);
+            }
+        });
+        jj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jjKeyTyped(evt);
+            }
+        });
+
+        jLabel14.setText("/");
+
+        mm.setText("MM");
+        mm.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                mmFocusGained(evt);
+            }
+        });
+        mm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mmMouseClicked(evt);
+            }
+        });
+        mm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mmActionPerformed(evt);
+            }
+        });
+        mm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                mmKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                mmKeyTyped(evt);
+            }
+        });
+
+        jLabel15.setText("/");
+
+        aa.setText("AAAA");
+        aa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                aaFocusGained(evt);
+            }
+        });
+        aa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aaMouseClicked(evt);
+            }
+        });
+        aa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aaActionPerformed(evt);
+            }
+        });
+        aa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                aaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                aaKeyTyped(evt);
             }
         });
 
@@ -396,8 +481,16 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(aa, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -408,15 +501,15 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1))
+                                .addComponent(jTextFieldNom))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(241, 241, 241)
-                        .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(228, Short.MAX_VALUE))
+                        .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(336, Short.MAX_VALUE))
             .addComponent(jSeparator1)
         );
         jPanel5Layout.setVerticalGroup(
@@ -430,23 +523,31 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel14)
+                                        .addComponent(jLabel15)
+                                        .addComponent(mm, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jj, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(aa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
-                .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -467,15 +568,85 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        try{
-        Patient3 p3=new Patient3();
-        p3.setVisible(true);
-        this.dispose();
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+        try {
+            Patient3 p3 = new Patient3();
+            p3.setVisible(true);
+            this.dispose();
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(null, "Information concernant le patient non valide");
         }
-    }//GEN-LAST:event_jButtonDeco1ActionPerformed
+    }//GEN-LAST:event_jButtonValiderActionPerformed
+
+    private void jjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jjFocusGained
+        jj.setText("");
+    }//GEN-LAST:event_jjFocusGained
+
+    private void jjMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jjMouseClicked
+        jj.setText("");
+    }//GEN-LAST:event_jjMouseClicked
+
+    private void jjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jjActionPerformed
+
+    }//GEN-LAST:event_jjActionPerformed
+
+    private void jjKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jjKeyTyped
+        if (jj.getText().length() == 1) {
+            mm.requestFocus();
+        }
+    }//GEN-LAST:event_jjKeyTyped
+
+    private void mmFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mmFocusGained
+        mm.setText("");
+    }//GEN-LAST:event_mmFocusGained
+
+    private void mmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mmMouseClicked
+        mm.setText("");
+    }//GEN-LAST:event_mmMouseClicked
+
+    private void mmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmActionPerformed
+
+    }//GEN-LAST:event_mmActionPerformed
+
+    private void mmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mmKeyPressed
+
+    }//GEN-LAST:event_mmKeyPressed
+
+    private void mmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mmKeyTyped
+        if (mm.getText().length() == 1) {
+            aa.requestFocus();
+        }
+    }//GEN-LAST:event_mmKeyTyped
+
+    private void aaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_aaFocusGained
+        aa.setText("");
+    }//GEN-LAST:event_aaFocusGained
+
+    private void aaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aaMouseClicked
+        aa.setText("");
+    }//GEN-LAST:event_aaMouseClicked
+
+    private void aaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaActionPerformed
+
+    }//GEN-LAST:event_aaActionPerformed
+
+    private void aaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aaKeyPressed
+
+    }//GEN-LAST:event_aaKeyPressed
+
+    private void aaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aaKeyTyped
+        if (aa.getText().length() == 3) {
+            jButtonValider.requestFocus();
+        }
+    }//GEN-LAST:event_aaKeyTyped
+
+    private void jTextFieldNomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNomMouseClicked
+       // nom.setText("");
+    }//GEN-LAST:event_jTextFieldNomMouseClicked
+
+    private void jTextFieldPrenomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPrenomMouseClicked
+       // prenom.setText("");
+    }//GEN-LAST:event_jTextFieldPrenomMouseClicked
 
     /**
      *
@@ -483,16 +654,18 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField aa;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonDeco1;
+    private javax.swing.JButton jButtonValider;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -509,11 +682,13 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel jTextFieldID;
+    private javax.swing.JTextField jTextFieldNom;
+    private javax.swing.JTextField jTextFieldPrenom;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;
+    private javax.swing.JTextField jj;
+    private javax.swing.JTextField mm;
     // End of variables declaration//GEN-END:variables
 
 }

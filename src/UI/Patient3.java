@@ -1,6 +1,7 @@
 
 package UI;
 
+import NF.DMR;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
@@ -8,10 +9,13 @@ import java.util.ArrayList;
 
 public class Patient3 extends javax.swing.JFrame {
 
+    private DMR dmr;
+    
     public Patient3() {
         initComponents();
         this.setTitle("Patient3");
         this.setLocationRelativeTo(null);
+        jLabelInfoPatient.setText(this.dmr.AfficherInfoPatient());
     }
 
     /**
@@ -28,7 +32,7 @@ public class Patient3 extends javax.swing.JFrame {
         layoutbutton = new javax.swing.JPanel();
         Valider = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabelInfoPatient = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
@@ -56,8 +60,8 @@ public class Patient3 extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
         jLabel1.setText("Processir");
 
-        jLabel14.setText("info patient");
-        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
+        jLabelInfoPatient.setText("info patient");
+        jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Le patient a bien été admis");
@@ -79,7 +83,7 @@ public class Patient3 extends javax.swing.JFrame {
                         .addComponent(jLabel5))
                     .addGroup(layoutbuttonLayout.createSequentialGroup()
                         .addGap(111, 111, 111)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layoutbuttonLayout.setVerticalGroup(
@@ -89,7 +93,7 @@ public class Patient3 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -123,8 +127,8 @@ public class Patient3 extends javax.swing.JFrame {
     private javax.swing.JButton Valider;
     private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelInfoPatient;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel layoutbutton;
     // End of variables declaration//GEN-END:variables
