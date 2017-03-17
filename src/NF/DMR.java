@@ -23,10 +23,10 @@ public class DMR {
 
     private List<Examen> listeExamen;
 
-    private Boolean estAdmis;
+    private boolean estAdmis;
     private int numSS;
     private Date date;
-    private Boolean temporaire;
+    private boolean temporaire;
     private Personnel personnel;
 
     public DMR(int idDMR) {
@@ -37,9 +37,10 @@ public class DMR {
         this.genre = lireGenre_fromDMR(idDMR);
         this.adresse = lireAdresse_fromDMR(this.idDMR);
         this.listeExamen = null;
+        this.temporaire = false;
     }
 
-     public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
+     public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, boolean temp) {
         if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre)==true){
             this.idDMR = lireIdDMR_fromDMR(nomPatient, prenomPatient, dateNaissance, genre);
         }
@@ -49,6 +50,7 @@ public class DMR {
         this.genre = genre;
         this.adresse = lireAdresse_fromDMR(this.idDMR);
         this.listeExamen = null;
+        this.temporaire = temp;
     }
 
     //retourne sous forme de liste l'ensemble des dmr
