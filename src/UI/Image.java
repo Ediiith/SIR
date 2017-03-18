@@ -5,7 +5,6 @@ import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
-import NF.Statut;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
@@ -21,6 +20,9 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private ArrayList<java.awt.Image> images;
+    private int i;
+
 
     Image(Personnel personnel) {
         initComponents();
@@ -381,7 +383,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_jButtonDeco2ActionPerformed
 
     private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
-        TraiterI tI= new TraiterI();
+        TraiterI tI= new TraiterI(images, i, e);
         tI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonTraiterActionPerformed

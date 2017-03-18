@@ -1,4 +1,3 @@
-
 package UI;
 
 import NF.CompteRendu;
@@ -7,11 +6,15 @@ import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Application;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-
 
 public class TraiterI extends javax.swing.JFrame implements TreeSelectionListener {
 
@@ -23,24 +26,41 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
     private List<DMR> listeDMR;
     private Examen e;
     private TraitementImage ti;
+    private int i;
+    private final DefaultListModel model;
+    private final ArrayList<ImageIcon> icons;
+    private ArrayList<String> paths;
+    private int util;
 
-  
+    public TraiterI(ArrayList<java.awt.Image> images, int i, Examen e) {
+        model = new DefaultListModel();
+        icons = new ArrayList<>();
+        paths = new ArrayList<>();
+        this.util = i;
+        this.e = e;
 
-  /**  public PageAccueil(String statut, String identifiant, DossierMedical dm, ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
         initComponents();
-        this.setTitle("Page d'Accueil");
-        this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.statut = statut;
-        this.identifiant = identifiant;
-        //this.dm = dm;
-        //this.listePatient = listePatient;
-        //this.listeFiche = listeFiche;
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setTitle("Traiter image");
+        this.setExtendedState(TraiterI.MAXIMIZED_BOTH);
+        this.setExtendedState(TraiterI.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(identifiant);
-        jTextFieldStatut.setText(statut);
-    }**/
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldStatut.setText(personnel.getStatut().toString());
+
+    }
+
+    /**
+     * public PageAccueil(String statut, String identifiant, DossierMedical dm,
+     * ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
+     * initComponents(); this.setTitle("Page d'Accueil");
+     * this.setExtendedState(this.MAXIMIZED_BOTH); this.statut = statut;
+     * this.identifiant = identifiant; //this.dm = dm; //this.listePatient =
+     * listePatient; //this.listeFiche = listeFiche;
+     * this.setExtendedState(this.MAXIMIZED_BOTH);
+     * this.setLocationRelativeTo(null); jTree.addTreeSelectionListener(this);
+     * jTextFieldID.setText(identifiant); jTextFieldStatut.setText(statut); }*
+     */
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
@@ -119,6 +139,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,14 +165,17 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButtonDeco1 = new javax.swing.JButton();
-        jButtonDeco2 = new javax.swing.JButton();
-        jButtonDeco3 = new javax.swing.JButton();
+        jButtonContrastePlus = new javax.swing.JButton();
+        jButtonNegative = new javax.swing.JButton();
+        jButtonZoom = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jButtonDeco4 = new javax.swing.JButton();
-        jButtonDeco5 = new javax.swing.JButton();
+        jButtonRotation = new javax.swing.JButton();
+        jButtonMiroir = new javax.swing.JButton();
+        jButtonContrasteMoins = new javax.swing.JButton();
+        scrollPane = new javax.swing.JScrollPane();
+        imageList = new JList(model);
+        jButtonReset = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
@@ -293,36 +317,36 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
 
-        jButtonDeco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco1.setText("Contraste");
-        jButtonDeco1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco1.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco1.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonContrastePlus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonContrastePlus.setText("Contraste +");
+        jButtonContrastePlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonContrastePlus.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonContrastePlus.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonContrastePlus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco1ActionPerformed(evt);
+                jButtonContrastePlusActionPerformed(evt);
             }
         });
 
-        jButtonDeco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco2.setText("Négative");
-        jButtonDeco2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco2.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco2.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNegative.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonNegative.setText("Négative");
+        jButtonNegative.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonNegative.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonNegative.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonNegative.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco2ActionPerformed(evt);
+                jButtonNegativeActionPerformed(evt);
             }
         });
 
-        jButtonDeco3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco3.setText("Zoom");
-        jButtonDeco3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco3.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco3.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonZoom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonZoom.setText("Zoom");
+        jButtonZoom.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonZoom.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonZoom.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonZoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco3ActionPerformed(evt);
+                jButtonZoomActionPerformed(evt);
             }
         });
 
@@ -332,28 +356,58 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
-        jLabel4.setText("Image");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
-
-        jButtonDeco4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco4.setText("Rotation");
-        jButtonDeco4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco4.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco4.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRotation.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonRotation.setText("Rotation");
+        jButtonRotation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonRotation.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonRotation.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonRotation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco4ActionPerformed(evt);
+                jButtonRotationActionPerformed(evt);
             }
         });
 
-        jButtonDeco5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco5.setText("Miroir");
-        jButtonDeco5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco5.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco5.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMiroir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonMiroir.setText("Miroir");
+        jButtonMiroir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonMiroir.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonMiroir.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonMiroir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco5ActionPerformed(evt);
+                jButtonMiroirActionPerformed(evt);
+            }
+        });
+
+        jButtonContrasteMoins.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonContrasteMoins.setText("Contraste -");
+        jButtonContrasteMoins.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonContrasteMoins.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonContrasteMoins.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonContrasteMoins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonContrasteMoinsActionPerformed(evt);
+            }
+        });
+
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        imageList.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
+        imageList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        imageList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                imageListValueChanged(evt);
+            }
+        });
+        scrollPane.setViewportView(imageList);
+
+        jButtonReset.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonReset.setText("Reset");
+        jButtonReset.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonReset.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonReset.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResetActionPerformed(evt);
             }
         });
 
@@ -361,46 +415,61 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel6)
-                .addContainerGap(224, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonDeco3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButtonDeco4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonDeco5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addComponent(jButtonReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButtonContrastePlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonContrasteMoins, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonRotation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonMiroir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 144, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeco3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeco4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeco5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 79, Short.MAX_VALUE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButtonReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonContrastePlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonContrasteMoins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRotation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonMiroir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addContainerGap(72, Short.MAX_VALUE)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         jSplitPane.setRightComponent(jPanel5);
@@ -416,25 +485,69 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jButtonDeco5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco5ActionPerformed
+    private void jButtonMiroirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMiroirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco5ActionPerformed
+    }//GEN-LAST:event_jButtonMiroirActionPerformed
 
-    private void jButtonDeco4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco4ActionPerformed
+    private void jButtonRotationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotationActionPerformed
+        ti.rotation();
+        ti.repaint();
+        this.dispose();
+    }//GEN-LAST:event_jButtonRotationActionPerformed
 
-    private void jButtonDeco3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco3ActionPerformed
+    private void jButtonZoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomActionPerformed
+//        ti.zoom();
+//        ti.repaint();
+//        this.dispose();
+    }//GEN-LAST:event_jButtonZoomActionPerformed
 
-    private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco2ActionPerformed
+    private void jButtonNegativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNegativeActionPerformed
+        ti.reverseLUT();
+        ti.applyFilter();
+        ti.repaint();
+    }//GEN-LAST:event_jButtonNegativeActionPerformed
 
-    private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco1ActionPerformed
+    private void jButtonContrastePlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContrastePlusActionPerformed
+        ti.contrastIncLUT();
+        ti.applyFilter();
+        ti.repaint();
+    }//GEN-LAST:event_jButtonContrastePlusActionPerformed
+
+    private void jButtonContrasteMoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContrasteMoinsActionPerformed
+        ti.contrastDecLUT();
+        ti.applyFilter();
+        ti.repaint();
+    }//GEN-LAST:event_jButtonContrasteMoinsActionPerformed
+
+    private void imageListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_imageListValueChanged
+//        i = imageList.getSelectedIndex();
+//        try {
+//            TraiterI image = (TraiterI) model.get(i);
+//            if (image.getWidth(null) > image.getHeight(null)) {
+//                image = image.getScaledInstance(imageViewContainer.getWidth(), -1, Image.SCALE_DEFAULT);
+//            } else {
+//                image = image.getScaledInstance(-1, imageViewContainer.getHeight(), Image.SCALE_DEFAULT);
+//            }
+//            t2 = new TraitementImage(image);
+//        } catch (ClassCastException ex) {
+//            Image image2 = icons.get(i).getImage();
+//            if (image2.getWidth(null) > image2.getHeight(null)) {
+//                image2 = image2.getScaledInstance(imageViewContainer.getWidth(), -1, Image.SCALE_DEFAULT);
+//            } else {
+//                image2 = image2.getScaledInstance(-1, imageViewContainer.getHeight(), Image.SCALE_DEFAULT);
+//            }
+//            displayPanel = new Manip_Image(image2);
+//        }
+//        imageViewContainer.add(displayPanel);
+//        displayPanel.repaint();
+    }//GEN-LAST:event_imageListValueChanged
+
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
+        ti.reset();
+        ti.repaint();
+        ti.createBufferedImage();
+        this.dispose();
+    }//GEN-LAST:event_jButtonResetActionPerformed
 
     /**
      *
@@ -443,18 +556,20 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barreDuHaut;
+    private javax.swing.JList<String> imageList;
+    private javax.swing.JButton jButtonContrasteMoins;
+    private javax.swing.JButton jButtonContrastePlus;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonDeco1;
-    private javax.swing.JButton jButtonDeco2;
-    private javax.swing.JButton jButtonDeco3;
-    private javax.swing.JButton jButtonDeco4;
-    private javax.swing.JButton jButtonDeco5;
+    private javax.swing.JButton jButtonMiroir;
+    private javax.swing.JButton jButtonNegative;
+    private javax.swing.JButton jButtonReset;
+    private javax.swing.JButton jButtonRotation;
+    private javax.swing.JButton jButtonZoom;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -466,6 +581,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;
+    private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 
 }

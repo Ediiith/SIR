@@ -28,6 +28,7 @@ public class DMR {
     private Date date;
     private boolean temporaire;
     private Personnel personnel;
+    
 
     public DMR(int idDMR) {
         this.idDMR = idDMR;
