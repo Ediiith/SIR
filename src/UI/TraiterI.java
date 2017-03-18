@@ -7,6 +7,7 @@ import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
@@ -485,18 +486,19 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
     private void jButtonMiroirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMiroirActionPerformed
         ti.symetrieVerticale();
         ti.repaint();
+        this.updateUI();
     }//GEN-LAST:event_jButtonMiroirActionPerformed
 
     private void jButtonRotationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotationActionPerformed
         ti.rotation();
         ti.repaint();
-        this.dispose();
+        this.updateUI();
     }//GEN-LAST:event_jButtonRotationActionPerformed
 
     private void jButtonZoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomActionPerformed
 //        ti.zoom();
 //        ti.repaint();
-//        this.dispose();
+//        this.upfateUI();
     }//GEN-LAST:event_jButtonZoomActionPerformed
 
     private void jButtonNegativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNegativeActionPerformed
@@ -552,8 +554,16 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         ti.reset();
         ti.repaint();
         ti.createBufferedImage();
+        this.updateUI();
     }//GEN-LAST:event_jButtonReset1ActionPerformed
-
+public void updateUI() {
+        BufferedImage bi = ti.getBi();
+        icons.set(i, new ImageIcon(bi));
+        java.awt.Image img = (java.awt.Image) bi;
+        img = img.getScaledInstance(100, -1, java.awt.Image.SCALE_DEFAULT);
+        model.setElementAt(new ImageIcon(img), i);
+        scrollPane.repaint();
+    }
     /**
      *
      * @param args the command line arguments
