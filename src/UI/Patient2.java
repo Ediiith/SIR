@@ -31,7 +31,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.getIdentifiant());
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
     @Override
