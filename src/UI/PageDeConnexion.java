@@ -205,11 +205,11 @@ public class PageDeConnexion extends javax.swing.JFrame {
             Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (b) {
-            PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE);
-            accueil.setVisible(true);
-            this.dispose();
-        }
+//        if (b) {
+//            PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE);
+//            accueil.setVisible(true);
+//            this.dispose();
+//        }
 
     }//GEN-LAST:event_ValiderActionPerformed
 
