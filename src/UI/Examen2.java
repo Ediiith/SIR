@@ -23,9 +23,11 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     private DMR dmr;
     private String[] columnNames;
     private Object[][] data;
+    private int i;
+    private ArrayList<java.awt.Image> images;
 
     public Examen2(Personnel personnel) {
-       jTree.addTreeSelectionListener(this);
+        jTree.addTreeSelectionListener(this);
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.personnel = personnel;
         this.columnNames = new String[8];
@@ -33,7 +35,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         this.columnNames[1] = "Patient (nom,prenom)";
         this.columnNames[2] = "numéro unique";
         this.columnNames[3] = "Date de naissance";
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel())); 
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
 
         int nbrligne = 0;
@@ -43,16 +45,16 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         int k = 0;
         data = new Object[nbrligne][4];
         for (int i = 0; i < listeDMR.size(); i++) {
-            data[k][0] = dmr.getDate().toString();           
+            data[k][0] = dmr.getDate().toString();
             data[k][1] = dmr.getNomPatient().toUpperCase() + " " + dmr.getPrenomPatient();
             data[k][2] = dmr.getIdDMR();
             data[k][3] = dmr.getDateNaissance();
-            
+
         }
         jTablePatient.setModel(new DefaultTableModel(data, columnNames));
     }
 
-   @Override
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -103,7 +105,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {

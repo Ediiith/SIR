@@ -4,6 +4,7 @@ import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -17,6 +18,8 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private int i;
+    private ArrayList<java.awt.Image> images;
 
     public CpR(Personnel personnel, CompteRendu cr) {
         initComponents();
@@ -27,11 +30,11 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         this.setExtendedState(CpR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel())); 
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
 
-@Override
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -82,7 +85,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {

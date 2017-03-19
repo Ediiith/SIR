@@ -1,4 +1,3 @@
-
 package UI;
 
 import NF.CompteRendu;
@@ -11,7 +10,6 @@ import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
-
 public class Patient2 extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
@@ -21,10 +19,10 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private int i;
+    private ArrayList<java.awt.Image> images;
 
-  
-
-  public Patient2() {
+    public Patient2() {
         initComponents();
         this.setTitle("Patient2");
         this.personnel = personnel;
@@ -34,6 +32,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
+
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
@@ -85,7 +84,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {
@@ -112,6 +111,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -448,13 +448,13 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        Patient4 p4=new Patient4();
+        Patient4 p4 = new Patient4();
         p4.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
     private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
-        Patient3 p3=new Patient3();
+        Patient3 p3 = new Patient3();
         p3.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDeco2ActionPerformed

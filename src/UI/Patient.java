@@ -15,6 +15,8 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private int i;
+    private ArrayList<java.awt.Image> images;
 
     Patient(Personnel personnel) {
         initComponents();
@@ -78,7 +80,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {
@@ -641,11 +643,11 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_aaKeyTyped
 
     private void jTextFieldNomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNomMouseClicked
-       // nom.setText("");
+        // nom.setText("");
     }//GEN-LAST:event_jTextFieldNomMouseClicked
 
     private void jTextFieldPrenomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPrenomMouseClicked
-       // prenom.setText("");
+        // prenom.setText("");
     }//GEN-LAST:event_jTextFieldPrenomMouseClicked
 
     /**

@@ -19,6 +19,8 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     private List<DMR> listeDMR;
     private Examen e;
     private DMR dmr;
+    private int i;
+    private ArrayList<java.awt.Image> images;
 
     public Exam(Personnel personnel, Examen e) {
         initComponents();
@@ -32,7 +34,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         this.setExtendedState(Exam.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel())); 
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
         jLabelInfoPatient.setText(this.dmr.AfficherInfoPatientTemp());
     }
@@ -88,7 +90,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {

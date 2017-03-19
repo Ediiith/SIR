@@ -1,4 +1,3 @@
-
 package UI;
 
 import NF.CompteRendu;
@@ -6,10 +5,10 @@ import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-
 
 public class PageAccueil extends javax.swing.JFrame implements TreeSelectionListener {
 
@@ -22,9 +21,10 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
     private Examen e;
     private Statut statut;
 
-  
+    private int i;
+    private ArrayList<java.awt.Image> images;
 
-  public PageAccueil(Personnel personnel) {
+    public PageAccueil(Personnel personnel) {
         initComponents();
         this.setTitle("Page d'Accueil");
         this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
@@ -35,7 +35,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
-@Override
+
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -95,7 +96,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {

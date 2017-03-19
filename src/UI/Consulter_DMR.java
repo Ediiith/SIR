@@ -19,6 +19,8 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
+    private int i;
+    private ArrayList<java.awt.Image> images;
 
     public Consulter_DMR(Personnel personnel, List<DMR> listeDMR) {
         initComponents();
@@ -29,7 +31,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         this.setExtendedState(Consulter_DMR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel())); 
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
 
@@ -84,7 +86,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {
@@ -551,25 +553,25 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         int compteur = 0;
         boolean rep = false;
         //        while ((i < listeFiche.size()) && (rep == false)) {
-            //            compteur = 0;
-            //            if (listeFiche.get(i).getDate().toString().equals(jTable.getValueAt(row, 0))
-                //                && listeFiche.get(i).getMedecin().toString().equals(jTable.getValueAt(row, 1))
-                //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable.getValueAt(row, 3))) {
-                //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-                    //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable.getValueAt(row + j, 5))) {
-                        //                        compteur++;
-                        //                    }
-                    //
-                    //                }
-                //                if (compteur == listeFiche.get(i).getActes().size()) {
-                    //                    rep = true;
-                    //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-                    //                    f.setVisible(true);
-                    //                }
-                //
-                //            }
-            //            i++;
-            //        }
+        //            compteur = 0;
+        //            if (listeFiche.get(i).getDate().toString().equals(jTable.getValueAt(row, 0))
+        //                && listeFiche.get(i).getMedecin().toString().equals(jTable.getValueAt(row, 1))
+        //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable.getValueAt(row, 3))) {
+        //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
+        //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable.getValueAt(row + j, 5))) {
+        //                        compteur++;
+        //                    }
+        //
+        //                }
+        //                if (compteur == listeFiche.get(i).getActes().size()) {
+        //                    rep = true;
+        //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
+        //                    f.setVisible(true);
+        //                }
+        //
+        //            }
+        //            i++;
+        //        }
     }//GEN-LAST:event_jTablePatientMouseClicked
 
     /**

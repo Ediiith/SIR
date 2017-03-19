@@ -1,15 +1,27 @@
-
 package UI;
 
 import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
+import NF.Statut;
+import NF.TraitementImage;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Application;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Image extends javax.swing.JFrame implements TreeSelectionListener {
 
@@ -20,21 +32,44 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
-    private ArrayList<java.awt.Image> images;
+    private TraitementImage ti;
     private int i;
+    private ArrayList<java.awt.Image> images;
+    private final DefaultListModel model;
+    private final ArrayList<ImageIcon> icons;
+    private ArrayList<String> paths;
+    private int util;
 
 
-    Image(Personnel personnel) {
+    public Image(ArrayList<java.awt.Image> images, int i, Examen e) {
+        model = new DefaultListModel();
+        icons = new ArrayList<>();
+        paths = new ArrayList<>();
+        this.util = i;
+        this.e = e;
+
         initComponents();
-        this.setTitle("Image");
-        this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.personnel = personnel;
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setTitle("Traiter image");
+        this.setExtendedState(Image.MAXIMIZED_BOTH);
+        this.setExtendedState(Image.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
+
     }
+
+    /**
+     * public PageAccueil(String statut, String identifiant, DossierMedical dm,
+     * ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
+     * initComponents(); this.setTitle("Page d'Accueil");
+     * this.setExtendedState(this.MAXIMIZED_BOTH); this.statut = statut;
+     * this.identifiant = identifiant; //this.dm = dm; //this.listePatient =
+     * listePatient; //this.listeFiche = listeFiche;
+     * this.setExtendedState(this.MAXIMIZED_BOTH);
+     * this.setLocationRelativeTo(null); jTree.addTreeSelectionListener(this);
+     * jTextFieldID.setText(identifiant); jTextFieldStatut.setText(statut); }*
+     */
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
@@ -86,7 +121,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
             case "Image":
                 if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Image i1 = new Image(this.personnel);
+                    Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
                 } else {
@@ -113,6 +148,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,6 +158,8 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         barreDuHaut = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -136,12 +174,21 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButtonDeco1 = new javax.swing.JButton();
-        jButtonDeco2 = new javax.swing.JButton();
-        jButtonTraiter = new javax.swing.JButton();
+        jButtonContrastePlus = new javax.swing.JButton();
+        jButtonNegative = new javax.swing.JButton();
+        jButtonZoomPlus = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
+        jButtonRotation = new javax.swing.JButton();
+        jButtonMiroir = new javax.swing.JButton();
+        jButtonContrasteMoins1 = new javax.swing.JButton();
+        jButtonReset1 = new javax.swing.JButton();
+        scrollPane = new javax.swing.JScrollPane();
+        imageList = new JList(model);
+        jButtonZoomMoins = new javax.swing.JButton();
+        jButtonDeco1 = new javax.swing.JButton();
+
+        jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -185,7 +232,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -280,6 +327,112 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jPanel5.setPreferredSize(new java.awt.Dimension(700, 400));
+
+        jButtonContrastePlus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonContrastePlus.setText("Contraste +");
+        jButtonContrastePlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonContrastePlus.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonContrastePlus.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonContrastePlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonContrastePlusActionPerformed(evt);
+            }
+        });
+
+        jButtonNegative.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonNegative.setText("Négative");
+        jButtonNegative.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonNegative.setMinimumSize(new java.awt.Dimension(80, 30));
+        jButtonNegative.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonNegative.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNegativeActionPerformed(evt);
+            }
+        });
+
+        jButtonZoomPlus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonZoomPlus.setText("Zoom +");
+        jButtonZoomPlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonZoomPlus.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonZoomPlus.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonZoomPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonZoomPlusActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel6.setText("Traiter l'image");
+
+        jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
+
+        jButtonRotation.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonRotation.setText("Rotation");
+        jButtonRotation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonRotation.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonRotation.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonRotation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRotationActionPerformed(evt);
+            }
+        });
+
+        jButtonMiroir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonMiroir.setText("Miroir");
+        jButtonMiroir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonMiroir.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonMiroir.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonMiroir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMiroirActionPerformed(evt);
+            }
+        });
+
+        jButtonContrasteMoins1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonContrasteMoins1.setText("Contraste -");
+        jButtonContrasteMoins1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonContrasteMoins1.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonContrasteMoins1.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonContrasteMoins1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonContrasteMoins1ActionPerformed(evt);
+            }
+        });
+
+        jButtonReset1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonReset1.setText("Reset");
+        jButtonReset1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonReset1.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonReset1.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonReset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReset1ActionPerformed(evt);
+            }
+        });
+
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        imageList.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
+        imageList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        imageList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                imageListValueChanged(evt);
+            }
+        });
+        scrollPane.setViewportView(imageList);
+
+        jButtonZoomMoins.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonZoomMoins.setText("Zoom -");
+        jButtonZoomMoins.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonZoomMoins.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonZoomMoins.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonZoomMoins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonZoomMoinsActionPerformed(evt);
+            }
+        });
 
         jButtonDeco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonDeco1.setText("Ajouter");
@@ -292,78 +445,73 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
             }
         });
 
-        jButtonDeco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco2.setText("Supprimer");
-        jButtonDeco2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco2.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco2.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco2ActionPerformed(evt);
-            }
-        });
-
-        jButtonTraiter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonTraiter.setText("Traiter");
-        jButtonTraiter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonTraiter.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonTraiter.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonTraiter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTraiterActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel6.setText("Image");
-
-        jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
-
-        jLabel4.setText("Image");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel6)
-                .addContainerGap(320, Short.MAX_VALUE))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(scrollPane)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jButtonContrastePlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jButtonContrasteMoins1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0))
+                            .addComponent(jButtonZoomPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonZoomMoins, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonRotation, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonMiroir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(179, 179, 179)
+                        .addComponent(jButtonReset1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonReset1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPane)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonContrastePlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonContrasteMoins1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 151, Short.MAX_VALUE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonZoomPlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonZoomMoins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRotation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonMiroir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 45, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jSplitPane.setRightComponent(jPanel5);
 
-        getContentPane().add(jSplitPane, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jSplitPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -374,20 +522,129 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
+    private void jButtonContrasteMoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco6ActionPerformed
+        // Ne rien rentrer ici, erreur de code généré
+    }//GEN-LAST:event_jButtonDeco6ActionPerformed
+
+    private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContrastePlus1ActionPerformed
+        // Ne rien rentrer ici, erreur de code généré
+    }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
+
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
+//        JFileChooser choix = new JFileChooser();
+//        FilenameFilter fileNameFilter;
+//        String[] imageTypes = ImageIO.getReaderFileSuffixes();
+//        FileNameExtensionFilter fnf = new FileNameExtensionFilter("Images", imageTypes);
+//        choix.setFileFilter(fnf);
+//        File userHome = new File(System.getProperty("user.home"));
+//        choix.setSelectedFile(userHome);
+//
+//        fileNameFilter = new FilenameFilter() {
+//            @Override
+//            public boolean accept(File file, String name) {
+//                return true;
+//            }
+//        };
+//
+//        int op = choix.showOpenDialog(null);
+//        if (op == JFileChooser.APPROVE_OPTION) {
+//            File eg = choix.getSelectedFile();
+//            // sélectionne tout le dossier dans lequel se situe l'image
+//            File dir = eg.getParentFile();
+//            try {
+//                File[] imageFiles = dir.listFiles(fileNameFilter);
+//                BufferedImage[] images = new BufferedImage[imageFiles.length];
+//                model.removeAllElements();
+//                for (int ii = 0; ii < images.length; ii++) {
+//                    paths.add(imageFiles[ii].getPath());
+//                    icons.add(new ImageIcon(imageFiles[ii].getPath()));
+//                    model.addElement(ImageIO.read(imageFiles[ii]));
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                JOptionPane.showMessageDialog(gui, "Erreur lors du chargement des images", "Erreur", JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
-    private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco2ActionPerformed
+    private void jButtonZoomMoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomMoinsActionPerformed
+        ti.zoomOut();
+        ti.repaint();
+    }//GEN-LAST:event_jButtonZoomMoinsActionPerformed
 
-    private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
-        TraiterI tI= new TraiterI(images, i, e);
-        tI.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonTraiterActionPerformed
+    private void imageListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_imageListValueChanged
+        //        i = imageList.getSelectedIndex();
+        //        try {
+        //            Image image = (Image) model.get(i);
+        //            if (image.getWidth(null) > image.getHeight(null)) {
+        //                image = image.getScaledInstance(imageViewContainer.getWidth(), -1, Image.SCALE_DEFAULT);
+        //            } else {
+        //                image = image.getScaledInstance(-1, imageViewContainer.getHeight(), Image.SCALE_DEFAULT);
+        //            }
+        //            displayPanel = new Manip_Image(image);
+        //        } catch (ClassCastException ex) {
+        //            Image image2 = icons.get(i).getImage();
+        //            if (image2.getWidth(null) > image2.getHeight(null)) {
+        //                image2 = image2.getScaledInstance(imageViewContainer.getWidth(), -1, Image.SCALE_DEFAULT);
+        //            } else {
+        //                image2 = image2.getScaledInstance(-1, imageViewContainer.getHeight(), Image.SCALE_DEFAULT);
+        //            }
+        //            displayPanel = new Manip_Image(image2);
+        //        }
+        //        imageViewContainer.add(displayPanel);
+        //        displayPanel.repaint();
+    }//GEN-LAST:event_imageListValueChanged
 
+    private void jButtonReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReset1ActionPerformed
+        ti.reset();
+        ti.repaint();
+        ti.createBufferedImage();
+        this.updateUI();
+    }//GEN-LAST:event_jButtonReset1ActionPerformed
+
+    private void jButtonContrasteMoins1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContrasteMoins1ActionPerformed
+        ti.contrastDecLUT();
+        ti.applyFilter();
+        ti.repaint();
+    }//GEN-LAST:event_jButtonContrasteMoins1ActionPerformed
+
+    private void jButtonMiroirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMiroirActionPerformed
+        ti.symetrieVerticale();
+        ti.repaint();
+        this.updateUI();
+    }//GEN-LAST:event_jButtonMiroirActionPerformed
+
+    private void jButtonRotationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotationActionPerformed
+        ti.rotation();
+        ti.repaint();
+        this.updateUI();
+    }//GEN-LAST:event_jButtonRotationActionPerformed
+
+    private void jButtonZoomPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomPlusActionPerformed
+        ti.zoomIn();
+        ti.repaint();
+        this.updateUI();
+    }//GEN-LAST:event_jButtonZoomPlusActionPerformed
+
+    private void jButtonNegativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNegativeActionPerformed
+        ti.reverseLUT();
+        ti.applyFilter();
+        ti.repaint();
+    }//GEN-LAST:event_jButtonNegativeActionPerformed
+
+    private void jButtonContrastePlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContrastePlusActionPerformed
+        ti.contrastIncLUT();
+        ti.applyFilter();
+        ti.repaint();
+    }//GEN-LAST:event_jButtonContrastePlusActionPerformed
+    public void updateUI() {
+        BufferedImage bi = ti.getBi();
+        icons.set(i, new ImageIcon(bi));
+        java.awt.Image img = (java.awt.Image) bi;
+        img = img.getScaledInstance(100, -1, java.awt.Image.SCALE_DEFAULT);
+        model.setElementAt(new ImageIcon(img), i);
+        scrollPane.repaint();
+    }
     /**
      *
      * @param args the command line arguments
@@ -395,25 +652,34 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barreDuHaut;
+    private javax.swing.JList<String> imageList;
+    private javax.swing.JButton jButtonContrasteMoins1;
+    private javax.swing.JButton jButtonContrastePlus;
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JButton jButtonDeco1;
-    private javax.swing.JButton jButtonDeco2;
-    private javax.swing.JButton jButtonTraiter;
+    private javax.swing.JButton jButtonMiroir;
+    private javax.swing.JButton jButtonNegative;
+    private javax.swing.JButton jButtonReset1;
+    private javax.swing.JButton jButtonRotation;
+    private javax.swing.JButton jButtonZoomMoins;
+    private javax.swing.JButton jButtonZoomPlus;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;
+    private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 
 }
