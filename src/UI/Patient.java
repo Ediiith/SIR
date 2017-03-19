@@ -338,6 +338,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
         jPanel5.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel5.setPreferredSize(new java.awt.Dimension(700, 400));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 0, 0));
