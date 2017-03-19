@@ -168,7 +168,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         jPanel5 = new javax.swing.JPanel();
         jButtonContrastePlus = new javax.swing.JButton();
         jButtonNegative = new javax.swing.JButton();
-        jButtonZoom = new javax.swing.JButton();
+        jButtonZoomPlus = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButtonRotation = new javax.swing.JButton();
@@ -177,6 +177,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         jButtonReset1 = new javax.swing.JButton();
         scrollPane = new javax.swing.JScrollPane();
         imageList = new JList(model);
+        jButtonZoomMoins = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
@@ -340,14 +341,14 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
             }
         });
 
-        jButtonZoom.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonZoom.setText("Zoom");
-        jButtonZoom.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonZoom.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonZoom.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonZoom.addActionListener(new java.awt.event.ActionListener() {
+        jButtonZoomPlus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonZoomPlus.setText("Zoom +");
+        jButtonZoomPlus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonZoomPlus.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonZoomPlus.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonZoomPlus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonZoomActionPerformed(evt);
+                jButtonZoomPlusActionPerformed(evt);
             }
         });
 
@@ -412,6 +413,17 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         });
         scrollPane.setViewportView(imageList);
 
+        jButtonZoomMoins.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonZoomMoins.setText("Zoom -");
+        jButtonZoomMoins.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonZoomMoins.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonZoomMoins.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonZoomMoins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonZoomMoinsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -435,9 +447,10 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButtonZoomPlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jButtonRotation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonMiroir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtonMiroir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonZoomMoins, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -453,6 +466,7 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPane)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButtonContrastePlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -460,13 +474,14 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonZoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonZoomPlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonZoomMoins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonRotation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonMiroir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 67, Short.MAX_VALUE))
-                    .addComponent(scrollPane))
+                        .addGap(0, 45, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -495,11 +510,11 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         this.updateUI();
     }//GEN-LAST:event_jButtonRotationActionPerformed
 
-    private void jButtonZoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomActionPerformed
-//        ti.zoom();
-//        ti.repaint();
-//        this.upfateUI();
-    }//GEN-LAST:event_jButtonZoomActionPerformed
+    private void jButtonZoomPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomPlusActionPerformed
+        ti.zoomIn();
+        ti.repaint();
+        this.updateUI();
+    }//GEN-LAST:event_jButtonZoomPlusActionPerformed
 
     private void jButtonNegativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNegativeActionPerformed
         ti.reverseLUT();
@@ -556,7 +571,12 @@ public class TraiterI extends javax.swing.JFrame implements TreeSelectionListene
         ti.createBufferedImage();
         this.updateUI();
     }//GEN-LAST:event_jButtonReset1ActionPerformed
-public void updateUI() {
+
+    private void jButtonZoomMoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomMoinsActionPerformed
+        ti.zoomOut();
+        ti.repaint();
+        this.updateUI();    }//GEN-LAST:event_jButtonZoomMoinsActionPerformed
+    public void updateUI() {
         BufferedImage bi = ti.getBi();
         icons.set(i, new ImageIcon(bi));
         java.awt.Image img = (java.awt.Image) bi;
@@ -579,7 +599,8 @@ public void updateUI() {
     private javax.swing.JButton jButtonNegative;
     private javax.swing.JButton jButtonReset1;
     private javax.swing.JButton jButtonRotation;
-    private javax.swing.JButton jButtonZoom;
+    private javax.swing.JButton jButtonZoomMoins;
+    private javax.swing.JButton jButtonZoomPlus;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
