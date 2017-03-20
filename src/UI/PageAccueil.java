@@ -41,7 +41,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
-            case "Admission patient": //secretaire
+            case "Admission patient": 
                 if (personnel.getStatut().compareTo(Statut.SECRETAIRE) == 0) {
                     Patient p = new Patient(this.personnel);
                     p.setVisible(true);
@@ -71,7 +71,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 break;
             case "Associer examen au DMR":
                 if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
-                    Associer a = new Associer(this.personnel);
+                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
                 } else {

@@ -25,13 +25,12 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
     public CpR(Personnel personnel, CompteRendu cr) {
         initComponents();
         this.setTitle("Compte-Rendu");
-        this.setExtendedState(CpR.MAXIMIZED_BOTH);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         this.personnel = personnel;
         this.cr = cr;
-        this.setExtendedState(CpR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
 
@@ -70,7 +69,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
             case "Associer examen au DMR":
                 if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
-                    Associer a = new Associer(this.personnel);
+                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
                 } else {
@@ -130,12 +129,12 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButtonDeco1 = new javax.swing.JButton();
-        jButtonDeco2 = new javax.swing.JButton();
-        jButtonDeco3 = new javax.swing.JButton();
+        jButtonAfficher = new javax.swing.JButton();
+        jButtonSaisir = new javax.swing.JButton();
+        jButtonImprimer = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButtonDeco4 = new javax.swing.JButton();
+        jButtonAssocier = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -233,36 +232,36 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
         jPanel5.setPreferredSize(new java.awt.Dimension(700, 400));
 
-        jButtonDeco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco1.setText("Afficher");
-        jButtonDeco1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco1.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco1.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAfficher.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonAfficher.setText("Afficher");
+        jButtonAfficher.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonAfficher.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonAfficher.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonAfficher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco1ActionPerformed(evt);
+                jButtonAfficherActionPerformed(evt);
             }
         });
 
-        jButtonDeco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco2.setText("Saisir");
-        jButtonDeco2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco2.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco2.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSaisir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonSaisir.setText("Saisir");
+        jButtonSaisir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonSaisir.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonSaisir.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonSaisir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco2ActionPerformed(evt);
+                jButtonSaisirActionPerformed(evt);
             }
         });
 
-        jButtonDeco3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco3.setText("Imprimer");
-        jButtonDeco3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco3.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco3.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonImprimer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonImprimer.setText("Imprimer");
+        jButtonImprimer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonImprimer.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonImprimer.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonImprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco3ActionPerformed(evt);
+                jButtonImprimerActionPerformed(evt);
             }
         });
 
@@ -272,14 +271,14 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
-        jButtonDeco4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco4.setText("Associer à un DMR");
-        jButtonDeco4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco4.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco4.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAssocier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonAssocier.setText("Associer à un examen");
+        jButtonAssocier.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonAssocier.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonAssocier.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonAssocier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco4ActionPerformed(evt);
+                jButtonAssocierActionPerformed(evt);
             }
         });
 
@@ -291,19 +290,16 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonDeco4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonDeco3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonDeco2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonDeco1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAfficher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAssocier, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jButtonImprimer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSaisir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(319, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
-
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonDeco1, jButtonDeco2, jButtonDeco3, jButtonDeco4});
-
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -311,17 +307,17 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAfficher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSaisir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonDeco3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonImprimer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonDeco4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAssocier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonDeco1, jButtonDeco2, jButtonDeco3, jButtonDeco4});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAfficher, jButtonAssocier, jButtonImprimer, jButtonSaisir});
 
         jSplitPane.setRightComponent(jPanel5);
 
@@ -336,21 +332,21 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
+    private void jButtonAfficherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco1ActionPerformed
+    }//GEN-LAST:event_jButtonAfficherActionPerformed
 
-    private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
+    private void jButtonSaisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaisirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco2ActionPerformed
+    }//GEN-LAST:event_jButtonSaisirActionPerformed
 
-    private void jButtonDeco3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco3ActionPerformed
+    private void jButtonImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco3ActionPerformed
+    }//GEN-LAST:event_jButtonImprimerActionPerformed
 
-    private void jButtonDeco4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco4ActionPerformed
+    private void jButtonAssocierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssocierActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco4ActionPerformed
+    }//GEN-LAST:event_jButtonAssocierActionPerformed
 
     /**
      *
@@ -359,11 +355,11 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barreDuHaut;
+    private javax.swing.JButton jButtonAfficher;
+    private javax.swing.JButton jButtonAssocier;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonDeco1;
-    private javax.swing.JButton jButtonDeco2;
-    private javax.swing.JButton jButtonDeco3;
-    private javax.swing.JButton jButtonDeco4;
+    private javax.swing.JButton jButtonImprimer;
+    private javax.swing.JButton jButtonSaisir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;

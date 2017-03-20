@@ -7,6 +7,7 @@ import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -29,33 +30,38 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     private ArrayList<java.awt.Image> images;
 
     public Examen2(Personnel personnel) {
+        initComponents();
+
         this.setTitle("Procéder à un examen");
-        
+
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.personnel = personnel;
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
-        jTextFieldStatut.setText(personnel.getStatut().toString());
-        this.columnNames = new String[4];
-        this.columnNames[0] = "Date";
-        this.columnNames[1] = "Patient (nom,prenom)";
-        this.columnNames[2] = "numéro unique";
-        this.columnNames[3] = "Date de naissance";
-
-        int nbrligne = 0;
-        for (int i = 0; i < listeDMR.size(); i++) {
-            nbrligne = nbrligne + listeDMR.get(i).getIdDMR(); //pas la bonne varaible de fin à changer
-        }
-        int k = 0;
-        data = new Object[nbrligne][4];
-        for (int i = 0; i < listeDMR.size(); i++) {
-            data[k][0] = e.getDateExamen();
-            data[k][1] = dmr.getNomPatient().toUpperCase() + " " + dmr.getPrenomPatient();
-            data[k][2] = dmr.getIdDMR();
-            data[k][3] = dmr.getDateNaissance();
-
-        }
-        jTablePatient.setModel(new DefaultTableModel(data, columnNames));
+        this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldStatut.setText(personnel.toString());
+        this.jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+//        this.columnNames = new String[4];
+//        this.columnNames[0] = "Date";
+//        this.columnNames[1] = "Patient (nom,prenom)";
+//        this.columnNames[2] = "numéro unique";
+//        this.columnNames[3] = "Date de naissance";
+//
+//        int nbrligne = 0;
+//        for (int i = 0; i < listeDMR.size(); i++) {
+//            nbrligne = nbrligne + listeDMR.get(i).getIdDMR(); //pas la bonne varaible de fin à changer
+//        }
+//        int k = 0;
+//        data = new Object[nbrligne][4];
+//        for (int i = 0; i < listeDMR.size(); i++) {
+//            data[k][0] = e.getDateExamen();
+//            data[k][1] = dmr.getNomPatient().toUpperCase() + " " + dmr.getPrenomPatient();
+//            data[k][2] = dmr.getIdDMR();
+//            data[k][3] = dmr.getDateNaissance();
+//
+//        }
+//        jTablePatient.setModel(new DefaultTableModel(data, columnNames));
     }
 
     @Override
@@ -93,7 +99,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 break;
             case "Associer examen au DMR":
                 if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    Associer a = new Associer(this.personnel);
+                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
                 } else {

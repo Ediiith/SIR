@@ -54,7 +54,7 @@ public class Personnel {
 
     //retourne les informations d'un professionnel    
     public String toString() {
-        return this.statut.toString() + " : " + this.nomPersonnel + " " + this.prenomPersonnel;
+        return this.nomPersonnel + " " + this.prenomPersonnel;
     }
 
     //vérifie si deux instances de Personnel sont égales

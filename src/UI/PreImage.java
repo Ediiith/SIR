@@ -104,7 +104,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 break;
             case "Associer examen au DMR":
                 if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
-                    Associer a = new Associer(this.personnel);
+                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
                 } else {
