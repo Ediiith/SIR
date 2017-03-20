@@ -21,6 +21,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private Examen e;
     private int i;
     private ArrayList<java.awt.Image> images;
+    private DMR dmr;
 
     public Patient2() {
         initComponents();
@@ -31,6 +32,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
+        jLabelInfoPatient.setText(this.dmr.AfficherInfoPatientTemp());
     }
 
    @Override
@@ -153,7 +155,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jButtonDeco1 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
+        jLabelInfoPatient = new javax.swing.JLabel();
         jButtonDeco2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -362,8 +364,8 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
             }
         });
 
-        jLabel14.setText("info patient");
-        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
+        jLabelInfoPatient.setText("info patient");
+        jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
 
         jButtonDeco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonDeco2.setText("Admission");
@@ -397,7 +399,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                         .addContainerGap()
                         .addComponent(jLabel5)
                         .addGap(17, 17, 17)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -424,7 +426,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -506,7 +508,6 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private javax.swing.JButton jButtonDeco2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -515,6 +516,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelInfoPatient;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

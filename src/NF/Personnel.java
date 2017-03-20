@@ -52,7 +52,7 @@ public class Personnel {
 
     //affiche les informations du professionnel    
     public String toString() {
-        return this.statut.toString() + " : " + this.nomPersonnel + " " + this.prenomPersonnel;
+        return this.nomPersonnel + " " + this.prenomPersonnel;
     }
 
     //vérifie si deux instances de Personnel sont égales
