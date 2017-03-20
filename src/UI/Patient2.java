@@ -23,7 +23,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private ArrayList<java.awt.Image> images;
     private DMR dmr;
 
-    public Patient2() {
+    public Patient2(Personnel personnel,String nom,String prenom,String genre,String jj,String mm,String aa) {
         initComponents();
         this.personnel = personnel;
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -31,7 +31,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        jLabelInfoPatient.setText(this.dmr.afficherInfoPatientTemporaire());
+        jLabelInfoPatient.setText(nom+" "+prenom+"\n"+genre+"\n"+"né(e) le "+jj+"/"+mm+"/"+aa);
     }
 
     @Override
