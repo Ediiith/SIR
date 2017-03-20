@@ -225,6 +225,8 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree.setMaximumSize(new java.awt.Dimension(170, 100));
+        jTree.setPreferredSize(new java.awt.Dimension(170, 100));
         jScrollPane1.setViewportView(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
