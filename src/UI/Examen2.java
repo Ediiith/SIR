@@ -14,7 +14,8 @@ import javax.swing.table.DefaultTableModel;
 public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
-     * Creates new form PageAccueil
+     * Creates new Examen2
+     * @author Julie
      */
     private Personnel personnel;
     private CompteRendu cr;
