@@ -1,13 +1,17 @@
 package UI;
 
+import BD.InitialisationIP;
 import NF.CompteRendu;
 import NF.ConnexionBD;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +21,6 @@ import javax.swing.JOptionPane;
 
 public class PageDeConnexion extends javax.swing.JFrame {
 
-    private static ConnexionBD connexionBD;
     private Personnel p;
     private Statut t;
 
@@ -25,7 +28,6 @@ public class PageDeConnexion extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
-        connexionBD = getConnexionBD();
     }
 
     /**
@@ -179,42 +181,38 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        String nom = "";
-        String prenom = "";
+        
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
 
-        boolean b = false;
         try {
-            ResultSet rs = connexionBD.exec("SELECT * FROM utilisateurs WHERE login='" + TextFieldID.getText() + "'");
-            if (rs != null) {
-                if (!rs.isBeforeFirst()) {
-                    JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
-                while (rs.next()) {
-                    if (rs.getString("login").equals(TextFieldID.getText()) && rs.getString("mdp").equals(PasswordFieldMDP.getText())) {
-                        nom = rs.getString("nom_u");
-                        prenom = rs.getString("prenom_u");
-                        //this.t = rs.getObject(metier, null);
-                        b = true;
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe incorrect", "Erreur", JOptionPane.ERROR_MESSAGE);
-                        b = false;
-                    }
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from personnel where idPersonnel = '" + Integer.parseInt(TextFieldID.getText()) + "';";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                if (PasswordFieldMDP.getText().equalsIgnoreCase(resultat.getString("mdp"))) {
+                    p=new Personnel(Integer.parseInt(TextFieldID.getText()));
+                    PageAccueil accueil = new PageAccueil(p);
+                    accueil.setVisible(true);
+                    this.dispose();
                 }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        if (b) {
-            PageAccueil accueil = new PageAccueil(p);
-            accueil.setVisible(true);
-            this.dispose();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
         }
-//        if (b) {
-//            PageAccueil accueil = new PageAccueil(Statut.SECRETAIRE);
-//            accueil.setVisible(true);
-//            this.dispose();
-//        }
 
     }//GEN-LAST:event_ValiderActionPerformed
 
@@ -229,10 +227,6 @@ public class PageDeConnexion extends javax.swing.JFrame {
     private void PasswordFieldMDPFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFieldMDPFocusGained
         PasswordFieldMDP.setText("");
     }//GEN-LAST:event_PasswordFieldMDPFocusGained
-
-    public static ConnexionBD getConnexionBD() {
-        return connexionBD;
-    }
 
     /**
      * @param args the command line arguments

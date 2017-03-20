@@ -14,7 +14,6 @@ import static BD.LectureDMR.lireNumSS_fromDMR;
 import static BD.LectureDPI.existenceDPI;
 import static BD.LectureDPI.lireAdresse_fromDPI;
 import static BD.LectureDPI.lireIdDPI;
-import java.util.Date;
 import java.util.List;
 
 public class DMR {
@@ -26,14 +25,12 @@ public class DMR {
     private Genre genre;
     private String adresse;
     private int numSS;
+    
+    //pas dans la base de donnees
+    private boolean estAdmis;
     private boolean temporaire;
 
-    private List<Examen> listeExamen;
-
-    //VOIR SI UTILE    
-    private boolean estAdmis;
-    private Date date;
-    private Personnel personnel;
+    private List<Examen> listeExamens;    
 
     //constructeur en connaissant l'identifiant du DMR
     public DMR(int idDMR) {
@@ -45,8 +42,9 @@ public class DMR {
             this.genre = lireGenre_fromDMR(idDMR);
             this.adresse = lireAdresse_fromDMR(idDMR);
             this.numSS = lireNumSS_fromDMR(idDMR);
+            this.estAdmis = true;
             this.temporaire = false;
-            this.listeExamen = null;
+            this.listeExamens = null;
         }
     }
 
@@ -60,7 +58,8 @@ public class DMR {
         this.dateNaissance = dateNaissance;
         this.genre = genre;
         this.numSS = numSS;
-        this.listeExamen = null;
+        this.estAdmis = true;
+        this.listeExamens = null;
         if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre) == true) {
             this.idDMR = lireIdDMR_fromDMR(nomPatient, prenomPatient, dateNaissance, genre);
             this.adresse = lireAdresse_fromDMR(this.idDMR);
@@ -81,13 +80,13 @@ public class DMR {
     }
 
     //retourne sous forme de liste l'ensemble des examens d'un DMR
-    public List<Examen> getExamen() {
-        return getListeExamen();
+    public List<Examen> getListeExamens() {
+        return listeExamens;
     }
 
     //ajoute un examen à la liste des examens
     public void ajouterExamen(Examen examen) {
-        getExamen().add(examen);
+        listeExamens.add(examen);
     }
 
     //compare si deux instances de DMR sont proches pour nom, prenom, date de naissance
@@ -165,9 +164,7 @@ public class DMR {
 
     //retourne toutes les informations du DMR
     public String afficherDMR() {
-        String s = "DMR du " + date.toString() + "\n";
-        s += "- Medecin : " + "Prénom : " + personnel.getPrenomPersonnel() + " Nom " + personnel.getNomPersonnel() + " Identifiant : " + personnel.getIdPersonnel() + "\n";
-        s += "- Patient : " + "Prénom : " + prenomPatient + " Nom " + nomPatient + " Genre : " + genre + "  né le " + dateNaissance + "\n";
+        String s = "- Patient : " + "Prénom : " + prenomPatient + " Nom " + nomPatient + " Genre : " + genre + "  né le " + dateNaissance + "\n";
         s += "- Examens :";
         for (int i = 0; i < listeExamen.size(); i++) {
             Examen e = listeExamen.get(i);
@@ -210,7 +207,27 @@ public class DMR {
     public int getNumSS() {
         return numSS;
     }
+   
+    //retourne si le patient est admis
+    public Boolean getEstAdmis() {
+        return estAdmis;
+    }
 
+    //change si le patient est admis
+    public void setEstAdmis(Boolean estAdmis) {
+        this.estAdmis = estAdmis;
+    }
+    
+    //retourne si le DMR est temporaire
+    public Boolean getTemporaire() {
+        return temporaire;
+    }
+
+    //change si le patient est admis
+    public void setTemporaire(Boolean temporaire) {
+        this.temporaire = temporaire;
+    }
+    
     /**
      * @return the ListeExamen
      */
@@ -261,25 +278,6 @@ public class DMR {
     //change le numero de securite sociale du patient
     public void setNumSS(int numSS) {
         this.numSS = numSS;
-    }
-    
-    /**
-     * @return the estAdmis
-     */
-    public Boolean getEstAdmis() {
-        return estAdmis;
-    }
-
-    /**
-     * @param estAdmis the estAdmis to set
-     */
-    public void setEstAdmis(Boolean estAdmis) {
-        this.estAdmis = estAdmis;
-    }
-
-    //retourne la date de creation du DMR
-    public Date getDate() {
-        return date;
     }
 
 }

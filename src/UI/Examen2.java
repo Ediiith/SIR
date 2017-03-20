@@ -45,7 +45,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         int k = 0;
         data = new Object[nbrligne][4];
         for (int i = 0; i < listeDMR.size(); i++) {
-            data[k][0] = dmr.getDate().toString();
+            data[k][0] = e.getDate().toString();
             data[k][1] = dmr.getNomPatient().toUpperCase() + " " + dmr.getPrenomPatient();
             data[k][2] = dmr.getIdDMR();
             data[k][3] = dmr.getDateNaissance();
