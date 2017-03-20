@@ -176,7 +176,7 @@
                   </Border>
                 </Property>
                 <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-                  <TreeModel code="Processir&#xa; Admission patient&#xa; DMR&#xa;  Consultation d&apos;un DMR&#xa;  Cr&#xe9;ation d&apos;un CMR&#xa; Examen&#xa;  Proc&#xe9;der &#xe0; un examen&#xa;  Associer &#xe0; un DMR&#xa; Compte-rendu&#xa; Image"/>
+                  <TreeModel code="Processir&#xa; Admission patient&#xa; Consultation d&apos;un DMR&#xa; Proc&#xe9;der &#xe0; un examen&#xa; Associer examen au DMR&#xa; Compte-rendu"/>
                 </Property>
               </Properties>
               <AuxValues>

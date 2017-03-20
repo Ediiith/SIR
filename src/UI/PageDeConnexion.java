@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 public class PageDeConnexion extends javax.swing.JFrame {
 
     private Personnel p;
-    private Statut t;
 
     public PageDeConnexion() {
         initComponents();
