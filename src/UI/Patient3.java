@@ -2,6 +2,7 @@
 package UI;
 
 import NF.DMR;
+import NF.Genre;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;

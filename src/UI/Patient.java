@@ -137,9 +137,9 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jTextFieldNom = new javax.swing.JTextField();
-        jTextFieldPrenom = new javax.swing.JTextField();
+        GenrePatient = new javax.swing.JComboBox();
+        NomPatient = new javax.swing.JTextField();
+        PrenomPatient = new javax.swing.JTextField();
         jButtonValider = new javax.swing.JButton();
         jj = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -314,24 +314,24 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Date de naissance :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Femme", "Homme", "Autre" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        GenrePatient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Femme", "Homme", "Autre" }));
+        GenrePatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                GenrePatientActionPerformed(evt);
             }
         });
 
-        jTextFieldNom.setText("jTextField1");
-        jTextFieldNom.addMouseListener(new java.awt.event.MouseAdapter() {
+        NomPatient.setText("Martin");
+        NomPatient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldNomMouseClicked(evt);
+                NomPatientMouseClicked(evt);
             }
         });
 
-        jTextFieldPrenom.setText("jTextField2");
-        jTextFieldPrenom.addMouseListener(new java.awt.event.MouseAdapter() {
+        PrenomPatient.setText("Chloe");
+        PrenomPatient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextFieldPrenomMouseClicked(evt);
+                PrenomPatientMouseClicked(evt);
             }
         });
 
@@ -346,7 +346,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
             }
         });
 
-        jj.setText("JJ");
+        jj.setText("31");
         jj.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jjFocusGained(evt);
@@ -370,7 +370,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
 
         jLabel14.setText("/");
 
-        mm.setText("MM");
+        mm.setText("12");
         mm.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 mmFocusGained(evt);
@@ -397,7 +397,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
 
         jLabel15.setText("/");
 
-        aa.setText("AAAA");
+        aa.setText("1965");
         aa.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 aaFocusGained(evt);
@@ -453,15 +453,15 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(GenrePatient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldNom))
+                                .addComponent(NomPatient))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(PrenomPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(241, 241, 241)
                         .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -479,7 +479,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -491,7 +491,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(GenrePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -501,7 +501,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jj, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(aa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addComponent(jTextFieldPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PrenomPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -520,18 +520,14 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void GenrePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenrePatientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_GenrePatientActionPerformed
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
-        try {
-            Patient3 p3 = new Patient3();
-            p3.setVisible(true);
+            Patient2 p2 = new Patient2(personnel,NomPatient.getText(),PrenomPatient.getText(),GenrePatient.getAccessibleContext().toString(),jj.getText(),mm.getText(),aa.getText());
+            p2.setVisible(true);
             this.dispose();
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Information concernant le patient non valide");
-        }
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jjFocusGained
@@ -596,13 +592,13 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         }
     }//GEN-LAST:event_aaKeyTyped
 
-    private void jTextFieldNomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldNomMouseClicked
+    private void NomPatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NomPatientMouseClicked
         // nom.setText("");
-    }//GEN-LAST:event_jTextFieldNomMouseClicked
+    }//GEN-LAST:event_NomPatientMouseClicked
 
-    private void jTextFieldPrenomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldPrenomMouseClicked
+    private void PrenomPatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrenomPatientMouseClicked
         // prenom.setText("");
-    }//GEN-LAST:event_jTextFieldPrenomMouseClicked
+    }//GEN-LAST:event_PrenomPatientMouseClicked
 
     /**
      *
@@ -610,11 +606,13 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox GenrePatient;
+    private javax.swing.JTextField NomPatient;
+    private javax.swing.JTextField PrenomPatient;
     private javax.swing.JTextField aa;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JButton jButtonValider;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -639,8 +637,6 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JLabel jTextFieldID;
-    private javax.swing.JTextField jTextFieldNom;
-    private javax.swing.JTextField jTextFieldPrenom;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;
     private javax.swing.JTextField jj;
