@@ -15,6 +15,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 
     /**
      * Creates new Examen2
+     *
      * @author Julie
      */
     private Personnel personnel;
@@ -28,16 +29,17 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     private ArrayList<java.awt.Image> images;
 
     public Examen2(Personnel personnel) {
-        jTree.addTreeSelectionListener(this);
+        this.setTitle("Procéder à un examen");
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldStatut.setText(personnel.getStatut().toString());
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.personnel = personnel;
-        this.columnNames = new String[8];
+        
+        this.columnNames = new String[4];
         this.columnNames[0] = "Date";
         this.columnNames[1] = "Patient (nom,prenom)";
         this.columnNames[2] = "numéro unique";
         this.columnNames[3] = "Date de naissance";
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
-        jTextFieldStatut.setText(personnel.getStatut().toString());
 
         int nbrligne = 0;
         for (int i = 0; i < listeDMR.size(); i++) {
@@ -53,9 +55,10 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 
         }
         jTablePatient.setModel(new DefaultTableModel(data, columnNames));
+        jTree.addTreeSelectionListener(this);
     }
 
-      @Override
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -68,7 +71,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;           
+                break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
@@ -89,7 +92,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 }
                 break;
             case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
+                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
                     Associer a = new Associer(this.personnel);
                     a.setVisible(true);
                     this.dispose();
@@ -106,7 +109,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
+
 //            case "Appareil":
 //                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
@@ -240,10 +243,6 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jScrollPane1.setViewportView(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setText("l'hopital Princeton Plainsboro");

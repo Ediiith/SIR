@@ -25,7 +25,6 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
 
     public Exam(Personnel personnel, Examen e) {
         initComponents();
-        this.setTitle("Examen");
         this.setExtendedState(Exam.MAXIMIZED_BOTH);
         this.personnel = personnel;
         this.e = e;

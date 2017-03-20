@@ -24,7 +24,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
     public CpR(Personnel personnel, CompteRendu cr) {
         initComponents();
-        this.setTitle("CompteRendu");
+        this.setTitle("Compte-Rendu");
         this.setExtendedState(CpR.MAXIMIZED_BOTH);
         this.personnel = personnel;
         this.cr = cr;
@@ -211,8 +211,6 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jScrollPane1.setViewportView(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
