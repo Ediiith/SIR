@@ -22,15 +22,13 @@ public class AfficherDMR extends javax.swing.JFrame {
     /**
      * Creates new form affichageFiche
      */
-    private List<DMR> listeDMR;
-    private Personnel personnel;
+
     private DMR dmr;
 
-    public AfficherDMR(Personnel personnel, List<DMR> listeDMR) {
+    public AfficherDMR(DMR dmr) {
         initComponents();
         this.setTitle("affichage du DMR");
-        this.listeDMR = listeDMR;
-        this.personnel = personnel;
+        this.dmr=dmr;
         zoneAffichage.setText(this.dmr.afficherDMR());
     }
 
@@ -45,7 +43,7 @@ public class AfficherDMR extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        RetourArrière = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         zoneAffichage = new javax.swing.JTextArea();
@@ -55,10 +53,10 @@ public class AfficherDMR extends javax.swing.JFrame {
         jPanel2.setMinimumSize(new java.awt.Dimension(10, 40));
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 50));
 
-        jButton2.setText("Fermer");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        RetourArrière.setText("Fermer");
+        RetourArrière.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                RetourArrièreActionPerformed(evt);
             }
         });
 
@@ -72,15 +70,15 @@ public class AfficherDMR extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addComponent(RetourArrière)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(RetourArrière)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -119,12 +117,12 @@ public class AfficherDMR extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void RetourArrièreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetourArrièreActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_RetourArrièreActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton RetourArrière;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
