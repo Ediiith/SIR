@@ -7,7 +7,7 @@ public class CompteRendu {
     private Personnel praticien;
     private String bilan;
 
-    // constructeur a partir dun examen
+    // constructeur à partir d'un examen
     public CompteRendu(Examen examen) {
         this.bilan = lireCompteRendu(examen.getIdExamen());
     }
