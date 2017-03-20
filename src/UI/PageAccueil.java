@@ -221,7 +221,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jTree.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTree.setMaximumSize(new java.awt.Dimension(200, 132));
         jTree.setMinimumSize(new java.awt.Dimension(100, 100));
-        jTree.setPreferredSize(new java.awt.Dimension(200, 200));
+        jTree.setPreferredSize(new java.awt.Dimension(170, 100));
         jScrollPane1.setViewportView(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
