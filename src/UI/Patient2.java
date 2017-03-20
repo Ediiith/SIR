@@ -31,7 +31,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        jLabelInfoPatient.setText(this.dmr.AfficherInfoPatientTemp());
+        jLabelInfoPatient.setText(this.dmr.afficherInfoPatientTemporaire());
     }
 
     @Override

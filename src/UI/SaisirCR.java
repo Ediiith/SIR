@@ -34,7 +34,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
 
-        jLabelInfoPatient.setText(this.dmr.AfficherInfoPatientTemp());
+        jLabelInfoPatient.setText(this.dmr.afficherInfoPatientTemporaire());
 
     }
 
