@@ -21,7 +21,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-80,0,0,3,71"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-3,0,0,3,71"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -164,7 +164,6 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree()"/>
-                <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="treeNode1 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Princeton-Plainsboro&quot;);&#xa;treeNode2 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Admission patients&quot;);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;DMR&quot;);&#xa;treeNode3.add(treeNode3);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Creation DMR&quot;);&#xa;treeNode3.add(treeNode2);&#xa;treeNode2 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Consulter DMR&quot;);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Compte rendu&quot;);&#xa;treeNode2.add(treeNode3);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Image&quot;);&#xa;treeNode2.add(treeNode3);&#xa;treeNode1.add(treeNode2);&#xa;treeNode2 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Compte personnel&quot;);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Associer &#xe0; un DMR&quot;);&#xa;treeNode2.add(treeNode3);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Saisir&quot;);&#xa;treeNode2.add(treeNode3);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Imprimer&quot;);&#xa;treeNode2.add(treeNode3);&#xa;treeNode1.add(treeNode2);&#xa;treeNode2 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Traiter&quot;);&#xa;treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(&quot;Num&#xe9;riser&quot;);&#xa;treeNode2.add(treeNode3);&#xa;treeNode1.add(treeNode2);&#xa;jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));&#xa;&#xa;jTree.setPreferredSize(new java.awt.Dimension(230, 80));&#xa;&#xa;jSplitPane.setLeftComponent(jTree);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -199,8 +198,8 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/UI/princeton.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <SerializedValue value="-84,-19,0,5,115,114,0,78,111,114,103,46,110,101,116,98,101,97,110,115,46,109,111,100,117,108,101,115,46,102,111,114,109,46,82,65,68,67,111,110,110,101,99,116,105,111,110,80,114,111,112,101,114,116,121,69,100,105,116,111,114,36,82,65,68,67,111,110,110,101,99,116,105,111,110,68,101,115,105,103,110,86,97,108,117,101,2,10,-70,90,-35,-97,-57,100,2,0,7,73,0,4,116,121,112,101,76,0,10,109,101,116,104,111,100,78,97,109,101,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,76,0,12,112,114,111,112,101,114,116,121,78,97,109,101,113,0,126,0,1,76,0,16,114,97,100,67,111,109,112,111,110,101,110,116,78,97,109,101,113,0,126,0,1,76,0,16,114,101,113,117,105,114,101,100,84,121,112,101,78,97,109,101,113,0,126,0,1,76,0,8,117,115,101,114,67,111,100,101,113,0,126,0,1,76,0,5,118,97,108,117,101,113,0,126,0,1,120,112,0,0,0,2,112,112,112,112,116,0,0,112"/>
                 </Property>
               </Properties>
             </Component>
@@ -248,8 +247,8 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/UI/princeton.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <SerializedValue value="-84,-19,0,5,115,114,0,78,111,114,103,46,110,101,116,98,101,97,110,115,46,109,111,100,117,108,101,115,46,102,111,114,109,46,82,65,68,67,111,110,110,101,99,116,105,111,110,80,114,111,112,101,114,116,121,69,100,105,116,111,114,36,82,65,68,67,111,110,110,101,99,116,105,111,110,68,101,115,105,103,110,86,97,108,117,101,2,10,-70,90,-35,-97,-57,100,2,0,7,73,0,4,116,121,112,101,76,0,10,109,101,116,104,111,100,78,97,109,101,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,76,0,12,112,114,111,112,101,114,116,121,78,97,109,101,113,0,126,0,1,76,0,16,114,97,100,67,111,109,112,111,110,101,110,116,78,97,109,101,113,0,126,0,1,76,0,16,114,101,113,117,105,114,101,100,84,121,112,101,78,97,109,101,113,0,126,0,1,76,0,8,117,115,101,114,67,111,100,101,113,0,126,0,1,76,0,5,118,97,108,117,101,113,0,126,0,1,120,112,0,0,0,2,112,112,112,112,116,0,0,112"/>
                     </Property>
                   </Properties>
                 </Component>

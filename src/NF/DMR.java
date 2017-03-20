@@ -30,6 +30,7 @@ public class DMR {
     private boolean estAdmis;
     private boolean temporaire;
 
+    private List<Examen> listeExamen;    
     private List<Examen> listeExamens;    
 
     //constructeur en connaissant l'identifiant du DMR
@@ -59,7 +60,9 @@ public class DMR {
         this.genre = genre;
         this.numSS = numSS;
         this.estAdmis = true;
+
         this.listeExamens = null;
+
         if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre) == true) {
             this.idDMR = lireIdDMR_fromDMR(nomPatient, prenomPatient, dateNaissance, genre);
             this.adresse = lireAdresse_fromDMR(this.idDMR);

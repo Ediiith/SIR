@@ -283,35 +283,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         treeNode1.add(treeNode2);
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree);
-        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Princeton-Plainsboro");
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Admission patients");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("DMR");
-        treeNode3.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Creation DMR");
-        treeNode3.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Consulter DMR");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Compte rendu");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Image");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte personnel");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Associer à un DMR");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Saisir");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Imprimer");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Traiter");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Numériser");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-
-        jTree.setPreferredSize(new java.awt.Dimension(230, 80));
-
-        jSplitPane.setLeftComponent(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
 
@@ -466,12 +437,10 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                         .addComponent(scrollPane)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jButtonContrastePlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jButtonContrasteMoins1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonNegative, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonContrastePlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonContrasteMoins1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButtonZoomPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonZoomMoins, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonRotation, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
