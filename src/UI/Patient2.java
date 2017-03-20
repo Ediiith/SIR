@@ -8,8 +8,10 @@ import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class Patient2 extends javax.swing.JFrame implements TreeSelectionListener {
 
@@ -20,11 +22,12 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
-    private int i;
     private ArrayList<java.awt.Image> images;
     private DMR dmr;
     private Genre g;
     private String date;
+    private String[] columnNames;
+    private Object[][] data;
 
     public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa,String numSS) {
         initComponents();
@@ -34,11 +37,34 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        //jLabelInfoPatient.setText(nom + " " + prenom + " " + genre + " " + "né(e) le " + jj + "/" + mm + "/" + aa);
+        jLabelInfoPatient.setText(nom + " " + prenom + " " + genre + " " + "né(e) le " + jj + "/" + mm + "/" + aa);
         this.g=toGenre(genre);
         date=""+jj + "/" + mm + "/" + aa;
-        dmr = new DMR(nom,prenom,date,g,Integer.parseInt(numSS));
-        jLabelInfoPatient.setText(aa);
+        this.dmr = new DMR(nom,prenom,date,g,Integer.parseInt(numSS));
+        
+        this.jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.columnNames = new String[7];
+        this.columnNames[0] = "Nom";
+        this.columnNames[1] = "Prénom";
+        this.columnNames[2] = "Genre";
+        this.columnNames[3] = "Date de naissance";
+        this.columnNames[4] = "Adresse";
+        this.columnNames[5] = "Numéro de sécurité sociale";
+        this.columnNames[6] = "Identifiant unique";
+        
+        int nbrligne = 1;
+        int k = 0;
+        data = new Object[nbrligne][7];
+        for (int i = 0; i <nbrligne; i++) {
+            data[k][0] = dmr.getNomPatient();
+            data[k][1] = dmr.getPrenomPatient();
+            data[k][2] = dmr.getGenre();
+            data[k][3] = dmr.getDateNaissance();
+            data[k][4] = dmr.getAdresse();
+            data[k][5] = dmr.getNumSS();
+            data[k][6] = dmr.getIdDMR();
+        }
+        jTable1.setModel(new DefaultTableModel(data, columnNames));
     }
 
     @Override
@@ -92,21 +118,6 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -146,7 +157,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jLabel5 = new javax.swing.JLabel();
         jButtonDeco1 = new javax.swing.JButton();
         jLabelInfoPatient = new javax.swing.JLabel();
-        jButtonDeco2 = new javax.swing.JButton();
+        Admission = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
@@ -318,14 +329,14 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jLabelInfoPatient.setText("info patient");
         jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
 
-        jButtonDeco2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco2.setText("Admission");
-        jButtonDeco2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco2.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco2.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco2.addActionListener(new java.awt.event.ActionListener() {
+        Admission.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Admission.setText("Admission");
+        Admission.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Admission.setMinimumSize(new java.awt.Dimension(110, 30));
+        Admission.setPreferredSize(new java.awt.Dimension(130, 30));
+        Admission.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco2ActionPerformed(evt);
+                AdmissionActionPerformed(evt);
             }
         });
 
@@ -355,7 +366,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                         .addGap(74, 74, 74)
                         .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
-                        .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Admission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112)))
                 .addContainerGap())
             .addComponent(jSeparator1)
@@ -381,7 +392,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonDeco2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Admission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -414,37 +425,39 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
-    private void jButtonDeco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco2ActionPerformed
-        Patient3 p3 = new Patient3();
+    private void AdmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdmissionActionPerformed
+        int row=jTable1.getSelectedRow();
+        int idDMR=(int)jTable1.getValueAt(row,6);
+        Patient3 p3 = new Patient3(this.personnel,idDMR);
         p3.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButtonDeco2ActionPerformed
+    }//GEN-LAST:event_AdmissionActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.getSelectedRow();
         int i = 0;
         int compteur = 0;
         boolean rep = false;
-//        while ((i < listeFiche.size()) && (rep == false)) {
-//            compteur = 0;
-//            if (listeFiche.get(i).getDate().toString().equals(jTable1.getValueAt(row, 0))
-//                && listeFiche.get(i).getMedecin().toString().equals(jTable1.getValueAt(row, 1))
-//                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable1.getValueAt(row, 3))) {
-//                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-//                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable1.getValueAt(row + j, 5))) {
-//                        compteur++;
-//                    }
-//
-//                }
-//                if (compteur == listeFiche.get(i).getActes().size()) {
-//                    rep = true;
-//                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-//                    f.setVisible(true);
-//                }
-//
-//            }
-//            i++;
-//        }
+        //        while ((i < listeFiche.size()) && (rep == false)) {
+            //            compteur = 0;
+            //            if (listeFiche.get(i).getDate().toString().equals(jTable1.getValueAt(row, 0))
+                //                && listeFiche.get(i).getMedecin().toString().equals(jTable1.getValueAt(row, 1))
+                //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable1.getValueAt(row, 3))) {
+                //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
+                    //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable1.getValueAt(row + j, 5))) {
+                        //                        compteur++;
+                        //                    }
+                    //
+                    //                }
+                //                if (compteur == listeFiche.get(i).getActes().size()) {
+                    //                    rep = true;
+                    //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
+                    //                    f.setVisible(true);
+                    //                }
+                //
+                //            }
+            //            i++;
+            //        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private Genre toGenre(String s) {
@@ -467,10 +480,10 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Admission;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JButton jButtonDeco1;
-    private javax.swing.JButton jButtonDeco2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;

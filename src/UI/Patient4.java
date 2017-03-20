@@ -27,7 +27,6 @@ public class Patient4 extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        image = new javax.swing.JLabel();
         layoutbutton = new javax.swing.JPanel();
         Valider = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -39,10 +38,6 @@ public class Patient4 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
-
-        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-        image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(image, java.awt.BorderLayout.EAST);
 
         layoutbutton.setBackground(new java.awt.Color(255, 255, 255));
         layoutbutton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
@@ -143,7 +138,6 @@ public class Patient4 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Valider;
     private javax.swing.JButton Valider1;
-    private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelInfoPatient;

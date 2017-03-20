@@ -81,21 +81,6 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -147,7 +132,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         jLabel15 = new javax.swing.JLabel();
         aa = new javax.swing.JTextField();
         JLabel16 = new javax.swing.JLabel();
-        NomPatient1 = new javax.swing.JTextField();
+        NomPatient = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -429,10 +414,10 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         JLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         JLabel16.setText("Numéro de sécurité sociale :");
 
-        NomPatient1.setText("Martin");
-        NomPatient1.addMouseListener(new java.awt.event.MouseAdapter() {
+        NomPatient.setText("Martin");
+        NomPatient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                NomPatient1MouseClicked(evt);
+                NomPatientMouseClicked(evt);
             }
         });
 
@@ -472,7 +457,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(NomPatient1))
+                                .addComponent(NomPatient))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -498,7 +483,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NomPatient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -548,7 +533,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_GenrePatientActionPerformed
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
-            Patient2 p2 = new Patient2(personnel,NumSS.getText(),PrenomPatient.getText(),GenrePatient.getSelectedItem().toString(),jj.getText(),mm.getText(),aa.getText(),NumSS.getText());
+            Patient2 p2 = new Patient2(personnel,NomPatient.getText(),PrenomPatient.getText(),GenrePatient.getSelectedItem().toString(),jj.getText(),mm.getText(),aa.getText(),NumSS.getText());
             p2.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_jButtonValiderActionPerformed
@@ -623,9 +608,9 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         // prenom.setText("");
     }//GEN-LAST:event_PrenomPatientMouseClicked
 
-    private void NomPatient1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NomPatient1MouseClicked
+    private void NomPatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NomPatientMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomPatient1MouseClicked
+    }//GEN-LAST:event_NomPatientMouseClicked
 
     /**
      *
@@ -635,7 +620,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox GenrePatient;
     private javax.swing.JLabel JLabel16;
-    private javax.swing.JTextField NomPatient1;
+    private javax.swing.JTextField NomPatient;
     private javax.swing.JTextField NumSS;
     private javax.swing.JTextField PrenomPatient;
     private javax.swing.JTextField aa;

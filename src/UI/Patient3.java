@@ -1,19 +1,21 @@
-
 package UI;
 
 import NF.DMR;
 import NF.Genre;
+import NF.Personnel;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 
-
 public class Patient3 extends javax.swing.JFrame {
 
     private DMR dmr;
-    
-    public Patient3() {
+    private Personnel personnel;
+
+    public Patient3(Personnel personnel, int idDMR) {
         initComponents();
+        this.dmr = new DMR(idDMR);
+        this.personnel = personnel;
         this.setTitle("Patient3");
         this.setLocationRelativeTo(null);
         jLabelInfoPatient.setText(this.dmr.afficherInfoPatient());
@@ -29,9 +31,8 @@ public class Patient3 extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        image = new javax.swing.JLabel();
         layoutbutton = new javax.swing.JPanel();
-        Valider = new javax.swing.JButton();
+        Fermer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabelInfoPatient = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -41,19 +42,15 @@ public class Patient3 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
 
-        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-        image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(image, java.awt.BorderLayout.EAST);
-
         layoutbutton.setBackground(new java.awt.Color(255, 255, 255));
         layoutbutton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
 
-        Valider.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Valider.setText("Fermer");
-        Valider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        Valider.addActionListener(new java.awt.event.ActionListener() {
+        Fermer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Fermer.setText("Fermer");
+        Fermer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Fermer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ValiderActionPerformed(evt);
+                FermerActionPerformed(evt);
             }
         });
 
@@ -71,14 +68,11 @@ public class Patient3 extends javax.swing.JFrame {
         layoutbutton.setLayout(layoutbuttonLayout);
         layoutbuttonLayout.setHorizontalGroup(
             layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
-                .addContainerGap(371, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layoutbuttonLayout.createSequentialGroup()
                 .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layoutbuttonLayout.createSequentialGroup()
                         .addGap(238, 238, 238)
-                        .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Fermer, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layoutbuttonLayout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,6 +81,9 @@ public class Patient3 extends javax.swing.JFrame {
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel5)))))
                 .addGap(0, 111, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
         layoutbuttonLayout.setVerticalGroup(
             layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,8 +93,8 @@ public class Patient3 extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(Fermer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -106,28 +103,18 @@ public class Patient3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        //------------identification a partir de la base de donnees
-
-           /** PageAccueil accueil = new PageAccueil(li.getListeType().get(i), li.getListeIdentifiant().get(i), dm,
-                    listePatient, listeFiche);
-            accueil.setVisible(true);
-            this.dispose();
-        } else {
-            System.out.println("error");
-            javax.swing.JOptionPane.showMessageDialog(null, "mot de passe ou identifiant incorrect");
-        }**/
-        //----------------------------------------------------
-    }//GEN-LAST:event_ValiderActionPerformed
+    private void FermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FermerActionPerformed
+        PageAccueil accueil = new PageAccueil(this.personnel);
+        accueil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_FermerActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Valider;
-    private javax.swing.JLabel image;
+    private javax.swing.JButton Fermer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelInfoPatient;

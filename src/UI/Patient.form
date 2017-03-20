@@ -367,7 +367,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="NomPatient1" max="32767" attributes="0"/>
+                                      <Component id="NomPatient" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -402,7 +402,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="NomPatient1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="NomPatient" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -612,12 +612,12 @@
                 <Property name="text" type="java.lang.String" value="Num&#xe9;ro de s&#xe9;curit&#xe9; sociale :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="NomPatient1">
+            <Component class="javax.swing.JTextField" name="NomPatient">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Martin"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NomPatient1MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NomPatientMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
