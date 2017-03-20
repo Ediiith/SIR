@@ -10,6 +10,7 @@ import static BD.LectureDPI.lireAdresse_fromDPI;
 import static BD.LectureDPI.lireDateNaissance_fromDPI;
 import static BD.LectureDPI.lireGenre_fromDPI;
 import static BD.LectureDPI.lireNomPatient_fromDPI;
+import static BD.LectureDPI.lireNumSS_fromDPI;
 import static BD.LectureDPI.lirePrenomPatient_fromDPI;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -34,13 +35,14 @@ public class EcritureDMR {
         String dateNaissance=lireDateNaissance_fromDPI(idDPI);
         Genre genre=lireGenre_fromDPI(idDPI);
         String adresse=lireAdresse_fromDPI(idDPI);
+        int numSS=lireNumSS_fromDPI(idDPI);
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
             c = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             s = (Statement) c.createStatement();
-            String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse) values "
-                    + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "');";
+            String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS) values "
+                    + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "','" + numSS + "');";
             s.executeUpdate(sql1);
         }
         
@@ -60,7 +62,7 @@ public class EcritureDMR {
     }
 
     //pour creer un DMR si aucun DMR ni DPI n'existe pour le patient
-    public static void creerDMR(int idDMR, String nomPatient, String prenomPatient, String dateNaissance, Genre genre, String adresse) {
+    public static void creerDMR(int idDMR, String nomPatient, String prenomPatient, String dateNaissance, Genre genre, String adresse, int numSS) {
 
         Connection c = null;
         Statement s = null;
@@ -70,7 +72,7 @@ public class EcritureDMR {
             c = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             s = (Statement) c.createStatement();
             String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse) values "
-                    + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "');";
+                    + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "','" + numSS + "');";
             s.executeUpdate(sql1);
         }
         

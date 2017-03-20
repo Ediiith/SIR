@@ -7,9 +7,9 @@ RADIOLOGUE("Radiologue"),
 
 MANIPULATEUR("Manipulateur"),
 
-INTERNE("Interne"),
+SECRETAIRE("Secretaire"),
 
-SECRETAIRE("Secretaire");
+CHEF_SERVICE("Chef de service");
 
 //attributs de l'énumération
     private String libelle;

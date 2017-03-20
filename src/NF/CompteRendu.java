@@ -1,17 +1,14 @@
 package NF;
 
 import static BD.LectureExamen.lireCompteRendu;
-import static BD.LectureExamen.lireIdResponsable;
 
 public class CompteRendu {
 
     private Personnel praticien;
-
     private String bilan;
 
-    // constructeur 
+    // constructeur a partir dun examen
     public CompteRendu(Examen examen) {
-        this.praticien = new Personnel(lireIdResponsable(examen.getIdExamen()));
         this.bilan = lireCompteRendu(examen.getIdExamen());
     }
 

@@ -1,11 +1,11 @@
 CREATE TABLE examens (
-    idExamen VARCHAR(20),
-    idDMR VARCHAR(20),
-    dateExamen VARCHAR(20),
-    idResponsable VARCHAR(20),
-    typeExamen VARCHAR(20),
-    compteRendu VARCHAR(20),
-    lienPACS VARCHAR(20),
+    idExamen VARCHAR(30),
+    idDMR VARCHAR(30),
+    dateExamen VARCHAR(30),
+    idResponsable VARCHAR(30),
+    typeExamen VARCHAR(30),
+    compteRendu VARCHAR(3000),
+    lienPACS VARCHAR(30),
     PRIMARY KEY (idExamen),
     FOREIGN KEY (idDMR) REFERENCES dmr(idDMR),
     FOREIGN KEY (idResponsable) REFERENCES personnel(idPersonnel)

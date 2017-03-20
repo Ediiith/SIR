@@ -1,14 +1,19 @@
 package NF;
 
+import static BD.EcritureDMR.creerDMR;
+import static BD.EcritureDMR.genererDMR;
 import static BD.LectureDMR.existenceDMR;
+import static BD.LectureDMR.existenceIdDMR;
 import static BD.LectureDMR.lireAdresse_fromDMR;
 import static BD.LectureDMR.lireDateNaissance_fromDMR;
 import static BD.LectureDMR.lireIdDMR_fromDMR;
 import static BD.LectureDMR.lireNomPatient_fromDMR;
 import static BD.LectureDMR.lirePrenomPatient_fromDMR;
 import static BD.LectureDMR.lireGenre_fromDMR;
-import static BD.LectureExamen.lireIdDMR_fromExamen;
-import java.util.Vector;
+import static BD.LectureDMR.lireNumSS_fromDMR;
+import static BD.LectureDPI.existenceDPI;
+import static BD.LectureDPI.lireAdresse_fromDPI;
+import static BD.LectureDPI.lireIdDPI;
 import java.util.Date;
 import java.util.List;
 
@@ -20,51 +25,72 @@ public class DMR {
     private String dateNaissance;
     private Genre genre;
     private String adresse;
+    private int numSS;
+    private boolean temporaire;
 
     private List<Examen> listeExamen;
 
+    //VOIR SI UTILE    
     private boolean estAdmis;
-    private int numSS;
     private Date date;
-    private boolean temporaire;
     private Personnel personnel;
-    
 
+    //constructeur en connaissant l'identifiant du DMR
     public DMR(int idDMR) {
-        this.idDMR = idDMR;
-        this.nomPatient = lireNomPatient_fromDMR(idDMR);
-        this.prenomPatient = lirePrenomPatient_fromDMR(idDMR);
-        this.dateNaissance = lireDateNaissance_fromDMR(idDMR);
-        this.genre = lireGenre_fromDMR(idDMR);
-        this.adresse = lireAdresse_fromDMR(this.idDMR);
-        this.listeExamen = null;
-        this.temporaire = false;
+        if (existenceIdDMR(idDMR) == true) {
+            this.idDMR = idDMR;
+            this.nomPatient = lireNomPatient_fromDMR(idDMR);
+            this.prenomPatient = lirePrenomPatient_fromDMR(idDMR);
+            this.dateNaissance = lireDateNaissance_fromDMR(idDMR);
+            this.genre = lireGenre_fromDMR(idDMR);
+            this.adresse = lireAdresse_fromDMR(idDMR);
+            this.numSS = lireNumSS_fromDMR(idDMR);
+            this.temporaire = false;
+            this.listeExamen = null;
+        }
     }
 
-     public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, boolean temp) {
-        if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre)==true){
-            this.idDMR = lireIdDMR_fromDMR(nomPatient, prenomPatient, dateNaissance, genre);
-        }
+    //constructeur en connaissant le nom, prenom, date de naissance, genre, numero de SS du patient 
+    //regarde si DMR existe ; si c'est le cas constructeur a partir des donnees du DMR
+    //sinon regarde si DPI existe ; si c'est le cas constructeur qui cree DMR a partir des donnees du DPI
+    //sinon creation d'un DMR temporaire
+    public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
         this.dateNaissance = dateNaissance;
         this.genre = genre;
-        this.adresse = lireAdresse_fromDMR(this.idDMR);
+        this.numSS = numSS;
         this.listeExamen = null;
-        this.temporaire = temp;
+        if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre) == true) {
+            this.idDMR = lireIdDMR_fromDMR(nomPatient, prenomPatient, dateNaissance, genre);
+            this.adresse = lireAdresse_fromDMR(this.idDMR);
+            this.temporaire = false;
+        } else {
+            if (existenceDPI(nomPatient, prenomPatient, dateNaissance, genre) == true) {
+                this.idDMR = lireIdDPI(nomPatient, prenomPatient, dateNaissance, genre);
+                this.adresse = lireAdresse_fromDPI(this.idDMR);
+                this.temporaire = false;
+                genererDMR(idDMR);
+            } else {
+                this.idDMR = 0;
+                this.adresse = null;
+                this.temporaire = true;
+                creerDMR(idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS);
+            }
+        }
     }
 
-    //retourne sous forme de liste l'ensemble des dmr
+    //retourne sous forme de liste l'ensemble des examens d'un DMR
     public List<Examen> getExamen() {
         return getListeExamen();
     }
 
-    //ajoute un examen à la liste
+    //ajoute un examen à la liste des examens
     public void ajouterExamen(Examen examen) {
         getExamen().add(examen);
     }
 
-    //compare si deux instances de DMR sont proches (Nom, prénom, date de naissance)
+    //compare si deux instances de DMR sont proches pour nom, prenom, date de naissance
     public boolean procheDe(Object o) {
         boolean proche = false;
         Levenshtein l = new Levenshtein();
@@ -80,7 +106,7 @@ public class DMR {
         return proche;
     }
 
-    //compare si deux instances de DMR sont égales pour Nom, prénom, date de naissance et genre
+    //compare si deux instances de DMR sont égales pour nom, prenom, date de naissance et genre
     public boolean equalsPartiel(Object o) {
         if (o instanceof DMR) {
             DMR d = (DMR) o;
@@ -91,7 +117,7 @@ public class DMR {
         }
     }
 
-    //compare si deux instances de DMR sont égales en tout points (sauf examens)
+    //compare si deux instances de DMR sont egales en tout points (sauf examens)
     public boolean equals(Object o) {
         if (o instanceof DMR) {
             DMR d = (DMR) o;
@@ -110,6 +136,7 @@ public class DMR {
                 + " \n né le " + dateNaissance + " \n Adresse : " + adresse + " \n n° unique : " + idDMR + "\n";
     }
 
+    //retourne les informations d'un patient admis
     public String AfficherInfoPatientAdmis() {
         if (this.estAdmis) {
             return "Prénom : " + prenomPatient + "\n Nom " + nomPatient + "\n Genre : " + genre + " \n N° sécurité sociale : " + numSS
@@ -119,6 +146,7 @@ public class DMR {
         }
     }
 
+    //retourne les informations d'un patient temporaire
     public String AfficherInfoPatientTemp() {
         return "Prénom : " + prenomPatient + "\n Nom : " + nomPatient + "\n Genre : " + genre + " \n né le " + dateNaissance;
     }
@@ -135,6 +163,7 @@ public class DMR {
         return s;
     }
 
+    //retourne toutes les informations du DMR
     public String afficherDMR() {
         String s = "DMR du " + date.toString() + "\n";
         s += "- Medecin : " + "Prénom : " + personnel.getPrenomPersonnel() + " Nom " + personnel.getNomPersonnel() + " Identifiant : " + personnel.getIdPersonnel() + "\n";
@@ -147,88 +176,39 @@ public class DMR {
         return s;
     }
 
-    //retourne le nom
-    public String getNomPatient() {
-        return nomPatient;
-    }
-
-    //change le nom
-    public void setNomPatient(String nomPatient) {
-        this.nomPatient = nomPatient;
-    }
-
-    //retourne le prénom
-    public String getPrenomPatient() {
-        return prenomPatient;
-    }
-
-    //change le prénom
-    public void setPrenomPatient(String prenomPatient) {
-        this.prenomPatient = prenomPatient;
-    }
-
-    //retourne la date de naissance
-    public String getDateNaissance() {
-        return dateNaissance;
-    }
-
-    //change la date de naissance
-    public void setDateNaissance(String dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
-    //retourne le numéro de sécurité sociale
-    public int getNumSS() {
-        return numSS;
-    }
-
-    //change le numéro de sécurité sociale
-    public void setNumSS(int numSS) {
-        this.numSS = numSS;
-    }
-
-    //retourne l'adresse
-    public String getAdresse() {
-        return adresse;
-    }
-
-    //change l'adresse
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    //retourne le numéro unique
+    //retourne l'identifiant du DMR du patient
     public int getIdDMR() {
         return idDMR;
     }
 
-    //change le numéro unique
-    public void setIdDMR(int idDMR) {
-        this.idDMR = idDMR;
+    //retourne le nom du patient
+    public String getNomPatient() {
+        return nomPatient;
     }
 
-    //retourne le genre sexuel
+    //retourne le prenom du patient
+    public String getPrenomPatient() {
+        return prenomPatient;
+    }
+
+    //retourne la date de naissance du patient
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    //retourne le genre sexuel du patient
     public Genre getGenre() {
         return genre;
     }
 
-    //change le genre sexuel
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    //retourne l'adresse du patient
+    public String getAdresse() {
+        return adresse;
     }
 
-    /**
-     * @return the estAdmis
-     */
-    public Boolean getEstAdmis() {
-        return estAdmis;
-    }
-
-    /**
-     * @param estAdmis the estAdmis to set
-     */
-    public void setEstAdmis(Boolean estAdmis) {
-        this.estAdmis = estAdmis;
+    //retourne le numero de sécurite sociale du patient
+    public int getNumSS() {
+        return numSS;
     }
 
     /**
@@ -245,6 +225,59 @@ public class DMR {
         this.listeExamen = ListeExamen;
     }
 
+    
+    //VOIR SI UTILE
+    
+    //change l'identifiant du DMR du patient
+    public void setIdDMR(int idDMR) {
+        this.idDMR = idDMR;
+    }
+
+    //change le nom du patient
+    public void setNomPatient(String nomPatient) {
+        this.nomPatient = nomPatient;
+    }
+
+    //change le prenom du patient
+    public void setPrenomPatient(String prenomPatient) {
+        this.prenomPatient = prenomPatient;
+    }
+
+    //change la date de naissance du patient
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    //change le genre sexuel du patient
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    //change l'adresse du patient
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    //change le numero de securite sociale du patient
+    public void setNumSS(int numSS) {
+        this.numSS = numSS;
+    }
+    
+    /**
+     * @return the estAdmis
+     */
+    public Boolean getEstAdmis() {
+        return estAdmis;
+    }
+
+    /**
+     * @param estAdmis the estAdmis to set
+     */
+    public void setEstAdmis(Boolean estAdmis) {
+        this.estAdmis = estAdmis;
+    }
+
+    //retourne la date de creation du DMR
     public Date getDate() {
         return date;
     }

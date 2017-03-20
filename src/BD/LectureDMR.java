@@ -19,8 +19,6 @@ import java.sql.SQLException;
 public class LectureDMR {
 
     //pour savoir si un patient possede deja un DMR
-    //si pas de DMR le creer a partir du DPI
-    //si pas de DPI creer un DMR
     public static boolean existenceDMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 
         Connection cn = null;
@@ -41,9 +39,7 @@ public class LectureDMR {
                     existence = false;
                 }
             }
-        }
-        
-        catch (SQLException exc) {
+        } catch (SQLException exc) {
             exc.printStackTrace();
         } catch (ClassNotFoundException exc) {
             exc.printStackTrace();
@@ -58,6 +54,44 @@ public class LectureDMR {
 
         return existence;
 
+    }
+
+    //pour savoir si un idDMR existe
+    public static boolean existenceIdDMR(int idDMR) {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        boolean existence = false;
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from dmr ;";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next() && existence == false) {
+                if (idDMR != resultat.getInt(1)) {
+                    existence = false;
+                } else {
+                    existence = true;
+                }
+
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        return existence;
     }
 
     //recuperer l'identifiant d'un DMR a partir du nom, prenom, date de naissance, genre du patient
@@ -236,7 +270,7 @@ public class LectureDMR {
         if (genreString.compareTo("Femme") == 0) {
             genre = Genre.FEMME;
         }
-        
+
         return genre;
 
     }
@@ -272,6 +306,40 @@ public class LectureDMR {
         }
 
         return adresse;
+
+    }
+
+    //recuperer le numero de securite sociale du patient a partir de l'identifiant du DMR
+    public static int lireNumSS_fromDMR(int idDMR) {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        int numSS = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from dmr where idDMR = " + idDMR + ";";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                numSS = Integer.parseInt(resultat.getString("numSS"));
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        return numSS;
 
     }
     

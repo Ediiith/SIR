@@ -10,7 +10,6 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  *
@@ -20,7 +19,7 @@ public class EcritureDPI {
 
     //pour creer un DPI
     //seulement utile pour les tests
-    public static void creerDPI(int idDPI, String nomPatient, String prenomPatient, String dateNaissance, Genre genre, String adresse) {
+    public static void creerDPI(int idDPI, String nomPatient, String prenomPatient, String dateNaissance, Genre genre, String adresse, int numSS) {
         
         Connection c = null;
         Statement s = null;
@@ -29,8 +28,8 @@ public class EcritureDPI {
             Class.forName("com.mysql.jdbc.Driver");
             c = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             s = (Statement) c.createStatement();
-            String sql1 = "insert into dpi (idDPI, nomPatient, prenomPatient, dateNaissance, genre, adresse) values "
-                         + "('" + idDPI + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "');";
+            String sql1 = "insert into dpi (idDPI, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS) values "
+                         + "('" + idDPI + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "','" + numSS + "');";
             s.executeUpdate(sql1);
         }
         

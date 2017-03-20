@@ -11,7 +11,6 @@ import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 /**
  *
@@ -96,7 +95,7 @@ public class LectureDPI {
 
     }
 
-    //recuperer le nom du patient a partir de l'indentifiant du DPI
+    //recuperer le nom du patient a partir de l'identifiant du DPI
     public static String lireNomPatient_fromDPI(int idDPI) {
 
         Connection cn = null;
@@ -130,7 +129,7 @@ public class LectureDPI {
 
     }
 
-    //recuperer le prenom du patient a partir de l'indentifiant du DPI
+    //recuperer le prenom du patient a partir de l'identifiant du DPI
     public static String lirePrenomPatient_fromDPI(int idDPI) {
 
         Connection cn = null;
@@ -164,7 +163,7 @@ public class LectureDPI {
 
     }
 
-    //recuperer la date de naissance du patient a partir de l'indentifiant du DPI
+    //recuperer la date de naissance du patient a partir de l'identifiant du DPI
     public static String lireDateNaissance_fromDPI(int idDPI) {
 
         Connection cn = null;
@@ -198,7 +197,7 @@ public class LectureDPI {
 
     }
 
-    //recuperer le genre du patient a partir de l'indentifiant du DPI
+    //recuperer le genre du patient a partir de l'identifiant du DPI
     public static Genre lireGenre_fromDPI(int idDPI) {
 
         Connection cn = null;
@@ -240,7 +239,7 @@ public class LectureDPI {
 
     }
 
-    //recuperer l'adresse du patient a partir de l'indentifiant du DPI
+    //recuperer l'adresse du patient a partir de l'identifiant du DPI
     public static String lireAdresse_fromDPI(int idDPI) {
 
         Connection cn = null;
@@ -274,4 +273,38 @@ public class LectureDPI {
 
     }
 
+    //recuperer le numero de securite sociale du patient a partir de l'identifiant du DPI
+    public static int lireNumSS_fromDPI(int idDPI) {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        int numSS = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from dpi where idDPI = " + idDPI + ";";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                numSS = Integer.parseInt(resultat.getString("numSS"));
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        return numSS;
+
+    }
+    
 }
