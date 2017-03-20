@@ -71,7 +71,7 @@ public class EcritureDMR {
             Class.forName("com.mysql.jdbc.Driver");
             c = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             s = (Statement) c.createStatement();
-            String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse) values "
+            String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS) values "
                     + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "','" + numSS + "');";
             s.executeUpdate(sql1);
         }
