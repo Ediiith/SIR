@@ -18,7 +18,8 @@ public class Personnel {
     private String prenomPersonnel;
     private Statut statut;
 
-    //constructeur en connaissant nom, prenom, statut du professionnel
+    //constructeur en connaissant nomPersonnel, prenomPersonnel, statut
+    //si le professionnel existe deja dans la base de donnees
     public Personnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
         if (existencePersonnel(nomPersonnel, prenomPersonnel, statut) == true) {
             this.idPersonnel = lireIdPersonnel(nomPersonnel, prenomPersonnel, statut);
@@ -29,7 +30,8 @@ public class Personnel {
         }
     }
 
-    //constructeur en connaissant l'identifiant du professionnel
+    //constructeur en connaissant idPersonnel
+    //si le professionnel existe deja dans la base de donnees
     public Personnel(int idPersonnel) {
         if (existenceIdPersonnel(idPersonnel) == true) {
             this.idPersonnel = idPersonnel;
@@ -40,7 +42,7 @@ public class Personnel {
         }
     }
 
-    //constructeur qui creer un professionnel
+    //constructeur pour creer un professionnel et l'ajouter a la base de donnees
     public Personnel(int idPersonnel, String mdp, String nomPersonnel, String prenomPersonnel, Statut statut) {
         this.idPersonnel = idPersonnel;
         this.mdp = mdp;
@@ -50,9 +52,9 @@ public class Personnel {
         creerProfessionnel(idPersonnel, mdp, nomPersonnel, prenomPersonnel, statut);
     }
 
-    //affiche les informations du professionnel    
+    //retourne les informations d'un professionnel    
     public String toString() {
-        return this.nomPersonnel + " " + this.prenomPersonnel;
+        return this.statut.toString() + " : " + this.nomPersonnel + " " + this.prenomPersonnel;
     }
 
     //vérifie si deux instances de Personnel sont égales
@@ -64,59 +66,58 @@ public class Personnel {
             return false;
         }
     }
-
-    //retourne l'identifiant du professionnel
+    
+    //retourne idPersonnel
     public int getIdPersonnel() {
         return idPersonnel;
     }
 
-    //retourne le mot de passe du professionnel
+    //retourne mdp
     public String getMdp() {
         return mdp;
     }
 
-    //change le mot de passe du professionnel
+    //change mdp
     public void setMdp(String ancienMdp, String nouveauMdp) {
-        this.mdp = mdp;
+        this.mdp = nouveauMdp;
         ajouterMdp(this.getIdPersonnel(), ancienMdp, nouveauMdp);
     }
 
-    //retourne le nom du professionnel
+    //retourne nomPersonnel
     public String getNomPersonnel() {
         return nomPersonnel;
     }
 
-    //retourne le prenom du professionnel
+    //retourne prenomPersonnel
     public String getPrenomPersonnel() {
         return prenomPersonnel;
     }
 
-    //retourne le statut du professionnel
+    //retourne statut
     public Statut getStatut() {
         return statut;
     }
-
-    
-    //VOIR SI UTILE 
-    
-    //change le nom du professionnel
-    public void setNomPersonnel(String nomPersonnel) {
-        this.nomPersonnel = nomPersonnel;
-    }
-
-    //change le prenom du professionnel
-    public void setPrenomPersonnel(String prenomPersonnel) {
-        this.prenomPersonnel = prenomPersonnel;
-    }
-
-    //change l'identifiant du professionnel
-    public void setIdPersonnel(int idPersonnel) {
-        this.idPersonnel = idPersonnel;
-    }
-
-    //change le statut du professionnel
-    public void setStatut(Statut statut) {
-        this.statut = statut;
-    }
     
 }
+
+//    //VOIR SI UTILE 
+//    
+//    //change nomPersonel
+//    public void setNomPersonnel(String nomPersonnel) {
+//        this.nomPersonnel = nomPersonnel;
+//    }
+//
+//    //change prenomPersonnel
+//    public void setPrenomPersonnel(String prenomPersonnel) {
+//        this.prenomPersonnel = prenomPersonnel;
+//    }
+//
+//    //change idPersonnel
+//    public void setIdPersonnel(int idPersonnel) {
+//        this.idPersonnel = idPersonnel;
+//    }
+//
+//    //change statut
+//    public void setStatut(Statut statut) {
+//        this.statut = statut;
+//    }

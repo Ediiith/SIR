@@ -7,10 +7,11 @@ import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
-public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
+public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
      * Creates new form PageAccueil
@@ -18,25 +19,20 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     private Personnel personnel;
     private CompteRendu cr;
     private List<DMR> listeDMR;
-    private Examen e;
-    private DMR dmr;
-    private int i;
     private ArrayList<java.awt.Image> images;
 
-    public Exam(Personnel personnel, Examen e) {
+    public AssocierDMR(Personnel personnel, List<DMR> listeDMR) {
         initComponents();
-        this.setExtendedState(Exam.MAXIMIZED_BOTH);
+        this.setTitle("Consulter DMR");
+        this.setExtendedState(AssocierDMR.MAXIMIZED_BOTH);
         this.personnel = personnel;
-        this.e = e;
-        //this.dm = dm;
-        //this.listePatient = listePatient;
-        //this.listeFiche = listeFiche;
-        this.setExtendedState(Exam.MAXIMIZED_BOTH);
+        this.listeDMR = listeDMR;
+        this.setExtendedState(AssocierDMR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        jLabelInfoPatient.setText(this.dmr.afficherInfoPatient());
+        this.jTableExamen.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     @Override
@@ -55,7 +51,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 break;           
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
+                    AssocierDMR cDMR = new AssocierDMR(this.personnel, this.listeDMR);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -90,26 +86,13 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
+
             default:
                 break;
         }
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,13 +104,13 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     private void initComponents() {
 
         barreDuHaut = new javax.swing.JPanel();
+        jButtonDeco = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldStatut = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButtonDeco = new javax.swing.JButton();
         jSplitPane = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree = new javax.swing.JTree();
@@ -142,14 +125,17 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jComboBoxFormat = new javax.swing.JComboBox();
-        jButtonDeco1 = new javax.swing.JButton();
-        jLabelInfoPatient = new javax.swing.JLabel();
-        jLabelInfoMedecin = new javax.swing.JLabel();
-        jComboBoxType = new javax.swing.JComboBox();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        TrierSelon = new javax.swing.JComboBox();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableExamen = new javax.swing.JTable();
+        JButtonAssocier = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableDMR = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        TrierSelon1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -157,18 +143,6 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         barreDuHaut.setPreferredSize(new java.awt.Dimension(30, 30));
         barreDuHaut.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-
-        jLabel1.setText("ID :");
-
-        jLabel3.setText("Statut :");
-
-        jLabel16.setFont(new java.awt.Font("Bernard MT Condensed", 2, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel16.setText("Processir");
-
-        jButtonDeco.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonDeco.setText("Deconnexion");
         jButtonDeco.setMinimumSize(new java.awt.Dimension(110, 30));
         jButtonDeco.setPreferredSize(new java.awt.Dimension(130, 30));
@@ -177,6 +151,15 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 jButtonDecoActionPerformed(evt);
             }
         });
+        barreDuHaut.add(jButtonDeco, java.awt.BorderLayout.EAST);
+
+        jLabel1.setText("ID :");
+
+        jLabel3.setText("Statut :");
+
+        jLabel16.setFont(new java.awt.Font("Bernard MT Condensed", 2, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel16.setText("Processir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,23 +173,20 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
-                .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jTextFieldStatut, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         barreDuHaut.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -229,10 +209,6 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jScrollPane1.setViewportView(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setText("l'hopital Princeton Plainsboro");
@@ -295,54 +271,65 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel5.setPreferredSize(new java.awt.Dimension(700, 400));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel6.setText("Procéder à un examen");
+        jLabel6.setText("Associer examen à un DMR");
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Patient :");
+        jLabel5.setText("Sélectionner un DMR");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Médecin :");
+        jSeparator2.setForeground(new java.awt.Color(153, 0, 0));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Format final :");
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setText("Trier :");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel12.setText("Type d'examen :");
-
-        jComboBoxFormat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Numériser", "Non numérique (impression)" }));
-        jComboBoxFormat.addActionListener(new java.awt.event.ActionListener() {
+        TrierSelon.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nom", "Prénom", "Date", "Médecin", "Date de naissance", "Numéro unique" }));
+        TrierSelon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFormatActionPerformed(evt);
+                TrierSelonActionPerformed(evt);
             }
         });
 
-        jButtonDeco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco1.setText("Valider et traiter les images");
-        jButtonDeco1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco1.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco1.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco1.addActionListener(new java.awt.event.ActionListener() {
+        jTableExamen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableExamenMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTableExamen);
+
+        JButtonAssocier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        JButtonAssocier.setText("Associer");
+        JButtonAssocier.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        JButtonAssocier.setMinimumSize(new java.awt.Dimension(110, 30));
+        JButtonAssocier.setPreferredSize(new java.awt.Dimension(130, 30));
+        JButtonAssocier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco1ActionPerformed(evt);
+                JButtonAssocierActionPerformed(evt);
             }
         });
 
-        jLabelInfoPatient.setText("info patient");
-        jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
+        jTableDMR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDMRMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTableDMR);
 
-        jLabelInfoMedecin.setText("info med");
-        jLabelInfoMedecin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setText("Sélectionner un examen");
 
-        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IRM", "Scanner", "Rayon X", "Echographie" }));
-        jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("Trier :");
+
+        TrierSelon1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nom", "Prénom", "Date", "Médecin", "Date de naissance", "Numéro unique" }));
+        TrierSelon1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTypeActionPerformed(evt);
+                TrierSelon1ActionPerformed(evt);
             }
         });
 
@@ -350,38 +337,39 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addComponent(jSeparator2)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(281, Short.MAX_VALUE)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBoxFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel7))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                                            .addComponent(jLabelInfoMedecin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(241, 241, 241)
-                                .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(259, Short.MAX_VALUE))
-            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TrierSelon1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TrierSelon, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JButtonAssocier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(360, 360, 360))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,26 +377,31 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(TrierSelon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(TrierSelon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelInfoMedecin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JButtonAssocier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         jSplitPane.setRightComponent(jPanel5);
@@ -419,22 +412,55 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecoActionPerformed
-        PageDeConnexion connection = new PageDeConnexion();
-        connection.setVisible(true);
+        PageDeConnexion connexion = new PageDeConnexion();
+        connexion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jComboBoxFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFormatActionPerformed
+    private void TrierSelonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrierSelonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFormatActionPerformed
+    }//GEN-LAST:event_TrierSelonActionPerformed
 
-    private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco1ActionPerformed
+    private void jTableExamenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableExamenMouseClicked
+        int row = jTableExamen.getSelectedRow();
+        int i = 0;
+        int compteur = 0;
+        boolean rep = false;
+        //        while ((i < listeFiche.size()) && (rep == false)) {
+        //            compteur = 0;
+        //            if (listeFiche.get(i).getDate().toString().equals(jTable.getValueAt(row, 0))
+        //                && listeFiche.get(i).getMedecin().toString().equals(jTable.getValueAt(row, 1))
+        //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable.getValueAt(row, 3))) {
+        //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
+        //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable.getValueAt(row + j, 5))) {
+        //                        compteur++;
+        //                    }
+        //
+        //                }
+        //                if (compteur == listeFiche.get(i).getActes().size()) {
+        //                    rep = true;
+        //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
+        //                    f.setVisible(true);
+        //                }
+        //
+        //            }
+        //            i++;
+        //        }
+    }//GEN-LAST:event_jTableExamenMouseClicked
 
-    private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
+    private void JButtonAssocierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonAssocierActionPerformed
+        AfficherDMR aDMR = new AfficherDMR(listeDMR.get(jTableExamen.getSelectedRow()));
+        aDMR.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_JButtonAssocierActionPerformed
+
+    private void jTableDMRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDMRMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTypeActionPerformed
+    }//GEN-LAST:event_jTableDMRMouseClicked
+
+    private void TrierSelon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrierSelon1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TrierSelon1ActionPerformed
 
     /**
      *
@@ -442,33 +468,36 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JButtonAssocier;
+    private javax.swing.JComboBox TrierSelon;
+    private javax.swing.JComboBox TrierSelon1;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonDeco1;
-    private javax.swing.JComboBox jComboBoxFormat;
-    private javax.swing.JComboBox jComboBoxType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelInfoMedecin;
-    private javax.swing.JLabel jLabelInfoPatient;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JTable jTableDMR;
+    private javax.swing.JTable jTableExamen;
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;

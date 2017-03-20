@@ -40,7 +40,7 @@ public class ListeDMR {
         s = ("Dossier medical radiologique :\n--------------------------------------------------------------------------------------------\n");
         for (int i = 0; i < getDMR().size(); i++) {
             DMR dmr = getDMR().get(i);
-            s = s + dmr.AfficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
+            s = s + dmr.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
         }
         return s;
     }
@@ -52,7 +52,7 @@ public class ListeDMR {
             for (int i = 0; i < getDMR().size(); i++) {
             if(getDMR().get(i).procheDe(dmr1)){
                 DMR dmr = getDMR().get(i);
-                s = s + dmr.AfficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
+                s = s + dmr.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
             }     
         }
         return s;
@@ -65,7 +65,7 @@ public class ListeDMR {
         for (int i = 0; i < getDMR().size(); i++) {
             if(getDMR().get(i).getEstAdmis()){
                 DMR dmr = getDMR().get(i);
-                s = s + dmr.AfficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
+                s = s + dmr.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
             }     
         }
         return s;

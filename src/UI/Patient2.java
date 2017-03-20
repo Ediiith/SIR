@@ -25,7 +25,6 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
 
     public Patient2() {
         initComponents();
-        this.setTitle("Patient2");
         this.personnel = personnel;
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
@@ -223,10 +222,6 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jScrollPane1.setViewportView(jTree);
 
         jSplitPane.setLeftComponent(jScrollPane1);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setText("l'hopital Princeton Plainsboro");

@@ -30,11 +30,11 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 
     public Examen2(Personnel personnel) {
         this.setTitle("Procéder à un examen");
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
-        jTextFieldStatut.setText(personnel.getStatut().toString());
+        
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.personnel = personnel;
-        
+        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldStatut.setText(personnel.getStatut().toString());
         this.columnNames = new String[4];
         this.columnNames[0] = "Date";
         this.columnNames[1] = "Patient (nom,prenom)";
@@ -48,7 +48,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         int k = 0;
         data = new Object[nbrligne][4];
         for (int i = 0; i < listeDMR.size(); i++) {
-            data[k][0] = e.getDate().toString();
+            data[k][0] = e.getDateExamen();
             data[k][1] = dmr.getNomPatient().toUpperCase() + " " + dmr.getPrenomPatient();
             data[k][2] = dmr.getIdDMR();
             data[k][3] = dmr.getDateNaissance();

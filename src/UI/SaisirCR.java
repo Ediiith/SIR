@@ -229,10 +229,6 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
 
         jSplitPane.setLeftComponent(jScrollPane1);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/princeton.png"))); // NOI18N
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setText("l'hopital Princeton Plainsboro");
 

@@ -14,7 +14,7 @@ public class Patient4 extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Patient4");
         this.setLocationRelativeTo(null);
-        jLabelInfoPatient.setText(this.dmr.AfficherInfoPatientTemp());
+        jLabelInfoPatient.setText(this.dmr.afficherInfoPatient());
     }
 
     /**
