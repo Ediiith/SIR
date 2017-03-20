@@ -77,7 +77,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Associer à un DMR":
-                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                if (personnel.getStatut().equals("Radiologue")) {
                     Associer a = new Associer(this.personnel);
                     a.setVisible(true);
                     this.dispose();
@@ -95,7 +95,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Image":
-                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                if ( personnel.getStatut().equals("Manipulateur")) {
                     Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();

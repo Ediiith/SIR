@@ -34,7 +34,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jTextFieldStatut.setText(personnel.getStatut().toString());
     }
 
-    @Override
+   @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -50,18 +50,9 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 //                break;
 
             case "Consultation d'un DMR":
-                if (personnel.equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
                     cDMR.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
-            case "Procéder à un examen":
-                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
-                    Examen2 e1 = new Examen2(this.personnel);
-                    e1.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
@@ -74,6 +65,24 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 this.dispose();
 
                 break;
+            case "Procéder à un examen":
+                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                    Examen2 e1 = new Examen2(this.personnel);
+                    e1.setVisible(true);
+                    this.dispose();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+                }
+                break;
+            case "Associer à un DMR":
+                if (personnel.getStatut().equals("Radiologue")) {
+                    Associer a = new Associer(this.personnel);
+                    a.setVisible(true);
+                    this.dispose();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+                }
+                break;
             case "Compte Rendu":
                 if (personnel.getStatut().equals("Radiologue")) {
                     CpR cr1 = new CpR(this.personnel, this.cr);
@@ -84,7 +93,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
             case "Image":
-                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateur")) {
+                if ( personnel.getStatut().equals("Manipulateur")) {
                     Image i1 = new Image(this.images, this.i, this.e);
                     i1.setVisible(true);
                     this.dispose();
