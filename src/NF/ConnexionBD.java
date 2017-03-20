@@ -31,14 +31,14 @@ public class ConnexionBD {
     private java.sql.Connection Connect = null;
     private java.sql.Statement Statement = null;
 
-   
+// constructeur à partir de l'URL, l'identifiant et le mot de passe de la base de données
     public ConnexionBD(String urlBd, String idBd, String mdpBd) {
         this.urlBd = urlBd;
         this.idBd = idBd;
         this.mdpBd = mdpBd;
     }
 
-    
+// connexion à la base de données, retourne false si la connexion a échoué    
     public Boolean connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -51,12 +51,7 @@ public class ConnexionBD {
         return false;
     }
 
-    /**
-    Executer une requête SQL.
-     
-    sql requête à exécuter
-    résultat de la requête
-     */
+// Exécute une requête SQL et retourne le résultat de la requête
     public ResultSet exec(String sql) {
         try {
             ResultSet rs = this.Statement.executeQuery(sql);
@@ -68,11 +63,6 @@ public class ConnexionBD {
     }
 
     /**
-     * Insérer des données avec requête SQL.
-     *
-     s requête SQL
-     return 0 si échec sinon nombre de lignes affectées
-     */
     public int insererDB(String s) {
         int i = 0;
         try {

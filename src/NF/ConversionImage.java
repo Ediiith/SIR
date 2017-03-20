@@ -8,10 +8,7 @@ package NF;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-//import org.dcm4che2.data.BasicDicomObject;
-//import org.dcm4che2.data.DicomObject;
-//import org.dcm4che3.data.*;
-//import org.dcm4che3.io.DicomOutputStream;
+
 
 
 /**
@@ -19,7 +16,7 @@ import javax.imageio.ImageIO;
  * @author Edith
  */
 public class ConversionImage {
-        public void jpegToDicom (File imgEntree, File dmcSortie, String date, String typeExam, String nomMed, String Cr,
+    public void jpegToDicom (File imgEntree, File dmcSortie, String date, String typeExam, String nomMed, String Cr,
                              String nomPatient, String genre, String dateNaissance, int IPP) throws Exception{
         
         

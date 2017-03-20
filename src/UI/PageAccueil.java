@@ -49,18 +49,16 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;
-               
-
+                break;           
             case "Consultation d'un DMR":
-                if (personnel.getStatut().compareTo(Statut.RADIOLOGUE)==0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR)==0) {
-
+                if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
+
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
@@ -71,7 +69,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen à un DMR":
+            case "Associer examen au DMR":
                 if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
                     Associer a = new Associer(this.personnel);
                     a.setVisible(true);
@@ -80,16 +78,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Image":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    Image i1 = new Image(this.images, this.i, this.e);
-                    i1.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
-            case "Compte Rendu":
+            case "Compte-Rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     CpR cr1 = new CpR(this.personnel, this.cr);
                     cr1.setVisible(true);
@@ -113,7 +102,6 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
 //                //lm.setVisible(true);
 //                this.dispose();
 //                break;
-
             default:
                 break;
         }
