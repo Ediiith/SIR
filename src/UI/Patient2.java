@@ -3,6 +3,7 @@ package UI;
 import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
+import NF.Genre;
 import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
@@ -22,16 +23,22 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private int i;
     private ArrayList<java.awt.Image> images;
     private DMR dmr;
+    private Genre g;
+    private String date;
 
-    public Patient2(Personnel personnel,String nom,String prenom,String genre,String jj,String mm,String aa) {
+    public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa,String numSS) {
         initComponents();
         this.personnel = personnel;
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        jLabelInfoPatient.setText(nom+" "+prenom+"\n"+genre+"\n"+"né(e) le "+jj+"/"+mm+"/"+aa);
+        //jLabelInfoPatient.setText(nom + " " + prenom + " " + genre + " " + "né(e) le " + jj + "/" + mm + "/" + aa);
+        this.g=toGenre(genre);
+        date=""+jj + "/" + mm + "/" + aa;
+        dmr = new DMR(nom,prenom,date,g,Integer.parseInt(numSS));
+        jLabelInfoPatient.setText(aa);
     }
 
     @Override
@@ -47,7 +54,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;           
+                break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
@@ -68,7 +75,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 }
                 break;
             case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
+                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
                     AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
@@ -85,7 +92,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
+
 //            case "Appareil":
 //                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
@@ -437,6 +444,20 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
 //            i++;
 //        }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private Genre toGenre(String s) {
+        Genre genre = null;
+        if (s.compareTo("Homme") == 0) {
+            genre = Genre.HOMME;
+        }
+        else if (s.compareTo("Femme") == 0) {
+            genre = Genre.FEMME;
+        }
+        else if(s.compareTo("Autre")==0){
+            genre = Genre.AUTRE;
+        }
+        return genre;
+    }
 
     /**
      *
