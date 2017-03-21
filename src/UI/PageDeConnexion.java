@@ -2,6 +2,7 @@ package UI;
 
 import BD.InitialisationIP;
 import NF.CompteRendu;
+import NF.Hachage;
 import NF.ConnexionBD;
 import NF.DMR;
 import NF.Examen;
@@ -180,7 +181,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_TextFieldIDActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        
+        Hachage hash = new Hachage();
         Connection cn = null;
         Statement st = null;
         ResultSet resultat = null;
@@ -192,7 +193,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
             String sql = "select * from personnel where idPersonnel = '" + Integer.parseInt(TextFieldID.getText()) + "';";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
-                if (PasswordFieldMDP.getText().equalsIgnoreCase(resultat.getString("mdp"))) {
+                if (hash.getHash(PasswordFieldMDP.getText()).equalsIgnoreCase(resultat.getString("mdp"))) {
                     p=new Personnel(Integer.parseInt(TextFieldID.getText()));
                     PageAccueil accueil = new PageAccueil(p);
                     accueil.setVisible(true);

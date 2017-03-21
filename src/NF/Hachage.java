@@ -26,7 +26,7 @@ public class Hachage {
             throw new Error ("no MD5 support in this VM");
         }
         // formation de la nouvelle châinte de caractères représentant le hash
-        StringBuffer hashString = new StringBuffer();
+        StringBuilder hashString = new StringBuilder();
         for (int i = 0; i<hash.length; i++){ // il faut traiter le message par bloc
             String hex= Integer.toHexString(hash[i]);
             if (hex.length()==1){
