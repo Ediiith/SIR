@@ -25,18 +25,13 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     private ListeDMR listeDMR2;
     private List<DMR> listDMRadmis;
     private List<DMR> listeDMR;
-    private Examen e;
-    private DMR dmr;
     private String[] columnNames;
     private Object[][] data;
-    private int i;
-    private ArrayList<java.awt.Image> images;
+    private DMR dmr;
 
     public Examen2(Personnel personnel) {
         initComponents();
-
         this.setTitle("Procéder à un examen");
-
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.personnel = personnel;
         this.listeDMR2 = new ListeDMR();
@@ -175,7 +170,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        jButtonValider = new javax.swing.JButton();
+        Valider = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
 
@@ -332,14 +327,14 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Liste des patients admis :");
 
-        jButtonValider.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonValider.setText("Valider");
-        jButtonValider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonValider.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonValider.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
+        Valider.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Valider.setText("Sélectionner");
+        Valider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Valider.setMinimumSize(new java.awt.Dimension(110, 30));
+        Valider.setPreferredSize(new java.awt.Dimension(130, 30));
+        Valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonValiderActionPerformed(evt);
+                ValiderActionPerformed(evt);
             }
         });
 
@@ -364,7 +359,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                         .addComponent(jLabel5))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(286, 286, 286)
-                        .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(391, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -382,7 +377,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
-                .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -404,38 +399,18 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
-        Exam e1 = new Exam(this.personnel, this.e);
+    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
+        int row = jTablePatient.getSelectedRow();
+        int idDMR = (int) jTablePatient.getValueAt(row, 6);
+        this.dmr = new DMR(idDMR);
+        Exam e1 = new Exam(this.personnel, this.dmr);
         e1.setVisible(true);
         this.dispose();
 
-    }//GEN-LAST:event_jButtonValiderActionPerformed
+    }//GEN-LAST:event_ValiderActionPerformed
 
     private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
-        int row = jTablePatient.getSelectedRow();
-        int i = 0;
-        int compteur = 0;
-        boolean rep = false;
-//        while ((i < listeFiche.size()) && (rep == false)) {
-//            compteur = 0;
-//            if (listeFiche.get(i).getDate().toString().equals(jTable.getValueAt(row, 0))
-//                && listeFiche.get(i).getMedecin().toString().equals(jTable.getValueAt(row, 1))
-//                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable.getValueAt(row, 3))) {
-//                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-//                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable.getValueAt(row + j, 5))) {
-//                        compteur++;
-//                    }
-//
-//                }
-//                if (compteur == listeFiche.get(i).getActes().size()) {
-//                    rep = true;
-//                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-//                    f.setVisible(true);
-//                }
-//
-//            }
-//            i++;
-//        }
+        
     }//GEN-LAST:event_jTablePatientMouseClicked
 
     /**
@@ -444,9 +419,9 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Valider;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonValider;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;

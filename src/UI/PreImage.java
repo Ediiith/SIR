@@ -29,10 +29,12 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
      * Creates new form PageAccueil
      */
     private Personnel personnel;
+    private DMR dmr;
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
     private TraitementImage ti;
+    private int idExamen;
     private int i;
     private ArrayList<java.awt.Image> images;
     private final DefaultListModel model;
@@ -40,21 +42,29 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private ArrayList<String> paths;
     private int util;
 
-    public PreImage(ArrayList<java.awt.Image> images, int i, Examen e) {
+    public PreImage(Personnel personnel, DMR dmr) {
         model = new DefaultListModel();
         icons = new ArrayList<>();
         paths = new ArrayList<>();
         this.util = i;
-        this.e = e;
+        //this.idExamen=
+        //this.e = new Examen();
 
         initComponents();
-        this.setTitle("Traiter image");
-        this.setExtendedState(PreImage.MAXIMIZED_BOTH);
+        this.setTitle("Visualiser image");
         this.setExtendedState(PreImage.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
+        this.personnel = personnel;
+        this.dmr = dmr;
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldID.setText(this.personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
+
+        for (java.awt.Image img : images) {
+            icons.add(new ImageIcon(img));
+            img = img.getScaledInstance(100, -1, java.awt.Image.SCALE_DEFAULT);
+            model.addElement(new ImageIcon(img));
+        }
 
     }
 
@@ -69,7 +79,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
      * this.setLocationRelativeTo(null); jTree.addTreeSelectionListener(this);
      * jTextFieldID.setText(identifiant); jTextFieldStatut.setText(statut); }*
      */
-     @Override
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -82,7 +92,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;           
+                break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
@@ -103,7 +113,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 }
                 break;
             case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
+                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
                     AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
@@ -120,7 +130,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
+
 //            case "Appareil":
 //                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
@@ -140,7 +150,6 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         }
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,10 +179,10 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         scrollPane = new javax.swing.JScrollPane();
-        imageList = new JList(model);
+        Images = new JList(model);
         jPanel3 = new javax.swing.JPanel();
-        jButtonTraiter = new javax.swing.JButton();
-        jButtonEnregistrer = new javax.swing.JButton();
+        Traiter = new javax.swing.JButton();
+        Enregistrer = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
@@ -287,36 +296,36 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
 
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        imageList.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
-        imageList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        imageList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        Images.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 0)));
+        Images.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        Images.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                imageListValueChanged(evt);
+                ImagesValueChanged(evt);
             }
         });
-        scrollPane.setViewportView(imageList);
+        scrollPane.setViewportView(Images);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButtonTraiter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonTraiter.setText("Traiter");
-        jButtonTraiter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonTraiter.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonTraiter.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonTraiter.addActionListener(new java.awt.event.ActionListener() {
+        Traiter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Traiter.setText("Traiter");
+        Traiter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Traiter.setMinimumSize(new java.awt.Dimension(110, 30));
+        Traiter.setPreferredSize(new java.awt.Dimension(130, 30));
+        Traiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTraiterActionPerformed(evt);
+                TraiterActionPerformed(evt);
             }
         });
 
-        jButtonEnregistrer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonEnregistrer.setText("Enregistrer");
-        jButtonEnregistrer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonEnregistrer.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonEnregistrer.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonEnregistrer.addActionListener(new java.awt.event.ActionListener() {
+        Enregistrer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Enregistrer.setText("Enregistrer");
+        Enregistrer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Enregistrer.setMinimumSize(new java.awt.Dimension(110, 30));
+        Enregistrer.setPreferredSize(new java.awt.Dimension(130, 30));
+        Enregistrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEnregistrerActionPerformed(evt);
+                EnregistrerActionPerformed(evt);
             }
         });
 
@@ -327,17 +336,17 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonEnregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Enregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(Traiter, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonEnregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Enregistrer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Traiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -396,7 +405,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         // Ne rien rentrer ici, erreur de code généré
     }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
 
-    private void jButtonEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnregistrerActionPerformed
+    private void EnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnregistrerActionPerformed
 //        JFileChooser choix = new JFileChooser();
 //        FilenameFilter fileNameFilter;
 //        String[] imageTypes = ImageIO.getReaderFileSuffixes();
@@ -431,9 +440,9 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
 //                JOptionPane.showMessageDialog(gui, "Erreur lors du chargement des images", "Erreur", JOptionPane.ERROR_MESSAGE);
 //            }
 //        }
-    }//GEN-LAST:event_jButtonEnregistrerActionPerformed
+    }//GEN-LAST:event_EnregistrerActionPerformed
 
-    private void imageListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_imageListValueChanged
+    private void ImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ImagesValueChanged
         //        i = imageList.getSelectedIndex();
         //        try {
         //            Image image = (Image) model.get(i);
@@ -454,13 +463,13 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         //        }
         //        imageViewContainer.add(displayPanel);
         //        displayPanel.repaint();
-    }//GEN-LAST:event_imageListValueChanged
+    }//GEN-LAST:event_ImagesValueChanged
 
-    private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
+    private void TraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraiterActionPerformed
         Image i = new Image(this.images, this.i, this.e);
         i.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButtonTraiterActionPerformed
+    }//GEN-LAST:event_TraiterActionPerformed
     public void updateUI() {
         BufferedImage bi = ti.getBi();
         icons.set(i, new ImageIcon(bi));
@@ -475,11 +484,11 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Enregistrer;
+    private javax.swing.JList<String> Images;
+    private javax.swing.JButton Traiter;
     private javax.swing.JPanel barreDuHaut;
-    private javax.swing.JList<String> imageList;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonEnregistrer;
-    private javax.swing.JButton jButtonTraiter;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;

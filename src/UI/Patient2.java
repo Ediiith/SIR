@@ -450,30 +450,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_AdmissionActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int row = jTable1.getSelectedRow();
-        int i = 0;
-        int compteur = 0;
-        boolean rep = false;
-        //        while ((i < listeFiche.size()) && (rep == false)) {
-        //            compteur = 0;
-        //            if (listeFiche.get(i).getDate().toString().equals(jTable1.getValueAt(row, 0))
-        //                && listeFiche.get(i).getMedecin().toString().equals(jTable1.getValueAt(row, 1))
-        //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable1.getValueAt(row, 3))) {
-        //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-        //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable1.getValueAt(row + j, 5))) {
-        //                        compteur++;
-        //                    }
-        //
-        //                }
-        //                if (compteur == listeFiche.get(i).getActes().size()) {
-        //                    rep = true;
-        //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-        //                    f.setVisible(true);
-        //                }
-        //
-        //            }
-        //            i++;
-        //        }
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private Genre toGenre(String s) {
