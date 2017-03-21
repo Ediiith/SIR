@@ -1,6 +1,7 @@
 package UI;
 
 import NF.DMR;
+import NF.Genre;
 import NF.Personnel;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -10,13 +11,17 @@ public class Patient4 extends javax.swing.JFrame {
 
     private DMR dmr;
     private Personnel personnel;
+    private String adresse;
+    private Genre g;
 
-    public Patient4(Personnel personnel, DMR dmr) {
+    public Patient4(Personnel personnel, String nom, String prenom, String genre, String date, String numSS) {
         initComponents();
         this.setTitle("Patient4");
         this.setLocationRelativeTo(null);
         this.personnel = personnel;
-        this.dmr=dmr;
+        this.adresse=this.Adresse.getText();
+        this.g = toGenre(genre);
+        this.dmr = new DMR(nom,prenom,date,this.g,Integer.parseInt(numSS),this.adresse);
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
     }
 
@@ -37,6 +42,8 @@ public class Patient4 extends javax.swing.JFrame {
         Admission = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         resumerPatient = new javax.swing.JTextPane();
+        jLabel7 = new javax.swing.JLabel();
+        Adresse = new javax.swing.JTextField();
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
@@ -77,14 +84,20 @@ public class Patient4 extends javax.swing.JFrame {
         resumerPatient.setCaretColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(resumerPatient);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Adresse : ");
+
+        Adresse.setText("Martin");
+        Adresse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AdresseMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layoutbuttonLayout = new javax.swing.GroupLayout(layoutbutton);
         layoutbutton.setLayout(layoutbuttonLayout);
         layoutbuttonLayout.setHorizontalGroup(
             layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layoutbuttonLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(Retour, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,6 +107,15 @@ public class Patient4 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1))
+            .addGroup(layoutbuttonLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layoutbuttonLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layoutbuttonLayout.createSequentialGroup()
                     .addGap(27, 27, 27)
@@ -106,7 +128,11 @@ public class Patient4 extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Adresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Retour, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Admission, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -114,8 +140,8 @@ public class Patient4 extends javax.swing.JFrame {
             .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layoutbuttonLayout.createSequentialGroup()
                     .addGap(110, 110, 110)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(60, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(111, Short.MAX_VALUE)))
         );
 
         getContentPane().add(layoutbutton, java.awt.BorderLayout.CENTER);
@@ -130,20 +156,37 @@ public class Patient4 extends javax.swing.JFrame {
     }//GEN-LAST:event_RetourActionPerformed
 
     private void AdmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdmissionActionPerformed
-        Patient3 p3 = new Patient3(this.personnel,this.dmr.getIdDMR());
+        Patient3 p3 = new Patient3(this.personnel,this.dmr);
         p3.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AdmissionActionPerformed
 
+    private void AdresseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdresseMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AdresseMouseClicked
+
+    private Genre toGenre(String s) {
+        Genre genre = null;
+        if (s.compareTo("Homme") == 0) {
+            genre = Genre.HOMME;
+        } else if (s.compareTo("Femme") == 0) {
+            genre = Genre.FEMME;
+        } else if (s.compareTo("Autre") == 0) {
+            genre = Genre.AUTRE;
+        }
+        return genre;
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Admission;
+    private javax.swing.JTextField Adresse;
     private javax.swing.JButton Retour;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel layoutbutton;

@@ -12,9 +12,9 @@ public class Patient3 extends javax.swing.JFrame {
     private DMR dmr;
     private Personnel personnel;
 
-    public Patient3(Personnel personnel, int idDMR) {
+    public Patient3(Personnel personnel, DMR dmr) {
         initComponents();
-        this.dmr = new DMR(idDMR);
+        this.dmr=dmr;
         this.personnel = personnel;
         this.setTitle("Patient3");
         this.setLocationRelativeTo(null);
@@ -96,8 +96,8 @@ public class Patient3 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Fermer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

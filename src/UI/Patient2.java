@@ -28,8 +28,13 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private String date;
     private String[] columnNames;
     private Object[][] data;
+    private String nom;
+    private String prenom;
+    private String genre;
+    private String numSS;
+    private DMR dmr1;
 
-    public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa,String numSS) {
+    public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa, String numSS) {
         initComponents();
         this.personnel = personnel;
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -39,33 +44,40 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTextFieldStatut.setText(personnel.getStatut().toString());
         this.resumerPatient.setText(nom + " " + prenom + "\n" + genre + "\n" + "né(e) le " + jj + "/" + mm + "/" + aa);
         this.resumerPatient.setEditable(false);
-        this.g=toGenre(genre);
-        date=""+jj + "/" + mm + "/" + aa;
-        this.dmr = new DMR(nom,prenom,date,g,Integer.parseInt(numSS));
-        
-        this.jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.columnNames = new String[7];
-        this.columnNames[0] = "Nom";
-        this.columnNames[1] = "Prénom";
-        this.columnNames[2] = "Genre";
-        this.columnNames[3] = "Date de naissance";
-        this.columnNames[4] = "Adresse";
-        this.columnNames[5] = "Numéro de sécurité sociale";
-        this.columnNames[6] = "Identifiant unique";
-        
-        int nbrligne = 1;
-        int k = 0;
-        data = new Object[nbrligne][7];
-        for (int i = 0; i <nbrligne; i++) {
-            data[k][0] = dmr.getNomPatient();
-            data[k][1] = dmr.getPrenomPatient();
-            data[k][2] = dmr.getGenre();
-            data[k][3] = dmr.getDateNaissance();
-            data[k][4] = dmr.getAdresse();
-            data[k][5] = dmr.getNumSS();
-            data[k][6] = dmr.getIdDMR();
+        this.nom=nom;
+        this.prenom=prenom;
+        this.numSS=numSS;
+        this.genre=genre;
+        this.g = toGenre(genre);
+        this.date = "" + jj + "/" + mm + "/" + aa;
+        this.dmr = new DMR(nom, prenom, date, g, Integer.parseInt(numSS));
+
+        if (this.dmr.getIdDMR() != 0) {
+            this.jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            this.columnNames = new String[7];
+            this.columnNames[0] = "Nom";
+            this.columnNames[1] = "Prénom";
+            this.columnNames[2] = "Genre";
+            this.columnNames[3] = "Date de naissance";
+            this.columnNames[4] = "Adresse";
+            this.columnNames[5] = "Numéro de sécurité sociale";
+            this.columnNames[6] = "Identifiant unique";
+
+            int nbrligne = 1;
+            int k = 0;
+            data = new Object[nbrligne][7];
+            for (int i = 0; i < nbrligne; i++) {
+                data[k][0] = dmr.getNomPatient();
+                data[k][1] = dmr.getPrenomPatient();
+                data[k][2] = dmr.getGenre();
+                data[k][3] = dmr.getDateNaissance();
+                data[k][4] = dmr.getAdresse();
+                data[k][5] = dmr.getNumSS();
+                data[k][6] = dmr.getIdDMR();
+            }
+            jTable1.setModel(new DefaultTableModel(data, columnNames));
         }
-        jTable1.setModel(new DefaultTableModel(data, columnNames));
+
     }
 
     @Override
@@ -423,15 +435,16 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        Patient4 p4 = new Patient4(this.personnel,this.dmr);
+        Patient4 p4 = new Patient4(this.personnel,this.nom,this.prenom,this.genre,this.date,this.numSS);
         p4.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
 
     private void AdmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdmissionActionPerformed
-        int row=jTable1.getSelectedRow();
-        int idDMR=(int)jTable1.getValueAt(row,6);
-        Patient3 p3 = new Patient3(this.personnel,idDMR);
+        int row = jTable1.getSelectedRow();
+        int idDMR = (int) jTable1.getValueAt(row, 6);
+        this.dmr1 = new DMR(idDMR);
+        Patient3 p3 = new Patient3(this.personnel,this.dmr1 );
         p3.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AdmissionActionPerformed
@@ -442,36 +455,34 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         int compteur = 0;
         boolean rep = false;
         //        while ((i < listeFiche.size()) && (rep == false)) {
-            //            compteur = 0;
-            //            if (listeFiche.get(i).getDate().toString().equals(jTable1.getValueAt(row, 0))
-                //                && listeFiche.get(i).getMedecin().toString().equals(jTable1.getValueAt(row, 1))
-                //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable1.getValueAt(row, 3))) {
-                //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-                    //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable1.getValueAt(row + j, 5))) {
-                        //                        compteur++;
-                        //                    }
-                    //
-                    //                }
-                //                if (compteur == listeFiche.get(i).getActes().size()) {
-                    //                    rep = true;
-                    //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-                    //                    f.setVisible(true);
-                    //                }
-                //
-                //            }
-            //            i++;
-            //        }
+        //            compteur = 0;
+        //            if (listeFiche.get(i).getDate().toString().equals(jTable1.getValueAt(row, 0))
+        //                && listeFiche.get(i).getMedecin().toString().equals(jTable1.getValueAt(row, 1))
+        //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable1.getValueAt(row, 3))) {
+        //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
+        //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable1.getValueAt(row + j, 5))) {
+        //                        compteur++;
+        //                    }
+        //
+        //                }
+        //                if (compteur == listeFiche.get(i).getActes().size()) {
+        //                    rep = true;
+        //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
+        //                    f.setVisible(true);
+        //                }
+        //
+        //            }
+        //            i++;
+        //        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private Genre toGenre(String s) {
         Genre genre = null;
         if (s.compareTo("Homme") == 0) {
             genre = Genre.HOMME;
-        }
-        else if (s.compareTo("Femme") == 0) {
+        } else if (s.compareTo("Femme") == 0) {
             genre = Genre.FEMME;
-        }
-        else if(s.compareTo("Autre")==0){
+        } else if (s.compareTo("Autre") == 0) {
             genre = Genre.AUTRE;
         }
         return genre;

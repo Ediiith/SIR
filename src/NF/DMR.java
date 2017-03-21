@@ -100,6 +100,23 @@ public class DMR {
         }
     }
 
+    public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS, String adresse) {
+
+        this.nomPatient = nomPatient;
+        this.prenomPatient = prenomPatient;
+        this.dateNaissance = dateNaissance;
+        this.genre = genre;
+        this.numSS = numSS;
+        this.estAdmis = true;
+        this.adresse = adresse;
+        this.idDMR = 0;
+        this.adresse = null;
+        this.temporaire = true;
+        this.listeExamens = new ArrayList<Examen>();
+        creerDMR(idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS);
+
+    }
+
     //compare si deux instances de DMR sont proches pour nomPatient, prenomPatient et dateNaissance
     public boolean procheDe(Object o) {
         boolean proche = false;
