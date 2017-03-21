@@ -18,7 +18,7 @@ public class ListeDMR {
         listeDMR = new ArrayList<DMR>();
     }
 
-    //remplissage listeDMR avec tous les dmr de la base de donnees
+    //remplissage listeDMR avec tous les dmr de la base de données
     public void remplissageListeDMR() {
         for (int i = 0; i < listeIdDMR().size(); i++) {
             DMR dmr = new DMR(listeIdDMR().get(i));

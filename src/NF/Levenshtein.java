@@ -6,54 +6,48 @@ package NF;
  */
 
 public class Levenshtein {
-    /**
- * compute the Levenshtein distance between two strings
- * @author Xavier Philippeau
- * 
- * @param s0 String 0
- * @param s1 String 1
- * @return the Levenshtein distance
- */
+    //Calcule la distance Levenshtein entre deux strings s0 et s1 
     //Plus les phrases sont ressemblantes, plus le résulat est petit (0 si elles sont égales)
-public int levenshtein(String s0, String s1) {
+    
+    public int levenshtein(String s0, String s1) {
 	int len0 = s0.length()+1;
 	int len1 = s1.length()+1;
  
-	// the array of distances
+	// tableau des distances
 	int[] cost = new int[len0];
 	int[] newcost = new int[len0];
  
-	// initial cost of skipping prefix in String s0
+	// coût initial de saut des préfixes dans le string s0
 	for(int i=0;i<len0;i++) cost[i]=i;
  
-	// dynamicaly computing the array of distances
+	// calcule dynamiquement le tableau des distances
  
-	// transformation cost for each letter in s1
+	// coût des transformations pour chaque lettre dans s1
 	for(int j=1;j<len1;j++) {
  
-		// initial cost of skipping prefix in String s1
+		// coût initial de saut des préfixes dans le string s1
 		newcost[0]=j-1;
  
-		// transformation cost for each letter in s0
+		// coût des transformations pour chaque lettre dans s0
 		for(int i=1;i<len0;i++) {
  
-			// matching current letters in both strings
+			// fait correspondre les lettres en commun dans les deux strings
 			int match = (s0.charAt(i-1)==s1.charAt(j-1))?0:1;
  
-			// computing cost for each transformation
+			// calcule le coût pour chaque transformation
 			int cost_replace = cost[i-1]+match;
 			int cost_insert  = cost[i]+1;
 			int cost_delete  = newcost[i-1]+1;
  
-			// keep minimum cost
+			// garde le coût minimum
 			newcost[i] = min(cost_insert, cost_delete, cost_replace);
 		}
  
-		// swap cost/newcost arrays
+		// change le nouveau coût
 		int[] swap=cost; cost=newcost; newcost=swap;
 	}
  
-	// the distance is the cost for transforming all letters in both strings
+	// la distance est le coût pour la transformation de chaque lettre dans les deux strings
 	return cost[len0-1];
 }
 

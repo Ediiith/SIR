@@ -24,7 +24,7 @@ public class Personnel {
     private Statut statut;
 
     //constructeur en connaissant nomPersonnel, prenomPersonnel, statut
-    //si le professionnel existe deja dans la base de donnees
+    //si le professionnel existe deja dans la base de données
     public Personnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
         if (existencePersonnel(nomPersonnel, prenomPersonnel, statut) == true) {
             this.idPersonnel = lireIdPersonnel(nomPersonnel, prenomPersonnel, statut);
@@ -47,7 +47,7 @@ public class Personnel {
         }
     }
 
-    //constructeur pour creer un professionnel et l'ajouter a la base de donnees
+    //constructeur pour créer un professionnel et l'ajouter a la base de données
     public Personnel(int idPersonnel, String mdp, String nomPersonnel, String prenomPersonnel, Statut statut) {
         this.idPersonnel = idPersonnel;
         this.mdp = mdp;

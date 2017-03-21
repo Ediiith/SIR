@@ -26,11 +26,7 @@ public class TraitementImage extends JPanel {
     private Graphics2D big;
     private LookupTable lookupTable;
 
-    /**
-     * Constructeur
-     *
-     * @param img l'image à traiter
-     */
+    //Constructeur en connaissant l'image img
     public TraitementImage(Image img) {
         loadImage(img);
         if (displayImage.getWidth(this) > displayImage.getHeight(this)) {
@@ -43,11 +39,7 @@ public class TraitementImage extends JPanel {
         createBufferedImage();
     }
 
-    /**
-     * Charger une image
-     *
-     * @param img l'image à charger
-     */
+    // charge l'image img
     public void loadImage(Image img) {
 
         displayImage = img;
@@ -66,9 +58,7 @@ public class TraitementImage extends JPanel {
 
     }
 
-    /**
-     * Crée une BufferedImage.
-     */
+    // créer une buffered image
     public void createBufferedImage() {
         if (displayImage.getWidth(this) > displayImage.getHeight(this)) {
             bi = new BufferedImage(displayImage.getWidth(this), displayImage
@@ -85,9 +75,7 @@ public class TraitementImage extends JPanel {
         big.drawImage(displayImage, 0, 0, this);
     }
 
-    /**
-     * Eclairci l'image.
-     */
+    // éclairci l'image
     public void brightenLUT() {
         short brighten[] = new short[256];
         for (int i = 0; i < 256; i++) {
@@ -102,9 +90,7 @@ public class TraitementImage extends JPanel {
         lookupTable = new ShortLookupTable(0, brighten);
     }
 
-    /**
-     * Augmente le contraste.
-     */
+    // augmente le contraste
     public void contrastIncLUT() {
         short brighten[] = new short[256];
         for (int i = 0; i < 256; i++) {
@@ -119,9 +105,7 @@ public class TraitementImage extends JPanel {
         lookupTable = new ShortLookupTable(0, brighten);
     }
 
-    /**
-     * Diminue le contraste.
-     */
+    // diminue le contraste
     public void contrastDecLUT() {
         short brighten[] = new short[256];
         for (int i = 0; i < 256; i++) {
@@ -136,9 +120,7 @@ public class TraitementImage extends JPanel {
         lookupTable = new ShortLookupTable(0, brighten);
     }
 
-    /**
-     * Inverse les niveaux de gris.
-     */
+    // inverse les niveaux de gris
     public void reverseLUT() {
         byte reverse[] = new byte[256];
         for (int i = 0; i < 256; i++) {
@@ -147,18 +129,14 @@ public class TraitementImage extends JPanel {
         lookupTable = new ByteLookupTable(0, reverse);
     }
 
-    /**
-     * Réinitialise l'image.
-     */
+    // réinitialise l'image
     public void reset() {
         big.setColor(Color.black);
         big.clearRect(0, 0, bi.getWidth(this), bi.getHeight(this));
         big.drawImage(displayImage, 0, 0, this);
     }
 
-    /**
-     * Effectue une rotation de 90°.
-     */
+    // effectue une rotation de 90 degrés
     public void rotation() {
         AffineTransform transformer = new AffineTransform();
         transformer.rotate(Math.toRadians(90), bi.getWidth() / 2, bi.getHeight() / 2);
@@ -167,9 +145,8 @@ public class TraitementImage extends JPanel {
         bi = op.filter(bi, null);
     }
 
-    /**
-     * Effectue une symétrie par un axe vertical de l'image.
-     */
+    // effectue une symétrie par un axe vertical de l'image
+     
     public void symetrieVerticale() {
         AffineTransform transformer = AffineTransform.getScaleInstance(1, -1);
         transformer.translate(0, -bi.getHeight(null));
@@ -177,9 +154,7 @@ public class TraitementImage extends JPanel {
         bi = op.filter(bi, null);
     }
 
-    /**
-     * Effectue une symétrie par un axe horizontal de l'image.
-     */
+    // effectue une symétrie par un axe horizontal de l'image.
     public void symetrieHorizontale() {
         AffineTransform transformer = AffineTransform.getScaleInstance(-1, 1);
         transformer.translate(-bi.getHeight(null), 0);
@@ -187,11 +162,13 @@ public class TraitementImage extends JPanel {
         bi = op.filter(bi, null);
     }
 
+    // applique un filtre
     public void applyFilter() {
         LookupOp lop = new LookupOp(lookupTable, null);
         lop.filter(bi, bi);
     }
     
+    // permet de zoomer
     public void zoomIn() {
         AffineTransform transformer = new AffineTransform();
         transformer.scale(1.1, 1.1);
@@ -199,6 +176,7 @@ public class TraitementImage extends JPanel {
         bi = op.filter(bi, null);
     }
     
+    // permet de dézoomer
     public void zoomOut() {
         AffineTransform transformer = new AffineTransform();
         transformer.scale(0.9, 0.9);
@@ -219,10 +197,7 @@ public class TraitementImage extends JPanel {
         g2D.drawImage(bi, 0, 0, this);
     }
 
-    /**
-     * 
-     * @return l'image affichée
-     */
+    // retourne l'image affichée
     public Image getDisplayImage() {
         return displayImage;
     }

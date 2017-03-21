@@ -12,7 +12,7 @@ import static BD.LecturePersonnel.listeIdPersonnel;
 
 /**
  *
- * @author Edith
+ * @author JEMCare Solution
  */
 
 public class Examen {
@@ -27,20 +27,19 @@ public class Examen {
 
     //constructeur en connaissant idExamen et dmr
     //si l'examen existe deja dans la base de donnees
-    //pour remplir listeExamens
+    //emplit listeExamens
     public Examen(int idExamen, DMR dmr) {
         if (existenceExamen(idExamen) == true) {
             this.idExamen = idExamen;
             this.dmr = dmr;
             this.dateExamen = lireDateExamen(idExamen);
-            //this.responsable = ;
             this.typeExamen = lireTypeExamen(idExamen);
             this.compteRendu = lireCompteRendu(idExamen);
             this.lienPACS = lireLienPACS(idExamen);
         }            
     }
 
-    //constructeur pour creer un examen et l'ajouter a la base de donnees
+    //constructeur pour créer un examen et l'ajouter à la base de données
     public Examen(int idExamen, DMR dmr, String dateExamen, Personnel responsable, TypeExamen typeExamen) {
         this.idExamen = idExamen;
         this.dmr = dmr;

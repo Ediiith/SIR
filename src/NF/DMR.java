@@ -25,8 +25,7 @@ import java.util.List;
 public class DMR {
 
     
-    //ATTRIBUTS
-    
+    //ATTRIBUTS   
     private int idDMR;
     private String nomPatient;
     private String prenomPatient;
@@ -44,9 +43,9 @@ public class DMR {
     
     //CONSTRUCTEURS
     
-    //constructeur en connaissant idDMR
+    //constructeur en connaissant le numéro du DMR : idDMR
     //si le dmr existe deja dans la base de donnees
-    //pour remplir listeDMR
+    //remplit la listeDMR
     public DMR(int idDMR) {
         if (existenceIdDMR(idDMR) == true) {            
             this.idDMR = idDMR;
@@ -68,7 +67,7 @@ public class DMR {
 
     //constructeur en connaissant le nomPatient, prenomPatient, dateNaissance, genre, numSS
     //vérifie que DMR n'existe pas
-    //regarde si DPI existe ; si c'est le cas constructeur qui cree DMR et l'ajoute a la base de donnees a partir des donnees du DPI
+    //regarde si DPI existe : si c'est le cas constructeur crée DMR et l'ajoute a la base de donnees a partir des donnees du DPI
     //sinon creation d'un DMR temporaire et ajout a la base de donnees
     public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS) {
         if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre) == false) {
