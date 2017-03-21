@@ -451,6 +451,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_ImagesValueChanged
 
     private void TraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraiterActionPerformed
+     
         Image i = new Image(this.images, this.i, this.e);
         i.setVisible(true);
         this.dispose();
