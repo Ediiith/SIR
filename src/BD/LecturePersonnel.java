@@ -12,6 +12,8 @@ import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -95,6 +97,41 @@ public class LecturePersonnel {
         return existence;
     }
 
+    //liste de tous les idPersonnel dans la base de donnees
+    public static List<Integer> listeIdPersonnel() {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        List<Integer> listePersonnel = new ArrayList<Integer>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from personnel";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                int idPersonnel = Integer.parseInt(resultat.getString("idPersonnel"));
+                listePersonnel.add(idPersonnel);
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        return listePersonnel;
+        
+    }
+    
     //recuperer l'identifiant d'un personnel a partir de son nom, prenom, statut
     public static int lireIdPersonnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
 

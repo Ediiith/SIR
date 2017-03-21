@@ -5,68 +5,89 @@
  */
 package NF;
 
+import static BD.LectureDMR.listeIdDMR;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class ListeDMR {
 
-    private List<DMR> listeDMR; 	// contient des objets de classe 'DMR'
+    public List<DMR> listeDMR;
 
+    //constructeur
     public ListeDMR() {
-        listeDMR = new Vector<DMR>(); //liste vide
+        listeDMR = new ArrayList<DMR>();
     }
 
-    //ajoute un DMR à la liste
+    //remplissage listeDMR avec tous les dmr de la base de donnees
+    public void remplissageListeDMR() {
+        for (int i = 0; i < listeIdDMR().size(); i++) {
+            DMR dmr = new DMR(listeIdDMR().get(i));
+            ajouterDMR(dmr);
+        }
+    }
+
+    //ajoute un DMR à listeDMR
     public void ajouterDMR(DMR dmr) {
-        getDMR().add(dmr);
+        listeDMR.add(dmr);
     }
 
-    //retourne sous forme de liste l'ensemble des dmr
-    public List<DMR> getDMR() {
+    //retourne listeDMR
+    public List<DMR> getListeDMR() {
         return listeDMR;
+    }
+    
+    //retourne la liste des DMR admis
+    public List<DMR> getListeDMRadmis() {
+        List<DMR> listeDMRadmis = new ArrayList<DMR>();
+        for (int i = 0; i < listeDMR.size(); i++) {
+            DMR dmr = listeDMR.get(i);
+            if(dmr.getEstAdmis()){
+                listeDMRadmis.add(dmr);
+            }
+        }
+        return listeDMRadmis;
     }
 
     //retourne le nombre de DMR enregistrés dans le système
     public String nombreDMR() {
-        int nb = 0;
         String s;
         s = "> Nombre de DMR : ";
         return s + listeDMR.size() + "\n";
     }
-    
-    //renvoie toutes les DMR
-    public String afficher() {
+
+    //retourne tous les DMR
+    public String afficherListeDMR() {
         String s;
-        s = ("Dossier medical radiologique :\n--------------------------------------------------------------------------------------------\n");
-        for (int i = 0; i < getDMR().size(); i++) {
-            DMR dmr = getDMR().get(i);
+        s = (listeDMR.size() + " dossiers medicaux radiologiques :\n--------------------------------------------------------------------------------------------\n");
+        for (int i = 0; i < listeDMR.size(); i++) {
+            DMR dmr = listeDMR.get(i);
             s = s + dmr.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
         }
         return s;
     }
-    
-    //renvoie la liste des DMR proches de la recherche
-    public String afficherDMRproches(DMR dmr1){
+
+    //retourne la liste des DMR proches de la recherche
+    public String afficherListeDMRproches(DMR dmr) {
         String s;
-        s=("Liste des DMR proches de la recherche :\n-----------------------------------------------------------------------------------------\n");
-            for (int i = 0; i < getDMR().size(); i++) {
-            if(getDMR().get(i).procheDe(dmr1)){
-                DMR dmr = getDMR().get(i);
-                s = s + dmr.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
-            }     
+        s = ("Liste des DMR proches de la recherche :\n-----------------------------------------------------------------------------------------\n");
+        for (int i = 0; i < listeDMR.size(); i++) {
+            if (listeDMR.get(i).procheDe(dmr)) {
+                DMR dmrP = listeDMR.get(i);
+                s = s + dmrP.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
+            }
         }
         return s;
     }
-    
-    //renvoie toutes les DMR admis
-    public String afficherDMRAdmis() {
+
+    //retourne tous les DMR admis
+    public String afficherListeDMRAdmis() {
         String s;
         s = ("Patients admis en radiologie :\n--------------------------------------------------------------------------------------------\n");
-        for (int i = 0; i < getDMR().size(); i++) {
-            if(getDMR().get(i).getEstAdmis()){
-                DMR dmr = getDMR().get(i);
-                s = s + dmr.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
-            }     
+        for (int i = 0; i < listeDMR.size(); i++) {
+            if (listeDMR.get(i).getEstAdmis() == true) {
+                DMR dmrA = listeDMR.get(i);
+                s = s + dmrA.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
+            }
         }
         return s;
     }

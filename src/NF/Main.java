@@ -8,21 +8,21 @@ public class Main {
 
     public static void main(String[] args) throws ParseException {
         
-        //Test de liste DMR proches
-        Date d1 = new Date(05,12,1990);
-        Genre g1 = Genre.FEMME;
-        DMR dmr1 = new DMR("MATHIVET", "Marie", d1.toString(), g1, 123);
-        DMR dmr2 = new DMR("MATIVE","Mary",d1.toString(),g1, 356);
-        DMR dmr3 = new DMR("Ferard","Julie",d1.toString(),g1, 532);
-        
-        ListeDMR LD=new ListeDMR();
-        
-        LD.ajouterDMR(dmr2);
-        LD.ajouterDMR(dmr1);
-        LD.ajouterDMR(dmr3);
-        
-        System.out.println(LD.afficher());
-        System.out.println(LD.afficherDMRproches(dmr1));
+//        //Test de liste DMR proches
+//        Date d1 = new Date(05,12,1990);
+//        Genre g1 = Genre.FEMME;
+//        DMR dmr1 = new DMR("MATHIVET", "Marie", d1.toString(), g1, 123);
+//        DMR dmr2 = new DMR("MATIVE","Mary",d1.toString(),g1, 356);
+//        DMR dmr3 = new DMR("Ferard","Julie",d1.toString(),g1, 532);
+//        
+//        ListeDMR LD=new ListeDMR();
+//        
+//        LD.ajouterDMR(dmr2);
+//        LD.ajouterDMR(dmr1);
+//        LD.ajouterDMR(dmr3);
+//        
+//        System.out.println(LD.afficher());
+//        System.out.println(LD.afficherDMRproches(dmr1));
         
 //        
 //        //Test de la liste de DMR

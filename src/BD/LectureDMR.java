@@ -11,6 +11,8 @@ import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -94,6 +96,41 @@ public class LectureDMR {
         return existence;
     }
 
+    //liste de tous les idDMR dans la base de donnees
+    public static List<Integer> listeIdDMR() {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        List<Integer> listeDMR = new ArrayList<Integer>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from dmr";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                int idDMR = Integer.parseInt(resultat.getString("idDMR"));
+                listeDMR.add(idDMR);
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        return listeDMR;
+        
+    }
+    
     //recuperer l'identifiant d'un DMR a partir du nom, prenom, date de naissance, genre du patient
     public static int lireIdDMR_fromDMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 
@@ -344,3 +381,4 @@ public class LectureDMR {
     }
     
 }
+

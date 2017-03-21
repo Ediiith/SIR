@@ -6,7 +6,6 @@ import static BD.LectureDMR.existenceDMR;
 import static BD.LectureDMR.existenceIdDMR;
 import static BD.LectureDMR.lireAdresse_fromDMR;
 import static BD.LectureDMR.lireDateNaissance_fromDMR;
-import static BD.LectureDMR.lireIdDMR_fromDMR;
 import static BD.LectureDMR.lireNomPatient_fromDMR;
 import static BD.LectureDMR.lirePrenomPatient_fromDMR;
 import static BD.LectureDMR.lireGenre_fromDMR;
@@ -22,8 +21,12 @@ import java.util.List;
  *
  * @author Edith
  */
+
 public class DMR {
 
+    
+    //ATTRIBUTS
+    
     private int idDMR;
     private String nomPatient;
     private String prenomPatient;
@@ -38,10 +41,14 @@ public class DMR {
     private boolean estAdmis;
     private boolean temporaire;
 
+    
+    //CONSTRUCTEURS
+    
     //constructeur en connaissant idDMR
     //si le dmr existe deja dans la base de donnees
+    //pour remplir listeDMR
     public DMR(int idDMR) {
-        if (existenceIdDMR(idDMR) == true) {
+        if (existenceIdDMR(idDMR) == true) {            
             this.idDMR = idDMR;
             this.nomPatient = lireNomPatient_fromDMR(idDMR);
             this.prenomPatient = lirePrenomPatient_fromDMR(idDMR);
@@ -49,46 +56,33 @@ public class DMR {
             this.genre = lireGenre_fromDMR(idDMR);
             this.adresse = lireAdresse_fromDMR(idDMR);
             this.numSS = lireNumSS_fromDMR(idDMR);
-
             this.listeExamens = new ArrayList<Examen>();
             for (int i = 0; i < listeIdExamen_parIdDMR(idDMR).size(); i++) {
                 Examen e = new Examen(listeIdExamen_parIdDMR(idDMR).get(i), this);
                 this.ajouterExamen(e);
             }
-
             this.estAdmis = true;
             this.temporaire = false;
         }
     }
 
     //constructeur en connaissant le nomPatient, prenomPatient, dateNaissance, genre, numSS
-    //regarde si DMR existe ; si c'est le cas constructeur a partir des donnees du DMR
-    //sinon regarde si DPI existe ; si c'est le cas constructeur qui cree DMR et l'ajoute a la base de donnees a partir des donnees du DPI
+    //vérifie que DMR n'existe pas
+    //regarde si DPI existe ; si c'est le cas constructeur qui cree DMR et l'ajoute a la base de donnees a partir des donnees du DPI
     //sinon creation d'un DMR temporaire et ajout a la base de donnees
     public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS) {
-
-        this.nomPatient = nomPatient;
-        this.prenomPatient = prenomPatient;
-        this.dateNaissance = dateNaissance;
-        this.genre = genre;
-        this.numSS = numSS;
-        this.estAdmis = true;
-
-        if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre) == true) {
-            this.idDMR = lireIdDMR_fromDMR(nomPatient, prenomPatient, dateNaissance, genre);
-            this.adresse = lireAdresse_fromDMR(this.idDMR);
-            this.listeExamens = new ArrayList<Examen>();
-            for (int i = 0; i < listeIdExamen_parIdDMR(idDMR).size(); i++) {
-                Examen e = new Examen(listeIdExamen_parIdDMR(idDMR).get(i), this);
-                this.ajouterExamen(e);
-            }
-            this.temporaire = false;
-        } else {
+        if (existenceDMR(nomPatient, prenomPatient, dateNaissance, genre) == false) {
+            this.nomPatient = nomPatient;
+            this.prenomPatient = prenomPatient;
+            this.dateNaissance = dateNaissance;
+            this.genre = genre;
+            this.numSS = numSS;
+            this.estAdmis = true;
             if (existenceDPI(nomPatient, prenomPatient, dateNaissance, genre) == true) {
                 this.idDMR = lireIdDPI(nomPatient, prenomPatient, dateNaissance, genre);
                 this.adresse = lireAdresse_fromDPI(lireIdDPI(nomPatient, prenomPatient, dateNaissance, genre));
-                this.listeExamens = new ArrayList<Examen>();
                 this.temporaire = false;
+                this.listeExamens = new ArrayList<Examen>();
                 genererDMR(lireIdDPI(nomPatient, prenomPatient, dateNaissance, genre));
             } else {
                 this.idDMR = 0;
@@ -99,8 +93,9 @@ public class DMR {
             }
         }
     }
+    //ne pas oublier dans le main ldmr.ajouterDMR(dmr)
 
-    public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS, String adresse) {
+ public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS, String adresse) {
 
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
@@ -116,7 +111,9 @@ public class DMR {
         creerDMR(idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS);
 
     }
-
+ 
+    //COMPARAISONS
+    
     //compare si deux instances de DMR sont proches pour nomPatient, prenomPatient et dateNaissance
     public boolean procheDe(Object o) {
         boolean proche = false;
@@ -157,6 +154,9 @@ public class DMR {
         }
     }
 
+    
+    //AFFICHAGES
+    
     //retourne les informations d'un patient 
     public String afficherInfoPatient() {
         return "Prénom : " + prenomPatient + "\n Nom : " + nomPatient + "\n Né(e) le " + dateNaissance + "\n Genre : " + genre + " \n Adresse : " + adresse + "\n N° sécurité sociale : " + numSS + " \n DMR N° : " + idDMR + "\n";
@@ -178,7 +178,10 @@ public class DMR {
         }
         return s;
     }
-
+    
+    
+    //GETS & SETS
+    
     //retourne idDMR
     public int getIdDMR() {
         return idDMR;
@@ -213,7 +216,7 @@ public class DMR {
     public int getNumSS() {
         return numSS;
     }
-
+    
     //retourne listeExamens
     public List<Examen> getListeExamens() {
         return listeExamens;
@@ -223,7 +226,7 @@ public class DMR {
     public void ajouterExamen(Examen examen) {
         listeExamens.add(examen);
     }
-
+    
     //retourne estAdmis
     public Boolean getEstAdmis() {
         return estAdmis;

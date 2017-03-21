@@ -6,9 +6,9 @@ import static BD.EcritureExamen.creerExamen;
 import static BD.LectureExamen.existenceExamen;
 import static BD.LectureExamen.lireCompteRendu;
 import static BD.LectureExamen.lireDateExamen;
-import static BD.LectureExamen.lireIdExamen;
 import static BD.LectureExamen.lireLienPACS;
 import static BD.LectureExamen.lireTypeExamen;
+import static BD.LecturePersonnel.listeIdPersonnel;
 
 /**
  *
@@ -27,6 +27,7 @@ public class Examen {
 
     //constructeur en connaissant idExamen et dmr
     //si l'examen existe deja dans la base de donnees
+    //pour remplir listeExamens
     public Examen(int idExamen, DMR dmr) {
         if (existenceExamen(idExamen) == true) {
             this.idExamen = idExamen;
@@ -37,20 +38,6 @@ public class Examen {
             this.compteRendu = lireCompteRendu(idExamen);
             this.lienPACS = lireLienPACS(idExamen);
         }            
-    }
-
-    //constructeur en connaissant dmr, dateExamen, responsable, typeExamen
-    //si l'examen existe deja dans la base de donnees
-    public Examen(DMR dmr, String dateExamen, Personnel responsable, TypeExamen typeExamen) {
-        if (existenceExamen(dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen) == true) {
-            this.idExamen = lireIdExamen(dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen);
-            this.dmr = dmr;
-            this.dateExamen = dateExamen;
-            this.responsable = responsable;
-            this.typeExamen = typeExamen;
-            this.compteRendu = lireCompteRendu(idExamen);
-            this.lienPACS = lireLienPACS(idExamen);
-        }
     }
 
     //constructeur pour creer un examen et l'ajouter a la base de donnees
@@ -136,4 +123,19 @@ public class Examen {
 //    //change typeExamen
 //    public void setTypeExamen(TypeExamen typeExamen) {
 //        this.typeExamen = typeExamen;
+//    }
+//
+//    //constructeur en connaissant dmr, dateExamen, responsable, typeExamen
+//    //si l'examen existe deja dans la base de donnees
+//    public Examen(DMR dmr, String dateExamen, Personnel responsable, TypeExamen typeExamen) {
+//        if (existenceExamen(dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen) == true) {
+//            this.idExamen = lireIdExamen(dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen);
+//            this.dmr = dmr;
+//            this.dateExamen = dateExamen;
+//            this.responsable = responsable;
+//            this.typeExamen = typeExamen;
+//            this.compteRendu = lireCompteRendu(idExamen);
+//            this.lienPACS = lireLienPACS(idExamen);
+//            this.dmr.ajouterExamen(this);
+//        }
 //    }

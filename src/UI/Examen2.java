@@ -3,6 +3,7 @@ package UI;
 import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
+import NF.ListeDMR;
 import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
      */
     private Personnel personnel;
     private CompteRendu cr;
+    private ListeDMR listeDMR2;
+    private List<DMR> listDMRadmis;
     private List<DMR> listeDMR;
     private Examen e;
     private DMR dmr;
@@ -36,32 +39,37 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.personnel = personnel;
+        this.listeDMR2 = new ListeDMR();
+        this.listeDMR2.remplissageListeDMR();
+        this.listDMRadmis = this.listeDMR2.getListeDMRadmis();
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
-        jTextFieldStatut.setText(personnel.toString());
-        this.jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTextFieldID.setText(personnel.toString());
+        jTextFieldStatut.setText(personnel.getStatut().toString());
 
-//        this.columnNames = new String[4];
-//        this.columnNames[0] = "Date";
-//        this.columnNames[1] = "Patient (nom,prenom)";
-//        this.columnNames[2] = "numéro unique";
-//        this.columnNames[3] = "Date de naissance";
-//
-//        int nbrligne = 0;
-//        for (int i = 0; i < listeDMR.size(); i++) {
-//            nbrligne = nbrligne + listeDMR.get(i).getIdDMR(); //pas la bonne varaible de fin à changer
-//        }
-//        int k = 0;
-//        data = new Object[nbrligne][4];
-//        for (int i = 0; i < listeDMR.size(); i++) {
-//            data[k][0] = e.getDateExamen();
-//            data[k][1] = dmr.getNomPatient().toUpperCase() + " " + dmr.getPrenomPatient();
-//            data[k][2] = dmr.getIdDMR();
-//            data[k][3] = dmr.getDateNaissance();
-//
-//        }
-//        jTablePatient.setModel(new DefaultTableModel(data, columnNames));
+        this.jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.columnNames = new String[7];
+        this.columnNames[0] = "Nom";
+        this.columnNames[1] = "Prénom";
+        this.columnNames[2] = "Genre";
+        this.columnNames[3] = "Date de naissance";
+        this.columnNames[4] = "Adresse";
+        this.columnNames[5] = "Numéro de sécurité sociale";
+        this.columnNames[6] = "Identifiant unique";
+
+        int nbrligne = this.listDMRadmis.size();
+        int k = 0;
+        data = new Object[nbrligne][7];
+        for (int i = 0; i < nbrligne; i++) {
+            data[k][0] = this.listDMRadmis.get(i).getNomPatient();
+            data[k][1] = this.listDMRadmis.get(i).getPrenomPatient();
+            data[k][2] = this.listDMRadmis.get(i).getGenre();
+            data[k][3] = this.listDMRadmis.get(i).getDateNaissance();
+            data[k][4] = this.listDMRadmis.get(i).getAdresse();
+            data[k][5] = this.listDMRadmis.get(i).getNumSS();
+            data[k][6] = this.listDMRadmis.get(i).getIdDMR();
+        }
+        jTablePatient.setModel(new DefaultTableModel(data, columnNames));
     }
 
     @Override
