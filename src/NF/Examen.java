@@ -4,11 +4,11 @@ import static BD.EcritureExamen.ajouterCompteRendu;
 import static BD.EcritureExamen.ajouterLienPACS;
 import static BD.EcritureExamen.creerExamen;
 import static BD.LectureExamen.existenceExamen;
+import static BD.LectureExamen.genererIdExamen;
 import static BD.LectureExamen.lireCompteRendu;
 import static BD.LectureExamen.lireDateExamen;
 import static BD.LectureExamen.lireLienPACS;
 import static BD.LectureExamen.lireTypeExamen;
-import static BD.LecturePersonnel.listeIdPersonnel;
 
 /**
  *
@@ -41,8 +41,8 @@ public class Examen {
     }
 
     //constructeur pour creer un examen et l'ajouter a la base de donnees
-    public Examen(int idExamen, DMR dmr, String dateExamen, Personnel responsable, TypeExamen typeExamen) {
-        this.idExamen = idExamen;
+    public Examen(DMR dmr, String dateExamen, Personnel responsable, TypeExamen typeExamen) {
+        this.idExamen = genererIdExamen();
         this.dmr = dmr;
         this.dateExamen = dateExamen;
         this.responsable = responsable;

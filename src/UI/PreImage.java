@@ -6,6 +6,7 @@ import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
+import NF.TypeExamen;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,6 +31,8 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
      */
     private Personnel personnel;
     private DMR dmr;
+    private String date;
+    private TypeExamen typeExamen;
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
@@ -42,29 +45,28 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private ArrayList<String> paths;
     private int util;
 
-    public PreImage(Personnel personnel, DMR dmr) {
+    public PreImage(Personnel personnel, DMR dmr, String format, TypeExamen typeExamen) {
         model = new DefaultListModel();
         icons = new ArrayList<>();
         paths = new ArrayList<>();
         this.util = i;
-        //this.idExamen=
-        //this.e = new Examen();
-
         initComponents();
         this.setTitle("Visualiser image");
         this.setExtendedState(PreImage.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.personnel = personnel;
+        this.typeExamen=typeExamen;
         this.dmr = dmr;
+        this.e = new Examen(this.dmr,this.date,this.personnel,this.typeExamen);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(this.personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
 
-        for (java.awt.Image img : images) {
-            icons.add(new ImageIcon(img));
-            img = img.getScaledInstance(100, -1, java.awt.Image.SCALE_DEFAULT);
-            model.addElement(new ImageIcon(img));
-        }
+//        for (java.awt.Image img : images) {
+//            icons.add(new ImageIcon(img));
+//            img = img.getScaledInstance(100, -1, java.awt.Image.SCALE_DEFAULT);
+//            model.addElement(new ImageIcon(img));
+//        }
 
     }
 
@@ -183,6 +185,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         jPanel3 = new javax.swing.JPanel();
         Traiter = new javax.swing.JButton();
         Enregistrer = new javax.swing.JButton();
+        ChoisirFichier = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
@@ -350,6 +353,17 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 .addContainerGap())
         );
 
+        ChoisirFichier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ChoisirFichier.setText("Fichier");
+        ChoisirFichier.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        ChoisirFichier.setMinimumSize(new java.awt.Dimension(110, 30));
+        ChoisirFichier.setPreferredSize(new java.awt.Dimension(130, 30));
+        ChoisirFichier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChoisirFichierActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -363,14 +377,18 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(372, 372, 372)
+                        .addGap(21, 21, 21)
+                        .addComponent(ChoisirFichier, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(226, 226, 226)
                         .addComponent(jLabel6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ChoisirFichier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,40 +424,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
 
     private void EnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnregistrerActionPerformed
-//        JFileChooser choix = new JFileChooser();
-//        FilenameFilter fileNameFilter;
-//        String[] imageTypes = ImageIO.getReaderFileSuffixes();
-//        FileNameExtensionFilter fnf = new FileNameExtensionFilter("Images", imageTypes);
-//        choix.setFileFilter(fnf);
-//        File userHome = new File(System.getProperty("user.home"));
-//        choix.setSelectedFile(userHome);
-//
-//        fileNameFilter = new FilenameFilter() {
-//            @Override
-//            public boolean accept(File file, String name) {
-//                return true;
-//            }
-//        };
-//
-//        int op = choix.showOpenDialog(null);
-//        if (op == JFileChooser.APPROVE_OPTION) {
-//            File eg = choix.getSelectedFile();
-//            // sélectionne tout le dossier dans lequel se situe l'image
-//            File dir = eg.getParentFile();
-//            try {
-//                File[] imageFiles = dir.listFiles(fileNameFilter);
-//                BufferedImage[] images = new BufferedImage[imageFiles.length];
-//                model.removeAllElements();
-//                for (int ii = 0; ii < images.length; ii++) {
-//                    paths.add(imageFiles[ii].getPath());
-//                    icons.add(new ImageIcon(imageFiles[ii].getPath()));
-//                    model.addElement(ImageIO.read(imageFiles[ii]));
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                JOptionPane.showMessageDialog(gui, "Erreur lors du chargement des images", "Erreur", JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
+
     }//GEN-LAST:event_EnregistrerActionPerformed
 
     private void ImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ImagesValueChanged
@@ -470,6 +455,44 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         i.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_TraiterActionPerformed
+
+    private void ChoisirFichierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChoisirFichierActionPerformed
+        JFileChooser choix = new JFileChooser();
+        FilenameFilter fileNameFilter;
+        String[] imageTypes = ImageIO.getReaderFileSuffixes();
+        FileNameExtensionFilter fnf = new FileNameExtensionFilter("Images", imageTypes);
+        choix.setFileFilter(fnf);
+        File userHome = new File(System.getProperty("user.home"));
+        choix.setSelectedFile(userHome);
+
+        fileNameFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return true;
+            }
+        };
+
+        int op = choix.showOpenDialog(null);
+        if (op == JFileChooser.APPROVE_OPTION) {
+            File eg = choix.getSelectedFile();
+            // sélectionne tout le dossier dans lequel se situe l'image
+            File dir = eg.getParentFile();
+            try {
+                File[] imageFiles = dir.listFiles(fileNameFilter);
+                BufferedImage[] images = new BufferedImage[imageFiles.length];
+                model.removeAllElements();
+                for (int ii = 0; ii < images.length; ii++) {
+                    paths.add(imageFiles[ii].getPath());
+                    icons.add(new ImageIcon(imageFiles[ii].getPath()));
+                    model.addElement(ImageIO.read(imageFiles[ii]));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(jSplitPane, "Erreur lors du chargement des images", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }//GEN-LAST:event_ChoisirFichierActionPerformed
     public void updateUI() {
         BufferedImage bi = ti.getBi();
         icons.set(i, new ImageIcon(bi));
@@ -478,12 +501,15 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         model.setElementAt(new ImageIcon(img), i);
         scrollPane.repaint();
     }
+    
+   
     /**
      *
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ChoisirFichier;
     private javax.swing.JButton Enregistrer;
     private javax.swing.JList<String> Images;
     private javax.swing.JButton Traiter;

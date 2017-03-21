@@ -5,6 +5,7 @@ import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
+import NF.TypeExamen;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,6 +22,8 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     private List<DMR> listeDMR;
     private Examen e;
     private DMR dmr;
+    private TypeExamen typeExamen;
+    private String format;
 
 
     public Exam(Personnel personnel, DMR dmr) {
@@ -28,6 +31,8 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         this.setExtendedState(Exam.MAXIMIZED_BOTH);
         this.personnel = personnel;
         this.dmr=dmr;
+        this.format=this.FormatFinal.getSelectedItem().toString();
+        this.typeExamen=toTypeExamen(this.TypedExamen.getSelectedItem().toString());
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
@@ -140,9 +145,9 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jComboBoxFormat = new javax.swing.JComboBox();
+        FormatFinal = new javax.swing.JComboBox();
         Valider = new javax.swing.JButton();
-        jComboBoxType = new javax.swing.JComboBox();
+        TypedExamen = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         resumerPatient = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -261,7 +266,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -301,10 +306,10 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Type d'examen :");
 
-        jComboBoxFormat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Numériser", "Non numérique (impression)" }));
-        jComboBoxFormat.addActionListener(new java.awt.event.ActionListener() {
+        FormatFinal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Numériser", "Non numérique (impression)" }));
+        FormatFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFormatActionPerformed(evt);
+                FormatFinalActionPerformed(evt);
             }
         });
 
@@ -319,10 +324,10 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
             }
         });
 
-        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IRM", "Scanner", "Rayon X", "Echographie" }));
-        jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
+        TypedExamen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IRM", "Scanner", "Rayon X", "Echographie" }));
+        TypedExamen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTypeActionPerformed(evt);
+                TypedExamenActionPerformed(evt);
             }
         });
 
@@ -368,11 +373,11 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(FormatFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TypedExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -395,11 +400,11 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                         .addGap(45, 45, 45)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TypedExamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FormatFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -418,36 +423,49 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jComboBoxFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFormatActionPerformed
+    private void FormatFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormatFinalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFormatActionPerformed
+    }//GEN-LAST:event_FormatFinalActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
         int validation=JOptionPane.showConfirmDialog(null, 
                 "Etes vous certain des informations saisies?", "Enregistrement de l'examen", 
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(validation==JOptionPane.YES_OPTION){
-            PreImage preImage = new PreImage(this.personnel,this.dmr);
+            PreImage preImage = new PreImage(this.personnel,this.dmr,this.format,this.typeExamen);
             preImage.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_ValiderActionPerformed
 
-    private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
+    private void TypedExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypedExamenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTypeActionPerformed
+    }//GEN-LAST:event_TypedExamenActionPerformed
 
+     private TypeExamen toTypeExamen(String s) {
+        TypeExamen typeExamen = null;
+        if (s.compareTo("Scanner") == 0) {
+            typeExamen = TypeExamen.SCANNER;
+        } else if (s.compareTo("IRM") == 0) {
+            typeExamen = TypeExamen.IRM;
+        } else if (s.compareTo("Radiographie") == 0) {
+            typeExamen = TypeExamen.RADIOGRAPHIE;
+        } else if (s.compareTo("Autre") == 0) {
+            typeExamen = TypeExamen.AUTRE;
+        }
+        return typeExamen;
+    }
     /**
      *
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox FormatFinal;
+    private javax.swing.JComboBox TypedExamen;
     private javax.swing.JButton Valider;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JComboBox jComboBoxFormat;
-    private javax.swing.JComboBox jComboBoxType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
