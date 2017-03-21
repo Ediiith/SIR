@@ -3,6 +3,7 @@ package UI;
 import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
+import NF.ListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
 
     private int i;
     private ArrayList<java.awt.Image> images;
-
+    
+    ListeExamenCR listeExamenCR = new ListeExamenCR();
+    
     public PageAccueil(Personnel personnel) {
         initComponents();
         this.setTitle("Page d'Accueil");

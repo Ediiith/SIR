@@ -56,13 +56,13 @@ public class TestsBD {
      */
     public static void main(String[] args) {
         
-//        //TESTS ECRITURE
-//        
-//        //creation de DMR
-//        creerDMR(1, "Cazaux", "Chloe", "01/12/1995", Genre.FEMME, "1 cours Liberation", 1);
-//        //test creation DMR avec meme idDMR
-//        //ne fonctionne pas
-//        creerDMR(1, "Cazaux", "Chloe", "01/12/1995", Genre.FEMME, "1 cours Liberation", 1);  
+        //TESTS ECRITURE
+        
+        //creation de DMR
+        creerDMR(1, "Cazaux", "Chloe", "01/12/1995", Genre.FEMME, "1 cours Liberation", 1);
+        //test creation DMR avec meme idDMR
+        //ne fonctionne pas
+        creerDMR(1, "Cazaux", "Chloe", "01/12/1995", Genre.FEMME, "1 cours Liberation", 1);  
 //        
 //        //creation de DPI
 //        creerDPI(1, "Cazaux", "Chloe", "01/12/1995", Genre.FEMME, "1 cours Liberation", 1);

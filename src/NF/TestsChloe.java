@@ -16,18 +16,18 @@ public class TestsChloe {
      */
     public static void main(String[] args) {
         
-//        Personnel p = new Personnel(1);
-//        System.out.println(p.toString());
-//        
-//        DMR d = new DMR(8);
-//        
-//        Examen e2 = new Examen(d,"13/03/2017",p,TypeExamen.AUTRE);
-//        System.out.println(e2.toString());
-//
-//        CompteRendu cr = new CompteRendu(e2);
-//        
-//        DMR dmrtest1 = new DMR("gerds","vervd","vrvd",Genre.FEMME, 853);
-//        DMR dmrtest2 = new DMR("Martinez", "Adam", "27/11/1928", Genre.HOMME, 822);
+        Personnel p = new Personnel(1);
+        System.out.println(p.toString());
+        
+        DMR d = new DMR(8);
+        
+        Examen e2 = new Examen(d,"13/03/2017",p,TypeExamen.AUTRE);
+        System.out.println(e2.toString());
+
+        CompteRendu cr = new CompteRendu(e2);
+        
+        DMR dmrtest1 = new DMR("gerds","vervd","vrvd",Genre.FEMME, 853);
+        DMR dmrtest2 = new DMR("Martinez", "Adam", "27/11/1928", Genre.HOMME, 822);
         
     }
     

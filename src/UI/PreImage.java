@@ -3,17 +3,15 @@ package UI;
 import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
+import NF.IconCellRenderer;
 import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
-import NF.TypeExamen;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.application.Application;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -43,22 +41,22 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private ArrayList<String> paths;
     private int i;
 
-    
     public PreImage(Personnel personnel, DMR dmr, Examen e) {
         model = new DefaultListModel();
         icons = new ArrayList<>();
         paths = new ArrayList<>();
+        this.personnel = personnel;
+        this.dmr = dmr;
+        this.e = e;
         initComponents();
         this.setTitle("Visualiser image");
         this.setExtendedState(PreImage.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
-        this.personnel = personnel;
-        this.dmr = dmr;
-        this.e=e;
-        
+
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(this.personnel.toString());
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
+        Images.setCellRenderer(new IconCellRenderer());
 
 //        for (java.awt.Image img : images) {
 //            icons.add(new ImageIcon(img));
@@ -425,31 +423,13 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_EnregistrerActionPerformed
 
     private void ImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ImagesValueChanged
-        //        i = imageList.getSelectedIndex();
-        //        try {
-        //            Image image = (Image) model.get(i);
-        //            if (image.getWidth(null) > image.getHeight(null)) {
-        //                image = image.getScaledInstance(imageViewContainer.getWidth(), -1, Image.SCALE_DEFAULT);
-        //            } else {
-        //                image = image.getScaledInstance(-1, imageViewContainer.getHeight(), Image.SCALE_DEFAULT);
-        //            }
-        //            displayPanel = new Manip_Image(image);
-        //        } catch (ClassCastException ex) {
-        //            Image image2 = icons.get(i).getImage();
-        //            if (image2.getWidth(null) > image2.getHeight(null)) {
-        //                image2 = image2.getScaledInstance(imageViewContainer.getWidth(), -1, Image.SCALE_DEFAULT);
-        //            } else {
-        //                image2 = image2.getScaledInstance(-1, imageViewContainer.getHeight(), Image.SCALE_DEFAULT);
-        //            }
-        //            displayPanel = new Manip_Image(image2);
-        //        }
-        //        imageViewContainer.add(displayPanel);
-        //        displayPanel.repaint();
+                this.i = Images.getSelectedIndex();                
     }//GEN-LAST:event_ImagesValueChanged
 
     private void TraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraiterActionPerformed
         if (this.personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-            Image i = new Image(this.personnel, this.images, this.i, this.e);
+             java.awt.Image im = (java.awt.Image) model.get(this.i);
+            Image i = new Image(this.personnel, im, this.e);
             i.setVisible(true);
             this.dispose();
         } else {
@@ -462,7 +442,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private void ChoisirFichierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChoisirFichierActionPerformed
         JFileChooser choix = new JFileChooser();
         FilenameFilter fileNameFilter;
-        String[] imageTypes = ImageIO.getReaderFileSuffixes();
+        String[] imageTypes ={"png","jpg"};
         FileNameExtensionFilter fnf = new FileNameExtensionFilter("Images", imageTypes);
         choix.setFileFilter(fnf);
         File userHome = new File(System.getProperty("user.home"));
@@ -482,9 +462,9 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
             File dir = eg.getParentFile();
             try {
                 File[] imageFiles = dir.listFiles(fileNameFilter);
-                BufferedImage[] images = new BufferedImage[imageFiles.length];
+                BufferedImage[] im = new BufferedImage[imageFiles.length];
                 model.removeAllElements();
-                for (int ii = 0; ii < images.length; ii++) {
+                for (int ii = 0; ii < im.length; ii++) {
                     paths.add(imageFiles[ii].getPath());
                     icons.add(new ImageIcon(imageFiles[ii].getPath()));
                     model.addElement(ImageIO.read(imageFiles[ii]));

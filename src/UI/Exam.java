@@ -44,8 +44,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         Calendar c = Calendar.getInstance();
         this.date = ""+c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR)+
                 "   "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE);
-        System.out.println(this.date);
-    
+   
     }
 
     @Override
@@ -338,10 +337,12 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
             }
         });
 
+        resumerPatient.setEditable(false);
         resumerPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         resumerPatient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane2.setViewportView(resumerPatient);
 
+        resumerMedecin.setEditable(false);
         resumerMedecin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         resumerMedecin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane3.setViewportView(resumerMedecin);

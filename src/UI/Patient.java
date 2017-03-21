@@ -420,6 +420,11 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                 NomPatientMouseClicked(evt);
             }
         });
+        NomPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NomPatientActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -611,6 +616,10 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     private void NomPatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NomPatientMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_NomPatientMouseClicked
+
+    private void NomPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomPatientActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomPatientActionPerformed
 
     /**
      *

@@ -9,10 +9,13 @@ import static BD.LectureExamen.lireCompteRendu;
 import static BD.LectureExamen.lireDateExamen;
 import static BD.LectureExamen.lireLienPACS;
 import static BD.LectureExamen.lireTypeExamen;
+import static NF.ListeExamenCR.ajouterExamenCR;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author JEMCare Solution
+ * @author Edith
  */
 
 public class Examen {
@@ -25,14 +28,17 @@ public class Examen {
     private String compteRendu;
     private String lienPACS;
 
+    private List<Examen> listeAjoutCR = new ArrayList<Examen>();
+    
     //constructeur en connaissant idExamen et dmr
     //si l'examen existe deja dans la base de donnees
-    //emplit listeExamens
+    //pour remplir listeExamens
     public Examen(int idExamen, DMR dmr) {
         if (existenceExamen(idExamen) == true) {
             this.idExamen = idExamen;
             this.dmr = dmr;
             this.dateExamen = lireDateExamen(idExamen);
+            //this.responsable = ;
             this.typeExamen = lireTypeExamen(idExamen);
             this.compteRendu = lireCompteRendu(idExamen);
             this.lienPACS = lireLienPACS(idExamen);
@@ -49,8 +55,10 @@ public class Examen {
         this.compteRendu = null;
         this.lienPACS = null;
         this.dmr.ajouterExamen(this);
+        ajouterExamenCR(this);
         creerExamen(idExamen, dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen);
     }
+    //ne pas oublier dans le main lecr.ajouterExamenCR(examen)
 
     @Override
     //retourne les informations d'un examen
@@ -105,6 +113,11 @@ public class Examen {
         ajouterLienPACS(this.getIdExamen(), lienPACS);
     }
 
+    //retourne listeAjoutCR
+    public List<Examen> getListeAjoutCR() {
+        return listeAjoutCR;
+    }
+    
 }
 
 //    //VOIR SI NECESSAIRE
