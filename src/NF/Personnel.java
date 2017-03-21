@@ -10,6 +10,11 @@ import static BD.LecturePersonnel.lireStatut;
 import static BD.LecturePersonnel.lireNomPersonnel;
 import static BD.LecturePersonnel.lirePrenomPersonnel;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class Personnel {
 
     private int idPersonnel;

@@ -1,5 +1,10 @@
 package NF;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 //Enumération des différents statuts professionnels
 public enum Statut {
 

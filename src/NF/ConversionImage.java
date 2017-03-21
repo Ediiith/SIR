@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package NF;
 
 import java.awt.image.BufferedImage;
@@ -13,8 +8,9 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Edith
+ * @author JEMCare Solution
  */
+
 public class ConversionImage {
     public void jpegToDicom (File imgEntree, File dmcSortie, String date, String typeExam, String nomMed, String Cr,
                              String nomPatient, String genre, String dateNaissance, int IPP) throws Exception{

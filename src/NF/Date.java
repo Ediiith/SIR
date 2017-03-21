@@ -1,5 +1,10 @@
 package NF;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class Date {
 
     private int jour;

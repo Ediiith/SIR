@@ -1,5 +1,10 @@
 package NF;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 //Enumeration des différents types d'examens
 public enum TypeExamen {
 

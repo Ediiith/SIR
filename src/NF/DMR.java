@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  *
- * @author Edith
+ * @author JEMCare Solution
  */
 
 public class DMR {

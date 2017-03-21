@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BD;
 
 import static BD.LecturePersonnel.validerMdp;
@@ -14,8 +9,9 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Chloé
+ * @author JEMCare Solution
  */
+
 public class EcriturePersonnel {
 
     //pour creer un professionnel

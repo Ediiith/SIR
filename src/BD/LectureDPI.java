@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BD;
 
 import NF.Genre;
@@ -14,8 +9,9 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Chloé
+ * @author JEMCare Solution
  */
+
 public class LectureDPI {
 
     //pour savoir si un patient possede un DPI a partir du nom, prenom, date de naissance, genre du patient
