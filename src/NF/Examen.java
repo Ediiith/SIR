@@ -9,8 +9,10 @@ import static BD.LectureExamen.lireCompteRendu;
 import static BD.LectureExamen.lireDateExamen;
 import static BD.LectureExamen.lireLienPACS;
 import static BD.LectureExamen.lireTypeExamen;
+
 import static NF.ListeExamenCR.ajouterExamenCR;
 import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -27,8 +29,10 @@ public class Examen {
     private TypeExamen typeExamen;
     private String compteRendu;
     private String lienPACS;
+    
+    private List<Examen> listeAjoutCR;
 
-    private List<Examen> listeAjoutCR = new ArrayList<Examen>();
+   // private List<Examen> listeAjoutCR = new ArrayList<Examen>();
     
     //constructeur en connaissant idExamen et dmr
     //si l'examen existe deja dans la base de donnees
@@ -55,7 +59,11 @@ public class Examen {
         this.compteRendu = null;
         this.lienPACS = null;
         this.dmr.ajouterExamen(this);
-        ajouterExamenCR(this);
+
+        //ajouterExamenCR(this);
+
+        listeAjoutCR.add(this);
+
         creerExamen(idExamen, dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen);
     }
     //ne pas oublier dans le main lecr.ajouterExamenCR(examen)
@@ -64,6 +72,11 @@ public class Examen {
     //retourne les informations d'un examen
     public String toString() {
         return "Patient " + this.dmr.getNomPatient() + " " + this.dmr.getPrenomPatient() + " Né(e) le " + this.dmr.getDateNaissance() + "\n Date de l'examen : " + this.getDateExamen() + "\n Type d'examen : " + this.getTypeExamen() + "\n Compte-rendu : " + this.getCompteRendu() + "\n N° PACS : " + this.getLienPACS();
+    }
+    
+    //retourne la liste des examens
+    public List<Examen> getExamen(){
+        return listeAjoutCR;
     }
 
     //retourne idExamen

@@ -11,6 +11,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListener {
 
@@ -22,19 +23,17 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
     private int i;
     private ArrayList<java.awt.Image> images;
 
-    public SaisirCR(Personnel personnel, List<DMR> listeDMR) {
+    public SaisirCR(Personnel personnel) {
         initComponents();
         this.setTitle("DMR temporaire");
         this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);
         this.personnel = personnel;
-        this.listeDMR = listeDMR;
         this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
-
-        jLabelInfoPatient.setText(this.dmr.afficherInfoPatientTemporaire());
+        JTextPanePatient.setText(this.e.toString());
 
     }
 
@@ -51,7 +50,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;           
+                break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
@@ -72,7 +71,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                 }
                 break;
             case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
+                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
                     AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
@@ -89,7 +88,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
+
 //            case "Appareil":
 //                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
@@ -140,12 +139,13 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButtonDeco1 = new javax.swing.JButton();
-        jLabelInfoPatient = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButtonDecoCreation = new javax.swing.JButton();
+        jButtonRetour = new javax.swing.JButton();
+        jButtonAssocier = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabelInfoPatient1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        JTextPanePatient = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        JTextPaneSaisie = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -189,7 +189,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                 .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                 .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -293,47 +293,48 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
         jPanel5.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel5.setMaximumSize(new java.awt.Dimension(700, 400));
         jPanel5.setPreferredSize(new java.awt.Dimension(700, 400));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel6.setText("Résumé compte-rendu ");
+        jLabel6.setText("Saisie du compte-rendu ");
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
-        jButtonDeco1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDeco1.setText("Retour");
-        jButtonDeco1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDeco1.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDeco1.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDeco1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRetour.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonRetour.setText("Retour");
+        jButtonRetour.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonRetour.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonRetour.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonRetour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeco1ActionPerformed(evt);
+                jButtonRetourActionPerformed(evt);
             }
         });
 
-        jLabelInfoPatient.setText("info patient");
-        jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Patient :");
-
-        jButtonDecoCreation.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonDecoCreation.setText("Valider");
-        jButtonDecoCreation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonDecoCreation.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonDecoCreation.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonDecoCreation.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAssocier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonAssocier.setText("Associer à l'examen");
+        jButtonAssocier.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        jButtonAssocier.setMinimumSize(new java.awt.Dimension(110, 30));
+        jButtonAssocier.setPreferredSize(new java.awt.Dimension(130, 30));
+        jButtonAssocier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDecoCreationActionPerformed(evt);
+                jButtonAssocierActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Commentaires :");
+        jLabel7.setText("Saisir le compte-rendu ci dessous :");
 
-        jLabelInfoPatient1.setText("commentaires de l'examen rédigés par le radiologue");
-        jLabelInfoPatient1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
+        JTextPanePatient.setEditable(false);
+        JTextPanePatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        JTextPanePatient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jScrollPane2.setViewportView(JTextPanePatient);
+
+        JTextPaneSaisie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        JTextPaneSaisie.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jScrollPane4.setViewportView(JTextPaneSaisie);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -342,30 +343,26 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
             .addComponent(jSeparator1)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
-                .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonDecoCreation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
+                .addComponent(jButtonAssocier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(101, 101, 101))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel6)
-                        .addGap(329, 329, 329))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelInfoPatient1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,17 +371,15 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelInfoPatient1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonDecoCreation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAssocier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -401,13 +396,23 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jButtonDecoCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecoCreationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDecoCreationActionPerformed
+    private void jButtonAssocierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssocierActionPerformed
+        e.setCompteRendu(JTextPaneSaisie.getText());
+        int validation = JOptionPane.showConfirmDialog(null,
+                "Etes vous certain des informations saisies?", "Associer le compte-rendu à l'examen",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (validation == JOptionPane.YES_OPTION) {
+            PageAccueil accueil = new PageAccueil(this.personnel);
+            accueil.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonAssocierActionPerformed
 
-    private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeco1ActionPerformed
+    private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
+        CpR cr1 = new CpR(this.personnel, this.cr);
+        cr1.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonRetourActionPerformed
 
     /**
      *
@@ -415,28 +420,29 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane JTextPanePatient;
+    private javax.swing.JTextPane JTextPaneSaisie;
     private javax.swing.JPanel barreDuHaut;
+    private javax.swing.JButton jButtonAssocier;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonDeco1;
-    private javax.swing.JButton jButtonDecoCreation;
+    private javax.swing.JButton jButtonRetour;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelInfoPatient;
-    private javax.swing.JLabel jLabelInfoPatient1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JLabel jTextFieldID;
