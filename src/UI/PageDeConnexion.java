@@ -66,7 +66,7 @@ public class PageDeConnexion extends javax.swing.JFrame {
         ID.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ID.setText("ID:");
 
-        TextFieldID.setText("8");
+        TextFieldID.setText("1");
         TextFieldID.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TextFieldIDMouseClicked(evt);

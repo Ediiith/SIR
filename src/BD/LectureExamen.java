@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package BD;
 
 import NF.TypeExamen;
@@ -11,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author JEMCare Solution
+ * @author Chloé
  */
 
 public class LectureExamen {
@@ -93,6 +98,40 @@ public class LectureExamen {
 
     }
 
+    public static int genererIdExamen() {
+        
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        int idExamen = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from examens";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                idExamen = idExamen + 1;
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        idExamen = idExamen + 1;
+        
+        return idExamen;
+    }
+    
     public static List<Integer> listeIdExamen_parIdDMR(int idDMR) {
 
         Connection cn = null;
