@@ -38,15 +38,14 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     private final DefaultListModel model;
     private final ArrayList<ImageIcon> icons;
     private ArrayList<String> paths;
-    private int util;
 
 
-    public Image(ArrayList<java.awt.Image> images, int i, Examen e) {
+    public Image(Personnel personnel,ArrayList<java.awt.Image> images,int i, Examen e) {
         model = new DefaultListModel();
         icons = new ArrayList<>();
         paths = new ArrayList<>();
-        this.util = i;
         this.e = e;
+        this.personnel=personnel;
 
         initComponents();
         this.setTitle("Traiter image");
@@ -54,8 +53,8 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         this.setExtendedState(Image.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
-        jTextFieldStatut.setText(personnel.getStatut().toString());
+        jTextFieldID.setText(this.personnel.toString());
+        jTextFieldStatut.setText(this.personnel.getStatut().toString());
 
     }
 

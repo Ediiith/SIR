@@ -7,6 +7,7 @@ import NF.Personnel;
 import NF.Statut;
 import NF.TypeExamen;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
@@ -24,21 +25,27 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     private DMR dmr;
     private TypeExamen typeExamen;
     private String format;
-
+    private String date;
 
     public Exam(Personnel personnel, DMR dmr) {
         initComponents();
         this.setExtendedState(Exam.MAXIMIZED_BOTH);
         this.personnel = personnel;
-        this.dmr=dmr;
-        this.format=this.FormatFinal.getSelectedItem().toString();
-        this.typeExamen=toTypeExamen(this.TypedExamen.getSelectedItem().toString());
+        this.dmr = dmr;
+        this.format = this.FormatFinal.getSelectedItem().toString();
+        this.typeExamen = toTypeExamen(this.TypedExamen.getSelectedItem().toString());
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
-        this.resumerMedecin.setText(this.personnel.toString()+"\nStatut : "+this.personnel.getStatut()+"\nIdentifiant : "+this.personnel.getIdPersonnel());
+        this.resumerMedecin.setText(this.personnel.toString() + "\nStatut : " + this.personnel.getStatut() + "\nIdentifiant : " + this.personnel.getIdPersonnel());
+        
+        Calendar c = Calendar.getInstance();
+        this.date = ""+c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR)+
+                "   "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE);
+        System.out.println(this.date);
+    
     }
 
     @Override
@@ -54,7 +61,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;           
+                break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
@@ -75,7 +82,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
             case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
+                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
                     AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
@@ -92,7 +99,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
+
 //            case "Appareil":
 //                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
@@ -428,13 +435,17 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_FormatFinalActionPerformed
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
-        int validation=JOptionPane.showConfirmDialog(null, 
-                "Etes vous certain des informations saisies?", "Enregistrement de l'examen", 
+        int validation = JOptionPane.showConfirmDialog(null,
+                "Etes vous certain des informations saisies?", "Enregistrement de l'examen",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(validation==JOptionPane.YES_OPTION){
-            PreImage preImage = new PreImage(this.personnel,this.dmr,this.format,this.typeExamen);
+        if (validation == JOptionPane.YES_OPTION) {
+            this.e = new Examen(this.dmr, this.date, this.personnel, this.typeExamen);
+            PreImage preImage = new PreImage(this.personnel, this.dmr, this.e);
             preImage.setVisible(true);
             this.dispose();
+            if (this.format.equalsIgnoreCase("Non numérique (impression)")) {
+                this.e.setLienPACS("Images imprimées");
+            }
         }
     }//GEN-LAST:event_ValiderActionPerformed
 
@@ -442,7 +453,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_TypedExamenActionPerformed
 
-     private TypeExamen toTypeExamen(String s) {
+    private TypeExamen toTypeExamen(String s) {
         TypeExamen typeExamen = null;
         if (s.compareTo("Scanner") == 0) {
             typeExamen = TypeExamen.SCANNER;

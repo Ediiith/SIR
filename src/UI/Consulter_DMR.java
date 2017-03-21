@@ -552,7 +552,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     }//GEN-LAST:event_VisualiserDMRActionPerformed
 
     private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
-        Image i = new Image(this.images, this.i, this.e);
+        Image i = new Image(this.personnel,this.images, this.i, this.e);
         i.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonTraiterActionPerformed
