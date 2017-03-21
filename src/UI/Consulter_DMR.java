@@ -596,13 +596,13 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void LancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LancerRechercheActionPerformed
-      while(i<listeDMR.size()){
-        if (((listeDMR.get(i).getNomPatient()==0)&&(listeDMR.get(i).getPrenomPatient()==0)&&(listeDMR.get(i).getDateNaissance()==0))||(listeDMR.get(i).getNumSS()==0)){
-              if(IdDMR==0){
-                  this.dmr = new DMR(nomPatient, prenomPatient, date, g, Integer.parseInt(numSS));
-              }
-  
-        }
+//      while(i<listeDMR.size()){
+//        if (((listeDMR.get(i).getNomPatient()==0)&&(listeDMR.get(i).getPrenomPatient()==0)&&(listeDMR.get(i).getDateNaissance()==0))||(listeDMR.get(i).getNumSS()==0)){
+//              if(IdDMR==0){
+//                  this.dmr = new DMR(nomPatient, prenomPatient, date, g, Integer.parseInt(numSS));
+//              }
+//  
+//        }
     }//GEN-LAST:event_LancerRechercheActionPerformed
 
     private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
@@ -639,9 +639,9 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     }//GEN-LAST:event_VisualiserDMRActionPerformed
 
     private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
-        Image i = new Image(this.personnel, this.images, this.i, this.e);
-        i.setVisible(true);
-        this.dispose();
+//        Image i = new Image(this.personnel, this.images.get(i), this.e);
+//        i.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_jButtonTraiterActionPerformed
 
     private void jjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jjFocusGained

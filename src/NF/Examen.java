@@ -61,8 +61,7 @@ public class Examen {
         this.dmr.ajouterExamen(this);
 
         //ajouterExamenCR(this);
-
-        listeAjoutCR.add(this);
+        //listeAjoutCR.add(this);
 
         creerExamen(idExamen, dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen);
     }
