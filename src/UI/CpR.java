@@ -8,7 +8,6 @@ import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.util.logging.Level;
@@ -28,9 +27,6 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
     private DMR dmr;
     private int i;
     private ArrayList<java.awt.Image> images;
-    private String[] columnNames;
-    private Object[][] data;
-    private List<Examen> listeExam;
 
     private String[] columnNames;
     private Object[][] data;
@@ -74,25 +70,6 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
             jTableCR.setModel(new DefaultTableModel(data, columnNames));
         }
 
-        this.jTableCR.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.columnNames = new String[7];
-        this.columnNames[0] = "ID";
-        this.columnNames[1] = "Date examen";
-        this.columnNames[2] = "Responsable";
-        this.columnNames[3] = "Type d'examen";
-
-        int nbrligne = this.listeExam.size();
-        int k = 0;
-        data = new Object[nbrligne][4];
-        for (int i = 0; i < nbrligne; i++) {
-            if (this.listeExam.get(i).getCompteRendu()==null) {
-                data[k][0] = this.listeExam.get(i).getIdExamen();
-                data[k][1] = this.listeExam.get(i).getDateExamen();
-                data[k][2] = this.listeExam.get(i).getResponsable();
-                data[k][3] = this.listeExam.get(i).getTypeExamen();
-            }
-        }
-        jTableCR.setModel(new DefaultTableModel(data, columnNames));
     }
 
     @Override
@@ -197,6 +174,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jButtonSaisir = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableCR = new javax.swing.JTable();
 
@@ -349,6 +327,12 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jPanel5.setMaximumSize(new java.awt.Dimension(700, 400));
         jPanel5.setPreferredSize(new java.awt.Dimension(700, 400));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel6.setText("Compte rendu");
+
+        jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
+
         jButtonSaisir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonSaisir.setText("Saisir");
         jButtonSaisir.setMinimumSize(new java.awt.Dimension(110, 30));
@@ -359,7 +343,6 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
             }
         });
 
-        jButtonSaisir = new javax.swing.JButton();
         jTableCR.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -385,17 +368,26 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel6.setText("Compte rendu");
-
-        jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
-
+                        .addContainerGap(338, Short.MAX_VALUE)
                         .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSaisir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSaisir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         jSplitPane.setRightComponent(jPanel5);
@@ -456,4 +448,3 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
     // End of variables declaration//GEN-END:variables
 
 }
-                        .addContainerGap(338, Short.MAX_VALUE)
