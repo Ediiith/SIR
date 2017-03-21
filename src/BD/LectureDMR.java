@@ -15,6 +15,7 @@ import java.util.List;
  */
 
 public class LectureDMR {
+// permet de lire un DMR
 
     //pour savoir si un patient possede deja un DMR
     public static boolean existenceDMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {

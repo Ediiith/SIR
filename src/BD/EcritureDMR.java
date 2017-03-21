@@ -18,6 +18,7 @@ import java.sql.SQLException;
  */
 
 public class EcritureDMR {
+// cette classe permet de remplir les informations concernant les DMR
 
     //pour generer un DMR s'il n'exite pas a partir de l'identifiant d'un DPI
     public static void genererDMR(int idDPI) {
