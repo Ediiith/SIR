@@ -32,42 +32,39 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private Personnel personnel;
     private DMR dmr;
     private String date;
-    private TypeExamen typeExamen;
     private CompteRendu cr;
     private List<DMR> listeDMR;
     private Examen e;
     private TraitementImage ti;
     private int idExamen;
-    private int i;
     private ArrayList<java.awt.Image> images;
     private final DefaultListModel model;
     private final ArrayList<ImageIcon> icons;
     private ArrayList<String> paths;
-    private int util;
+    private int i;
 
-    public PreImage(Personnel personnel, DMR dmr, String format, TypeExamen typeExamen) {
+    
+    public PreImage(Personnel personnel, DMR dmr, Examen e) {
         model = new DefaultListModel();
         icons = new ArrayList<>();
         paths = new ArrayList<>();
-        this.util = i;
         initComponents();
         this.setTitle("Visualiser image");
         this.setExtendedState(PreImage.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.personnel = personnel;
-        this.typeExamen=typeExamen;
         this.dmr = dmr;
-        this.e = new Examen(this.dmr,this.date,this.personnel,this.typeExamen);
+        this.e=e;
+        
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(this.personnel.toString());
-        jTextFieldStatut.setText(personnel.getStatut().toString());
+        jTextFieldStatut.setText(this.personnel.getStatut().toString());
 
 //        for (java.awt.Image img : images) {
 //            icons.add(new ImageIcon(img));
 //            img = img.getScaledInstance(100, -1, java.awt.Image.SCALE_DEFAULT);
 //            model.addElement(new ImageIcon(img));
 //        }
-
     }
 
     /**
@@ -451,10 +448,15 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_ImagesValueChanged
 
     private void TraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraiterActionPerformed
-     
-        Image i = new Image(this.images, this.i, this.e);
-        i.setVisible(true);
-        this.dispose();
+        if (this.personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
+            Image i = new Image(this.personnel, this.images, this.i, this.e);
+            i.setVisible(true);
+            this.dispose();
+        } else {
+            String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
+            javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+        }
+
     }//GEN-LAST:event_TraiterActionPerformed
 
     private void ChoisirFichierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChoisirFichierActionPerformed
@@ -502,8 +504,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         model.setElementAt(new ImageIcon(img), i);
         scrollPane.repaint();
     }
-    
-   
+
     /**
      *
      * @param args the command line arguments
