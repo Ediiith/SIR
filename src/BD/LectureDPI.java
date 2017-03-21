@@ -13,7 +13,8 @@ import java.sql.SQLException;
  */
 
 public class LectureDPI {
-
+// permet de lire un DPI
+    
     //pour savoir si un patient possede un DPI a partir du nom, prenom, date de naissance, genre du patient
     public static boolean existenceDPI(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 

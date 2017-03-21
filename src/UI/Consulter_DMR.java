@@ -81,7 +81,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Compte-Rendu":
+            case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     CpR cr1 = new CpR(this.personnel, this.cr);
                     cr1.setVisible(true);

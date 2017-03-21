@@ -12,7 +12,7 @@ import static BD.LectureExamen.lireTypeExamen;
 
 /**
  *
- * @author Edith
+ * @author JEMCare Solution
  */
 
 public class Examen {
@@ -27,13 +27,12 @@ public class Examen {
 
     //constructeur en connaissant idExamen et dmr
     //si l'examen existe deja dans la base de donnees
-    //pour remplir listeExamens
+    //emplit listeExamens
     public Examen(int idExamen, DMR dmr) {
         if (existenceExamen(idExamen) == true) {
             this.idExamen = idExamen;
             this.dmr = dmr;
             this.dateExamen = lireDateExamen(idExamen);
-            //this.responsable = ;
             this.typeExamen = lireTypeExamen(idExamen);
             this.compteRendu = lireCompteRendu(idExamen);
             this.lienPACS = lireLienPACS(idExamen);

@@ -1,5 +1,10 @@
 package NF;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 //Enumération des différents types de sexe
 public enum Genre {
 
@@ -14,8 +19,8 @@ public enum Genre {
     private Genre(String libelle) {
         this.libelle = libelle;
     }
-//méthode
-
+    
+    //méthode
     @Override
     public String toString() {
         return libelle;

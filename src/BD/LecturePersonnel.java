@@ -16,7 +16,8 @@ import java.util.List;
  */
 
 public class LecturePersonnel {
-
+// permet de lire un personnel
+    
     //pour savoir si un personnel existe a partir de nom, prenom, statut du personnel
     public static boolean existencePersonnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
 

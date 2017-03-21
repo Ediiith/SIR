@@ -16,10 +16,8 @@ import NF.TypeExamen;
  */
 
 public class RemplissageBD {
-
-    /**
-     * @param args the command line arguments
-     */
+// génère la base de données
+    
     public static void main(String[] args) {
         
         //creation de 30 DPI

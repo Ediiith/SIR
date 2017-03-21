@@ -17,12 +17,12 @@ public enum TypeExamen {
     //attributs de l'énumération
     private String libelle;
 
-//constructeur
+    //constructeur
     private TypeExamen(String libelle) {
         this.libelle = libelle;
     }
-//méthode
-
+    
+    //méthode
     @Override
     public String toString() {
         return libelle;

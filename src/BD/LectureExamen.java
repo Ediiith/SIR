@@ -20,7 +20,8 @@ import java.util.List;
  */
 
 public class LectureExamen {
-
+// permet de lire un examen
+    
     //pour savoir si un examen existe a partir de idExamen
     public static boolean existenceExamen(int idExamen) {
 
