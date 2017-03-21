@@ -37,7 +37,8 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        jLabelInfoPatient.setText(nom + " " + prenom + " " + genre + " " + "né(e) le " + jj + "/" + mm + "/" + aa);
+        this.resumerPatient.setText(nom + " " + prenom + "\n" + genre + "\n" + "né(e) le " + jj + "/" + mm + "/" + aa);
+        this.resumerPatient.setEditable(false);
         this.g=toGenre(genre);
         date=""+jj + "/" + mm + "/" + aa;
         this.dmr = new DMR(nom,prenom,date,g,Integer.parseInt(numSS));
@@ -156,11 +157,12 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jButtonDeco1 = new javax.swing.JButton();
-        jLabelInfoPatient = new javax.swing.JLabel();
         Admission = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resumerPatient = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -326,9 +328,6 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
             }
         });
 
-        jLabelInfoPatient.setText("info patient");
-        jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
-
         Admission.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Admission.setText("Admission");
         Admission.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
@@ -351,6 +350,9 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
 
         jSeparator2.setForeground(new java.awt.Color(153, 0, 0));
 
+        resumerPatient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jScrollPane2.setViewportView(resumerPatient);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -360,12 +362,13 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5)
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
                         .addComponent(Admission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112)))
                 .addContainerGap())
@@ -388,7 +391,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,7 +423,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        Patient4 p4 = new Patient4();
+        Patient4 p4 = new Patient4(this.personnel,this.dmr);
         p4.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
@@ -494,12 +497,12 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelInfoPatient;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -508,6 +511,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;
+    private javax.swing.JTextPane resumerPatient;
     // End of variables declaration//GEN-END:variables
 
 }

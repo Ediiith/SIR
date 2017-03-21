@@ -18,7 +18,7 @@ public class Patient3 extends javax.swing.JFrame {
         this.personnel = personnel;
         this.setTitle("Patient3");
         this.setLocationRelativeTo(null);
-        jLabelInfoPatient.setText(this.dmr.afficherInfoPatient());
+        this.resumerPatient.setText(this.dmr.afficherInfoPatient());
     }
 
     /**
@@ -34,8 +34,9 @@ public class Patient3 extends javax.swing.JFrame {
         layoutbutton = new javax.swing.JPanel();
         Fermer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabelInfoPatient = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resumerPatient = new javax.swing.JTextPane();
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
@@ -58,11 +59,14 @@ public class Patient3 extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
         jLabel1.setText("Processir");
 
-        jLabelInfoPatient.setText("info patient");
-        jLabelInfoPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Le patient suivant a bien été admis");
+
+        resumerPatient.setEditable(false);
+        resumerPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        resumerPatient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        resumerPatient.setCaretColor(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setViewportView(resumerPatient);
 
         javax.swing.GroupLayout layoutbuttonLayout = new javax.swing.GroupLayout(layoutbutton);
         layoutbutton.setLayout(layoutbuttonLayout);
@@ -74,16 +78,16 @@ public class Patient3 extends javax.swing.JFrame {
                         .addGap(238, 238, 238)
                         .addComponent(Fermer, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layoutbuttonLayout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layoutbuttonLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jLabel5)))))
-                .addGap(0, 111, Short.MAX_VALUE))
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel5)))
+                .addGap(0, 254, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1))
+            .addGroup(layoutbuttonLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layoutbuttonLayout.setVerticalGroup(
             layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,9 +95,9 @@ public class Patient3 extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelInfoPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(Fermer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -117,8 +121,9 @@ public class Patient3 extends javax.swing.JFrame {
     private javax.swing.JButton Fermer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabelInfoPatient;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel layoutbutton;
+    private javax.swing.JTextPane resumerPatient;
     // End of variables declaration//GEN-END:variables
 }
