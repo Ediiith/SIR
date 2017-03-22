@@ -28,7 +28,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);        
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.getIdPersonnel());
+        jTextFieldID.setText(this.personnel.getIdPersonnel().toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
         //JTextPanePatient.setText(this.examen.toString());
 

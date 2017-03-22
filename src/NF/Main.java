@@ -37,13 +37,13 @@ public class Main {
                 }
             }
             );
-     while (true) {
+            while (true) {
                 serveur.ecoute();
                 serveur.protocole();
                 Patient p = serveur.getPatient();
                 Message m = serveur.getMessage();
                 if (m.getName().equals("ADT_A01")) {
-                    //connexionBD.connect();
+                    connexionBD.connect();
                     java.sql.Date date = new java.sql.Date(p.getBirth().getTime());
                     connexionBD.insererDB("INSERT INTO patients (id_p, nom_p, nom_naissance, prenom_p, date_naissance, genre) VALUES ("
                             + p.getID() + ", '"

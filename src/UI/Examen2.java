@@ -32,7 +32,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                 
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.toString());
+        jTextFieldID.setText(personnel.getIdPersonnel().toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
 
         this.jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

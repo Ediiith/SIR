@@ -32,7 +32,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         this.setExtendedState(Consulter_DMR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.toString());
+        jTextFieldID.setText(personnel.getIdPersonnel().toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
         jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

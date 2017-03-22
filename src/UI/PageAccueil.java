@@ -23,7 +23,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.toString());
+        jTextFieldID.setText(personnel.getIdPersonnel().toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
 
         jPanel4.getMaximumSize();
@@ -164,12 +164,12 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
                 .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -202,7 +202,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTree.setMaximumSize(new java.awt.Dimension(200, 132));
-        jTree.setMinimumSize(new java.awt.Dimension(100, 100));
+        jTree.setMinimumSize(new java.awt.Dimension(170, 1));
         jTree.setPreferredSize(new java.awt.Dimension(170, 100));
         jScrollPane1.setViewportView(jTree);
 

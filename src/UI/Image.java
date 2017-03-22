@@ -54,7 +54,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         this.setExtendedState(Image.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(this.personnel.toString());
+        jTextFieldID.setText(this.personnel.getIdPersonnel().toString());
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
 
         this.icons.add(new ImageIcon(this.im));
