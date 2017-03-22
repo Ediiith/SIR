@@ -47,6 +47,18 @@ public class ListeDMR {
         }
         return listeDMRadmis;
     }
+    
+    //retourne la liste des DMR proches
+    public static List<DMR> getListeDMRproches(String nom, String prenom, String date) {
+        List<DMR> listeDMRproches = new ArrayList<DMR>();
+        for (int i = 0; i < getListeDMR().size(); i++) {
+            DMR dmr = getListeDMR().get(i);
+            if(dmr.procheDe(nom, prenom, date)){
+                listeDMRproches.add(dmr);
+            }
+        }
+        return listeDMRproches;
+    }
 
     //retourne le nombre de DMR enregistrés dans le système
     public static String nombreDMR() {
@@ -71,7 +83,7 @@ public class ListeDMR {
         String s;
         s = ("Liste des DMR proches de la recherche :\n-----------------------------------------------------------------------------------------\n");
         for (int i = 0; i < getListeDMR().size(); i++) {
-            if (getListeDMR().get(i).procheDe(dmr)) {
+            if (getListeDMR().get(i).procheDe(dmr.getNomPatient(),dmr.getPrenomPatient(),dmr.getDateNaissance())) {
                 DMR dmrP = getListeDMR().get(i);
                 s = s + dmrP.afficherInfoPatient() + "--------------------------------------------------------------------------------------------\n";
             }

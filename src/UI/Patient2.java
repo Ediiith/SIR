@@ -4,6 +4,7 @@ import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Genre;
+import NF.ListeDMR;
 import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private String genre;
     private String numSS;
     private DMR dmr1;
+    private ListeDMR listeDMR2;
+    private List<DMR> listDMRproches;
 
     public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa, String numSS) {
         initComponents();
@@ -44,39 +47,40 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jTextFieldStatut.setText(personnel.getStatut().toString());
         this.resumerPatient.setText(nom + " " + prenom + "\n" + genre + "\n" + "né(e) le " + jj + "/" + mm + "/" + aa);
         this.resumerPatient.setEditable(false);
-        this.nom=nom;
-        this.prenom=prenom;
-        this.numSS=numSS;
-        this.genre=genre;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numSS = numSS;
+        this.genre = genre;
         this.g = toGenre(genre);
         this.date = "" + jj + "/" + mm + "/" + aa;
-        this.dmr = new DMR(nom, prenom, date, g, Integer.parseInt(numSS));
+        //this.dmr = new DMR(nom, prenom, date, g, Integer.parseInt(numSS));
+        this.listeDMR2 = new ListeDMR();
+        this.listeDMR2.remplissageListeDMR();
+        this.listDMRproches = this.listeDMR2.getListeDMRproches(this.nom, this.prenom, this.date);
 
-        if (this.dmr.getIdDMR() != 0) {
-            this.jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            this.columnNames = new String[7];
-            this.columnNames[0] = "Nom";
-            this.columnNames[1] = "Prénom";
-            this.columnNames[2] = "Genre";
-            this.columnNames[3] = "Date de naissance";
-            this.columnNames[4] = "Adresse";
-            this.columnNames[5] = "Numéro de sécurité sociale";
-            this.columnNames[6] = "Identifiant unique";
+        this.jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.columnNames = new String[7];
+        this.columnNames[0] = "Nom";
+        this.columnNames[1] = "Prénom";
+        this.columnNames[2] = "Genre";
+        this.columnNames[3] = "Date de naissance";
+        this.columnNames[4] = "Adresse";
+        this.columnNames[5] = "Numéro de sécurité sociale";
+        this.columnNames[6] = "Identifiant unique";
 
-            int nbrligne = 1;
-            int k = 0;
-            data = new Object[nbrligne][7];
-            for (int i = 0; i < nbrligne; i++) {
-                data[k][0] = dmr.getNomPatient();
-                data[k][1] = dmr.getPrenomPatient();
-                data[k][2] = dmr.getGenre();
-                data[k][3] = dmr.getDateNaissance();
-                data[k][4] = dmr.getAdresse();
-                data[k][5] = dmr.getNumSS();
-                data[k][6] = dmr.getIdDMR();
-            }
-            jTable1.setModel(new DefaultTableModel(data, columnNames));
+        int nbrligne = this.listDMRproches.size();
+        int k = 0;
+        data = new Object[nbrligne][7];
+        for (int i = 0; i < nbrligne; i++) {
+            data[i][0] = this.listDMRproches.get(i).getNomPatient();
+            data[i][1] = this.listDMRproches.get(i).getPrenomPatient();
+            data[i][2] = this.listDMRproches.get(i).getGenre();
+            data[i][3] = this.listDMRproches.get(i).getDateNaissance();
+            data[i][4] = this.listDMRproches.get(i).getAdresse();
+            data[i][5] = this.listDMRproches.get(i).getNumSS();
+            data[i][6] = this.listDMRproches.get(i).getIdDMR();
         }
+        jTable1.setModel(new DefaultTableModel(data, columnNames));
 
     }
 
@@ -435,7 +439,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void jButtonDeco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeco1ActionPerformed
-        Patient4 p4 = new Patient4(this.personnel,this.nom,this.prenom,this.genre,this.date,this.numSS);
+        Patient4 p4 = new Patient4(this.personnel, this.nom, this.prenom, this.genre, this.date, this.numSS);
         p4.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDeco1ActionPerformed
@@ -444,13 +448,13 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         int row = jTable1.getSelectedRow();
         int idDMR = (int) jTable1.getValueAt(row, 6);
         this.dmr1 = new DMR(idDMR);
-        Patient3 p3 = new Patient3(this.personnel,this.dmr1 );
+        Patient3 p3 = new Patient3(this.personnel, this.dmr1);
         p3.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AdmissionActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private Genre toGenre(String s) {

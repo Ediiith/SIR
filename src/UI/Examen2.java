@@ -53,16 +53,15 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         this.columnNames[6] = "Identifiant unique";
 
         int nbrligne = this.listDMRadmis.size();
-        int k = 0;
         data = new Object[nbrligne][7];
         for (int i = 0; i < nbrligne; i++) {
-            data[k][0] = this.listDMRadmis.get(i).getNomPatient();
-            data[k][1] = this.listDMRadmis.get(i).getPrenomPatient();
-            data[k][2] = this.listDMRadmis.get(i).getGenre();
-            data[k][3] = this.listDMRadmis.get(i).getDateNaissance();
-            data[k][4] = this.listDMRadmis.get(i).getAdresse();
-            data[k][5] = this.listDMRadmis.get(i).getNumSS();
-            data[k][6] = this.listDMRadmis.get(i).getIdDMR();
+            data[i][0] = this.listDMRadmis.get(i).getNomPatient();
+            data[i][1] = this.listDMRadmis.get(i).getPrenomPatient();
+            data[i][2] = this.listDMRadmis.get(i).getGenre();
+            data[i][3] = this.listDMRadmis.get(i).getDateNaissance();
+            data[i][4] = this.listDMRadmis.get(i).getAdresse();
+            data[i][5] = this.listDMRadmis.get(i).getNumSS();
+            data[i][6] = this.listDMRadmis.get(i).getIdDMR();
         }
         jTablePatient.setModel(new DefaultTableModel(data, columnNames));
     }
