@@ -53,8 +53,8 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         this.setLocationRelativeTo(null);
 
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(this.personnel.getIdPersonnel());
-        jTextFieldStatut.setText(this.personnel.getStatut().toString());
+        jTextFieldID.setText(personnel.getIdPersonnel());
+        jTextFieldStatut.setText(personnel.getStatut().toString());
         Images.setCellRenderer(new IconCellRenderer());
 
     }
@@ -349,7 +349,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,7 +362,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                         .addComponent(ChoisirFichier, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(226, 226, 226)
                         .addComponent(jLabel6)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,7 +435,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
             ima.setVisible(true);
             this.dispose();
         } else {
-            String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
+            String pasAutoriser = "Vous n'êtes pas autorisé à acceder à cette fonction";
             javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
         }
 

@@ -150,7 +150,7 @@ public class DMR {
     //AFFICHAGES
     //retourne les informations d'un patient 
     public String afficherInfoPatient() {
-        return "Prénom : " + prenomPatient + "\n Nom : " + nomPatient + "\n Né(e) le " + dateNaissance + "\n Genre : " + genre + " \n Adresse : " + adresse + "\n N° sécurité sociale : " + numSS + " \n DMR N° : " + idDMR + "\n";
+        return " Prénom : " + prenomPatient + "\n Nom : " + nomPatient + "\n Né(e) le " + dateNaissance + "\n Genre : " + genre + " \n Adresse : " + adresse + "\n N° sécurité sociale : " + numSS + " \n DMR N° : " + idDMR + "\n";
     }
 
     //retourne les informations d'un patient temporaire

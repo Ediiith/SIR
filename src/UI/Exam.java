@@ -36,7 +36,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jTextFieldID.setText(this.personnel.getIdPersonnel());
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
-        this.resumerMedecin.setText(this.personnel.toString() + "\nStatut : " + this.personnel.getStatut() + "\nIdentifiant : " + this.personnel.getIdPersonnel());
+        this.resumerMedecin.setText(this.personnel.toString() + "\n Statut : " + this.personnel.getStatut() + "\n Identifiant : " + this.personnel.getIdPersonnel());
         
         Calendar c = Calendar.getInstance();
         this.date = ""+c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR)+
