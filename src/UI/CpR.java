@@ -21,7 +21,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         this.personnel = personnel;
 
         initComponents();
-        this.setTitle("DMR temporaire");
+        this.setTitle("Compte-rendu");
         this.setExtendedState(CpR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);

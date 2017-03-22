@@ -298,6 +298,7 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
         jSeparator2.setForeground(new java.awt.Color(153, 0, 0));
 
+        jTablePatient.setAutoCreateColumnsFromModel(false);
         jTablePatient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -335,6 +336,7 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
             }
         });
 
+        resumerPatient.setEditable(false);
         resumerPatient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane2.setViewportView(resumerPatient);
 
