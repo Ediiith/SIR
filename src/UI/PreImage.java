@@ -58,11 +58,6 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
         Images.setCellRenderer(new IconCellRenderer());
 
-//        for (java.awt.Image img : images) {
-//            icons.add(new ImageIcon(img));
-//            img = img.getScaledInstance(100, -1, java.awt.Image.SCALE_DEFAULT);
-//            model.addElement(new ImageIcon(img));
-//        }
     }
 
     /**
@@ -448,7 +443,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private void TraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraiterActionPerformed
         if (this.personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
             java.awt.Image im = (java.awt.Image) model.get(this.i);
-            Image i = new Image(this.personnel, im, this.e);
+            Image i = new Image(this.personnel, this.dmr, im, this.e);
             i.setVisible(true);
             this.dispose();
         } else {

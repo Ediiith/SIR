@@ -254,14 +254,14 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButtonNegative" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jButtonContrastePlus" alignment="1" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jButtonContrasteMoins1" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="Negatif" pref="0" max="32767" attributes="0"/>
+                                      <Component id="ContrastePlus" alignment="1" pref="0" max="32767" attributes="0"/>
+                                      <Component id="ContrasteMoins1" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jButtonZoomPlus" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jButtonZoomMoins" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jButtonRotation" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jButtonMiroir" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="ZoomPlus" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="ZoomMoins" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="Rotation" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="Miroir" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -300,19 +300,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="scrollPane" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButtonContrastePlus" min="-2" max="-2" attributes="0"/>
+                              <Component id="ContrastePlus" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonContrasteMoins1" min="-2" max="-2" attributes="0"/>
+                              <Component id="ContrasteMoins1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonNegative" min="-2" max="-2" attributes="0"/>
+                              <Component id="Negatif" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonZoomPlus" min="-2" max="-2" attributes="0"/>
+                              <Component id="ZoomPlus" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonZoomMoins" min="-2" max="-2" attributes="0"/>
+                              <Component id="ZoomMoins" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonRotation" min="-2" max="-2" attributes="0"/>
+                              <Component id="Rotation" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonMiroir" min="-2" max="-2" attributes="0"/>
+                              <Component id="Miroir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -322,7 +322,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButtonContrastePlus">
+            <Component class="javax.swing.JButton" name="ContrastePlus">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -343,10 +343,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonContrastePlusActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ContrastePlusActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonNegative">
+            <Component class="javax.swing.JButton" name="Negatif">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -367,10 +367,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNegativeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NegatifActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonZoomPlus">
+            <Component class="javax.swing.JButton" name="ZoomPlus">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -391,7 +391,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonZoomPlusActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ZoomPlusActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -412,7 +412,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonRotation">
+            <Component class="javax.swing.JButton" name="Rotation">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -433,10 +433,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRotationActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RotationActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonMiroir">
+            <Component class="javax.swing.JButton" name="Miroir">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -457,10 +457,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMiroirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MiroirActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonContrasteMoins1">
+            <Component class="javax.swing.JButton" name="ContrasteMoins1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -481,7 +481,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonContrasteMoins1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ContrasteMoins1ActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonReset1">
@@ -539,7 +539,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButtonZoomMoins">
+            <Component class="javax.swing.JButton" name="ZoomMoins">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -560,7 +560,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonZoomMoinsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ZoomMoinsActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="Sauvegarde">
