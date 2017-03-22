@@ -52,6 +52,7 @@ public class Main {
                             + p.getFirstName().toLowerCase() + "', '"
                             + date + "', '"
                             + p.getCharSex() + "')");
+                    System.out.println("--");
                  //   if (p.getAdresse().getStreetName() != null) {
 //                        connexionBD.insererDB("UPDATE patients SET adresse='" + p.getAdresse().getStreetName() + "' WHERE id_p=" + p.getID());
 //                    }
