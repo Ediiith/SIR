@@ -53,7 +53,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                 break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
+                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {

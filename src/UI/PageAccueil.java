@@ -3,6 +3,9 @@ package UI;
 import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
+import NF.ListeDMR;
+import static NF.ListeDMR.getListeDMR;
+import static NF.ListeDMR.remplissageListeDMR;
 import NF.ListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
@@ -24,9 +27,10 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
 
     private int i;
     private ArrayList<java.awt.Image> images;
-    
+
     ListeExamenCR listeExamenCR = new ListeExamenCR();
-    
+    ListeDMR listeDMRtot = new ListeDMR();
+
     public PageAccueil(Personnel personnel) {
         initComponents();
         this.setTitle("Page d'Accueil");
@@ -37,6 +41,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
+
+        remplissageListeDMR();
     }
 
     @Override
@@ -44,7 +50,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
-            case "Admission patient": 
+            case "Admission patient":
                 if (personnel.getStatut().compareTo(Statut.SECRETAIRE) == 0) {
                     Patient p = new Patient(this.personnel);
                     p.setVisible(true);
@@ -52,10 +58,10 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;           
+                break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
+                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -73,7 +79,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                 }
                 break;
             case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
+                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
                     AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
                     a.setVisible(true);
                     this.dispose();
@@ -90,7 +96,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            
+
 //            case "Appareil":
 //                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
 //                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);

@@ -30,10 +30,6 @@ public class Examen {
     private String compteRendu;
     private String lienPACS;
     
-    private List<Examen> listeAjoutCR;
-
-   // private List<Examen> listeAjoutCR = new ArrayList<Examen>();
-    
     //constructeur en connaissant idExamen et dmr
     //si l'examen existe deja dans la base de donnees
     //pour remplir listeExamens
@@ -58,24 +54,16 @@ public class Examen {
         this.typeExamen = typeExamen;
         this.compteRendu = null;
         this.lienPACS = null;
-        this.dmr.ajouterExamen(this);
-
-        //ajouterExamenCR(this);
-        //listeAjoutCR.add(this);
-
-        creerExamen(idExamen, dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen);
+        
+        this.dmr.ajouterExamen(this); //ajoute l'examen dans la liste des examens du DMR
+        ajouterExamenCR(this); //ajoute l'examen dans la liste des examens ou il faut ajouter le compte rendu
+        creerExamen(idExamen, dmr.getIdDMR(), dateExamen, responsable.getIdPersonnel(), typeExamen); //ajoute l'examen a la base de donnees
     }
-    //ne pas oublier dans le main lecr.ajouterExamenCR(examen)
 
     @Override
     //retourne les informations d'un examen
     public String toString() {
         return "Patient " + this.dmr.getNomPatient() + " " + this.dmr.getPrenomPatient() + " Né(e) le " + this.dmr.getDateNaissance() + "\n Date de l'examen : " + this.getDateExamen() + "\n Type d'examen : " + this.getTypeExamen() + "\n Compte-rendu : " + this.getCompteRendu() + "\n N° PACS : " + this.getLienPACS();
-    }
-    
-    //retourne la liste des examens
-    public List<Examen> getExamen(){
-        return listeAjoutCR;
     }
 
     //retourne idExamen
@@ -111,7 +99,7 @@ public class Examen {
     //change compteRendu
     public void setCompteRendu(String compteRendu) {
         this.compteRendu = compteRendu;
-        ajouterCompteRendu(this.getIdExamen(), compteRendu);
+        ajouterCompteRendu(this.getIdExamen(), compteRendu); //change le compte rendu dans la base de donnees
     }
 
     //retourne lienPACS
@@ -122,12 +110,7 @@ public class Examen {
     //change lienPACS
     public void setLienPACS(String lienPACS) {
         this.lienPACS = lienPACS;
-        ajouterLienPACS(this.getIdExamen(), lienPACS);
-    }
-
-    //retourne listeAjoutCR
-    public List<Examen> getListeAjoutCR() {
-        return listeAjoutCR;
+        ajouterLienPACS(this.getIdExamen(), lienPACS); //change le lien PACS dans la base de donnees
     }
     
 }

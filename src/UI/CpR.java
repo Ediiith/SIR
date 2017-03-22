@@ -53,7 +53,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
             this.columnNames[5] = "Type examen";
             this.columnNames[6] = "Identifiant unique";
 
-            int nbrligne = 1;
+            int nbrligne = getListeExamenCR().size();
             int k = 0;
             data = new Object[nbrligne][7];
 
@@ -65,6 +65,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 data[k][4] = getListeExamenCR().get(i).getResponsable().getNomPersonnel();
                 data[k][5] = getListeExamenCR().get(i).getTypeExamen();
                 data[k][6] = getListeExamenCR().get(i).getDMR().getIdDMR();
+                k++;
             }
             
             jTableCR.setModel(new DefaultTableModel(data, columnNames));
@@ -88,7 +89,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
+                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {

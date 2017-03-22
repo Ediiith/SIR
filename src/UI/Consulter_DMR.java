@@ -4,6 +4,7 @@ import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Genre;
+import static NF.ListeDMR.getListeDMR;
 import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
@@ -20,15 +21,17 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
      * Creates new form PageAccueil
      */
     private Personnel personnel;
-    private CompteRendu cr;
     private List<DMR> listeDMR;
+
+    private String[] columnNames;
+    private Object[][] data;
+
+    //voir utilisation
+    private CompteRendu cr;
     private ArrayList<java.awt.Image> images;
     private Examen e;
     private TraitementImage ti;
-    private int i;
     private String date;
-    private String[] columnNames;
-    private Object[][] data;
     private DMR dmr;
     private String nomPatient;
     private String prenomPatient;
@@ -36,45 +39,48 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     private String numSS;
     private Genre g;
 
-    public Consulter_DMR(Personnel personnel, List<DMR> listeDMR) {
+    public Consulter_DMR(Personnel personnel) {
+
+        this.personnel = personnel;
+        this.listeDMR = new ArrayList<DMR>();
+
         initComponents();
         this.setTitle("Consulter DMR");
-        this.setExtendedState(Consulter_DMR.MAXIMIZED_BOTH);
-        this.personnel = personnel;
-        this.listeDMR = listeDMR;
         this.setExtendedState(Consulter_DMR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        this.jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.date = "" + jj + "/" + mm + "/" + aa;
-        this.dmr = new DMR(nomPatient, prenomPatient, date, g, Integer.parseInt(numSS));
+        jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        if (this.dmr.getIdDMR() != 0) {
-            this.jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            this.columnNames = new String[7];
-            this.columnNames[0] = "Nom";
-            this.columnNames[1] = "Prénom";
-            this.columnNames[2] = "Genre";
-            this.columnNames[3] = "Date de naissance";
-            this.columnNames[4] = "Adresse";
-            this.columnNames[5] = "Numéro de sécurité sociale";
-            this.columnNames[6] = "Identifiant unique";
+        this.columnNames = new String[7];
+        this.columnNames[0] = "Nom";
+        this.columnNames[1] = "Prénom";
+        this.columnNames[2] = "Genre";
+        this.columnNames[3] = "Date de naissance";
+        this.columnNames[4] = "Adresse";
+        this.columnNames[5] = "Numéro de sécurité sociale";
+        this.columnNames[6] = "Identifiant unique";
 
-            int nbrligne = 1;
-            int k = 0;
-            data = new Object[nbrligne][7];
-            for (int i = 0; i < nbrligne; i++) {
-                data[k][0] = dmr.getNomPatient();
-                data[k][1] = dmr.getPrenomPatient();
-                data[k][2] = dmr.getGenre();
-                data[k][3] = dmr.getDateNaissance();
-                data[k][4] = dmr.getAdresse();
-                data[k][5] = dmr.getNumSS();
-                data[k][6] = dmr.getIdDMR();//examen
+        int nbrligne = getListeDMR().size();
+        data = new Object[nbrligne][7];
+
+        for (int i = 0; i < getListeDMR().size(); i++) {
+
+            if (getListeDMR().get(i).getIdDMR() != 0) {
+
+                data[i][0] = getListeDMR().get(i).getNomPatient();
+                data[i][1] = getListeDMR().get(i).getPrenomPatient();
+                data[i][2] = getListeDMR().get(i).getGenre();
+                data[i][3] = getListeDMR().get(i).getDateNaissance();
+                data[i][4] = getListeDMR().get(i).getAdresse();
+                data[i][5] = getListeDMR().get(i).getNumSS();
+                data[i][6] = getListeDMR().get(i).getIdDMR();
+
             }
+
             jTablePatient.setModel(new DefaultTableModel(data, columnNames));
+
         }
 
     }
@@ -95,13 +101,12 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                 break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
+                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
@@ -130,11 +135,9 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-
             default:
                 break;
         }
-
     }
 
     /**
@@ -485,28 +488,6 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(NumSSPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                                .addComponent(LancerRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(NomPatient))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                            .addComponent(jLabel12)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(PrenomPatient))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -527,11 +508,32 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                             .addComponent(jLabel19))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(VisualiserDMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(NumSSPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                                .addComponent(LancerRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(NomPatient))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                            .addComponent(jLabel12)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(PrenomPatient))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(VisualiserDMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LancerRecherche, VisualiserDMR, jButtonTraiter});
@@ -596,13 +598,29 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void LancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LancerRechercheActionPerformed
-//      while(i<listeDMR.size()){
-//        if (((listeDMR.get(i).getNomPatient()==0)&&(listeDMR.get(i).getPrenomPatient()==0)&&(listeDMR.get(i).getDateNaissance()==0))||(listeDMR.get(i).getNumSS()==0)){
-//              if(IdDMR==0){
-//                  this.dmr = new DMR(nomPatient, prenomPatient, date, g, Integer.parseInt(numSS));
-//              }
-//  
-//        }
+        for (int i = 0; i < getListeDMR().size(); i++) {
+            if (((getListeDMR().get(i).getNomPatient().equalsIgnoreCase(NomPatient.getText())) && (getListeDMR().get(i).getPrenomPatient().equalsIgnoreCase(PrenomPatient.getText())) && (getListeDMR().get(i).getDateNaissance().equalsIgnoreCase(jj.getText() + "/" + mm.getText() + "/" + aa.getText()))) || (Integer.toString(getListeDMR().get(i).getNumSS()).equalsIgnoreCase(NumSSPatient.getText()))) {
+
+                int nbrligne = getListeDMR().size();
+                data = new Object[nbrligne][7];
+
+                if (getListeDMR().get(i).getIdDMR() != 0) {
+
+                    data[i][0] = getListeDMR().get(i).getNomPatient();
+                    data[i][1] = getListeDMR().get(i).getPrenomPatient();
+                    data[i][2] = getListeDMR().get(i).getGenre();
+                    data[i][3] = getListeDMR().get(i).getDateNaissance();
+                    data[i][4] = getListeDMR().get(i).getAdresse();
+                    data[i][5] = getListeDMR().get(i).getNumSS();
+                    data[i][6] = getListeDMR().get(i).getIdDMR();
+
+                }
+
+                jTablePatient.setModel(new DefaultTableModel(data, columnNames));
+
+            }
+
+        }
     }//GEN-LAST:event_LancerRechercheActionPerformed
 
     private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
@@ -639,7 +657,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     }//GEN-LAST:event_VisualiserDMRActionPerformed
 
     private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
-//        Image i = new Image(this.personnel, this.images.get(i), this.e);
+//        Image i = new Image(this.personnel, this.images, this.i, this.e);
 //        i.setVisible(true);
 //        this.dispose();
     }//GEN-LAST:event_jButtonTraiterActionPerformed

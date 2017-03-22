@@ -76,7 +76,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel, this.listeDMR);
+                    Consulter_DMR cDMR = new Consulter_DMR(this.personnel);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
@@ -111,6 +111,21 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
+
+//            case "Appareil":
+//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
+//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                    //fsm.setVisible(true);
+//                    this.dispose();
+//                } else {
+//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+//                }
+//                break;
+//            case "Compte personnel":
+//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                //lm.setVisible(true);
+//                this.dispose();
+//                break;
             default:
                 break;
         }
