@@ -24,14 +24,14 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     private String nom;
     private String prenom;
     private String genre;
-    private String numSS;
+    private int numSS;
     private DMR dmr1;
     private List<DMR> listDMRproches;
 
     private String[] columnNames;
     private Object[][] data;
     
-    public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa, String numSS) {
+    public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa, int numSS) {
         
         initComponents();
         this.setExtendedState(Patient2.MAXIMIZED_BOTH);

@@ -11,7 +11,7 @@ public class Patient4 extends javax.swing.JFrame {
     private String adresse;
     private Genre g;
 
-    public Patient4(Personnel personnel, String nom, String prenom, String genre, String date, String numSS) {
+    public Patient4(Personnel personnel, String nom, String prenom, String genre, String date, int numSS) {
         initComponents();
         this.setTitle("Patient4");
         this.setLocationRelativeTo(null);
@@ -19,7 +19,7 @@ public class Patient4 extends javax.swing.JFrame {
         this.personnel = personnel;
         this.adresse=this.Adresse.getText();
         this.g = toGenre(genre);
-        this.dmr = new DMR(nom,prenom,date,this.g,Integer.parseInt(numSS),this.adresse);
+        this.dmr = new DMR(nom,prenom,date,this.g,numSS,this.adresse);
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
     }
 

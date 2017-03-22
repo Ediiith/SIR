@@ -2,6 +2,8 @@ package UI;
 
 import NF.Personnel;
 import NF.Statut;
+import NF.DMR;
+import NF.Genre;
 import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -9,11 +11,13 @@ import javax.swing.event.TreeSelectionListener;
 public class Patient extends javax.swing.JFrame implements TreeSelectionListener {
 
     private Personnel personnel;
+    private DMR patient;
+    private Genre genre;
 
     Patient(Personnel personnel) {
-        
+
         this.personnel = personnel;
-        
+
         initComponents();
         this.setTitle("Admission patient");
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -21,7 +25,8 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(this.personnel.getIdPersonnel());
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
-        
+        this.genre = toGenre(this.GenrePatient.getSelectedItem().toString());
+
     }
 
     @Override
@@ -37,7 +42,7 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-                break;           
+                break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
                     Consulter_DMR cDMR = new Consulter_DMR(this.personnel);
@@ -520,16 +525,19 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_GenrePatientActionPerformed
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
-           int validation = JOptionPane.showConfirmDialog(null,
+        int validation = JOptionPane.showConfirmDialog(null,
                 "Etes vous certain des informations saisies?", "Enregistrement de l'examen",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        String date = this.jj.toString();
+        date += this.mm.toString();
+        date += this.aa.toString();
+        System.out.println(date);
         if (validation == JOptionPane.YES_OPTION) {
-            //this.e = new Examen(this.dmr, this.date, this.personnel, this.typeExamen);
-            Patient2 p2 = new Patient2(this.personnel,NomPatient.getText(),PrenomPatient.getText(),GenrePatient.getSelectedItem().toString(),jj.getText(),mm.getText(),aa.getText(),NumSS.getText());
+            patient = new DMR(NomPatient.getText(), PrenomPatient.getText(), date, genre, NumSS.getColumns());
+            Patient2 p2 = new Patient2(this.personnel, NomPatient.getText(), PrenomPatient.getText(), GenrePatient.getSelectedItem().toString(), jj.getText(), mm.getText(), aa.getText(), NumSS.getColumns());
             p2.setVisible(true);
             this.dispose();
-        } 
-        
+        }
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jjFocusGained
@@ -610,6 +618,17 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         // TODO add your handling code here:
     }//GEN-LAST:event_NomPatientActionPerformed
 
+    private Genre toGenre(String s) {
+        Genre genre = null;
+        if (s.compareTo("Femme") == 0) {
+            genre = Genre.FEMME;
+        } else if (s.compareTo("Homme") == 0) {
+            genre = Genre.HOMME;
+        } else if (s.compareTo("Autre") == 0) {
+            genre = Genre.AUTRE;
+        }
+        return genre;
+    }
     /**
      *
      * @param args the command line arguments
