@@ -40,15 +40,10 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private ArrayList<String> paths;
     private int i;
 
-    public PreImage(Personnel personnel,ArrayList<ImageIcon> icons,int index, DMR dmr, Examen e) {
+    public PreImage(Personnel personnel, DMR dmr, Examen e) {
         this.model = new DefaultListModel();
         this.paths = new ArrayList<>();
-        if(index==-1){
-            this.icons = new ArrayList<>();
-        }
-        else {
-            this.icons=icons;
-        }
+        this.icons = new ArrayList<>();
         this.personnel = personnel;
         this.dmr = dmr;
         this.e = e;
@@ -118,20 +113,6 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 }
                 break;
 
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -441,7 +422,6 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
             this.e.setLienPACS(paths.get(j));
         }
         JOptionPane.showMessageDialog(this, "Les images ont bien été enregistrées", "Enregistrement", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
     }//GEN-LAST:event_EnregistrerActionPerformed
 
     private void ImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ImagesValueChanged
@@ -451,7 +431,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private void TraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraiterActionPerformed
         if (this.personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
             java.awt.Image im = (java.awt.Image) model.get(this.i);
-            Image ima = new Image(this.personnel, this.dmr,this.icons, im, this.i,this.e);
+            Image ima = new Image(this.personnel, this.dmr, im,this.e);
             ima.setVisible(true);
             this.dispose();
         } else {

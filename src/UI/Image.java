@@ -1,16 +1,23 @@
 package UI;
 
+import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -20,29 +27,26 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
      * Creates new form PageAccueil
      */
     private Personnel personnel;
+    private CompteRendu cr;
     private List<DMR> listeDMR;
     private DMR dmr;
     private Examen e;
     private TraitementImage ti;
     private int i;
-    private int index;
     private ArrayList<String> paths;
     private java.awt.Image im;
     private final DefaultListModel model;
     private final ArrayList<ImageIcon> icons;
-    private final ArrayList<ImageIcon> icons2;
-    ArrayList<java.awt.Image> ims;
+    private ArrayList<java.awt.Image> ims;
 
-    public Image(Personnel personnel, DMR dmr, ArrayList<ImageIcon> icons2,java.awt.Image im,int index, Examen e) {
+    public Image(Personnel personnel, DMR dmr, java.awt.Image im, Examen e) {
         this.paths = new ArrayList<>();
         this.model = new DefaultListModel();
         this.icons = new ArrayList<>();
         this.e = e;
-        this.index=index;
         this.dmr = dmr;
         this.personnel = personnel;
         this.im = im;
-        this.icons2=icons2;
         this.ti = new TraitementImage(im);
         initComponents();
         this.setTitle("Traiter image");
@@ -56,7 +60,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         this.icons.add(new ImageIcon(this.im));
         this.im = this.im.getScaledInstance(600, -1, java.awt.Image.SCALE_DEFAULT);
         model.addElement(new ImageIcon(this.im));
-
     }
 
     /**
@@ -113,20 +116,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
 
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -169,8 +158,9 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         scrollPane = new javax.swing.JScrollPane();
         imageList = new JList(model);
         ZoomMoins = new javax.swing.JButton();
-        Sauvegarde = new javax.swing.JButton();
         Retour = new javax.swing.JButton();
+        Rogner = new javax.swing.JButton();
+        Eclaircir = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
@@ -244,6 +234,8 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Procéder à un examen");
         treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Associer examen au DMR");
+        treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -282,7 +274,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         });
 
         Negatif.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Negatif.setText("Négative");
+        Negatif.setText("Négatif");
         Negatif.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
         Negatif.setMinimumSize(new java.awt.Dimension(80, 30));
         Negatif.setPreferredSize(new java.awt.Dimension(130, 30));
@@ -375,17 +367,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
             }
         });
 
-        Sauvegarde.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Sauvegarde.setText("Sauvegarder");
-        Sauvegarde.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        Sauvegarde.setMinimumSize(new java.awt.Dimension(110, 30));
-        Sauvegarde.setPreferredSize(new java.awt.Dimension(130, 30));
-        Sauvegarde.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SauvegardeActionPerformed(evt);
-            }
-        });
-
         Retour.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Retour.setText("Retour");
         Retour.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
@@ -394,6 +375,28 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         Retour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RetourActionPerformed(evt);
+            }
+        });
+
+        Rogner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Rogner.setText("Rogner");
+        Rogner.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Rogner.setMinimumSize(new java.awt.Dimension(110, 30));
+        Rogner.setPreferredSize(new java.awt.Dimension(130, 30));
+        Rogner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RognerActionPerformed(evt);
+            }
+        });
+
+        Eclaircir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Eclaircir.setText("Eclaircir");
+        Eclaircir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Eclaircir.setMinimumSize(new java.awt.Dimension(110, 30));
+        Eclaircir.setPreferredSize(new java.awt.Dimension(130, 30));
+        Eclaircir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EclaircirActionPerformed(evt);
             }
         });
 
@@ -409,19 +412,19 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                         .addComponent(scrollPane)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Negatif, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(ContrastePlus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(ContrasteMoins1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ZoomPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ZoomMoins, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Rotation, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Miroir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ZoomPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ZoomMoins, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Rotation, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Miroir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Rogner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ContrastePlus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ContrasteMoins1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Negatif, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Eclaircir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(Sauvegarde, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Retour, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(179, 179, 179)
                         .addComponent(jButtonReset1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -437,13 +440,14 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonReset1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Sauvegarde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Retour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPane)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(scrollPane)
+                        .addContainerGap())
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(ContrastePlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -458,8 +462,11 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                         .addComponent(Rotation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Miroir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 45, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Rogner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Eclaircir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 21, Short.MAX_VALUE))))
         );
 
         jSplitPane.setRightComponent(jPanel5);
@@ -482,10 +489,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonContrastePlus1ActionPerformed
         // Ne rien rentrer ici, erreur de code généré
     }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
-
-    private void SauvegardeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SauvegardeActionPerformed
-  
-    }//GEN-LAST:event_SauvegardeActionPerformed
 
     private void ZoomMoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZoomMoinsActionPerformed
         ti.zoomOut();
@@ -552,10 +555,37 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_ContrastePlusActionPerformed
 
     private void RetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetourActionPerformed
-        PreImage preIm = new PreImage(this.personnel,this.icons2,this.index,this.dmr, this.e);
+        PreImage preIm = null;
+        preIm = new PreImage(this.personnel, this.dmr, this.e);
         preIm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RetourActionPerformed
+
+    private void RognerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RognerActionPerformed
+        BufferedImage bi = ti.getBi();
+        double x=bi.getWidth()-bi.getWidth()*0.9;
+        int xi= (int)x;
+        double y=bi.getHeight()-bi.getHeight()*0.9;
+        int yi= (int)y;
+        double w= bi.getWidth()*0.9;
+        int wi=(int)w;
+        double h=bi.getHeight()*0.9;
+        int hi = (int)h;
+        bi = bi.getSubimage(xi, yi, wi, hi);
+        icons.set(i, new ImageIcon(bi));
+        java.awt.Image img = (java.awt.Image) bi;
+        img = img.getScaledInstance(400, -1, java.awt.Image.SCALE_DEFAULT);
+        model.setElementAt(new ImageIcon(img), i);
+        ti.repaint();
+        scrollPane.repaint();
+    }//GEN-LAST:event_RognerActionPerformed
+
+    private void EclaircirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EclaircirActionPerformed
+        ti.brightenLUT();
+        ti.applyFilter();
+        ti.repaint();
+        this.updateUI();
+    }//GEN-LAST:event_EclaircirActionPerformed
     public void updateUI() {
         BufferedImage bi = ti.getBi();
         icons.set(i, new ImageIcon(bi));
@@ -572,11 +602,12 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ContrasteMoins1;
     private javax.swing.JButton ContrastePlus;
+    private javax.swing.JButton Eclaircir;
     private javax.swing.JButton Miroir;
     private javax.swing.JButton Negatif;
     private javax.swing.JButton Retour;
+    private javax.swing.JButton Rogner;
     private javax.swing.JButton Rotation;
-    private javax.swing.JButton Sauvegarde;
     private javax.swing.JButton ZoomMoins;
     private javax.swing.JButton ZoomPlus;
     private javax.swing.JPanel barreDuHaut;

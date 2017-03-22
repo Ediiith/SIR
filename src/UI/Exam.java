@@ -430,7 +430,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (validation == JOptionPane.YES_OPTION) {
             this.e = new Examen(this.dmr, this.date, this.personnel, this.typeExamen);
-            PreImage preImage = new PreImage(this.personnel, null,-1,this.dmr, this.e);
+            PreImage preImage = new PreImage(this.personnel,this.dmr, this.e);
             preImage.setVisible(true);
             this.dispose();
             if (this.format.equalsIgnoreCase("Non numérique (impression)")) {
