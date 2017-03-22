@@ -1,5 +1,7 @@
 package NF;
 
+import static BD.EcritureDMR.changerEstAdmis;
+import static BD.EcritureDMR.changerTemporaire;
 import static BD.EcritureDMR.creerDMR;
 import static BD.EcritureDMR.genererDMR;
 import static BD.LectureDMR.existenceDMR;
@@ -23,10 +25,8 @@ import java.util.List;
  *
  * @author JEMCare Solution
  */
-
 public class DMR {
 
-    
     //ATTRIBUTS   
     private int idDMR;
     private String nomPatient;
@@ -35,21 +35,17 @@ public class DMR {
     private Genre genre;
     private String adresse;
     private int numSS;
-
-    private List<Examen> listeExamens;
-
-    //pas dans la base de donnees
     private boolean estAdmis;
     private boolean temporaire;
 
-    
+    private List<Examen> listeExamens;
+
     //CONSTRUCTEURS
-    
     //constructeur en connaissant le numéro du DMR : idDMR
     //si le dmr existe deja dans la base de donnees
     //remplit la listeDMR
     public DMR(int idDMR) {
-        if (existenceIdDMR(idDMR) == true) {            
+        if (existenceIdDMR(idDMR) == true) {
             this.idDMR = idDMR;
             this.nomPatient = lireNomPatient_fromDMR(idDMR);
             this.prenomPatient = lirePrenomPatient_fromDMR(idDMR);
@@ -96,7 +92,7 @@ public class DMR {
     }
     //ne pas oublier dans le main ldmr.ajouterDMR(dmr)
 
- public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS, String adresse) {
+    public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS, String adresse) {
 
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
@@ -112,15 +108,14 @@ public class DMR {
         creerDMR(idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS);
 
     }
- 
+
     //COMPARAISONS
-    
     //compare si deux instances de DMR sont proches pour nomPatient, prenomPatient et dateNaissance
     public boolean procheDe(String nom, String prenom, String date) {
         boolean proche = false;
         Levenshtein l = new Levenshtein();
         int nomsProches = l.levenshtein(this.getNomPatient(), nom);
-        int prenomsProches = l.levenshtein(this.getPrenomPatient(),prenom);
+        int prenomsProches = l.levenshtein(this.getPrenomPatient(), prenom);
         int datesProches = l.levenshtein(this.getDateNaissance(), date);
         if (nomsProches <= 4 && prenomsProches <= 3 && datesProches <= 5) {
             proche = true;
@@ -152,9 +147,7 @@ public class DMR {
         }
     }
 
-    
     //AFFICHAGES
-    
     //retourne les informations d'un patient 
     public String afficherInfoPatient() {
         return "Prénom : " + prenomPatient + "\n Nom : " + nomPatient + "\n Né(e) le " + dateNaissance + "\n Genre : " + genre + " \n Adresse : " + adresse + "\n N° sécurité sociale : " + numSS + " \n DMR N° : " + idDMR + "\n";
@@ -176,10 +169,8 @@ public class DMR {
         }
         return s;
     }
-    
-    
+
     //GETS & SETS
-    
     //retourne idDMR
     public int getIdDMR() {
         return idDMR;
@@ -214,7 +205,7 @@ public class DMR {
     public int getNumSS() {
         return numSS;
     }
-    
+
     //retourne listeExamens
     public List<Examen> getListeExamens() {
         return listeExamens;
@@ -224,7 +215,7 @@ public class DMR {
     public void ajouterExamen(Examen examen) {
         listeExamens.add(examen);
     }
-    
+
     //retourne estAdmis
     public Boolean getEstAdmis() {
         return estAdmis;
@@ -233,7 +224,7 @@ public class DMR {
     //change estAdmis
     public void setEstAdmis(Boolean estAdmis) {
         this.estAdmis = estAdmis;
-        //base de donnees
+        changerEstAdmis(this.getIdDMR(), estAdmis);
     }
 
     //retourne temporaire
@@ -244,6 +235,7 @@ public class DMR {
     //change temporaire
     public void setTemporaire(Boolean temporaire) {
         this.temporaire = temporaire;
+        changerTemporaire(this.getIdDMR(), temporaire);
     }
 
 }

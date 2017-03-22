@@ -4,26 +4,22 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 
-
-
 /**
  *
  * @author JEMCare Solution
  */
-
 public class ConversionImage {
-    public void jpegToDicom (File imgEntree, File dmcSortie, String date, String typeExam, String nomMed, String Cr,
-                             String nomPatient, String genre, String dateNaissance, int IPP) throws Exception{
-        
-        
-     try {   
-        BufferedImage jpeg = ImageIO.read(imgEntree);  
- 
-        if (jpeg == null) {
-          throw new Exception("Le fichier selectionné est invalide.");
-        }
-        
-         
+
+    public void jpegToDicom(File imgEntree, File dmcSortie, String date, String typeExam, String nomMed, String Cr,
+            String nomPatient, String genre, String dateNaissance, int IPP) throws Exception {
+
+        try {
+            BufferedImage jpeg = ImageIO.read(imgEntree);
+
+            if (jpeg == null) {
+                throw new Exception("Le fichier selectionné est invalide.");
+            }
+
 //   
 //      
 //        Attributes att = new Attributes();
@@ -87,12 +83,11 @@ public class ConversionImage {
 //            
 //            dmc.writeHeader(Tag.SequenceDelimitationItem, null, 0);
 //            dmc.close(); // la création du fichier Dicom est terminée
-
         } catch (Exception e) {
 
             e.printStackTrace();
         }
 
     }
-    
+
 }

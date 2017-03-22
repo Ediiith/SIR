@@ -13,7 +13,6 @@ import java.util.List;
  *
  * @author JEMCare Solution
  */
-
 public class LectureDMR {
 // permet de lire un DMR
 
@@ -62,7 +61,7 @@ public class LectureDMR {
         Statement st = null;
         ResultSet resultat = null;
         boolean existence = false;
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
@@ -125,9 +124,9 @@ public class LectureDMR {
         }
 
         return listeDMR;
-        
+
     }
-    
+
     //recuperer l'identifiant d'un DMR a partir du nom, prenom, date de naissance, genre du patient
     public static int lireIdDMR_fromDMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 
@@ -376,7 +375,7 @@ public class LectureDMR {
         return numSS;
 
     }
-    
+
     //recuperer si le patient est admis
     public static boolean lireEstAdmis(int idDMR) {
 
@@ -414,12 +413,12 @@ public class LectureDMR {
         if (estAdmisString.compareTo("false") == 0) {
             estAdmis = false;
         }
-        
+
         return estAdmis;
 
     }
-    
-    //recuperer le DMR est temporaire
+
+    //recuperer si le DMR est temporaire
     public static boolean lireTemporaire(int idDMR) {
 
         Connection cn = null;
@@ -456,10 +455,9 @@ public class LectureDMR {
         if (temporaireString.compareTo("false") == 0) {
             temporaire = false;
         }
-        
+
         return temporaire;
 
     }
-    
-}
 
+}

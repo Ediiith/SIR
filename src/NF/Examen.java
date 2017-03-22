@@ -30,6 +30,21 @@ public class Examen {
     private String compteRendu;
     private String lienPACS;
     
+    //constructeur en connaissant idExamen
+    //si l'examen existe deja dans la base de donnees
+    //pour remplir listeExamenCR
+    public Examen(int idExamen) {
+        if (existenceExamen(idExamen) == true) {
+            this.idExamen = idExamen;
+            //this.dmr = ;
+            this.dateExamen = lireDateExamen(idExamen);
+            //this.responsable = ;
+            this.typeExamen = lireTypeExamen(idExamen);
+            this.compteRendu = lireCompteRendu(idExamen);
+            this.lienPACS = lireLienPACS(idExamen);
+        }            
+    }
+    
     //constructeur en connaissant idExamen et dmr
     //si l'examen existe deja dans la base de donnees
     //pour remplir listeExamens

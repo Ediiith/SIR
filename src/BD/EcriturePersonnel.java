@@ -11,11 +11,10 @@ import java.sql.SQLException;
  *
  * @author JEMCare Solution
  */
-
 public class EcriturePersonnel {
 
     //pour creer un professionnel
-    public static void creerProfessionnel(int idPersonnel, String mdp, String nomPersonnel, String prenomPersonnel, Statut statut) {
+    public static void creerProfessionnel(String idPersonnel, String mdp, String nomPersonnel, String prenomPersonnel, Statut statut) {
 
         Connection cn = null;
         Statement st = null;
@@ -43,7 +42,7 @@ public class EcriturePersonnel {
     }
 
     //pour changer le mot de passe du professionnel
-    public static void ajouterMdp(int idPersonnel, String ancienMdp, String nouveauMdp) {
+    public static void ajouterMdp(String idPersonnel, String ancienMdp, String nouveauMdp) {
 
         if (validerMdp(idPersonnel, ancienMdp) == true) {
 
@@ -68,7 +67,7 @@ public class EcriturePersonnel {
                     exc.printStackTrace();
                 }
             }
-            
+
         }
 
     }

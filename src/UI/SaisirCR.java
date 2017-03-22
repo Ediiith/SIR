@@ -1,8 +1,8 @@
 package UI;
 
-import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
+import static NF.ListeExamenCR.supprimeExamenCR;
 import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);        
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
+        jTextFieldID.setText(personnel.getIdPersonnel());
         jTextFieldStatut.setText(personnel.getStatut().toString());
         //JTextPanePatient.setText(this.examen.toString());
 
@@ -207,8 +207,6 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Consultation d'un DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Procéder à un examen");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Associer examen au DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);
@@ -394,6 +392,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
             PageAccueil accueil = new PageAccueil(this.personnel);
             accueil.setVisible(true);
             this.dispose();
+            supprimeExamenCR(this.examen);
         }
     }//GEN-LAST:event_jButtonAssocierActionPerformed
 

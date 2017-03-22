@@ -18,10 +18,9 @@ import java.util.List;
  *
  * @author Chloé
  */
-
 public class LectureExamen {
 // permet de lire un examen
-    
+
     //pour savoir si un examen existe a partir de idExamen
     public static boolean existenceExamen(int idExamen) {
 
@@ -59,9 +58,9 @@ public class LectureExamen {
         return existence;
 
     }
-    
+
     //pour savoir si un examen existe a partir du dmr, date examen, personnel, type examen
-    public static boolean existenceExamen(int idDMR, String dateExamen, int idResponsable, TypeExamen typeExamen) {
+    public static boolean existenceExamen(int idDMR, String dateExamen, String idResponsable, TypeExamen typeExamen) {
 
         Connection cn = null;
         Statement st = null;
@@ -75,7 +74,7 @@ public class LectureExamen {
             String sql1 = "select * from examens ;";
             resultat = (ResultSet) st.executeQuery(sql1);
             while (resultat.next() && existence == false) {
-                if (Integer.toString(idDMR).equalsIgnoreCase(resultat.getString("idDMR")) && dateExamen.equalsIgnoreCase(resultat.getString("dateExamen")) && Integer.toString(idResponsable).equalsIgnoreCase(resultat.getString("idResponsable")) && typeExamen.toString().equalsIgnoreCase(resultat.getString("typeExamen"))) {
+                if (Integer.toString(idDMR).equalsIgnoreCase(resultat.getString("idDMR")) && dateExamen.equalsIgnoreCase(resultat.getString("dateExamen")) && idResponsable.equalsIgnoreCase(resultat.getString("idResponsable")) && typeExamen.toString().equalsIgnoreCase(resultat.getString("typeExamen"))) {
                     existence = true;
                 } else {
                     existence = false;
@@ -99,7 +98,7 @@ public class LectureExamen {
     }
 
     public static int genererIdExamen() {
-        
+
         Connection cn = null;
         Statement st = null;
         ResultSet resultat = null;
@@ -109,7 +108,7 @@ public class LectureExamen {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             st = (Statement) cn.createStatement();
-            String sql = "select * from examens";
+            String sql = "select * from examens ;";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
                 idExamen = idExamen + 1;
@@ -128,8 +127,43 @@ public class LectureExamen {
         }
 
         idExamen = idExamen + 1;
-        
+
         return idExamen;
+    }
+
+    //liste de tous les examens dans la base de donnees
+    public static List<Integer> listeIdExamens() {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        List<Integer> listeIdExamens = new ArrayList<Integer>();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from examens";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                int idExamen = Integer.parseInt(resultat.getString("idExamen"));
+                listeIdExamens.add(idExamen);
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        return listeIdExamens;
+
     }
     
     public static List<Integer> listeIdExamen_parIdDMR(int idDMR) {
@@ -163,11 +197,11 @@ public class LectureExamen {
         }
 
         return listeExamens;
-        
+
     }
 
     //recuperer l'identifiant d'un examen a partir de l'identifiant du DMR, date de l'examen, identifiant du responsable, type d'examen
-    public static int lireIdExamen(int idDMR, String dateExamen, int idResponsable, TypeExamen typeExamen) {
+    public static int lireIdExamen(int idDMR, String dateExamen, String idResponsable, TypeExamen typeExamen) {
 
         Connection cn = null;
         Statement st = null;
@@ -272,12 +306,12 @@ public class LectureExamen {
     }
 
     //recuperer l'identifiant du responsable a partir de l'identifiant de l'examen
-    public static int lireIdResponsable(int idExamen) {
+    public static String lireIdResponsable(int idExamen) {
 
         Connection cn = null;
         Statement st = null;
         ResultSet resultat = null;
-        int idResponsable = 0;
+        String idResponsable = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -286,7 +320,7 @@ public class LectureExamen {
             String sql = "select * from examens where idExamen = " + idExamen + ";";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
-                idResponsable = Integer.parseInt(resultat.getString("idResponsable"));
+                idResponsable = resultat.getString("idResponsable");
             }
         } catch (SQLException exc) {
             exc.printStackTrace();

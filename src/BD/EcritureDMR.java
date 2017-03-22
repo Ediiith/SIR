@@ -7,7 +7,6 @@ import static BD.LectureDPI.lireGenre_fromDPI;
 import static BD.LectureDPI.lireNomPatient_fromDPI;
 import static BD.LectureDPI.lireNumSS_fromDPI;
 import static BD.LectureDPI.lirePrenomPatient_fromDPI;
-import static BD.LecturePersonnel.validerMdp;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
@@ -18,7 +17,7 @@ import java.sql.SQLException;
  * @author JEMCare Solution
  */
 public class EcritureDMR {
-// cette classe permet de remplir les informations concernant les DMR
+    // cette classe permet de remplir les informations concernant les DMR
 
     //pour generer un DMR s'il n'exite pas a partir de l'identifiant d'un DPI
     public static void genererDMR(int idDPI) {
@@ -62,12 +61,15 @@ public class EcritureDMR {
         Connection c = null;
         Statement s = null;
 
+        boolean estAdmis = true;
+        boolean temporaire = true;
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             c = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             s = (Statement) c.createStatement();
-            String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS) values "
-                    + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "','" + numSS + "');";
+            String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS, estAdmis, temporaire) values "
+                    + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "','" + numSS + "','" + estAdmis + "','" + temporaire + "');";
             s.executeUpdate(sql1);
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -84,7 +86,36 @@ public class EcritureDMR {
 
     }
 
-    public static void changerEstAdmis(int idDMR, String nouveauEstAdmis) {
+    //pour creer un DMR pour la base de donnees
+    public static void creerDMR(int idDMR, String nomPatient, String prenomPatient, String dateNaissance, Genre genre, String adresse, int numSS, boolean estAdmis, boolean temporaire) {
+
+        Connection c = null;
+        Statement s = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            c = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            s = (Statement) c.createStatement();
+            String sql1 = "insert into dmr (idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS, estAdmis, temporaire) values "
+                    + "('" + idDMR + "','" + nomPatient + "','" + prenomPatient + "','" + dateNaissance + "','" + genre + "','" + adresse + "','" + numSS + "','" + estAdmis + "','" + temporaire + "');";
+            s.executeUpdate(sql1);
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                c.close();
+                s.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+    }
+
+    //change estAdmis
+    public static void changerEstAdmis(int idDMR, boolean nouveauEstAdmis) {
 
         Connection cn = null;
         Statement st = null;
@@ -109,8 +140,9 @@ public class EcritureDMR {
         }
 
     }
-    
-    public static void changerTemporaire(int idDMR, String nouveauTemporaire) {
+
+    //change temporaire
+    public static void changerTemporaire(int idDMR, boolean nouveauTemporaire) {
 
         Connection cn = null;
         Statement st = null;

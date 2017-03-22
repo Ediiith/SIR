@@ -1,13 +1,9 @@
 package UI;
 
-import NF.CompteRendu;
 import NF.DMR;
-import NF.Examen;
-import NF.Genre;
 import static NF.ListeDMR.getListeDMR;
 import NF.Personnel;
 import NF.Statut;
-import NF.TraitementImage;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ListSelectionModel;
@@ -231,8 +227,6 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Consultation d'un DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Procéder à un examen");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Associer examen au DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);

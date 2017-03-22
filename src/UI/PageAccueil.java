@@ -14,16 +14,10 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
      */
     
     private Personnel personnel;
-    
-    ListeExamenCR listeExamenCR;
-    ListeDMR listeDMRtot;
 
     public PageAccueil(Personnel personnel) {
         
         this.personnel = personnel;
-        
-        listeExamenCR = new ListeExamenCR();
-        listeDMRtot = new ListeDMR();
         
         initComponents();
         this.setTitle("Page d'Accueil");
@@ -32,6 +26,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
+        jPanel4.revalidate();
 
     }
 
@@ -202,8 +197,6 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Consultation d'un DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Procéder à un examen");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Associer examen au DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);

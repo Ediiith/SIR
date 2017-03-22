@@ -1,21 +1,16 @@
 package UI;
 
-import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -25,7 +20,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
      * Creates new form PageAccueil
      */
     private Personnel personnel;
-    private CompteRendu cr;
     private List<DMR> listeDMR;
     private DMR dmr;
     private Examen e;
@@ -119,6 +113,20 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
 
+//            case "Appareil":
+//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
+//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                    //fsm.setVisible(true);
+//                    this.dispose();
+//                } else {
+//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
+//                }
+//                break;
+//            case "Compte personnel":
+//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
+//                //lm.setVisible(true);
+//                this.dispose();
+//                break;
             default:
                 break;
         }
@@ -235,8 +243,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Consultation d'un DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Procéder à un examen");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Associer examen au DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);

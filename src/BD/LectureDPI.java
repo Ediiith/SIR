@@ -11,10 +11,9 @@ import java.sql.SQLException;
  *
  * @author JEMCare Solution
  */
-
 public class LectureDPI {
 // permet de lire un DPI
-    
+
     //pour savoir si un patient possede un DPI a partir du nom, prenom, date de naissance, genre du patient
     public static boolean existenceDPI(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 
@@ -36,9 +35,7 @@ public class LectureDPI {
                     existence = false;
                 }
             }
-        }
-        
-        catch (SQLException exc) {
+        } catch (SQLException exc) {
             exc.printStackTrace();
         } catch (ClassNotFoundException exc) {
             exc.printStackTrace();
@@ -54,7 +51,7 @@ public class LectureDPI {
         return existence;
 
     }
-    
+
     //recuperer l'identifiant d'un DPI a partir du nom, prenom, date de naissance, genre du patient
     public static int lireIdDPI(String nomPatient, String prenomPatient, String dateNaissance, Genre genre) {
 
@@ -231,7 +228,7 @@ public class LectureDPI {
         if (genreString.compareTo("Femme") == 0) {
             genre = Genre.FEMME;
         }
-        
+
         return genre;
 
     }
@@ -303,5 +300,5 @@ public class LectureDPI {
         return numSS;
 
     }
-    
+
 }

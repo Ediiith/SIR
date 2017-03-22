@@ -17,7 +17,7 @@ import static BD.LecturePersonnel.lirePrenomPersonnel;
 
 public class Personnel {
 
-    private int idPersonnel;
+    private String idPersonnel;
     private String mdp;
     private String nomPersonnel;
     private String prenomPersonnel;
@@ -37,7 +37,7 @@ public class Personnel {
 
     //constructeur en connaissant idPersonnel
     //si le professionnel existe deja dans la base de donnees
-    public Personnel(int idPersonnel) {
+    public Personnel(String idPersonnel) {
         if (existenceIdPersonnel(idPersonnel) == true) {
             this.idPersonnel = idPersonnel;
             this.mdp = lireMdp(idPersonnel);
@@ -48,7 +48,7 @@ public class Personnel {
     }
 
     //constructeur pour créer un professionnel et l'ajouter a la base de données
-    public Personnel(int idPersonnel, String mdp, String nomPersonnel, String prenomPersonnel, Statut statut) {
+    public Personnel(String idPersonnel, String mdp, String nomPersonnel, String prenomPersonnel, Statut statut) {
         this.idPersonnel = idPersonnel;
         this.mdp = mdp;
         this.nomPersonnel = nomPersonnel;
@@ -73,7 +73,7 @@ public class Personnel {
     }
     
     //retourne idPersonnel
-    public int getIdPersonnel() {
+    public String getIdPersonnel() {
         return idPersonnel;
     }
 
@@ -118,7 +118,7 @@ public class Personnel {
 //    }
 //
 //    //change idPersonnel
-//    public void setIdPersonnel(int idPersonnel) {
+//    public void setIdPersonnel(String idPersonnel) {
 //        this.idPersonnel = idPersonnel;
 //    }
 //

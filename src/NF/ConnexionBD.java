@@ -1,5 +1,8 @@
 package NF;
 
+import BD.InitialisationIP;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -18,7 +21,6 @@ import java.util.logging.Logger;
  *
  * @author JEMCare Solution
  */
-
 public class ConnexionBD {
 
     private String urlBd = "";
@@ -26,6 +28,8 @@ public class ConnexionBD {
     private String mdpBd = "";
     private java.sql.Connection Connect = null;
     private java.sql.Statement Statement = null;
+    private Connection cn = null;
+    private Statement st = null;
 
 // constructeur à partir de l'URL, l'identifiant et le mot de passe de la base de données
     public ConnexionBD(String urlBd, String idBd, String mdpBd) {
@@ -38,8 +42,9 @@ public class ConnexionBD {
     public Boolean connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            this.Connect = DriverManager.getConnection("jdbc:mysql:" + this.urlBd, this.idBd, this.mdpBd);
-            this.Statement = this.Connect.createStatement();
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
             return true;
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +63,6 @@ public class ConnexionBD {
         return null;
     }
 
-    /**
     public int insererDB(String s) {
         int i = 0;
         try {
@@ -73,14 +77,13 @@ public class ConnexionBD {
     /**
      * Inserer une image dans la base de données.
      *
-     * chemin vers l'image
-     *idBd id de l'examen auquel correspond l'image
+     * chemin vers l'image idBd id de l'examen auquel correspond l'image
      */
     public void insert_image(String chemin, int id) {
         try {
             File imgfile = new File(chemin);
             FileInputStream fin = new FileInputStream(imgfile);
-            
+
             PreparedStatement pre = this.Connect.prepareStatement("insert into PACS values(?,?,?)");
             pre.setString(1, null); //insère à l'indice n°1 càd à id_image
             pre.setInt(3, id);   //insère à l'indice n°3 càd à id
@@ -92,12 +95,12 @@ public class ConnexionBD {
             System.out.println(e1.getMessage());
         }
     }
-    
+
     /**
      * Récupérer les images d'un examen.
      *
-     * id l'id de l'examen
-     * return <code>null</code> si aucune images disponibles, sinon la liste d'images 
+     * id l'id de l'examen return <code>null</code> si aucune images
+     * disponibles, sinon la liste d'images
      */
     public ArrayList<Image> getImage(int id) {
         ArrayList<Image> images = new ArrayList<>();
@@ -134,5 +137,5 @@ public class ConnexionBD {
             Logger.getLogger(ConnexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

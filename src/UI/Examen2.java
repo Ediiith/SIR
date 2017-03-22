@@ -230,8 +230,6 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Procéder à un examen");
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Associer examen au DMR");
-        treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);
         jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));

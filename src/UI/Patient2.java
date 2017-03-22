@@ -1,16 +1,11 @@
 package UI;
 
-import NF.CompteRendu;
 import NF.DMR;
-import NF.Examen;
 import NF.Genre;
-import NF.ListeDMR;
 import static NF.ListeDMR.ajouterDMRadmis;
-import static NF.ListeDMR.getListeDMR;
 import static NF.ListeDMR.getListeDMRproches;
 import NF.Personnel;
 import NF.Statut;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
@@ -434,6 +429,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         int row = jTable1.getSelectedRow();
         int idDMR = (int) jTable1.getValueAt(row, 6);
         this.dmr1 = new DMR(idDMR);
+        dmr1.setEstAdmis(true);
         ajouterDMRadmis(this.dmr1);
         Patient3 p3 = new Patient3(this.personnel, this.dmr1);
         p3.setVisible(true);

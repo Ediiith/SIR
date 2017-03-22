@@ -14,10 +14,9 @@ import java.util.List;
  *
  * @author JEMCare Solution
  */
-
 public class LecturePersonnel {
 // permet de lire un personnel
-    
+
     //pour savoir si un personnel existe a partir de nom, prenom, statut du personnel
     public static boolean existencePersonnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
 
@@ -55,9 +54,9 @@ public class LecturePersonnel {
         return existence;
 
     }
-    
+
     //pour savoir si un idPersonnel existe
-    public static boolean existenceIdPersonnel(int idPersonnel) {
+    public static boolean existenceIdPersonnel(String idPersonnel) {
 
         Connection cn = null;
         Statement st = null;
@@ -71,10 +70,10 @@ public class LecturePersonnel {
             String sql = "select * from personnel ;";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next() && existence == false) {
-                if (idPersonnel != resultat.getInt(1)) {
-                    existence = false;
-                } else {
+                if (idPersonnel.equalsIgnoreCase(resultat.getString("idPersonnel"))) {
                     existence = true;
+                } else {
+                    existence = false;
                 }
 
             }
@@ -95,21 +94,21 @@ public class LecturePersonnel {
     }
 
     //liste de tous les idPersonnel dans la base de donnees
-    public static List<Integer> listeIdPersonnel() {
+    public static List<String> listeIdPersonnel() {
 
         Connection cn = null;
         Statement st = null;
         ResultSet resultat = null;
-        List<Integer> listePersonnel = new ArrayList<Integer>();
+        List<String> listePersonnel = new ArrayList<String>();
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             st = (Statement) cn.createStatement();
-            String sql = "select * from personnel";
+            String sql = "select * from personnel ;";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
-                int idPersonnel = Integer.parseInt(resultat.getString("idPersonnel"));
+                String idPersonnel = resultat.getString("idPersonnel");
                 listePersonnel.add(idPersonnel);
             }
         } catch (SQLException exc) {
@@ -126,16 +125,16 @@ public class LecturePersonnel {
         }
 
         return listePersonnel;
-        
+
     }
-    
+
     //recuperer l'identifiant d'un personnel a partir de son nom, prenom, statut
-    public static int lireIdPersonnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
+    public static String lireIdPersonnel(String nomPersonnel, String prenomPersonnel, Statut statut) {
 
         Connection cn = null;
         Statement st = null;
         ResultSet resultat = null;
-        int idPersonnel = 0;
+        String idPersonnel = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -146,7 +145,7 @@ public class LecturePersonnel {
                     + "statut = '" + statut + "' ;";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
-                idPersonnel = Integer.parseInt(resultat.getString("idPersonnel"));
+                idPersonnel = resultat.getString("idPersonnel");
             }
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -166,7 +165,7 @@ public class LecturePersonnel {
     }
 
     //recuperer le mot de passe du professionnel a partir de son identifiant
-    public static String lireMdp(int idPersonnel) {
+    public static String lireMdp(String idPersonnel) {
 
         Connection cn = null;
         Statement st = null;
@@ -177,7 +176,7 @@ public class LecturePersonnel {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             st = (Statement) cn.createStatement();
-            String sql = "select * from personnel where idPersonnel = " + idPersonnel + ";";
+            String sql = "select * from personnel where idPersonnel = '" + idPersonnel + "' ;";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
                 mdp = resultat.getString("mdp");
@@ -200,13 +199,13 @@ public class LecturePersonnel {
     }
 
     //valider le mot de passe entre par le professionnel pour s'identifier
-    public static boolean validerMdp(int idPersonnel, String mdp) {
+    public static boolean validerMdp(String idPersonnel, String mdp) {
 
         Connection cn = null;
         Statement st = null;
         ResultSet resultat = null;
         boolean validation = false;
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
@@ -234,8 +233,8 @@ public class LecturePersonnel {
         return validation;
     }
 
-        //recuperer le nom du professionnel a partir de son identifiant
-    public static String lireNomPersonnel(int idPersonnel) {
+    //recuperer le nom du professionnel a partir de son identifiant
+    public static String lireNomPersonnel(String idPersonnel) {
 
         Connection cn = null;
         Statement st = null;
@@ -246,7 +245,7 @@ public class LecturePersonnel {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             st = (Statement) cn.createStatement();
-            String sql = "select * from personnel where idPersonnel = " + idPersonnel + ";";
+            String sql = "select * from personnel where idPersonnel = '" + idPersonnel + "';";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
                 nomPersonnel = resultat.getString("nomPersonnel");
@@ -267,9 +266,9 @@ public class LecturePersonnel {
         return nomPersonnel;
 
     }
-    
+
     //recuperer le prenom du professionnel a partir de son identifiant
-    public static String lirePrenomPersonnel(int idPersonnel) {
+    public static String lirePrenomPersonnel(String idPersonnel) {
 
         Connection cn = null;
         Statement st = null;
@@ -280,7 +279,7 @@ public class LecturePersonnel {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             st = (Statement) cn.createStatement();
-            String sql = "select * from personnel where idPersonnel = " + idPersonnel + ";";
+            String sql = "select * from personnel where idPersonnel = '" + idPersonnel + "' ;";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
                 prenomPersonnel = resultat.getString("prenomPersonnel");
@@ -303,7 +302,7 @@ public class LecturePersonnel {
     }
 
     //recuperer le nom du professionnel a partir de son identifiant
-    public static Statut lireStatut(int idPersonnel) {
+    public static Statut lireStatut(String idPersonnel) {
 
         Connection cn = null;
         Statement st = null;
@@ -315,7 +314,7 @@ public class LecturePersonnel {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             st = (Statement) cn.createStatement();
-            String sql = "select * from personnel where idPersonnel = " + idPersonnel + ";";
+            String sql = "select * from personnel where idPersonnel = '" + idPersonnel + "' ;";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
                 statutString = resultat.getString("statut");

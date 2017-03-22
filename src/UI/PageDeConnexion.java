@@ -1,6 +1,8 @@
 package UI;
 
 import BD.InitialisationIP;
+import NF.ListeDMR;
+import NF.ListeExamenCR;
 import NF.Personnel;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -11,11 +13,17 @@ import java.sql.SQLException;
 public class PageDeConnexion extends javax.swing.JFrame {
 
     private Personnel p;
-
+    
+    ListeExamenCR listeExamenCR;
+    ListeDMR listeDMRtot;
+    
     public PageDeConnexion() {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
+        
+        listeExamenCR = new ListeExamenCR();
+        listeDMRtot = new ListeDMR();
     }
 
     /**
@@ -179,11 +187,11 @@ public class PageDeConnexion extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
             st = (Statement) cn.createStatement();
-            String sql = "select * from personnel where idPersonnel = '" + Integer.parseInt(TextFieldID.getText()) + "';";
+            String sql = "select * from personnel where idPersonnel = '" + TextFieldID.getText() + "';";
             resultat = (ResultSet) st.executeQuery(sql);
             while (resultat.next()) {
                 if (PasswordFieldMDP.getText().equalsIgnoreCase(resultat.getString("mdp"))) {
-                    p=new Personnel(Integer.parseInt(TextFieldID.getText()));
+                    p=new Personnel(TextFieldID.getText());
                     PageAccueil accueil = new PageAccueil(p);
                     accueil.setVisible(true);
                     this.dispose();

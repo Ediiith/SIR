@@ -172,7 +172,7 @@
                   </Border>
                 </Property>
                 <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-                  <TreeModel code="Processir&#xa; Admission patient&#xa; Consultation d&apos;un DMR&#xa; Proc&#xe9;der &#xe0; un examen&#xa; Associer examen au DMR&#xa; Compte-rendu"/>
+                  <TreeModel code="Processir&#xa; Admission patient&#xa; Consultation d&apos;un DMR&#xa; Proc&#xe9;der &#xe0; un examen&#xa; Compte-rendu"/>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[170, 100]"/>
