@@ -23,8 +23,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         this.setExtendedState(PageAccueil.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.getIdPersonnel().toString());
-        jTextFieldStatut.setText(personnel.getStatut().toString());
+        jTextFieldID.setText(this.personnel.getIdPersonnel());
+        jTextFieldStatut.setText(this.personnel.getStatut().toString());
 
         jPanel4.getMaximumSize();
 

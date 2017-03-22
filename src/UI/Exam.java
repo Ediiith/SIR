@@ -33,8 +33,8 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         this.typeExamen = toTypeExamen(this.TypedExamen.getSelectedItem().toString());
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(personnel.getIdPersonnel().toString());
-        jTextFieldStatut.setText(personnel.getStatut().toString());
+        jTextFieldID.setText(this.personnel.getIdPersonnel());
+        jTextFieldStatut.setText(this.personnel.getStatut().toString());
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
         this.resumerMedecin.setText(this.personnel.toString() + "\nStatut : " + this.personnel.getStatut() + "\nIdentifiant : " + this.personnel.getIdPersonnel());
         

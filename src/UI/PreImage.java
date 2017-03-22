@@ -53,7 +53,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
         this.setLocationRelativeTo(null);
 
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(this.personnel.getIdPersonnel().toString());
+        jTextFieldID.setText(this.personnel.getIdPersonnel());
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
         Images.setCellRenderer(new IconCellRenderer());
 

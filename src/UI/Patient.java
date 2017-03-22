@@ -2,6 +2,7 @@ package UI;
 
 import NF.Personnel;
 import NF.Statut;
+import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -18,8 +19,8 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(this.personnel.getIdPersonnel().toString());
-        jTextFieldStatut.setText(personnel.getStatut().toString());
+        jTextFieldID.setText(this.personnel.getIdPersonnel());
+        jTextFieldStatut.setText(this.personnel.getStatut().toString());
         
     }
 
@@ -519,9 +520,16 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_GenrePatientActionPerformed
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+           int validation = JOptionPane.showConfirmDialog(null,
+                "Etes vous certain des informations saisies?", "Enregistrement de l'examen",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (validation == JOptionPane.YES_OPTION) {
+            //this.e = new Examen(this.dmr, this.date, this.personnel, this.typeExamen);
             Patient2 p2 = new Patient2(personnel,NomPatient.getText(),PrenomPatient.getText(),GenrePatient.getSelectedItem().toString(),jj.getText(),mm.getText(),aa.getText(),NumSS.getText());
             p2.setVisible(true);
             this.dispose();
+        } 
+        
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jjFocusGained
