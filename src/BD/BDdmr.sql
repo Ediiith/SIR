@@ -6,5 +6,7 @@ CREATE TABLE dmr (
     genre VARCHAR(30),
     adresse VARCHAR(300),
     numSS VARCHAR(30),
+    estAdmis VARCHAR(30),
+    temporaire VARCHAR(30),
     PRIMARY KEY (idDMR, numSS)
 )

@@ -7,7 +7,6 @@ package NF;
 
 import static NF.ListeDMR.afficherListeDMR;
 import static NF.ListeDMR.getListeDMR;
-import static NF.ListeDMR.remplissageListeDMR;
 
 /**
  *
@@ -34,7 +33,6 @@ public class TestsChloe {
 //        DMR dmrtest2 = new DMR("Martinez", "Adam", "27/11/1928", Genre.HOMME, 822);
         
         ListeDMR ldmr = new ListeDMR();
-        remplissageListeDMR();
         System.out.println(afficherListeDMR());
         
         System.out.println(getListeDMR());

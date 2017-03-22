@@ -16,24 +16,21 @@ import javax.swing.JOptionPane;
 public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListener {
 
     private Personnel personnel;
-    private CompteRendu cr;
-    private List<DMR> listeDMR;
-    private Examen e;
-    private DMR dmr;
-    private int i;
-    private ArrayList<java.awt.Image> images;
+    private Examen examen;
 
-    public SaisirCR(Personnel personnel) {
+    public SaisirCR(Personnel personnel, Examen examen) {
+        
+        this.personnel = personnel;
+        this.examen = examen;
+        
         initComponents();
         this.setTitle("DMR temporaire");
-        this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);
-        this.personnel = personnel;
-        this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);
+        this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);        
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        JTextPanePatient.setText(this.e.toString());
+        //JTextPanePatient.setText(this.examen.toString());
 
     }
 
@@ -70,18 +67,9 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
@@ -397,7 +385,8 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
     private void jButtonAssocierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssocierActionPerformed
-        e.setCompteRendu(JTextPaneSaisie.getText());
+        String s = JTextPaneSaisie.getText();
+        this.examen.setCompteRendu(s);
         int validation = JOptionPane.showConfirmDialog(null,
                 "Etes vous certain des informations saisies?", "Associer le compte-rendu à l'examen",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -409,7 +398,7 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonAssocierActionPerformed
 
     private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
-        CpR cr1 = new CpR(this.personnel, this.cr);
+        CpR cr1 = new CpR(this.personnel);
         cr1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRetourActionPerformed

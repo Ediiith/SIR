@@ -7,11 +7,15 @@ import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -27,20 +31,25 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     private Examen e;
     private TraitementImage ti;
     private int i;
+    private int index;
     private ArrayList<String> paths;
     private java.awt.Image im;
     private final DefaultListModel model;
     private final ArrayList<ImageIcon> icons;
+    private final ArrayList<ImageIcon> icons2;
+    ArrayList<java.awt.Image> ims;
 
-    public Image(Personnel personnel, DMR dmr, java.awt.Image im, Examen e) {
+    public Image(Personnel personnel, DMR dmr, ArrayList<ImageIcon> icons2,java.awt.Image im,int index, Examen e) {
         this.paths = new ArrayList<>();
         this.model = new DefaultListModel();
         this.icons = new ArrayList<>();
         this.e = e;
+        this.index=index;
         this.dmr = dmr;
         this.personnel = personnel;
         this.im = im;
-        this.ti=new TraitementImage(im);
+        this.icons2=icons2;
+        this.ti = new TraitementImage(im);
         initComponents();
         this.setTitle("Traiter image");
         this.setExtendedState(Image.MAXIMIZED_BOTH);
@@ -100,18 +109,9 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
@@ -119,20 +119,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
 
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -492,46 +478,13 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
 
     private void SauvegardeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SauvegardeActionPerformed
-//        JFileChooser choix = new JFileChooser();
-//        FilenameFilter fileNameFilter;
-//        String[] imageTypes = ImageIO.getReaderFileSuffixes();
-//        FileNameExtensionFilter fnf = new FileNameExtensionFilter("Images", imageTypes);
-//        choix.setFileFilter(fnf);
-//        File userHome = new File(System.getProperty("user.home"));
-//        choix.setSelectedFile(userHome);
-//
-//        fileNameFilter = new FilenameFilter() {
-//            @Override
-//            public boolean accept(File file, String name) {
-//                return true;
-//            }
-//        };
-//
-//        int op = choix.showOpenDialog(null);
-//        if (op == JFileChooser.APPROVE_OPTION) {
-//            File eg = choix.getSelectedFile();
-//            // sélectionne tout le dossier dans lequel se situe l'image
-//            File dir = eg.getParentFile();
-//            try {
-//                File[] imageFiles = dir.listFiles(fileNameFilter);
-//                BufferedImage[] images = new BufferedImage[imageFiles.length];
-//                model.removeAllElements();
-//                for (int ii = 0; ii < images.length; ii++) {
-//                    paths.add(imageFiles[ii].getPath());
-//                    icons.add(new ImageIcon(imageFiles[ii].getPath()));
-//                    model.addElement(ImageIO.read(imageFiles[ii]));
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                JOptionPane.showMessageDialog(gui, "Erreur lors du chargement des images", "Erreur", JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
+  
     }//GEN-LAST:event_SauvegardeActionPerformed
 
     private void ZoomMoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZoomMoinsActionPerformed
         ti.zoomOut();
         ti.repaint();
-         BufferedImage bi = ti.getBi();
+        BufferedImage bi = ti.getBi();
         icons.set(i, new ImageIcon(bi));
         java.awt.Image img = (java.awt.Image) bi;
         model.setElementAt(new ImageIcon(img), i);
@@ -539,7 +492,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_ZoomMoinsActionPerformed
 
     private void imageListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_imageListValueChanged
-       
+
     }//GEN-LAST:event_imageListValueChanged
 
     private void jButtonReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReset1ActionPerformed
@@ -557,7 +510,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_ContrasteMoins1ActionPerformed
 
     private void MiroirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiroirActionPerformed
-        ti.symetrieVerticale();
+        ti.symetrieHorizontale();
         ti.repaint();
         this.updateUI();
     }//GEN-LAST:event_MiroirActionPerformed
@@ -593,7 +546,7 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_ContrastePlusActionPerformed
 
     private void RetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetourActionPerformed
-        PreImage preIm = new PreImage(this.personnel, this.dmr, this.e);
+        PreImage preIm = new PreImage(this.personnel,this.icons2,this.index,this.dmr, this.e);
         preIm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RetourActionPerformed

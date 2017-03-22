@@ -21,28 +21,15 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
      * Creates new form PageAccueil
      */
     private Personnel personnel;
-    private List<DMR> listeDMR;
+    private List<DMR> listeDMRrecherche;
 
     private String[] columnNames;
     private Object[][] data;
 
-    //voir utilisation
-    private CompteRendu cr;
-    private ArrayList<java.awt.Image> images;
-    private Examen e;
-    private TraitementImage ti;
-    private String date;
-    private DMR dmr;
-    private String nomPatient;
-    private String prenomPatient;
-    private String genre;
-    private String numSS;
-    private Genre g;
-
     public Consulter_DMR(Personnel personnel) {
 
         this.personnel = personnel;
-        this.listeDMR = new ArrayList<DMR>();
+        this.listeDMRrecherche = new ArrayList<DMR>();
 
         initComponents();
         this.setTitle("Consulter DMR");
@@ -117,18 +104,9 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
@@ -181,8 +159,6 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         NumSSPatient = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePatient = new javax.swing.JTable();
-        VisualiserDMR = new javax.swing.JButton();
-        jButtonTraiter = new javax.swing.JButton();
         jj = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -190,6 +166,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         jLabel18 = new javax.swing.JLabel();
         aa = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
+        Valider = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -373,28 +350,6 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         });
         jScrollPane3.setViewportView(jTablePatient);
 
-        VisualiserDMR.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        VisualiserDMR.setText("Visualiser DMR");
-        VisualiserDMR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        VisualiserDMR.setMinimumSize(new java.awt.Dimension(110, 30));
-        VisualiserDMR.setPreferredSize(new java.awt.Dimension(130, 30));
-        VisualiserDMR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VisualiserDMRActionPerformed(evt);
-            }
-        });
-
-        jButtonTraiter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonTraiter.setText("Traiter Image");
-        jButtonTraiter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        jButtonTraiter.setMinimumSize(new java.awt.Dimension(110, 30));
-        jButtonTraiter.setPreferredSize(new java.awt.Dimension(130, 30));
-        jButtonTraiter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTraiterActionPerformed(evt);
-            }
-        });
-
         jj.setText("31");
         jj.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -477,6 +432,17 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel19.setText("Rechercher par numéro de Sécurité sociale :");
 
+        Valider.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Valider.setText("Sélectionner");
+        Valider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Valider.setMinimumSize(new java.awt.Dimension(110, 30));
+        Valider.setPreferredSize(new java.awt.Dimension(130, 30));
+        Valider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ValiderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -513,7 +479,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(NumSSPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                                 .addComponent(LancerRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,17 +493,13 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                                             .addComponent(jLabel12)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(PrenomPatient))))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(VisualiserDMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(268, 268, 268)
+                .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LancerRecherche, VisualiserDMR, jButtonTraiter});
-
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -578,9 +540,7 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VisualiserDMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTraiter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Valider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
 
@@ -599,68 +559,31 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
 
     private void LancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LancerRechercheActionPerformed
         for (int i = 0; i < getListeDMR().size(); i++) {
-            if (((getListeDMR().get(i).getNomPatient().equalsIgnoreCase(NomPatient.getText())) && (getListeDMR().get(i).getPrenomPatient().equalsIgnoreCase(PrenomPatient.getText())) && (getListeDMR().get(i).getDateNaissance().equalsIgnoreCase(jj.getText() + "/" + mm.getText() + "/" + aa.getText()))) || (Integer.toString(getListeDMR().get(i).getNumSS()).equalsIgnoreCase(NumSSPatient.getText()))) {
-
-                int nbrligne = getListeDMR().size();
-                data = new Object[nbrligne][7];
-
-                if (getListeDMR().get(i).getIdDMR() != 0) {
-
-                    data[i][0] = getListeDMR().get(i).getNomPatient();
-                    data[i][1] = getListeDMR().get(i).getPrenomPatient();
-                    data[i][2] = getListeDMR().get(i).getGenre();
-                    data[i][3] = getListeDMR().get(i).getDateNaissance();
-                    data[i][4] = getListeDMR().get(i).getAdresse();
-                    data[i][5] = getListeDMR().get(i).getNumSS();
-                    data[i][6] = getListeDMR().get(i).getIdDMR();
-
-                }
-
-                jTablePatient.setModel(new DefaultTableModel(data, columnNames));
-
+            if (((getListeDMR().get(i).getNomPatient().equalsIgnoreCase(NomPatient.getText())) && (getListeDMR().get(i).getPrenomPatient().equalsIgnoreCase(PrenomPatient.getText())) && (getListeDMR().get(i).getDateNaissance().equalsIgnoreCase(jj.getText() + "/" + mm.getText() + "/" + aa.getText())) && (getListeDMR().get(i).getIdDMR() != 0)) || ((Integer.toString(getListeDMR().get(i).getNumSS()).equalsIgnoreCase(NumSSPatient.getText())) && (getListeDMR().get(i).getIdDMR() != 0))) {
+                this.listeDMRrecherche.add(getListeDMR().get(i));
             }
+        }
+        
+        int nbrligne = this.listeDMRrecherche.size();
+        data = new Object[nbrligne][7];
+
+        for (int j = 0; j < nbrligne; j++) {
+            data[j][0] = this.listeDMRrecherche.get(j).getNomPatient();
+            data[j][1] = this.listeDMRrecherche.get(j).getPrenomPatient();
+            data[j][2] = this.listeDMRrecherche.get(j).getGenre();
+            data[j][3] = this.listeDMRrecherche.get(j).getDateNaissance();
+            data[j][4] = this.listeDMRrecherche.get(j).getAdresse();
+            data[j][5] = this.listeDMRrecherche.get(j).getNumSS();
+            data[j][6] = this.listeDMRrecherche.get(j).getIdDMR();
+
+            jTablePatient.setModel(new DefaultTableModel(data, columnNames));
 
         }
     }//GEN-LAST:event_LancerRechercheActionPerformed
 
     private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
-        int row = jTablePatient.getSelectedRow();
-        int i = 0;
-        int compteur = 0;
-        boolean rep = false;
-        // while ((i < listeDMR.size()) && (rep == false)) {
-        compteur = 0;
-        //if (listeDMR.get(i).getDate().toString().equals(jTable.getValueAt(row, 0))
-        //  && listeDMR.get(i).getMedecin().toString().equals(jTable.getValueAt(row, 1))
-        //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable.getValueAt(row, 3))) {
-        //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-        //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable.getValueAt(row + j, 5))) {
-        //                        compteur++;
-        //                    }
-        //
-        //                }
-        //                if (compteur == listeFiche.get(i).getActes().size()) {
-        //                    rep = true;
-        //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-        //                    f.setVisible(true);
-        //                }
-        //
-        //            }
-        //            i++;
-        //        }
+
     }//GEN-LAST:event_jTablePatientMouseClicked
-
-    private void VisualiserDMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualiserDMRActionPerformed
-        AfficherDMR aDMR = new AfficherDMR(listeDMR.get(jTablePatient.getSelectedRow()));
-        aDMR.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_VisualiserDMRActionPerformed
-
-    private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
-//        Image i = new Image(this.personnel, this.images, this.i, this.e);
-//        i.setVisible(true);
-//        this.dispose();
-    }//GEN-LAST:event_jButtonTraiterActionPerformed
 
     private void jjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jjFocusGained
         jj.setText("");
@@ -724,6 +647,16 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         }
     }//GEN-LAST:event_aaKeyTyped
 
+    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
+        int row = jTablePatient.getSelectedRow();
+        int idDMR = (int) jTablePatient.getValueAt(row, 6);
+        DMR dmr;
+        dmr = new DMR(idDMR);
+        CDMR cdmr = new CDMR(this.personnel, dmr);
+        cdmr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ValiderActionPerformed
+
     /**
      *
      * @param args the command line arguments
@@ -734,11 +667,10 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
     private javax.swing.JTextField NomPatient;
     private javax.swing.JTextField NumSSPatient;
     private javax.swing.JTextField PrenomPatient;
-    private javax.swing.JButton VisualiserDMR;
+    private javax.swing.JButton Valider;
     private javax.swing.JTextField aa;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
-    private javax.swing.JButton jButtonTraiter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

@@ -1,24 +1,23 @@
 package UI;
 
 import NF.DMR;
-import NF.Genre;
 import NF.Personnel;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.util.ArrayList;
 
 public class Patient3 extends javax.swing.JFrame {
 
-    private DMR dmr;
     private Personnel personnel;
+    private DMR dmr;
 
     public Patient3(Personnel personnel, DMR dmr) {
-        initComponents();
-        this.dmr=dmr;
+        
         this.personnel = personnel;
+        this.dmr=dmr;
+        
+        initComponents();
         this.setTitle("Patient3");
         this.setLocationRelativeTo(null);
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
+        
     }
 
     /**

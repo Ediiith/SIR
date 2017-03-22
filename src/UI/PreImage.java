@@ -10,6 +10,7 @@ import NF.TraitementImage;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -35,16 +36,21 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private Examen e;
     private TraitementImage ti;
     private int idExamen;
-    private ArrayList<java.awt.Image> images;
+    private ArrayList<java.awt.Image> ims;
     private final DefaultListModel model;
     private final ArrayList<ImageIcon> icons;
     private ArrayList<String> paths;
     private int i;
 
-    public PreImage(Personnel personnel, DMR dmr, Examen e) {
-        model = new DefaultListModel();
-        icons = new ArrayList<>();
-        paths = new ArrayList<>();
+    public PreImage(Personnel personnel,ArrayList<ImageIcon> icons,int index, DMR dmr, Examen e) {
+        this.model = new DefaultListModel();
+        this.paths = new ArrayList<>();
+        if(index==-1){
+            this.icons = new ArrayList<>();
+        }
+        else {
+            this.icons=icons;
+        }
         this.personnel = personnel;
         this.dmr = dmr;
         this.e = e;
@@ -104,18 +110,9 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
@@ -123,20 +120,6 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 }
                 break;
 
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -433,7 +416,22 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
 
     private void EnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnregistrerActionPerformed
-
+      for (int j = 1; j < paths.size(); j++) {
+            try {
+                BufferedImage bi = (BufferedImage) icons.get(j).getImage();
+                File file = new File(paths.get(j));
+                try {
+                    ImageIO.write(bi, "png", file);
+                    System.out.println("File saved!");
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement des images", "Enregistrement", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (ClassCastException ex) {
+            }
+            this.e.setLienPACS(paths.get(j));
+        }
+        JOptionPane.showMessageDialog(this, "Les images ont bien été enregistrées", "Enregistrement", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_EnregistrerActionPerformed
 
     private void ImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ImagesValueChanged
@@ -443,8 +441,8 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     private void TraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraiterActionPerformed
         if (this.personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
             java.awt.Image im = (java.awt.Image) model.get(this.i);
-            Image i = new Image(this.personnel, this.dmr, im, this.e);
-            i.setVisible(true);
+            Image ima = new Image(this.personnel, this.dmr,this.icons, im, this.i,this.e);
+            ima.setVisible(true);
             this.dispose();
         } else {
             String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";

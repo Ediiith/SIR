@@ -80,18 +80,9 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
@@ -99,20 +90,6 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
 
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -444,7 +421,7 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (validation == JOptionPane.YES_OPTION) {
             this.e = new Examen(this.dmr, this.date, this.personnel, this.typeExamen);
-            PreImage preImage = new PreImage(this.personnel, this.dmr, this.e);
+            PreImage preImage = new PreImage(this.personnel, null,-1,this.dmr, this.e);
             preImage.setVisible(true);
             this.dispose();
             if (this.format.equalsIgnoreCase("Non numérique (impression)")) {

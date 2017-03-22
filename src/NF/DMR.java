@@ -6,10 +6,12 @@ import static BD.LectureDMR.existenceDMR;
 import static BD.LectureDMR.existenceIdDMR;
 import static BD.LectureDMR.lireAdresse_fromDMR;
 import static BD.LectureDMR.lireDateNaissance_fromDMR;
+import static BD.LectureDMR.lireEstAdmis;
 import static BD.LectureDMR.lireNomPatient_fromDMR;
 import static BD.LectureDMR.lirePrenomPatient_fromDMR;
 import static BD.LectureDMR.lireGenre_fromDMR;
 import static BD.LectureDMR.lireNumSS_fromDMR;
+import static BD.LectureDMR.lireTemporaire;
 import static BD.LectureDPI.existenceDPI;
 import static BD.LectureDPI.lireAdresse_fromDPI;
 import static BD.LectureDPI.lireIdDPI;
@@ -21,8 +23,10 @@ import java.util.List;
  *
  * @author JEMCare Solution
  */
+
 public class DMR {
 
+    
     //ATTRIBUTS   
     private int idDMR;
     private String nomPatient;
@@ -38,12 +42,14 @@ public class DMR {
     private boolean estAdmis;
     private boolean temporaire;
 
+    
     //CONSTRUCTEURS
+    
     //constructeur en connaissant le numéro du DMR : idDMR
     //si le dmr existe deja dans la base de donnees
     //remplit la listeDMR
     public DMR(int idDMR) {
-        if (existenceIdDMR(idDMR) == true) {
+        if (existenceIdDMR(idDMR) == true) {            
             this.idDMR = idDMR;
             this.nomPatient = lireNomPatient_fromDMR(idDMR);
             this.prenomPatient = lirePrenomPatient_fromDMR(idDMR);
@@ -56,8 +62,8 @@ public class DMR {
                 Examen e = new Examen(listeIdExamen_parIdDMR(idDMR).get(i), this);
                 this.ajouterExamen(e);
             }
-            this.estAdmis = true;
-            this.temporaire = false;
+            this.estAdmis = lireEstAdmis(idDMR);
+            this.temporaire = lireTemporaire(idDMR);
         }
     }
 
@@ -90,7 +96,7 @@ public class DMR {
     }
     //ne pas oublier dans le main ldmr.ajouterDMR(dmr)
 
-    public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS, String adresse) {
+ public DMR(String nomPatient, String prenomPatient, String dateNaissance, Genre genre, int numSS, String adresse) {
 
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
@@ -106,8 +112,9 @@ public class DMR {
         creerDMR(idDMR, nomPatient, prenomPatient, dateNaissance, genre, adresse, numSS);
 
     }
-
+ 
     //COMPARAISONS
+    
     //compare si deux instances de DMR sont proches pour nomPatient, prenomPatient et dateNaissance
     public boolean procheDe(String nom, String prenom, String date) {
         boolean proche = false;
@@ -145,7 +152,9 @@ public class DMR {
         }
     }
 
+    
     //AFFICHAGES
+    
     //retourne les informations d'un patient 
     public String afficherInfoPatient() {
         return "Prénom : " + prenomPatient + "\n Nom : " + nomPatient + "\n Né(e) le " + dateNaissance + "\n Genre : " + genre + " \n Adresse : " + adresse + "\n N° sécurité sociale : " + numSS + " \n DMR N° : " + idDMR + "\n";
@@ -167,8 +176,10 @@ public class DMR {
         }
         return s;
     }
-
+    
+    
     //GETS & SETS
+    
     //retourne idDMR
     public int getIdDMR() {
         return idDMR;
@@ -203,7 +214,7 @@ public class DMR {
     public int getNumSS() {
         return numSS;
     }
-
+    
     //retourne listeExamens
     public List<Examen> getListeExamens() {
         return listeExamens;
@@ -213,7 +224,7 @@ public class DMR {
     public void ajouterExamen(Examen examen) {
         listeExamens.add(examen);
     }
-
+    
     //retourne estAdmis
     public Boolean getEstAdmis() {
         return estAdmis;
@@ -222,6 +233,7 @@ public class DMR {
     //change estAdmis
     public void setEstAdmis(Boolean estAdmis) {
         this.estAdmis = estAdmis;
+        //base de donnees
     }
 
     //retourne temporaire

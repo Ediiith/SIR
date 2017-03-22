@@ -21,10 +21,6 @@ public class ListeDMR {
             ajouterDMR(dmr);
         }
     }
-    
-    public static void remplissageListeDMR() {
-        
-    }
 
     //ajoute un DMR à listeDMR
     public static void ajouterDMR(DMR dmr) {
@@ -47,6 +43,11 @@ public class ListeDMR {
         }
         return listeDMRadmis;
     }
+
+    //ajoute un DMR a listeDMRadmis
+    public static void ajouterDMRadmis(DMR dmr) {
+        getListeDMRadmis().add(dmr);
+    }
     
     //retourne la liste des DMR proches
     public static List<DMR> getListeDMRproches(String nom, String prenom, String date) {
@@ -59,7 +60,7 @@ public class ListeDMR {
         }
         return listeDMRproches;
     }
-
+    
     //retourne le nombre de DMR enregistrés dans le système
     public static String nombreDMR() {
         String s;

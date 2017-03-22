@@ -6,13 +6,6 @@
 package UI;
 
 import NF.CompteRendu;
-import NF.Examen;
-import NF.Personnel;
-import java.awt.print.PrinterException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -24,7 +17,6 @@ public class AfficherCR extends javax.swing.JFrame {
      * Creates new form affichageFiche
      */
 
-    private Examen e;
     private CompteRendu cr;
 
     public AfficherCR(CompteRendu cr) {

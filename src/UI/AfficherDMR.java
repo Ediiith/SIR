@@ -6,12 +6,6 @@
 package UI;
 
 import NF.DMR;
-import NF.Personnel;
-import java.awt.print.PrinterException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -27,7 +21,7 @@ public class AfficherDMR extends javax.swing.JFrame {
 
     public AfficherDMR(DMR dmr) {
         initComponents();
-        this.setTitle("affichage du DMR");
+        this.setTitle("Affichage du DMR");
         this.dmr=dmr;
         zoneAffichage.setText(this.dmr.afficherDMR());
     }

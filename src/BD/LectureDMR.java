@@ -377,5 +377,89 @@ public class LectureDMR {
 
     }
     
+    //recuperer si le patient est admis
+    public static boolean lireEstAdmis(int idDMR) {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        boolean estAdmis = false;
+        String estAdmisString = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from dmr where idDMR = " + idDMR + ";";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                estAdmisString = resultat.getString("estAdmis");
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        if (estAdmisString.compareTo("true") == 0) {
+            estAdmis = true;
+        }
+        if (estAdmisString.compareTo("false") == 0) {
+            estAdmis = false;
+        }
+        
+        return estAdmis;
+
+    }
+    
+    //recuperer le DMR est temporaire
+    public static boolean lireTemporaire(int idDMR) {
+
+        Connection cn = null;
+        Statement st = null;
+        ResultSet resultat = null;
+        boolean temporaire = false;
+        String temporaireString = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            cn = (Connection) DriverManager.getConnection(InitialisationIP.urlBD, InitialisationIP.idBD, InitialisationIP.mdpBD);
+            st = (Statement) cn.createStatement();
+            String sql = "select * from dmr where idDMR = " + idDMR + ";";
+            resultat = (ResultSet) st.executeQuery(sql);
+            while (resultat.next()) {
+                temporaireString = resultat.getString("temporaire");
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } catch (ClassNotFoundException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+                st.close();
+            } catch (SQLException exc) {
+                exc.printStackTrace();
+            }
+        }
+
+        if (temporaireString.compareTo("true") == 0) {
+            temporaire = true;
+        }
+        if (temporaireString.compareTo("false") == 0) {
+            temporaire = false;
+        }
+        
+        return temporaire;
+
+    }
+    
 }
 

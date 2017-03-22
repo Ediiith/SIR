@@ -3,9 +3,6 @@ package UI;
 import NF.DMR;
 import NF.Genre;
 import NF.Personnel;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.util.ArrayList;
 
 public class Patient4 extends javax.swing.JFrame {
 
@@ -18,6 +15,7 @@ public class Patient4 extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Patient4");
         this.setLocationRelativeTo(null);
+        
         this.personnel = personnel;
         this.adresse=this.Adresse.getText();
         this.g = toGenre(genre);

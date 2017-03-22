@@ -1,75 +1,57 @@
 package UI;
 
-import NF.CompteRendu;
-import NF.DMR;
 import NF.Examen;
-import NF.ListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
 import static NF.ListeExamenCR.getListeExamenCR;
 
 public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
     private Personnel personnel;
-    private CompteRendu cr;
-    private List<DMR> listeDMR;
-    private Examen e;
-    private DMR dmr;
-    private int i;
-    private ArrayList<java.awt.Image> images;
 
     private String[] columnNames;
     private Object[][] data;
 
-    public CpR(Personnel personnel, CompteRendu cr) {
+    public CpR(Personnel personnel) {
+
+        this.personnel = personnel;
+
         initComponents();
         this.setTitle("DMR temporaire");
-        this.setExtendedState(CpR.MAXIMIZED_BOTH);
-        this.personnel = personnel;
         this.setExtendedState(CpR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(Integer.toString(personnel.getIdPersonnel()));
         jTextFieldStatut.setText(personnel.getStatut().toString());
 
-        for (int i = 0; i < getListeExamenCR().size(); i++) {
-            this.jTableCR.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            this.columnNames = new String[7];
-            this.columnNames[0] = "Identifiant examen";
-            this.columnNames[1] = "Nom du patient";
-            this.columnNames[2] = "Prénom du patient";
-            this.columnNames[3] = "Date examen";
-            this.columnNames[4] = "Reponsable";
-            this.columnNames[5] = "Type examen";
-            this.columnNames[6] = "Identifiant unique";
+        this.jTableCR.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.columnNames = new String[7];
+        this.columnNames[0] = "Identifiant examen";
+        this.columnNames[1] = "Nom du patient";
+        this.columnNames[2] = "Prénom du patient";
+        this.columnNames[3] = "Date examen";
+        this.columnNames[4] = "Reponsable";
+        this.columnNames[5] = "Type examen";
+        this.columnNames[6] = "Identifiant unique";
 
-            int nbrligne = getListeExamenCR().size();
-            int k = 0;
-            data = new Object[nbrligne][7];
+        int nbrligne = getListeExamenCR().size();
+        data = new Object[nbrligne][7];
 
-            for (int j = 0; j < nbrligne; j++) {
-                data[k][0] = getListeExamenCR().get(i).getIdExamen();
-                data[k][1] = getListeExamenCR().get(i).getDMR().getNomPatient();
-                data[k][2] = getListeExamenCR().get(i).getDMR().getPrenomPatient();
-                data[k][3] = getListeExamenCR().get(i).getDateExamen();
-                data[k][4] = getListeExamenCR().get(i).getResponsable().getNomPersonnel();
-                data[k][5] = getListeExamenCR().get(i).getTypeExamen();
-                data[k][6] = getListeExamenCR().get(i).getDMR().getIdDMR();
-                k++;
-            }
-            
-            jTableCR.setModel(new DefaultTableModel(data, columnNames));
+        for (int i = 0; i < nbrligne; i++) {
+            data[i][0] = getListeExamenCR().get(i).getIdExamen();
+            data[i][1] = getListeExamenCR().get(i).getDMR().getNomPatient();
+            data[i][2] = getListeExamenCR().get(i).getDMR().getPrenomPatient();
+            data[i][3] = getListeExamenCR().get(i).getDateExamen();
+            data[i][4] = getListeExamenCR().get(i).getResponsable().getNomPersonnel();
+            data[i][5] = getListeExamenCR().get(i).getTypeExamen();
+            data[i][6] = getListeExamenCR().get(i).getDMR().getIdDMR();
         }
+
+        jTableCR.setModel(new DefaultTableModel(data, columnNames));
 
     }
 
@@ -106,18 +88,9 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
@@ -141,8 +114,8 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 //                break;
             default:
                 break;
-        }
 
+        }
     }
 
     /**
@@ -406,8 +379,14 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
     private void jButtonSaisirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaisirActionPerformed
         int row = jTableCR.getSelectedRow();
-        int idExamen = (int) jTableCR.getValueAt(row, 6);
-        SaisirCR sCR = new SaisirCR(this.personnel);
+        int idExamen = (int) jTableCR.getValueAt(row, 0);
+        Examen examen = null;
+        for(int i=0; i<getListeExamenCR().size(); i++) {
+            if(getListeExamenCR().get(i).getIdExamen()==idExamen) {
+                examen = getListeExamenCR().get(i);
+            }
+        }
+        SaisirCR sCR = new SaisirCR(this.personnel, examen);
         sCR.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonSaisirActionPerformed

@@ -1,33 +1,26 @@
 package UI;
 
-import NF.CompteRendu;
-import NF.DMR;
-import NF.Examen;
 import NF.Personnel;
 import NF.Statut;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 public class Patient extends javax.swing.JFrame implements TreeSelectionListener {
 
     private Personnel personnel;
-    private CompteRendu cr;
-    private List<DMR> listeDMR;
-    private Examen e;
-    private int i;
-    private ArrayList<java.awt.Image> images;
 
     Patient(Personnel personnel) {
+        
+        this.personnel = personnel;
+        
         initComponents();
         this.setTitle("Admission patient");
-        this.personnel = personnel;
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
+        
     }
 
     @Override
@@ -52,7 +45,6 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
@@ -63,18 +55,9 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 ) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {

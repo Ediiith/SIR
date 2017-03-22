@@ -3,40 +3,71 @@ package UI;
 import NF.CompteRendu;
 import NF.DMR;
 import NF.Examen;
+import NF.Genre;
+import static NF.ListeDMR.getListeDMR;
+import static NF.ListeExamenCR.getListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
+import NF.TraitementImage;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
-public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionListener {
+public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
      * Creates new form PageAccueil
      */
+    
     private Personnel personnel;
-    private CompteRendu cr;
-    private List<DMR> listeDMR;
-    private ArrayList<java.awt.Image> images;
+    private DMR dmr;
 
-    public AssocierDMR(Personnel personnel, List<DMR> listeDMR) {
-        initComponents();
-        this.setTitle("Associer examen au DMR");
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+    private String[] columnNames;
+    private Object[][] data;
+
+    public CDMR(Personnel personnel, DMR dmr) {
+
         this.personnel = personnel;
-        this.listeDMR = listeDMR;
+        this.dmr = dmr;
+
+        initComponents();
+        this.setTitle("CDMR");
+        this.setExtendedState(CDMR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        this.jTableExamen.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.jTableDMR.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        this.resumerPatient.setText(this.dmr.afficherInfoPatient());
+        
+        this.columnNames = new String[4];
+        this.columnNames[0] = "id";
+        this.columnNames[1] = "Date";
+        this.columnNames[2] = "Responsable";
+        this.columnNames[3] = "Type";
+
+        int nbrligne = this.dmr.getListeExamens().size();
+        data = new Object[nbrligne][4];
+
+        for (int i = 0; i < this.dmr.getListeExamens().size(); i++) {
+
+                data[i][0] = this.dmr.getListeExamens().get(i).getIdExamen();
+                data[i][1] = this.dmr.getListeExamens().get(i).getDateExamen();
+                data[i][2] = this.dmr.getListeExamens().get(i).getResponsable();
+                data[i][3] = this.dmr.getListeExamens().get(i).getTypeExamen();
+            
+            jTablePatient.setModel(new DefaultTableModel(data, columnNames));
+
+        }
 
     }
 
     @Override
+
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
@@ -52,13 +83,12 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
                 break;
             case "Consultation d'un DMR":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    AssocierDMR cDMR = new AssocierDMR(this.personnel, this.listeDMR);
+                    CDMR cDMR = new CDMR(this.personnel, this.dmr);
                     cDMR.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
@@ -69,29 +99,18 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-
             default:
                 break;
         }
-
     }
 
     /**
@@ -124,18 +143,16 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel15 = new javax.swing.JLabel();
-        TrierSelon = new javax.swing.JComboBox();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTableExamen = new javax.swing.JTable();
-        JButtonAssocier = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTableDMR = new javax.swing.JTable();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        TrierSelon1 = new javax.swing.JComboBox();
+        jTablePatient = new javax.swing.JTable();
+        AfficherDMR = new javax.swing.JButton();
+        SortiePatient = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resumerPatient = new javax.swing.JTextPane();
+        jLabel5 = new javax.swing.JLabel();
+        Image = new javax.swing.JButton();
+        CR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 300));
@@ -277,60 +294,72 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel6.setText("Associer examen à un DMR");
+        jLabel6.setText("DMR");
 
         jSeparator1.setForeground(new java.awt.Color(153, 0, 0));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Sélectionner un DMR");
-
         jSeparator2.setForeground(new java.awt.Color(153, 0, 0));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setText("Trier :");
+        jTablePatient.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        TrierSelon.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nom", "Prénom", "Date", "Médecin", "Date de naissance", "Numéro unique" }));
-        TrierSelon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TrierSelonActionPerformed(evt);
+            },
+            new String [] {
+
             }
-        });
-
-        jTableExamen.addMouseListener(new java.awt.event.MouseAdapter() {
+        ));
+        jTablePatient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableExamenMouseClicked(evt);
+                jTablePatientMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(jTableExamen);
+        jScrollPane3.setViewportView(jTablePatient);
 
-        JButtonAssocier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        JButtonAssocier.setText("Associer");
-        JButtonAssocier.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
-        JButtonAssocier.setMinimumSize(new java.awt.Dimension(110, 30));
-        JButtonAssocier.setPreferredSize(new java.awt.Dimension(130, 30));
-        JButtonAssocier.addActionListener(new java.awt.event.ActionListener() {
+        AfficherDMR.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        AfficherDMR.setText("Afficher DMR");
+        AfficherDMR.setMinimumSize(new java.awt.Dimension(110, 30));
+        AfficherDMR.setPreferredSize(new java.awt.Dimension(130, 30));
+        AfficherDMR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JButtonAssocierActionPerformed(evt);
+                AfficherDMRActionPerformed(evt);
             }
         });
 
-        jTableDMR.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableDMRMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(jTableDMR);
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("Sélectionner un examen");
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel17.setText("Trier :");
-
-        TrierSelon1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nom", "Prénom", "Date", "Médecin", "Date de naissance", "Numéro unique" }));
-        TrierSelon1.addActionListener(new java.awt.event.ActionListener() {
+        SortiePatient.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SortiePatient.setText("Sortie Patient");
+        SortiePatient.setMinimumSize(new java.awt.Dimension(110, 30));
+        SortiePatient.setPreferredSize(new java.awt.Dimension(130, 30));
+        SortiePatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TrierSelon1ActionPerformed(evt);
+                SortiePatientActionPerformed(evt);
+            }
+        });
+
+        resumerPatient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jScrollPane2.setViewportView(resumerPatient);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Patient :");
+
+        Image.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Image.setText("Image");
+        Image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        Image.setMinimumSize(new java.awt.Dimension(110, 30));
+        Image.setPreferredSize(new java.awt.Dimension(130, 30));
+        Image.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImageActionPerformed(evt);
+            }
+        });
+
+        CR.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CR.setText("Compte-rendu");
+        CR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0)));
+        CR.setMinimumSize(new java.awt.Dimension(110, 30));
+        CR.setPreferredSize(new java.awt.Dimension(130, 30));
+        CR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CRActionPerformed(evt);
             }
         });
 
@@ -343,31 +372,28 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TrierSelon1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel15)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TrierSelon, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5)))))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AfficherDMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SortiePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addGap(114, 114, 114))))
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(JButtonAssocier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(113, 113, 113)
+                .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,31 +401,27 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(SortiePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AfficherDMR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(TrierSelon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(TrierSelon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JButtonAssocier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jSplitPane.setRightComponent(jPanel5);
@@ -415,50 +437,46 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void TrierSelonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrierSelonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TrierSelonActionPerformed
+    private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
 
-    private void jTableExamenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableExamenMouseClicked
-        int row = jTableExamen.getSelectedRow();
-        int i = 0;
-        int compteur = 0;
-        boolean rep = false;
-        //        while ((i < listeFiche.size()) && (rep == false)) {
-        //            compteur = 0;
-        //            if (listeFiche.get(i).getDate().toString().equals(jTable.getValueAt(row, 0))
-        //                && listeFiche.get(i).getMedecin().toString().equals(jTable.getValueAt(row, 1))
-        //                && listeFiche.get(i).getPatient().getNumSecu().equals(jTable.getValueAt(row, 3))) {
-        //                for (int j = 0; j < listeFiche.get(i).getActes().size(); j++) {
-        //                    if (listeFiche.get(i).getActe(j).getCode().toString().equals(jTable.getValueAt(row + j, 5))) {
-        //                        compteur++;
-        //                    }
-        //
-        //                }
-        //                if (compteur == listeFiche.get(i).getActes().size()) {
-        //                    rep = true;
-        //                    AffichageFiche f = new AffichageFiche(listeFiche.get(i),this.statut);
-        //                    f.setVisible(true);
-        //                }
-        //
-        //            }
-        //            i++;
-        //        }
-    }//GEN-LAST:event_jTableExamenMouseClicked
+    }//GEN-LAST:event_jTablePatientMouseClicked
 
-    private void JButtonAssocierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonAssocierActionPerformed
-        AfficherDMR aDMR = new AfficherDMR(listeDMR.get(jTableExamen.getSelectedRow()));
+    private void AfficherDMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfficherDMRActionPerformed
+        AfficherDMR aDMR = new AfficherDMR(this.dmr);
         aDMR.setVisible(true);
+    }//GEN-LAST:event_AfficherDMRActionPerformed
+
+    private void SortiePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortiePatientActionPerformed
+
+    }//GEN-LAST:event_SortiePatientActionPerformed
+
+    private void ImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImageActionPerformed
+        int row = jTablePatient.getSelectedRow();
+        int idExamen = (int) jTablePatient.getValueAt(row, 0);
+        Examen examen = null;
+        for(int i=0; i<getListeExamenCR().size(); i++) {
+            if(getListeExamenCR().get(i).getIdExamen()==idExamen) {
+                examen = getListeExamenCR().get(i);
+            }
+        }
+        PreImage pi = new PreImage(this.personnel, this.dmr, examen);
+        pi.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_JButtonAssocierActionPerformed
+    }//GEN-LAST:event_ImageActionPerformed
 
-    private void jTableDMRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDMRMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTableDMRMouseClicked
-
-    private void TrierSelon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrierSelon1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TrierSelon1ActionPerformed
+    private void CRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRActionPerformed
+        int row = jTablePatient.getSelectedRow();
+        int idExamen = (int) jTablePatient.getValueAt(row, 0);
+        Examen examen = null;
+        for(int i=0; i<getListeExamenCR().size(); i++) {
+            if(getListeExamenCR().get(i).getIdExamen()==idExamen) {
+                examen = getListeExamenCR().get(i);
+            }
+        }
+        SaisirCR cr1 = new SaisirCR(this.personnel, examen);
+        cr1.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CRActionPerformed
 
     /**
      *
@@ -466,17 +484,15 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JButtonAssocier;
-    private javax.swing.JComboBox TrierSelon;
-    private javax.swing.JComboBox TrierSelon1;
+    private javax.swing.JButton AfficherDMR;
+    private javax.swing.JButton CR;
+    private javax.swing.JButton Image;
+    private javax.swing.JButton SortiePatient;
     private javax.swing.JPanel barreDuHaut;
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -489,16 +505,16 @@ public class AssocierDMR extends javax.swing.JFrame implements TreeSelectionList
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTable jTableDMR;
-    private javax.swing.JTable jTableExamen;
+    private javax.swing.JTable jTablePatient;
     private javax.swing.JLabel jTextFieldID;
     private javax.swing.JLabel jTextFieldStatut;
     private javax.swing.JTree jTree;
+    private javax.swing.JTextPane resumerPatient;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -5,6 +5,9 @@ import NF.DMR;
 import NF.Examen;
 import NF.Genre;
 import NF.ListeDMR;
+import static NF.ListeDMR.ajouterDMRadmis;
+import static NF.ListeDMR.getListeDMR;
+import static NF.ListeDMR.getListeDMRproches;
 import NF.Personnel;
 import NF.Statut;
 import java.util.ArrayList;
@@ -19,32 +22,30 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
     /**
      * Creates new form PageAccueil
      */
+    
     private Personnel personnel;
-    private CompteRendu cr;
-    private List<DMR> listeDMR;
-    private Examen e;
-    private ArrayList<java.awt.Image> images;
-    private DMR dmr;
     private Genre g;
     private String date;
-    private String[] columnNames;
-    private Object[][] data;
     private String nom;
     private String prenom;
     private String genre;
     private String numSS;
     private DMR dmr1;
-    private ListeDMR listeDMR2;
     private List<DMR> listDMRproches;
 
+    private String[] columnNames;
+    private Object[][] data;
+    
     public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa, String numSS) {
+        
         initComponents();
-        this.personnel = personnel;
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.toString());
         jTextFieldStatut.setText(personnel.getStatut().toString());
+        
+        this.personnel = personnel;
         this.resumerPatient.setText(nom + " " + prenom + "\n" + genre + "\n" + "né(e) le " + jj + "/" + mm + "/" + aa);
         this.resumerPatient.setEditable(false);
         this.nom = nom;
@@ -53,10 +54,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         this.genre = genre;
         this.g = toGenre(genre);
         this.date = "" + jj + "/" + mm + "/" + aa;
-        //this.dmr = new DMR(nom, prenom, date, g, Integer.parseInt(numSS));
-        this.listeDMR2 = new ListeDMR();
-        this.listeDMR2.remplissageListeDMR();
-        this.listDMRproches = this.listeDMR2.getListeDMRproches(this.nom, this.prenom, this.date);
+        this.listDMRproches = getListeDMRproches(this.nom, this.prenom, this.date);
 
         this.jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.columnNames = new String[7];
@@ -69,8 +67,8 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         this.columnNames[6] = "Identifiant unique";
 
         int nbrligne = this.listDMRproches.size();
-        int k = 0;
         data = new Object[nbrligne][7];
+        
         for (int i = 0; i < nbrligne; i++) {
             data[i][0] = this.listDMRproches.get(i).getNomPatient();
             data[i][1] = this.listDMRproches.get(i).getPrenomPatient();
@@ -106,7 +104,6 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
-
                 break;
             case "Procéder à un examen":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
@@ -117,18 +114,9 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-            case "Associer examen au DMR":
-                if (personnel.getStatut().compareTo(Statut.MANIPULATEUR) == 0) {
-                    AssocierDMR a = new AssocierDMR(this.personnel, this.listeDMR);
-                    a.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-                }
-                break;
             case "Compte-rendu":
                 if (personnel.getStatut().compareTo(Statut.RADIOLOGUE) == 0 || personnel.getStatut().compareTo(Statut.CHEF_SERVICE) == 0) {
-                    CpR cr1 = new CpR(this.personnel, this.cr);
+                    CpR cr1 = new CpR(this.personnel);
                     cr1.setVisible(true);
                     this.dispose();
                 } else {
@@ -137,8 +125,8 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 break;
             default:
                 break;
+                
         }
-
     }
 
     /**
@@ -249,8 +237,6 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Consultation d'un DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Procéder à un examen");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Associer examen au DMR");
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Compte-rendu");
         treeNode1.add(treeNode2);
@@ -448,6 +434,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         int row = jTable1.getSelectedRow();
         int idDMR = (int) jTable1.getValueAt(row, 6);
         this.dmr1 = new DMR(idDMR);
+        ajouterDMRadmis(this.dmr1);
         Patient3 p3 = new Patient3(this.personnel, this.dmr1);
         p3.setVisible(true);
         this.dispose();
