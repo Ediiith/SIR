@@ -460,6 +460,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 File[] imageFiles = dir.listFiles(fileNameFilter);
                 BufferedImage[] im = new BufferedImage[imageFiles.length];
                 model.removeAllElements();
+                paths.add(dir.getPath());
                 for (int ii = 0; ii < im.length; ii++) {
                     paths.add(imageFiles[ii].getPath());
                     icons.add(new ImageIcon(imageFiles[ii].getPath()));
