@@ -397,7 +397,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
 
     private void EnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnregistrerActionPerformed
-      if(this.e.getLienPACS().equalsIgnoreCase(this.icons.toString())){
+     // if(this.e.getLienPACS().equalsIgnoreCase(this.icons.toString())){
         for (int j = 1; j < paths.size(); j++) {
             try {
                 BufferedImage bi = (BufferedImage) icons.get(j).getImage();
@@ -413,9 +413,9 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
             this.e.setLienPACS(paths.get(j));
         }
         JOptionPane.showMessageDialog(this, "Les images ont bien été enregistrées", "Enregistrement", JOptionPane.INFORMATION_MESSAGE);
-      }else{
-          JOptionPane.showMessageDialog(this, "Les images sont déjà enregistrées", "Enregistrement", JOptionPane.INFORMATION_MESSAGE);
-      }
+//      }else{
+//          JOptionPane.showMessageDialog(this, "Les images sont déjà enregistrées", "Enregistrement", JOptionPane.INFORMATION_MESSAGE);
+//      }
     }//GEN-LAST:event_EnregistrerActionPerformed
 
     private void ImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ImagesValueChanged
