@@ -1,8 +1,6 @@
 package UI;
 
 import BD.InitialisationIP;
-import NF.ListeDMR;
-import NF.ListeExamenCR;
 import NF.Personnel;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -23,16 +21,11 @@ public class PageDeConnexion extends javax.swing.JFrame {
 
     private Personnel p;
 
-    ListeExamenCR listeExamenCR;
-    ListeDMR listeDMRtot;
-
     public PageDeConnexion() {
         initComponents();
         this.setTitle("Connexion");
         this.setLocationRelativeTo(null);
 
-        listeExamenCR = new ListeExamenCR();
-        listeDMRtot = new ListeDMR();
     }
 
     /**

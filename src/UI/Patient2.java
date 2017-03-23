@@ -365,7 +365,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         });
 
         jTable1.setPreferredSize(new java.awt.Dimension(700, 200));
-        jTable1.setSelectionBackground(new java.awt.Color(153, 0, 0));
+        jTable1.setSelectionBackground(new java.awt.Color(255, 102, 102));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);

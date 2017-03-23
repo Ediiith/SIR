@@ -49,6 +49,11 @@ public class ListeDMR {
         getListeDMRadmis().add(dmr);
     }
     
+    //supprime un DMR de listeDMRadmis
+    public static void supprimerDMRadmis(DMR dmr) {
+        getListeDMRadmis().remove(dmr);
+    }
+    
     //retourne la liste des DMR proches
     public static List<DMR> getListeDMRproches(String nom, String prenom, String date) {
         List<DMR> listeDMRproches = new ArrayList<DMR>();

@@ -15,7 +15,6 @@ import java.awt.Desktop;
  *
  * @author JEMCare Solution
  */
-
 public class Patient extends javax.swing.JFrame implements TreeSelectionListener {
 
     private Personnel personnel;
@@ -565,20 +564,6 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_GenrePatientActionPerformed
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
-        String date = this.jj.toString();
-        date += this.mm.toString();
-        date += this.aa.toString();
-        System.out.println(date);
-//       int validation = JOptionPane.showConfirmDialog(null,
-//                "Etes vous certain des informations saisies?", "Enregistrement de l'examen",
-//                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//        
-//        if (validation == JOptionPane.YES_OPTION) {
-//            patient = new DMR(NomPatient.getText(), PrenomPatient.getText(), date, genre, NumSS.getColumns());
-//            Patient2 p2 = new Patient2(this.personnel, NomPatient.getText(), PrenomPatient.getText(), GenrePatient.getSelectedItem().toString(), jj.getText(), mm.getText(), aa.getText(), NumSS.getColumns());
-//            p2.setVisible(true);
-//            this.dispose();
-//        }
         Patient2 p2 = new Patient2(this.personnel, NomPatient.getText(), PrenomPatient.getText(), GenrePatient.getSelectedItem().toString(), jj.getText(), mm.getText(), aa.getText(), NumSS.getColumns());
         p2.setVisible(true);
         this.dispose();

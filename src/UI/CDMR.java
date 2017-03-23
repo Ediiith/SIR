@@ -2,18 +2,18 @@ package UI;
 
 import NF.DMR;
 import NF.Examen;
-
+import static NF.ListeDMR.supprimerDMRadmis;
 import static NF.ListeExamenCR.getListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
+import java.awt.Desktop;
+import java.io.File;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
-import java.io.File;
-import java.awt.Desktop;
 
 /**
  *
@@ -33,6 +33,7 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         this.dmr = dmr;
 
         initComponents();
+        this.setTitle("CDMR");
         this.setExtendedState(CDMR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
@@ -41,19 +42,21 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         resumerPatient.setText(this.dmr.afficherInfoPatient());
 
         jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.columnNames = new String[3];
-        this.columnNames[0] = "id";
-        this.columnNames[1] = "Date";
-        this.columnNames[2] = "Type";
+        this.columnNames = new String[4];
+        this.columnNames[0] = "Identifiant examen";
+        this.columnNames[1] = "Date examen";
+        this.columnNames[2] = "Type examen";
+        this.columnNames[3] = "Praticien responsable";
 
         int nbrligne = this.dmr.getListeExamens().size();
-        data = new Object[nbrligne][3];
+        data = new Object[nbrligne][4];
 
         for (int i = 0; i < nbrligne; i++) {
 
             data[i][0] = this.dmr.getListeExamens().get(i).getIdExamen();
             data[i][1] = this.dmr.getListeExamens().get(i).getDateExamen();
             data[i][2] = this.dmr.getListeExamens().get(i).getTypeExamen();
+            data[i][3] = this.dmr.getListeExamens().get(i).getResponsable().toString();
 
         }
 
@@ -184,8 +187,8 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel20.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel20.setPreferredSize(new java.awt.Dimension(30, 30));
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel20MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel20MouseClicked(evt);
             }
         });
 
@@ -322,6 +325,7 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
             }
         ));
+        jTablePatient.setSelectionBackground(new java.awt.Color(255, 102, 102));
         jTablePatient.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTablePatientMouseClicked(evt);
@@ -496,6 +500,13 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
     private void SortiePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortiePatientActionPerformed
         this.dmr.setEstAdmis(false);
+        supprimerDMRadmis(this.dmr);
+        if (this.dmr.getEstAdmis() == true) {
+            JOptionPane.showMessageDialog(this, "Le patient n'est plus admis", "Sortie patient", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Action impossible \n   Le patient n'est pas admis actuellement", "Sortie patient", JOptionPane.INFORMATION_MESSAGE);
+        }
+
         PageAccueil pa = new PageAccueil(this.personnel);
         pa.setVisible(true);
         this.dispose();
@@ -522,20 +533,23 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         for (int i = 0; i < getListeExamenCR().size(); i++) {
             if (getListeExamenCR().get(i).getIdExamen() == idExamen) {
                 examen = getListeExamenCR().get(i);
+                SaisirCR cr1 = new SaisirCR(this.personnel, examen);
+                cr1.setVisible(true);
+                this.dispose();
             }
         }
-        SaisirCR cr1 = new SaisirCR(this.personnel, examen);
-        cr1.setVisible(true);
-        this.dispose();
+        if (examen == null) {
+            JOptionPane.showMessageDialog(this, "Action impossible \n   Compte rendu déjà saisi", "Compte rendu", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_CRActionPerformed
 
     private void AfficherCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfficherCRActionPerformed
         int row = jTablePatient.getSelectedRow();
         int idExamen = (int) jTablePatient.getValueAt(row, 0);
         Examen examen = null;
-        for (int i = 0; i < getListeExamenCR().size(); i++) {
-            if (getListeExamenCR().get(i).getIdExamen() == idExamen) {
-                examen = getListeExamenCR().get(i);
+        for (int i = 0; i < this.dmr.getListeExamens().size(); i++) {
+            if (this.dmr.getListeExamens().get(i).getIdExamen() == idExamen) {
+                examen = this.dmr.getListeExamens().get(i);
             }
         }
         AfficherCR aCR = new AfficherCR(examen);
@@ -548,7 +562,7 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         this.dispose();
     }//GEN-LAST:event_QuitterActionPerformed
 
-    private void jLabel20MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MousePressed
+    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
         try {
             File f = new File("ManuelUtilisation.pdf");
             FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
@@ -556,7 +570,8 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
             d.open(f);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
-        }    }//GEN-LAST:event_jLabel20MousePressed
+        }
+    }//GEN-LAST:event_jLabel20MouseClicked
 
     /**
      *

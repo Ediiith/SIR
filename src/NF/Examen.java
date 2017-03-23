@@ -7,14 +7,18 @@ import static BD.LectureExamen.existenceExamen;
 import static BD.LectureExamen.genererIdExamen;
 import static BD.LectureExamen.lireCompteRendu;
 import static BD.LectureExamen.lireDateExamen;
+import static BD.LectureExamen.lireIdResponsable;
 import static BD.LectureExamen.lireLienPACS;
 import static BD.LectureExamen.lireTypeExamen;
 
 import static NF.ListeExamenCR.ajouterExamenCR;
+import java.util.ArrayList;
+
+import java.util.List;
 
 /**
  *
- * @author JEMCare Solution
+ * @author Edith
  */
 
 public class Examen {
@@ -50,7 +54,7 @@ public class Examen {
             this.idExamen = idExamen;
             this.dmr = dmr;
             this.dateExamen = lireDateExamen(idExamen);
-            //this.responsable = ;
+            this.responsable = new Personnel(lireIdResponsable(idExamen));
             this.typeExamen = lireTypeExamen(idExamen);
             this.compteRendu = lireCompteRendu(idExamen);
             this.lienPACS = lireLienPACS(idExamen);

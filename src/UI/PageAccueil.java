@@ -1,5 +1,7 @@
 package UI;
 
+import NF.ListeDMR;
+import NF.ListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
 import javax.swing.event.TreeSelectionEvent;
@@ -13,13 +15,19 @@ import java.awt.Desktop;
  *
  * @author JEMCare Solution
  */
-public class PageAccueil extends javax.swing.JFrame implements TreeSelectionListener {
 
+public class PageAccueil extends javax.swing.JFrame implements TreeSelectionListener {
     private Personnel personnel;
+
+    ListeExamenCR listeExamenCR;
+    ListeDMR listeDMRtot;
 
     public PageAccueil(Personnel personnel) {
 
         this.personnel = personnel;
+
+        listeExamenCR = new ListeExamenCR();
+        listeDMRtot = new ListeDMR();
 
         initComponents();
         this.setTitle("Page d'Accueil");
@@ -151,8 +159,8 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jLabel17.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 30));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel17MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
             }
         });
 
@@ -348,7 +356,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
 
-    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         try {
             File f = new File("ManuelUtilisation.pdf");
             FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
@@ -357,7 +365,7 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
         }
-    }//GEN-LAST:event_jLabel17MousePressed
+    }//GEN-LAST:event_jLabel17MouseClicked
 
     /**
      *

@@ -8,15 +8,16 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import static NF.ListeExamenCR.getListeExamenCR;
+import java.awt.Desktop;
+import java.io.File;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
-import java.io.File;
-import java.awt.Desktop;
 
 /**
  *
  * @author JEMCare Solution
  */
+
 public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
     private Personnel personnel;
@@ -42,7 +43,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         this.columnNames[1] = "Nom du patient";
         this.columnNames[2] = "Prénom du patient";
         this.columnNames[3] = "Date examen";
-        this.columnNames[4] = "Reponsable";
+        this.columnNames[4] = "Praticien reponsable";
         this.columnNames[5] = "Type examen";
         this.columnNames[6] = "Identifiant unique";
 
@@ -51,16 +52,15 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
         for (int i = 0; i < nbrligne; i++) {
             data[i][0] = getListeExamenCR().get(i).getIdExamen();
-            //data[i][1] = getListeExamenCR().get(i).getDMR().getNomPatient();
-            //data[i][2] = getListeExamenCR().get(i).getDMR().getPrenomPatient();
+            data[i][1] = getListeExamenCR().get(i).getDMR().getNomPatient();
+            data[i][2] = getListeExamenCR().get(i).getDMR().getPrenomPatient();
             data[i][3] = getListeExamenCR().get(i).getDateExamen();
-            //data[i][4] = getListeExamenCR().get(i).getResponsable().getNomPersonnel();
+            data[i][4] = getListeExamenCR().get(i).getResponsable().toString();
             data[i][5] = getListeExamenCR().get(i).getTypeExamen();
-            //data[i][6] = getListeExamenCR().get(i).getDMR().getIdDMR();
+            data[i][6] = getListeExamenCR().get(i).getDMR().getIdDMR();
         }
 
         jTableCR.setModel(new DefaultTableModel(data, columnNames));
-        
 
     }
 
@@ -69,7 +69,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
-            case "Admission patient": //secretaire
+            case "Admission patient": 
                 if (personnel.getStatut().compareTo(Statut.SECRETAIRE) == 0) {
                     Patient p = new Patient(this.personnel);
                     p.setVisible(true);
@@ -183,8 +183,8 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel17.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 30));
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel17MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
             }
         });
 
@@ -219,11 +219,12 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                     .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonDeco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         barreDuHaut.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -337,7 +338,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
             }
         ));
         jTableCR.setPreferredSize(new java.awt.Dimension(700, 150));
-        jTableCR.setSelectionBackground(new java.awt.Color(153, 0, 0));
+        jTableCR.setSelectionBackground(new java.awt.Color(255, 102, 102));
         jTableCR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableCRMouseClicked(evt);
@@ -365,9 +366,9 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 182, Short.MAX_VALUE)
+                        .addGap(0, 112, Short.MAX_VALUE)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                         .addComponent(jButtonSaisir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -383,8 +384,8 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                .addGap(30, 30, 30)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Quitter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -426,7 +427,7 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         this.dispose();
     }//GEN-LAST:event_QuitterActionPerformed
 
-    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         try {
             File f = new File("ManuelUtilisation.pdf");
             FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
@@ -434,12 +435,14 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
             d.open(f);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
-    }//GEN-LAST:event_jLabel17MousePressed
-    }
+        }
+    }//GEN-LAST:event_jLabel17MouseClicked
+
     /**
      *
      * @param args the command line arguments
      */
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Quitter;
     private javax.swing.JPanel barreDuHaut;
