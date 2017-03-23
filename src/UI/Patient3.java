@@ -3,6 +3,11 @@ package UI;
 import NF.DMR;
 import NF.Personnel;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class Patient3 extends javax.swing.JFrame {
 
     private Personnel personnel;

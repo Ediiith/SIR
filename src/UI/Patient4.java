@@ -4,6 +4,11 @@ import NF.DMR;
 import NF.Genre;
 import NF.Personnel;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class Patient4 extends javax.swing.JFrame {
 
     private DMR dmr;

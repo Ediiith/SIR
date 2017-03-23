@@ -22,6 +22,11 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class PreImage extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**

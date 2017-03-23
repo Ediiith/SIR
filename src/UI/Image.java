@@ -21,6 +21,11 @@ import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class Image extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**

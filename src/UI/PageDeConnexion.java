@@ -10,6 +10,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class PageDeConnexion extends javax.swing.JFrame {
 
     private Personnel p;

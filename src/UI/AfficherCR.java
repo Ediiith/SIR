@@ -12,8 +12,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Edith
+ * @author JEMCare Solution
  */
+
 public class AfficherCR extends javax.swing.JFrame {
 
     /**
