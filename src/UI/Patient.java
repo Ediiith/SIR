@@ -23,8 +23,8 @@ public class Patient extends javax.swing.JFrame implements TreeSelectionListener
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
-        jTextFieldID.setText(this.personnel.getIdPersonnel());
-        jTextFieldStatut.setText(this.personnel.getStatut().toString());
+        jTextFieldID.setText(personnel.getIdPersonnel());
+        jTextFieldStatut.setText(personnel.getStatut().toString());
         this.genre = toGenre(this.GenrePatient.getSelectedItem().toString());
 
     }

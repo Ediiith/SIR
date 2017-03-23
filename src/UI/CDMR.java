@@ -56,7 +56,7 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
                 data[i][0] = this.dmr.getListeExamens().get(i).getIdExamen();
                 data[i][1] = this.dmr.getListeExamens().get(i).getDateExamen();
-                data[i][2] = this.dmr.getListeExamens().get(i).getResponsable();
+                data[i][2] = this.dmr.getListeExamens().get(i).getResponsable().getIdPersonnel();
                 data[i][3] = this.dmr.getListeExamens().get(i).getTypeExamen();
             
             jTablePatient.setModel(new DefaultTableModel(data, columnNames));
