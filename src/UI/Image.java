@@ -570,9 +570,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_ContrastePlusActionPerformed
 
     private void RetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetourActionPerformed
-        PreImage preIm = null;
-        preIm = new PreImage(this.personnel, this.dmr, this.e);
-        preIm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_RetourActionPerformed
 
