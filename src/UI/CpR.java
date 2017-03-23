@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
  */
-
 public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
     private Personnel personnel;
@@ -51,15 +51,16 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
 
         for (int i = 0; i < nbrligne; i++) {
             data[i][0] = getListeExamenCR().get(i).getIdExamen();
-            data[i][1] = getListeExamenCR().get(i).getDMR().getNomPatient();
-            data[i][2] = getListeExamenCR().get(i).getDMR().getPrenomPatient();
+            //data[i][1] = getListeExamenCR().get(i).getDMR().getNomPatient();
+            //data[i][2] = getListeExamenCR().get(i).getDMR().getPrenomPatient();
             data[i][3] = getListeExamenCR().get(i).getDateExamen();
-            data[i][4] = getListeExamenCR().get(i).getResponsable().getNomPersonnel();
+            //data[i][4] = getListeExamenCR().get(i).getResponsable().getNomPersonnel();
             data[i][5] = getListeExamenCR().get(i).getTypeExamen();
-            data[i][6] = getListeExamenCR().get(i).getDMR().getIdDMR();
+            //data[i][6] = getListeExamenCR().get(i).getDMR().getIdDMR();
         }
 
         jTableCR.setModel(new DefaultTableModel(data, columnNames));
+        
 
     }
 
@@ -105,21 +106,6 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
 
@@ -196,6 +182,11 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel17.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel17.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,12 +219,11 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                     .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonDeco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         barreDuHaut.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -393,8 +383,8 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(Quitter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -416,8 +406,8 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         int row = jTableCR.getSelectedRow();
         int idExamen = (int) jTableCR.getValueAt(row, 0);
         Examen examen = null;
-        for(int i=0; i<getListeExamenCR().size(); i++) {
-            if(getListeExamenCR().get(i).getIdExamen()==idExamen) {
+        for (int i = 0; i < getListeExamenCR().size(); i++) {
+            if (getListeExamenCR().get(i).getIdExamen() == idExamen) {
                 examen = getListeExamenCR().get(i);
             }
         }
@@ -436,11 +426,20 @@ public class CpR extends javax.swing.JFrame implements TreeSelectionListener {
         this.dispose();
     }//GEN-LAST:event_QuitterActionPerformed
 
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+    }//GEN-LAST:event_jLabel17MousePressed
+    }
     /**
      *
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Quitter;
     private javax.swing.JPanel barreDuHaut;

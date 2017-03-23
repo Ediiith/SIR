@@ -11,13 +11,10 @@ import static BD.LectureExamen.lireLienPACS;
 import static BD.LectureExamen.lireTypeExamen;
 
 import static NF.ListeExamenCR.ajouterExamenCR;
-import java.util.ArrayList;
-
-import java.util.List;
 
 /**
  *
- * @author Edith
+ * @author JEMCare Solution
  */
 
 public class Examen {

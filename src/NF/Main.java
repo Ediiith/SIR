@@ -2,8 +2,6 @@ package NF;
 
 import UI.PageDeConnexion;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import library.interfaces.Patient;

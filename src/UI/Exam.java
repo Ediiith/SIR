@@ -6,26 +6,20 @@ import NF.Personnel;
 import NF.Statut;
 import NF.TypeExamen;
 import java.util.Calendar;
-import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
  */
-
 public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
 
-    /**
-     * Creates new form PageAccueil
-     */
     private Personnel personnel;
-    private List<DMR> listeDMR;
     private Examen e;
     private DMR dmr;
     private TypeExamen typeExamen;
@@ -45,11 +39,11 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
         this.resumerMedecin.setText(this.personnel.toString() + "\n Statut : " + this.personnel.getStatut() + "\n Identifiant : " + this.personnel.getIdPersonnel());
-        
+
         Calendar c = Calendar.getInstance();
-        this.date = ""+c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR)+
-                "   "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE);
-   
+        this.date = "" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR)
+                + "   " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
+
     }
 
     @Override
@@ -95,20 +89,6 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 }
                 break;
 
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -190,6 +170,11 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel17.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel17.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -448,12 +433,18 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
                 "Etes vous certain des informations saisies?", "Enregistrement de l'examen",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (validation == JOptionPane.YES_OPTION) {
+            this.format = this.FormatFinal.getSelectedItem().toString();
             this.e = new Examen(this.dmr, this.date, this.personnel, this.typeExamen);
-            PreImage preImage = new PreImage(this.personnel,this.dmr, this.e);
-            preImage.setVisible(true);
-            this.dispose();
             if (this.format.equalsIgnoreCase("Non numérique (impression)")) {
                 this.e.setLienPACS("Images imprimées");
+                JOptionPane.showMessageDialog(this, "Les images seront imprimées avec les informations administratives du patient", "Impression", JOptionPane.INFORMATION_MESSAGE);
+                PageAccueil accueil = new PageAccueil(this.personnel);
+                accueil.setVisible(true);
+                this.dispose();
+            } else {
+                PreImage preImage = new PreImage(this.personnel, this.dmr, this.e);
+                preImage.setVisible(true);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_ValiderActionPerformed
@@ -461,6 +452,17 @@ public class Exam extends javax.swing.JFrame implements TreeSelectionListener {
     private void TypedExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypedExamenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TypedExamenActionPerformed
+
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }
+    }//GEN-LAST:event_jLabel17MousePressed
 
     private TypeExamen toTypeExamen(String s) {
         TypeExamen typeExamen = null;

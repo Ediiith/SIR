@@ -1,7 +1,5 @@
 package UI;
 
-import NF.ListeDMR;
-import NF.ListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
 import javax.swing.event.TreeSelectionEvent;
@@ -10,16 +8,13 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
  */
-
 public class PageAccueil extends javax.swing.JFrame implements TreeSelectionListener {
 
-    /**
-     * Creates new form PageAccueil
-     */
     private Personnel personnel;
 
     public PageAccueil(Personnel personnel) {
@@ -79,21 +74,6 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
 
@@ -170,6 +150,11 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         jLabel17.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel17.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -362,6 +347,17 @@ public class PageAccueil extends javax.swing.JFrame implements TreeSelectionList
         connexion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonDecoActionPerformed
+
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }
+    }//GEN-LAST:event_jLabel17MousePressed
 
     /**
      *

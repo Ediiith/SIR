@@ -30,7 +30,6 @@ public class AfficherCR extends javax.swing.JFrame {
 
     public AfficherCR(Examen examen) {
         initComponents();
-        this.setTitle("Affichage du DMR");
         this.examen=examen;
         zoneAffichage.setText(this.examen.getCompteRendu());
     }

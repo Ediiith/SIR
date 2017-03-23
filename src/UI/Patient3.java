@@ -6,26 +6,25 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
  */
-
 public class Patient3 extends javax.swing.JFrame {
 
     private Personnel personnel;
     private DMR dmr;
 
     public Patient3(Personnel personnel, DMR dmr) {
-        
+
         this.personnel = personnel;
-        this.dmr=dmr;
-        
+        this.dmr = dmr;
+
         initComponents();
-        this.setTitle("Patient3");
         this.setLocationRelativeTo(null);
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
-        
+
     }
 
     /**
@@ -83,6 +82,11 @@ public class Patient3 extends javax.swing.JFrame {
         jLabel13.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel13.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel13.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel13MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layoutbuttonLayout = new javax.swing.GroupLayout(layoutbutton);
         layoutbutton.setLayout(layoutbuttonLayout);
@@ -130,6 +134,17 @@ public class Patient3 extends javax.swing.JFrame {
         accueil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FermerActionPerformed
+
+    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }
+    }//GEN-LAST:event_jLabel13MousePressed
 
     /**
      * @param args the command line arguments

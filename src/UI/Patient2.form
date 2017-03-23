@@ -148,6 +148,9 @@
                   <Dimension value="[30, 30]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel13MousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonDeco">
               <Properties>
@@ -401,10 +404,12 @@
                           <Component id="jScrollPane2" min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="223" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jButtonDeco1" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="Quitter" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Admission" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Quitter" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Admission" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

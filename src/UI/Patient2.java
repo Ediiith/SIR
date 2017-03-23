@@ -15,17 +15,16 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
  */
-
 public class Patient2 extends javax.swing.JFrame implements TreeSelectionListener {
 
     /**
      * Creates new form PageAccueil
      */
-    
     private Personnel personnel;
     private Genre g;
     private String date;
@@ -38,16 +37,16 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
 
     private String[] columnNames;
     private Object[][] data;
-    
+
     public Patient2(Personnel personnel, String nom, String prenom, String genre, String jj, String mm, String aa, int numSS) {
-        
+
         initComponents();
         this.setExtendedState(Patient2.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(personnel.getIdPersonnel());
         jTextFieldStatut.setText(personnel.getStatut().toString());
-        
+
         this.personnel = personnel;
         this.resumerPatient.setText(nom + " " + prenom + "\n" + genre + "\n" + "né(e) le " + jj + "/" + mm + "/" + aa);
         this.resumerPatient.setEditable(false);
@@ -71,7 +70,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
 
         int nbrligne = this.listDMRproches.size();
         data = new Object[nbrligne][7];
-        
+
         for (int i = 0; i < nbrligne; i++) {
             data[i][0] = this.listDMRproches.get(i).getNomPatient();
             data[i][1] = this.listDMRproches.get(i).getPrenomPatient();
@@ -90,7 +89,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
-            case "Admission patient": //secretaire
+            case "Admission patient":
                 if (personnel.getStatut().compareTo(Statut.SECRETAIRE) == 0) {
                     Patient p = new Patient(this.personnel);
                     p.setVisible(true);
@@ -128,7 +127,7 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                 break;
             default:
                 break;
-                
+
         }
     }
 
@@ -197,6 +196,11 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         jLabel13.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel13.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel13.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel13MousePressed(evt);
+            }
+        });
 
         jButtonDeco.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonDeco.setText("Deconnexion");
@@ -427,10 +431,11 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDeco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Quitter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Admission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonDeco1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Quitter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Admission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
@@ -483,6 +488,17 @@ public class Patient2 extends javax.swing.JFrame implements TreeSelectionListene
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_QuitterActionPerformed
+
+    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }
+    }//GEN-LAST:event_jLabel13MousePressed
 
     private Genre toGenre(String s) {
         Genre genre = null;

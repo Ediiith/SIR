@@ -14,16 +14,12 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
- *
  * @author JEMCare Solution
  */
-
 public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionListener {
 
-    /**
-     * Creates new form PageAccueil
-     */
     private Personnel personnel;
     private List<DMR> listeDMRrecherche;
 
@@ -205,6 +201,11 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         jLabel20.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel20.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel20.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel20MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -590,16 +591,16 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
 
     private void LancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LancerRechercheActionPerformed
         for (int i = 0; i < getListeDMR().size(); i++) {
-            if (((getListeDMR().get(i).getNomPatient().equalsIgnoreCase(NomPatient.getText())) 
-                    && (getListeDMR().get(i).getPrenomPatient().equalsIgnoreCase(PrenomPatient.getText())) 
-                    && (getListeDMR().get(i).getDateNaissance().equalsIgnoreCase(jj.getText() + "/" + mm.getText() + "/" + aa.getText())) 
-                    && (getListeDMR().get(i).getIdDMR() != 0)) 
-                    || ((Integer.toString(getListeDMR().get(i).getNumSS()).equalsIgnoreCase(NumSSPatient.getText())) 
+            if (((getListeDMR().get(i).getNomPatient().equalsIgnoreCase(NomPatient.getText()))
+                    && (getListeDMR().get(i).getPrenomPatient().equalsIgnoreCase(PrenomPatient.getText()))
+                    && (getListeDMR().get(i).getDateNaissance().equalsIgnoreCase(jj.getText() + "/" + mm.getText() + "/" + aa.getText()))
+                    && (getListeDMR().get(i).getIdDMR() != 0))
+                    || ((Integer.toString(getListeDMR().get(i).getNumSS()).equalsIgnoreCase(NumSSPatient.getText()))
                     && (getListeDMR().get(i).getIdDMR() != 0))) {
                 this.listeDMRrecherche.add(getListeDMR().get(i));
             }
         }
-        
+
         int nbrligne = this.listeDMRrecherche.size();
         data = new Object[nbrligne][7];
 
@@ -698,6 +699,16 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
         cdmr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ValiderActionPerformed
+
+    private void jLabel20MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }    }//GEN-LAST:event_jLabel20MousePressed
 
     /**
      *

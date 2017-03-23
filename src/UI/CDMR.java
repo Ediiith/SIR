@@ -2,14 +2,10 @@ package UI;
 
 import NF.DMR;
 import NF.Examen;
-import NF.Genre;
-import static NF.ListeDMR.getListeDMR;
+
 import static NF.ListeExamenCR.getListeExamenCR;
 import NF.Personnel;
 import NF.Statut;
-import NF.TraitementImage;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -18,17 +14,13 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
  */
-
 public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
-    /**
-     * Creates new form PageAccueil
-     */
-    
     private Personnel personnel;
     private DMR dmr;
 
@@ -41,35 +33,31 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         this.dmr = dmr;
 
         initComponents();
-        this.setTitle("CDMR");
         this.setExtendedState(CDMR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(this.personnel.getIdPersonnel());
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
-        jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        resumerPatient.setText(this.dmr.afficherInfoPatient());
 
-        this.resumerPatient.setText(this.dmr.afficherInfoPatient());
-        
-        this.columnNames = new String[4];
+        jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.columnNames = new String[3];
         this.columnNames[0] = "id";
         this.columnNames[1] = "Date";
-        this.columnNames[2] = "Responsable";
-        this.columnNames[3] = "Type";
+        this.columnNames[2] = "Type";
 
         int nbrligne = this.dmr.getListeExamens().size();
-        data = new Object[nbrligne][4];
+        data = new Object[nbrligne][3];
 
-        for (int i = 0; i < this.dmr.getListeExamens().size(); i++) {
+        for (int i = 0; i < nbrligne; i++) {
 
-                data[i][0] = this.dmr.getListeExamens().get(i).getIdExamen();
-                data[i][1] = this.dmr.getListeExamens().get(i).getDateExamen();
-                data[i][2] = this.dmr.getListeExamens().get(i).getResponsable().getIdPersonnel();
-                data[i][3] = this.dmr.getListeExamens().get(i).getTypeExamen();
-            
-            jTablePatient.setModel(new DefaultTableModel(data, columnNames));
+            data[i][0] = this.dmr.getListeExamens().get(i).getIdExamen();
+            data[i][1] = this.dmr.getListeExamens().get(i).getDateExamen();
+            data[i][2] = this.dmr.getListeExamens().get(i).getTypeExamen();
 
         }
+
+        jTablePatient.setModel(new DefaultTableModel(data, columnNames));
 
     }
 
@@ -195,6 +183,11 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel20.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel20.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel20.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel20MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -321,7 +314,6 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
 
         jSeparator2.setForeground(new java.awt.Color(153, 0, 0));
 
-        jTablePatient.setAutoCreateColumnsFromModel(false);
         jTablePatient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -503,15 +495,18 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_AfficherDMRActionPerformed
 
     private void SortiePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortiePatientActionPerformed
-
+        this.dmr.setEstAdmis(false);
+        PageAccueil pa = new PageAccueil(this.personnel);
+        pa.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_SortiePatientActionPerformed
 
     private void ImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImageActionPerformed
         int row = jTablePatient.getSelectedRow();
         int idExamen = (int) jTablePatient.getValueAt(row, 0);
         Examen examen = null;
-        for(int i=0; i<getListeExamenCR().size(); i++) {
-            if(getListeExamenCR().get(i).getIdExamen()==idExamen) {
+        for (int i = 0; i < getListeExamenCR().size(); i++) {
+            if (getListeExamenCR().get(i).getIdExamen() == idExamen) {
                 examen = getListeExamenCR().get(i);
             }
         }
@@ -524,8 +519,8 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         int row = jTablePatient.getSelectedRow();
         int idExamen = (int) jTablePatient.getValueAt(row, 0);
         Examen examen = null;
-        for(int i=0; i<getListeExamenCR().size(); i++) {
-            if(getListeExamenCR().get(i).getIdExamen()==idExamen) {
+        for (int i = 0; i < getListeExamenCR().size(); i++) {
+            if (getListeExamenCR().get(i).getIdExamen() == idExamen) {
                 examen = getListeExamenCR().get(i);
             }
         }
@@ -535,14 +530,14 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
     }//GEN-LAST:event_CRActionPerformed
 
     private void AfficherCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfficherCRActionPerformed
-                int row = jTablePatient.getSelectedRow();
-                int idExamen = (int) jTablePatient.getValueAt(row, 0);
-                Examen examen = null;
-                for(int i=0; i<getListeExamenCR().size(); i++) {
-                        if(getListeExamenCR().get(i).getIdExamen()==idExamen) {
-                                examen = getListeExamenCR().get(i);
-                            }
-                    }
+        int row = jTablePatient.getSelectedRow();
+        int idExamen = (int) jTablePatient.getValueAt(row, 0);
+        Examen examen = null;
+        for (int i = 0; i < getListeExamenCR().size(); i++) {
+            if (getListeExamenCR().get(i).getIdExamen() == idExamen) {
+                examen = getListeExamenCR().get(i);
+            }
+        }
         AfficherCR aCR = new AfficherCR(examen);
         aCR.setVisible(true);
     }//GEN-LAST:event_AfficherCRActionPerformed
@@ -552,6 +547,16 @@ public class CDMR extends javax.swing.JFrame implements TreeSelectionListener {
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_QuitterActionPerformed
+
+    private void jLabel20MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }    }//GEN-LAST:event_jLabel20MousePressed
 
     /**
      *

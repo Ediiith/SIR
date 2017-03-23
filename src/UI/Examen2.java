@@ -12,39 +12,33 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
  */
-
 public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener {
 
-    /**
-     * Creates new Examen2
-     *
-     * @author Julie
-     */
-    
     private Personnel personnel;
-    
+
     private String[] columnNames;
     private Object[][] data;
 
     public Examen2(Personnel personnel) {
-        
+
         this.personnel = personnel;
-        
+
         initComponents();
         this.setTitle("Procéder à un examen");
         this.setExtendedState(this.MAXIMIZED_BOTH);
-                
+
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(this.personnel.getIdPersonnel());
         jTextFieldStatut.setText(this.personnel.getStatut().toString());
 
         this.jTablePatient.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
         this.columnNames = new String[7];
         this.columnNames[0] = "Nom";
         this.columnNames[1] = "Prénom";
@@ -56,7 +50,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
 
         int nbrligne = getListeDMRadmis().size();
         data = new Object[nbrligne][7];
-        
+
         for (int i = 0; i < nbrligne; i++) {
             data[i][0] = getListeDMRadmis().get(i).getNomPatient();
             data[i][1] = getListeDMRadmis().get(i).getPrenomPatient();
@@ -66,9 +60,9 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
             data[i][5] = getListeDMRadmis().get(i).getNumSS();
             data[i][6] = getListeDMRadmis().get(i).getIdDMR();
         }
-        
+
         jTablePatient.setModel(new DefaultTableModel(data, columnNames));
-        
+
     }
 
     @Override
@@ -112,21 +106,6 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                     javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
                 }
                 break;
-
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }
@@ -204,6 +183,11 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jLabel17.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel17.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,6 +212,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,10 +220,11 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
                     .addComponent(jTextFieldStatut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         barreDuHaut.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -431,7 +417,7 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
     }//GEN-LAST:event_ValiderActionPerformed
 
     private void jTablePatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePatientMouseClicked
-        
+
     }//GEN-LAST:event_jTablePatientMouseClicked
 
     private void QuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitterActionPerformed
@@ -439,6 +425,17 @@ public class Examen2 extends javax.swing.JFrame implements TreeSelectionListener
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_QuitterActionPerformed
+
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }
+    }//GEN-LAST:event_jLabel17MousePressed
 
     /**
      *

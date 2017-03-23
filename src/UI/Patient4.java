@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
@@ -21,13 +22,12 @@ public class Patient4 extends javax.swing.JFrame {
 
     public Patient4(Personnel personnel, String nom, String prenom, String genre, String date, int numSS) {
         initComponents();
-        this.setTitle("Patient4");
         this.setLocationRelativeTo(null);
-        
+
         this.personnel = personnel;
-        this.adresse=this.Adresse.getText();
+        this.adresse = this.Adresse.getText();
         this.g = toGenre(genre);
-        this.dmr = new DMR(nom,prenom,date,this.g,numSS,this.adresse);
+        this.dmr = new DMR(nom, prenom, date, this.g, numSS, this.adresse);
         this.resumerPatient.setText(this.dmr.afficherInfoPatient());
     }
 
@@ -117,6 +117,11 @@ public class Patient4 extends javax.swing.JFrame {
         jLabel13.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel13.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel13.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel13MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layoutbuttonLayout = new javax.swing.GroupLayout(layoutbutton);
         layoutbutton.setLayout(layoutbuttonLayout);
@@ -184,7 +189,7 @@ public class Patient4 extends javax.swing.JFrame {
     }//GEN-LAST:event_RetourActionPerformed
 
     private void AdmissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdmissionActionPerformed
-        Patient3 p3 = new Patient3(this.personnel,this.dmr);
+        Patient3 p3 = new Patient3(this.personnel, this.dmr);
         p3.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AdmissionActionPerformed
@@ -192,6 +197,17 @@ public class Patient4 extends javax.swing.JFrame {
     private void AdresseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdresseMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_AdresseMouseClicked
+
+    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }
+    }//GEN-LAST:event_jLabel13MousePressed
 
     private Genre toGenre(String s) {
         Genre genre = null;

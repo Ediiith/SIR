@@ -5,9 +5,7 @@
  */
 package NF;
 
-import static BD.LectureDMR.listeIdDMR;
-import static BD.LectureExamen.listeIdExamens;
-import static NF.ListeDMR.ajouterDMR;
+import static NF.ListeDMR.getListeDMR;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +15,18 @@ import java.util.List;
  */
 public class ListeExamenCR {
 
-    public static List<Examen> listeExamenCR;
+    public static List<Examen> listeExamenCR;  
+    private ListeDMR ldmr;
 
     //constructeur
     public ListeExamenCR() {
         listeExamenCR = new ArrayList<Examen>();
-        for (int i = 0; i < listeIdExamens().size(); i++) {
-            Examen examen = new Examen(listeIdExamens().get(i));
-            if (examen.getCompteRendu() == null) {
-                ajouterExamenCR(examen);
+        ldmr=new ListeDMR();
+        for (int i = 0; i < getListeDMR().size(); i++) {
+            for (int j = 0; j < getListeDMR().get(i).getListeExamens().size(); j++) {
+                if (getListeDMR().get(i).getListeExamens().get(j).getCompteRendu()==null) {                    
+                    ajouterExamenCR(getListeDMR().get(i).getListeExamens().get(j));
+                }
             }
         }
     }

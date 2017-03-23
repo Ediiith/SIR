@@ -1,21 +1,16 @@
 package UI;
 
-import NF.DMR;
 import NF.Examen;
 import static NF.ListeExamenCR.supprimeExamenCR;
 import NF.Personnel;
 import NF.Statut;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
@@ -27,13 +22,12 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
     private Examen examen;
 
     public SaisirCR(Personnel personnel, Examen examen) {
-        
+
         this.personnel = personnel;
         this.examen = examen;
-        
+
         initComponents();
-        this.setTitle("DMR temporaire");
-        this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);        
+        this.setExtendedState(SaisirCR.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
         jTextFieldID.setText(this.personnel.getIdPersonnel());
@@ -85,20 +79,6 @@ public class SaisirCR extends javax.swing.JFrame implements TreeSelectionListene
                 }
                 break;
 
-//            case "Appareil":
-//                if (personnel.getStatut().equals("Radiologue") || personnel.getStatut().equals("Manipulateurulateur")) {
-//                    //FacturationSpeMed fsm = new FacturationSpeMed(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                    //fsm.setVisible(true);
-//                    this.dispose();
-//                } else {
-//                    javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
-//                }
-//                break;
-//            case "Compte personnel":
-//                //ListeMedecin lm = new ListeMedecin(this.statut, this.identifiant, this.dm, this.listePatient, this.listeFiche);
-//                //lm.setVisible(true);
-//                this.dispose();
-//                break;
             default:
                 break;
         }

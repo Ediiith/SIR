@@ -6,13 +6,7 @@ import NF.Personnel;
 import NF.Statut;
 import NF.TraitementImage;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -22,6 +16,7 @@ import javax.swing.event.TreeSelectionListener;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.awt.Desktop;
+
 /**
  *
  * @author JEMCare Solution
@@ -29,11 +24,8 @@ import java.awt.Desktop;
 
 public class Image extends javax.swing.JFrame implements TreeSelectionListener {
 
-    /**
-     * Creates new form PageAccueil
-     */
+    
     private Personnel personnel;
-    private List<DMR> listeDMR;
     private DMR dmr;
     private Examen e;
     private TraitementImage ti;
@@ -42,7 +34,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
     private java.awt.Image im;
     private final DefaultListModel model;
     private final ArrayList<ImageIcon> icons;
-    private ArrayList<java.awt.Image> ims;
 
     public Image(Personnel personnel, DMR dmr, java.awt.Image im, Examen e) {
         this.paths = new ArrayList<>();
@@ -54,8 +45,6 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         this.im = im;
         this.ti = new TraitementImage(im);
         initComponents();
-        this.setTitle("Traiter image");
-        this.setExtendedState(Image.MAXIMIZED_BOTH);
         this.setExtendedState(Image.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTree.addTreeSelectionListener(this);
@@ -67,23 +56,12 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         model.addElement(new ImageIcon(this.im));
     }
 
-    /**
-     * public PageAccueil(String statut, String identifiant, DossierMedical dm,
-     * ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
-     * initComponents(); this.setTitle("Page d'Accueil");
-     * this.setExtendedState(this.MAXIMIZED_BOTH); this.statut = statut;
-     * this.identifiant = identifiant; //this.dm = dm; //this.listePatient =
-     * listePatient; //this.listeFiche = listeFiche;
-     * this.setExtendedState(this.MAXIMIZED_BOTH);
-     * this.setLocationRelativeTo(null); jTree.addTreeSelectionListener(this);
-     * jTextFieldID.setText(identifiant); jTextFieldStatut.setText(statut); }*
-     */
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
         String pasAutoriser = "Vous n'etes pas autorise a acceder a cette fonction";
         switch (obj.toString()) {
-            case "Admission patient": //secretaire
+            case "Admission patient": 
                 if (personnel.getStatut().compareTo(Statut.SECRETAIRE) == 0) {
                     Patient p = new Patient(this.personnel);
                     p.setVisible(true);
@@ -204,6 +182,11 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         jLabel17.setMaximumSize(new java.awt.Dimension(30, 30));
         jLabel17.setMinimumSize(new java.awt.Dimension(30, 30));
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -578,14 +561,14 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
 
     private void RognerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RognerActionPerformed
         BufferedImage bi = ti.getBi();
-        double x=bi.getWidth()-bi.getWidth()*0.9;
-        int xi= (int)x;
-        double y=bi.getHeight()-bi.getHeight()*0.9;
-        int yi= (int)y;
-        double w= bi.getWidth()*0.9;
-        int wi=(int)w;
-        double h=bi.getHeight()*0.9;
-        int hi = (int)h;
+        double x = bi.getWidth() - bi.getWidth() * 0.9;
+        int xi = (int) x;
+        double y = bi.getHeight() - bi.getHeight() * 0.9;
+        int yi = (int) y;
+        double w = bi.getWidth() * 0.9;
+        int wi = (int) w;
+        double h = bi.getHeight() * 0.9;
+        int hi = (int) h;
         bi = bi.getSubimage(xi, yi, wi, hi);
         icons.set(i, new ImageIcon(bi));
         java.awt.Image img = (java.awt.Image) bi;
@@ -601,6 +584,17 @@ public class Image extends javax.swing.JFrame implements TreeSelectionListener {
         ti.repaint();
         this.updateUI();
     }//GEN-LAST:event_EclaircirActionPerformed
+
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        try {
+            File f = new File("ManuelUtilisation.pdf");
+            FileUtils.copyURLToFile(PageDeConnexion.class.getResource("ManuelUtilisation.pdf"), f);
+            Desktop d = Desktop.getDesktop();
+            d.open(f);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur d'ouverture du manuel, veuillez contacter le service maintenance");
+        }
+    }//GEN-LAST:event_jLabel17MousePressed
     public void updateUI() {
         BufferedImage bi = ti.getBi();
         icons.set(i, new ImageIcon(bi));
