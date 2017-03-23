@@ -427,7 +427,6 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
             java.awt.Image im = (java.awt.Image) model.get(this.i);
             Image ima = new Image(this.personnel, this.dmr, im, this.e);
             ima.setVisible(true);
-            this.dispose();
         } else {
             String pasAutoriser = "Vous n'êtes pas autorisé à acceder à cette fonction";
             javax.swing.JOptionPane.showMessageDialog(null, pasAutoriser);
