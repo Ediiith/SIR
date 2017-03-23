@@ -574,7 +574,12 @@ public class Consulter_DMR extends javax.swing.JFrame implements TreeSelectionLi
 
     private void LancerRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LancerRechercheActionPerformed
         for (int i = 0; i < getListeDMR().size(); i++) {
-            if (((getListeDMR().get(i).getNomPatient().equalsIgnoreCase(NomPatient.getText())) && (getListeDMR().get(i).getPrenomPatient().equalsIgnoreCase(PrenomPatient.getText())) && (getListeDMR().get(i).getDateNaissance().equalsIgnoreCase(jj.getText() + "/" + mm.getText() + "/" + aa.getText())) && (getListeDMR().get(i).getIdDMR() != 0)) || ((Integer.toString(getListeDMR().get(i).getNumSS()).equalsIgnoreCase(NumSSPatient.getText())) && (getListeDMR().get(i).getIdDMR() != 0))) {
+            if (((getListeDMR().get(i).getNomPatient().equalsIgnoreCase(NomPatient.getText())) 
+                    && (getListeDMR().get(i).getPrenomPatient().equalsIgnoreCase(PrenomPatient.getText())) 
+                    && (getListeDMR().get(i).getDateNaissance().equalsIgnoreCase(jj.getText() + "/" + mm.getText() + "/" + aa.getText())) 
+                    && (getListeDMR().get(i).getIdDMR() != 0)) 
+                    || ((Integer.toString(getListeDMR().get(i).getNumSS()).equalsIgnoreCase(NumSSPatient.getText())) 
+                    && (getListeDMR().get(i).getIdDMR() != 0))) {
                 this.listeDMRrecherche.add(getListeDMR().get(i));
             }
         }

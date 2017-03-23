@@ -64,17 +64,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
 
     }
 
-    /**
-     * public PageAccueil(String statut, String identifiant, DossierMedical dm,
-     * ArrayList<Patient> listePatient, ArrayList<FicheDeSoins> listeFiche) {
-     * initComponents(); this.setTitle("Page d'Accueil");
-     * this.setExtendedState(this.MAXIMIZED_BOTH); this.statut = statut;
-     * this.identifiant = identifiant; //this.dm = dm; //this.listePatient =
-     * listePatient; //this.listeFiche = listeFiche;
-     * this.setExtendedState(this.MAXIMIZED_BOTH);
-     * this.setLocationRelativeTo(null); jTree.addTreeSelectionListener(this);
-     * jTextFieldID.setText(identifiant); jTextFieldStatut.setText(statut); }*
-     */
+    
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         Object obj = jTree.getLastSelectedPathComponent();
@@ -412,7 +402,8 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
     }//GEN-LAST:event_jButtonContrastePlus1ActionPerformed
 
     private void EnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnregistrerActionPerformed
-      for (int j = 1; j < paths.size(); j++) {
+      if(this.e.getLienPACS().equalsIgnoreCase(this.icons.toString())){
+        for (int j = 1; j < paths.size(); j++) {
             try {
                 BufferedImage bi = (BufferedImage) icons.get(j).getImage();
                 File file = new File(paths.get(j));
@@ -427,6 +418,9 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
             this.e.setLienPACS(paths.get(j));
         }
         JOptionPane.showMessageDialog(this, "Les images ont bien été enregistrées", "Enregistrement", JOptionPane.INFORMATION_MESSAGE);
+      }else{
+          JOptionPane.showMessageDialog(this, "Les images sont déjà enregistrées", "Enregistrement", JOptionPane.INFORMATION_MESSAGE);
+      }
     }//GEN-LAST:event_EnregistrerActionPerformed
 
     private void ImagesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ImagesValueChanged
@@ -471,6 +465,7 @@ public class PreImage extends javax.swing.JFrame implements TreeSelectionListene
                 File[] imageFiles = dir.listFiles(fileNameFilter);
                 BufferedImage[] im = new BufferedImage[imageFiles.length];
                 model.removeAllElements();
+                paths.add(dir.getPath());
                 for (int ii = 0; ii < im.length; ii++) {
                     paths.add(imageFiles[ii].getPath());
                     icons.add(new ImageIcon(imageFiles[ii].getPath()));
