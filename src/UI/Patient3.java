@@ -3,6 +3,11 @@ package UI;
 import NF.DMR;
 import NF.Personnel;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class Patient3 extends javax.swing.JFrame {
 
     private Personnel personnel;
@@ -59,7 +64,7 @@ public class Patient3 extends javax.swing.JFrame {
         jLabel1.setText("Processir");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Le patient suivant a bien été admis");
+        jLabel5.setText("Le patient suivant a bien été admis :");
 
         resumerPatient.setEditable(false);
         resumerPatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
@@ -74,19 +79,19 @@ public class Patient3 extends javax.swing.JFrame {
             .addGroup(layoutbuttonLayout.createSequentialGroup()
                 .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layoutbuttonLayout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(Fermer, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layoutbuttonLayout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jLabel5)))
-                .addGap(0, 254, Short.MAX_VALUE))
-            .addGroup(layoutbuttonLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(293, 293, 293)
+                        .addComponent(Fermer, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layoutbuttonLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(176, 176, 176))))
         );
         layoutbuttonLayout.setVerticalGroup(
             layoutbuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

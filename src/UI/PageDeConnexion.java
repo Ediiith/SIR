@@ -15,6 +15,11 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 
+/**
+ *
+ * @author JEMCare Solution
+ */
+
 public class PageDeConnexion extends javax.swing.JFrame {
 
     private Personnel p;

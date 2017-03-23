@@ -12,8 +12,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Edith
+ * @author JEMCare Solution
  */
+
 public class AfficherDMR extends javax.swing.JFrame {
 
     /**
